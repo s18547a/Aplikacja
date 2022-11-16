@@ -44,6 +44,9 @@ class Animal {
     this.AnimalTypeId = AnimalTypeId;
     this.AnimalType = AnimalType;
   }
+
+ 
+
 }
 
 export default Animal;
