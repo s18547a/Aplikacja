@@ -31,6 +31,8 @@ function VisitVaccineForm(props) {
     }
   }
   useEffect(() => {
+    console.log("JEes")
+    
     getAnimalUnadminstratedVaccinesApiCall(props.AnimalId);
   }, [props.AnimalId]);
 
