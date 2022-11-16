@@ -1,5 +1,6 @@
 
 
+import { executionAsyncResource } from "async_hooks";
 import Animal,{Sex} from "../../classes/Animal";
 
 
@@ -60,6 +61,7 @@ exports.getAnimal=async(AnimalId:string)=>{
 
 exports.getAnimals = async (parameters: AnimalParametersType) => {
   try {
+    
     
     let pool = await sql.connect(config);
     let animalsRecordset;
