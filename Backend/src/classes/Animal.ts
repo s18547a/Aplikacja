@@ -45,7 +45,10 @@ class Animal {
     this.AnimalType = AnimalType;
   }
 
- 
+ /**
+  * name
+  */
+
 
 }
 
