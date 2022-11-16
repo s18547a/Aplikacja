@@ -54,7 +54,7 @@ function DiagnosisForm(props) {
     props.setDiagnosisList(diagnosisList);
   }
 
-  const r =
+  const diagnosisFromComponenet =
     props.AnimalId != "" ? (
       <div className="">
         <div className="row">
@@ -104,7 +104,7 @@ function DiagnosisForm(props) {
         </div>
       </div>
     ) : null;
-  return r;
+  return diagnosisFromComponenet;
 }
 
 export default DiagnosisForm;
