@@ -1,0 +1,31 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "target": "es6",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "module": "esnext",
+
+    "resolveJsonModule": true,
+
+    "noEmit": true,
+    "lib": ["es2018", "dom"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"],
+
+  "typeAcquisition": {
+    "include": ["jest"]
+  }
+}
