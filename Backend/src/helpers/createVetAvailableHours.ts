@@ -8,7 +8,7 @@ const ReservationRepository =require('../repositories/ReservationRepository');
 const SurgeryRepository = require('../repositories/SurgeryRepository')
 export async function createVatAvailableHours(reccordset,paramters){
 
-    const workHours= Object.values(reccordset)[0];
+    const workHours:string= String(Object.values(reccordset)[0]);
          
     if (workHours!= null) {
       let receptionHours = hoursHelper.createVetVisitHours(workHours);
