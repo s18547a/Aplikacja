@@ -89,7 +89,7 @@ function App() {
       <header style={{ width: "100%", height: "10%" }}>
         <Navigation handleLogout={handleLogout} />
       </header>
-
+    
       <div className="row" style={{ height: "90%", width: "100%" }}>
         <div className="col-lg-1 col-12">
           <SideBar />

@@ -38,7 +38,7 @@ function BannerComponent(props) {
   const loggedUser = () => {
     return isAuthenticated() ? (
       <div className="">
-        <div>
+        <div className="">
           <Modal
             label={"Czy na pewno?"}
             function={handleLogout}
@@ -46,8 +46,8 @@ function BannerComponent(props) {
           />
         </div>
         <nav
-          className="nav navbar-dark  row sticky-top"
-          style={{ background: "#3373C4", height: "75px" }}
+          className=" nav navbar-dark  sticky-top row"
+          style={{ background: "#3373C4", height: "75px" , width:"100%"}}
         >
           <div className="col-6 ">
             <div className="row">
@@ -82,7 +82,7 @@ function BannerComponent(props) {
           </div>
         </nav>
       </div>
-    ) : null;
+    ) : <div></div>;
   };
 
   return loggedUser();

@@ -56,14 +56,14 @@ function VetSchedulde(props) {
       <div className="card-title">
         <div className="row">
           <div className="col-12">
-            <div className="row">
-              <div className="col-6">
+            <div className="row mb-3">
+              <div className="col-auto">
                 <h5>Godziny</h5>
               </div>
-              <div className="col-6">
+              <div className="col-auto">
                 {isManager() ? (
                   <a
-                    className="btn btn-primary"
+                    className="btn btn-primary btn-sm"
                     href={`/vets/${props.VetId}/schedulde/edit`}
                   >
                     Edytuj
