@@ -189,3 +189,22 @@ exports.getSurgeryTypes = async () => {
     return error;
   }
 };
+
+exports.deleteSurgery=async(SurgeryId:string)=>{
+  try {
+
+    let pool =await sql.connect(config)
+    const results =await pool.request().input("SurgeryId",sql.VarChar,SurgeryId)
+    .query("Delete From Surgery Where SurgeryId=@SurgeryID ")
+
+    const rowsAffected:number=results.rowsAffected[0];
+    if(rowsAffected!=1){
+
+      throw Error("")
+    }
+    return rowsAffected
+    
+  } catch (error) {
+    console.log(error)
+  }
+}

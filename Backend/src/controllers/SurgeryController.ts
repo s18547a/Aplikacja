@@ -64,4 +64,15 @@ export const updateSurgeryReport=async(req,res)=>{
   else return res.status(201).json({});
 }
 
+export const deleteSurgery=async(req,res)=>{
+  const SurgeryId=req.params.SurgeryId;
+
+  const results =await SurgeryRepository.deleteSurgery(SurgeryId)
+  if(results instanceof Error){
+    return res.status(500).json(results)
+  }
+  else return res.status(201).json({});
+
+}
+
 

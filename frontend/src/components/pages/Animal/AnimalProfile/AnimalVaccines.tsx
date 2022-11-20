@@ -33,7 +33,7 @@ function AnimalVaccines(props) {
 
         <div className="col-lg-3 ">
           <div className="card-title">
-            <h5>Szczepienia obowiazkowe</h5>
+            <h5 className=" text-danger">Szczepienia obowiazkowe</h5>
           </div>
           {props.coreList.lenght != 0 ? (
             <table className="table">

@@ -1,5 +1,5 @@
 import { off } from "process";
-import { useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { getLogo } from "../../other/imageHelper";
 import UnloggedLogo from "../Shared/UnloggedLogo";
 import HomePageNavigation from "./HomePageNavigation";
@@ -12,6 +12,9 @@ function HomePage(props) {
   }
 
   const [selectedTab, setSelectedTab] = useState("login");
+
+  
+
 
   function selectedComponent() {
     if (selectedTab == "login") {

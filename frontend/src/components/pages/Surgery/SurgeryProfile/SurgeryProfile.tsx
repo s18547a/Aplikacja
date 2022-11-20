@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getSurgery, updateSurgeryReport } from "../../../api/surgeryApiCalls";
+import { cancelSurgery, getSurgery, updateSurgeryReport } from "../../../api/surgeryApiCalls";
 import Surgery from "../../../classes/Surgery";
+import Modal from "../../../Modal/Modal";
+import ModalEnableBtn from "../../../Modal/ModalEnableBtn";
 import { getCurrentUser } from "../../../other/authHelper";
 import ProfileDiv from "../../../other/ProfileDiv";
 import { isManager } from "../../../other/userType";
@@ -84,10 +86,23 @@ function SurgeryProfile(props) {
       );
   }
 
+  const handleClick = (event) => {
+   
+    let result;
+    cancelSurgery(surgery?.SurgeryId)
+      .then((res) => {
+        result = res;
+        return res.json();
+      })
+      .then((data) => {
+        navigate('/surgeries')
+      });
+  };
+
   const saveEditButton = (
     <button
       onClick={saveEditReport}
-      className="btn btn-primary"
+      className="btn btn-primary btn-sm"
       style={{ background: "green" }}
     >
       Zapisz
@@ -98,7 +113,7 @@ function SurgeryProfile(props) {
       onClick={() => {
         setEditReport(true);
       }}
-      className="btn btn-primary"
+      className="btn btn-primary btn-sm"
       style={{ background: "green" }}
     >
       Edytuj
@@ -110,8 +125,22 @@ function SurgeryProfile(props) {
   ) : (
     <div>{report}</div>
   );
+
+  const deleteButton = <ModalEnableBtn
+  id={"cancelSurgery"}
+  className="btn btn-sm btn-danger"
+  label="Anuluj"
+  function={null}
+  value={surgery?.SurgeryId}
+/>
+
   return (
     <div className="container">
+        <Modal
+        id={"cancelSurgery"}
+        function={handleClick}
+        label={"Czy na pewno?"}
+      />
       <div className="">
         <div className="row">
           <div className="col-lg-4 ">
@@ -152,7 +181,7 @@ function SurgeryProfile(props) {
           <div className="col-lg-4">
             <div className="card card-body">
               <div className="row">
-                <div className="col-9">
+                <div className="col-6">
                   <div className="card-title">
                     <h5>Raport z operacji</h5>
                   </div>
@@ -160,6 +189,13 @@ function SurgeryProfile(props) {
                 <div className="col-3">
                   {surgery?.LeadVetId == getCurrentUser().userId || isManager()
                     ? reportButton
+                    : null}
+                   
+                </div>
+                <div className="col-3">
+                {surgery?.LeadVetId == getCurrentUser().userId || isManager()
+                    ? surgery?.Report==""||surgery?.Report==null? deleteButton:null
+                    
                     : null}
                 </div>
               </div>

@@ -1,6 +1,6 @@
 function NavBtn(props: { link: string; label: string }) {
   return (
-    <div className=" bg-primary  border ">
+    <div className="   border " style={{background: "#3373C4"}}>
       <li className="nav-item">
         <h5 className="">
           <a

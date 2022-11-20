@@ -8,5 +8,6 @@ router.get("/", SurgeryController.getSurgeries);
 
 router.post('/',SurgeryController.registerSurgery);
 router.put('/:SurgeryId/report',SurgeryController.updateSurgeryReport)
+router.delete('/:SurgeryId',SurgeryController.deleteSurgery)
 
 module.exports=router

@@ -6,11 +6,13 @@ import {
   getReservations,
   cancelReservation,
 } from "../../../api/reservationApiCalls";
-import { getSurgeries } from "../../../api/surgeryApiCalls";
+import { cancelSurgery, getSurgeries } from "../../../api/surgeryApiCalls";
 import Surgery from "../../../classes/Surgery";
 import RegiserSuccessInfo from "../../../List/RegisterSuccessInfo";
 
 import TableOrEmpty from "../../../List/TableOrEmpty";
+import Modal from "../../../Modal/Modal";
+import ModalEnableBtn from "../../../Modal/ModalEnableBtn";
 import { getCurrentUser } from "../../../other/authHelper";
 import { isVet, isOwner, isManager } from "../../../other/userType";
 
@@ -68,9 +70,15 @@ function SurgeryList() {
     }
   }, []);
 
+
+  
+
+ 
+
   return (
     <div className="container">
-      <RegiserSuccessInfo newId={newId} message={"Nowa rezerwacja: "} />
+      
+      <RegiserSuccessInfo newId={newId} message={"Nowy zabieg: "} />
 
       <div className="card card-body">
         <h5 className="card-title">Zabiegi</h5>
@@ -83,6 +91,7 @@ function SurgeryList() {
                 <th>Godzina</th>
                 <th>Rodzaj</th>
                 <th>Zwierzę</th>
+                
               </tr>
             </thead>
 
@@ -99,7 +108,9 @@ function SurgeryList() {
                     <td>{surgery.StartTime}</td>
                     <td>{surgery.SurgeryType}</td>
                     <td>{surgery.Animal.Name}</td>
+                   
                   </tr>
+                  
                 );
               })}
             </tbody>

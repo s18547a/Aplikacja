@@ -53,3 +53,15 @@ export async function updateSurgeryReport(surgeryReport, ReportSurgeryId) {
   const promise = await fetch(url, options);
   return promise;
 }
+
+export async function cancelSurgery(SurgeryId){
+
+  const url=`${baseUrl}/${SurgeryId}`
+  const options ={
+    method:"DELETE"
+  }
+
+  const promise= await fetch(url,options);
+
+  return promise
+}
