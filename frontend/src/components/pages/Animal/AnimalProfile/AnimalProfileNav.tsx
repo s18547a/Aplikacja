@@ -4,7 +4,7 @@ function AnimalProfileNav(props) {
   }
 
   return (
-    <ul className="nav nav-tabs border-0 row justify-content-center">
+    <ul className="nav nav-pills border-0 row justify-content-center mb-3">
       <div className="col-lg-1 ">
         <li className="nav-item">
           <button

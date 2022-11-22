@@ -37,25 +37,26 @@ function BannerComponent(props) {
 
   const loggedUser = () => {
     return isAuthenticated() ? (
-      <div className="">
-        <div className="">
+      <>
+       
           <Modal
             label={"Czy na pewno?"}
             function={handleLogout}
             id={"logoutModal"}
           />
-        </div>
+      
         <nav
-          className=" nav navbar-dark  sticky-top row"
+          className="nav navbar-dark  sticky-top"
           style={{ background: "#3373C4", height: "75px" , width:"100%"}}
         >
+          <div className="row justify-content-between" style={{width:"100%"}}>
           <div className="col-6 ">
             <div className="row">
               <div className="col-2">
                 <img height="75px" width="100px" src={getLogo()} />
               </div>
               <div
-                className="col-6 align-self-center"
+                className="col-6 "
                 style={{ color: "white" }}
               >
                 <h4>Klinka</h4>
@@ -63,25 +64,28 @@ function BannerComponent(props) {
               </div>
             </div>
           </div>
-          <div className="col-6  align-self-center">
-            <div className="row justify-content-end">
-              <div className="col-auto ">
-                <div className="row">
-                  <div className="col-12 ">
+          <div className="col-6 row justify-content-end">
+          
+              <div className="col-auto align-self-center">
+                <div className="row ">
+                  <div className="col-6 ">
                     <h6 style={{ color: "white" }}>
                       <p>{getCurrentUser().Email}</p>
                     </h6>
                   </div>
-                  <div className="col-12">
+                  </div>
+                  <div className="row">
+                  <div className="col-6">
                     <h6 style={{ color: "white" }}>{getUserName()}</h6>
                   </div>
                 </div>
               </div>
-              <div className="col-auto  align-self-center">{logoutBtn}</div>
-            </div>
+              <div className="col-auto align-self-center">{logoutBtn}</div>
+          
+          </div>
           </div>
         </nav>
-      </div>
+      </>
     ) : <nav
     className=" nav navbar-dark  sticky-top d-flex justify-content-center"
     style={{ background: "#3373C4", height: "75px" , width:"100%"}}

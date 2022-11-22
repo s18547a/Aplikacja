@@ -37,7 +37,7 @@ function HomePage(props) {
             
 
             <div className="row justify-content-center">
-                <div className="col-4">
+                <div className="col-4 mb-5">
                     <HomePageNavigation onChange={changeTab} selected={selectedTab} />
                 </div>
             </div>

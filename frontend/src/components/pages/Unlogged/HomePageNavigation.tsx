@@ -4,7 +4,7 @@ function HomePageNavigation(props) {
     props.onChange(value);
   }
   return (
-    <ul className="nav nav-tabs border-0">
+    <ul className="nav nav-pills border-0">
       <li className="nav-item ">
         <button
           className={props.selected == "login" ? "nav-link active" : "nav-link"}

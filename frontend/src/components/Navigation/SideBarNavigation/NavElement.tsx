@@ -13,9 +13,11 @@ function NavElement(props: {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
   const currentLocation = location.pathname;
+  const [isActive,setIsAcitve]=useState(false)
   useEffect(() => {
     if (currentLocation.includes(props.mainLink)) {
       setCollapsed(true);
+      setIsAcitve(true);
     }
   });
 
@@ -45,8 +47,8 @@ function NavElement(props: {
           return (
             <li className="nav-item border">
               <a
-                className="nav-link "
-                /*  {currentLocation.includes(""+{element.path})?"nav-link active":"nav-link "} */
+                className=
+                  {currentLocation==(element.link)?"nav-link bg-primary text-white":"nav-link "} 
 
                 href={element.link}
               >

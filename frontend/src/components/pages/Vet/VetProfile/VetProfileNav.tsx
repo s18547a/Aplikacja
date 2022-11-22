@@ -4,7 +4,7 @@ function VetProfileNav(props) {
   }
 
   return (
-    <ul className="nav nav-tabs bor">
+    <ul className="nav nav-pills mb-3">
       <li>
         <button
           className={props.activeTab == "" ? "nav-link active " : "nav-link"}
