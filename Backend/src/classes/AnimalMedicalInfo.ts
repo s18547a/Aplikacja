@@ -1,5 +1,6 @@
 class AnimalMedicalInfo {
     AnimalId: string;
+    Weight:number|null;
     Chipped: boolean | null;
     Sterilized: boolean | null;
     Skeletal: string;
@@ -19,6 +20,7 @@ class AnimalMedicalInfo {
 
     constructor(
         AnimalId: string,
+        Weight:number|null,
         Chipped: boolean | null,
         Sterilized: boolean | null,
 
@@ -38,6 +40,7 @@ class AnimalMedicalInfo {
         Others: string
     ) {
         this.AnimalId = AnimalId;
+        this.Weight = Weight;
         this.Chipped = Chipped;
         this.Sterilized = Sterilized;
         this.Skeletal = Skeletal;

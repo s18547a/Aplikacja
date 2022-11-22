@@ -155,7 +155,7 @@ exports.registerOwner = async (owner) => {
             return Error('');
         }
   
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.log(error);
 
         return error;

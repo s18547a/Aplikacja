@@ -82,7 +82,34 @@ function BannerComponent(props) {
           </div>
         </nav>
       </div>
-    ) : <div></div>;
+    ) : <nav
+    className=" nav navbar-dark  sticky-top d-flex justify-content-center"
+    style={{ background: "#3373C4", height: "75px" , width:"100%"}}
+  >
+    
+      <div className="row ">
+        <div className="col-6">
+        <img height="75px" width="100px" src={getLogo()} />
+
+        </div>
+        <div className="col-6">
+        <div
+          className="col-6 align-self-center"
+          style={{ color: "white" }}
+        >
+          <h4>Klinka</h4>
+          <h4>Vet</h4>
+        </div>
+
+        </div>
+       
+      
+        
+       
+      </div>
+    
+    
+  </nav>;
   };
 
   return loggedUser();

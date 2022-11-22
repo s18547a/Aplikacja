@@ -3,9 +3,8 @@ import { registerOwnerApiCall } from "../../api/ownerApiCalls";
 import { useNavigate } from "react-router-dom";
 import FormDiv from "../../../components/Form/FormDiv";
 import SubmitFormButton from "../../../components/General/SubmitFormButton";
-import UnloggedLogo from "../Shared/UnloggedLogo";
 
-function OwnerRegister() {
+function OwnerRegister(props) {
   const [owner, setOwner] = useState({
     Name: "",
     LastName: "",
@@ -27,6 +26,7 @@ function OwnerRegister() {
 
   function handleChange(e) {
     const { name, value } = e.target;
+ 
     setOwner((prev) => ({
       ...prev,
       [name]: value,
@@ -62,10 +62,39 @@ function OwnerRegister() {
         }));
         isValid = false;
       }
+      if(value== ""){
+        setError((prevErrors) => ({
+          ...prevErrors,
+          [name]: "Puste pole",
+        }));
+        isValid = false;
+
+      }
+      if(name== "Contact"){
+        const isNumber=/^\d+$/.test(value)
+       
+
+     
+        if(value.length<9||!isNumber){
+          
+        setError((prevErrors) => ({
+          ...prevErrors,
+          [name]: "Niepoprawny number",
+        }));
+        isValid = false;
+        }
+
+
+      }
     }
     return isValid;
   }
 
+
+  function changeTab(){
+
+    props.changeTab("login")
+  }
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -91,7 +120,8 @@ function OwnerRegister() {
                 }));
               }
               if (response.status === 201) {
-                naviage("/home");
+
+               changeTab();
               }
             },
             (error) => {
@@ -108,20 +138,16 @@ function OwnerRegister() {
   }
 
   return (
-    <form className="container" onSubmit={handleSubmit} noValidate={true}>
+    <form className="container " onSubmit={handleSubmit} noValidate={true}>
       <div className="row">
-        <div className="col-12">
-          <UnloggedLogo />
-        </div>
-        <div className="col-6 offset-3">
-          <div className="card card-body">
-            <div className="card-title">
-              <h5>Rejestracja</h5>
-            </div>
+      
+        <div className="col-lg-6 offset-lg-3">
+          <div className="card card-body border-0">
+            
             <div className="row">
               <div className="col-12">
                 <div className="row">
-                  <div className="col-6">
+                  <div className="col-lg-6">
                     <FormDiv
                       name="Name"
                       label="Imie"
@@ -130,7 +156,7 @@ function OwnerRegister() {
                       type="text"
                     />
                   </div>
-                  <div className="col-6">
+                  <div className="col-lg-6">
                     <FormDiv
                       name="LastName"
                       label="Nazwisko"
@@ -144,7 +170,7 @@ function OwnerRegister() {
 
               <div className="col-12">
                 <div className="row">
-                  <div className="col-6">
+                  <div className="col-lg-6">
                     <FormDiv
                       name="Contact"
                       label="Numer telefonu"
@@ -153,7 +179,7 @@ function OwnerRegister() {
                       type="text"
                     />
                   </div>
-                  <div className="col-6">
+                  <div className="col-lg-6">
                     <FormDiv
                       name="Email"
                       label="Email"
@@ -166,22 +192,23 @@ function OwnerRegister() {
               </div>
               <div className="col-12">
                 <div className="row">
-                  <div className="col-6">
+                  <div className="col-lg-6">
                     <FormDiv
                       name="Password"
                       label="Hasło"
                       error={error.Password}
                       onChange={handleChange}
-                      type="text"
+                      type="password"
                     />
                   </div>
-                  <div className="col-6">
+                  <div className="col-lg-6">
                     <FormDiv
                       name="Password2"
                       label="Powtórz hasło"
                       error={passwordError}
                       onChange={handleRepeatPassword}
-                      type="text"
+                     
+                      type="password"
                     />
                   </div>
                 </div>

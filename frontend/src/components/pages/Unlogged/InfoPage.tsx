@@ -33,7 +33,7 @@ function InfoPage() {
   return (
     <div className="container ">
       <div className="row justify-content-center">
-        <div className="col-3 ">
+        <div className="col-lg-3">
           <div className="card card-body  border-0">
             <ScheduldeRow label="Poniedziałek" day={schedulde.Monday} />
             <ScheduldeRow label="Wtorek" day={schedulde.Tuesday} />

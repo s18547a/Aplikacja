@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { updateMedicalInfo } from "../../../../api/animalApiCalls";
 import AnimalMedicalInfo from "../../../../classes/AnimalMedicalInfo";
 import FormCheck from "../../../../Form/FormCheck";
+import FormDiv from "../../../../Form/FormDiv";
 import FormTextField from "../../../../Form/FormTextField";
 import SubmitFormButton from "../../../../General/SubmitFormButton";
 
@@ -83,18 +84,34 @@ function MedicalInfoForm(props) {
 
   return (
     <form
-      className="container card card-body "
+      className="container "
       onSubmit={hanldeSubmit}
       noValidate={true}
     >
-      <div className="row ">
+      <div className="row justify-content-center ">
+        <div className="col-6">
+        <div className="row  card card-body">
         <div className="col-12">
           <SubmitFormButton label={"Zapisz"} />
         </div>
 
-        <div className="col-12" style={{ overflowY: "scroll", height: "80vh" }}>
-          <div className="row">
-            <div className="col-6">
+        <div className="col-12 mt-5" style={{ overflowY: "scroll", height: "80vh" }}>
+          <div className="row justify-content-between">
+           
+              <div className="col-3">
+                <FormDiv
+                label="Waga"
+                onChange={handleChange}
+                 type="number"
+                  value={props.Weight}
+                  name="Weight"
+                />
+
+              </div>
+
+          
+           
+            <div className="col-3">
               <FormCheck
                 label="Sterylizacja"
                 name="Sterilized"
@@ -114,9 +131,11 @@ function MedicalInfoForm(props) {
                   },
                 ]}
               />
-            </div>
+           
 
-            <div className="col-6">
+            </div>
+           
+            <div className="col-3">
               <FormCheck
                 label="Chip"
                 name="Chipped"
@@ -136,9 +155,13 @@ function MedicalInfoForm(props) {
                   },
                 ]}
               />
+          
             </div>
+            
 
-            <div className="col-6" style={{ marginTop: "10px" }}>
+          
+
+            <div className="col-12" style={{ marginTop: "10px" }}>
               <FormTextField
                 label={"Układ mięśniowy"}
                 name="Muscular"
@@ -147,7 +170,7 @@ function MedicalInfoForm(props) {
               />
             </div>
 
-            <div className="col-6" style={{ marginTop: "10px" }}>
+            <div className="col-12" style={{ marginTop: "10px" }}>
               <FormTextField
                 label={"Układ nerwowy"}
                 name="Nervous"
@@ -155,7 +178,7 @@ function MedicalInfoForm(props) {
                 onChange={handleChange}
               />
             </div>
-            <div className="col-6">
+            <div className="col-12">
               <FormTextField
                 label={"Układ kostny"}
                 name="Skeletal"
@@ -163,7 +186,7 @@ function MedicalInfoForm(props) {
                 onChange={handleChange}
               />
             </div>
-            <div className="col-6">
+            <div className="col-12">
               <FormTextField
                 label={"Układ hormonalny"}
                 name="Endocrine"
@@ -171,7 +194,7 @@ function MedicalInfoForm(props) {
                 onChange={handleChange}
               />
             </div>
-            <div className="col-6">
+            <div className="col-12">
               <FormTextField
                 label={"Układ krążeniowy"}
                 name="Cardiovascular"
@@ -180,7 +203,7 @@ function MedicalInfoForm(props) {
               />
             </div>
 
-            <div className="col-6">
+            <div className="col-12">
               <FormTextField
                 label={"Układ limfatyczny"}
                 name="Lymphatic"
@@ -189,7 +212,7 @@ function MedicalInfoForm(props) {
               />
             </div>
 
-            <div className="col-6">
+            <div className="col-12">
               <FormTextField
                 label={"Układ rozrodczy"}
                 name="Reproductive"
@@ -198,7 +221,7 @@ function MedicalInfoForm(props) {
               />
             </div>
 
-            <div className="col-6">
+            <div className="col-12">
               <FormTextField
                 label={"Układ oddechowy"}
                 name="Respiratory"
@@ -207,7 +230,7 @@ function MedicalInfoForm(props) {
               />
             </div>
 
-            <div className="col-6">
+            <div className="col-12">
               <FormTextField
                 label={"Układ trawienny"}
                 name="Digestive"
@@ -216,7 +239,7 @@ function MedicalInfoForm(props) {
               />
             </div>
 
-            <div className="col-6">
+            <div className="col-12">
               <FormTextField
                 label={"Układ wydalniczy"}
                 name="Urinary"
@@ -225,7 +248,7 @@ function MedicalInfoForm(props) {
               />
             </div>
 
-            <div className="col-6">
+            <div className="col-12">
               <FormTextField
                 label={"Optyka"}
                 name="Optical"
@@ -233,7 +256,7 @@ function MedicalInfoForm(props) {
                 onChange={handleChange}
               />
             </div>
-            <div className="col-6">
+            <div className="col-12">
               <FormTextField
                 label={"Dermatologia"}
                 name="Dermatological"
@@ -242,7 +265,7 @@ function MedicalInfoForm(props) {
               />
             </div>
 
-            <div className="col-6">
+            <div className="col-12">
               <FormTextField
                 label={"Inne"}
                 name="Others"
@@ -253,6 +276,10 @@ function MedicalInfoForm(props) {
           </div>
         </div>
       </div>
+        </div>
+
+      </div>
+     
     </form>
   );
 }

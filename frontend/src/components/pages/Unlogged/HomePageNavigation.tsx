@@ -1,6 +1,7 @@
 function HomePageNavigation(props) {
   function onChangeTab(e) {
-    props.onChange(e);
+    const {name,value}=e.target;
+    props.onChange(value);
   }
   return (
     <ul className="nav nav-tabs border-0">
@@ -21,6 +22,16 @@ function HomePageNavigation(props) {
         >
           Godziny otwarcia
         </button>
+      </li>
+      <li className="nav-item">
+        <button
+        className={props.selected=="register"?"nav-link active" :"nav-link"}
+        value="register"
+        onClick={onChangeTab}
+        >
+          Zarejestruj
+        </button>
+
       </li>
     </ul>
   );

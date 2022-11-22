@@ -181,8 +181,19 @@ function MedicalInfo(props) {
                   role="tabpanel"
                   aria-labelledby="list-home-list"
                 >
-                  <div className="row text-center">
-                    <div className="col-12">
+                    <div className="row justify-content-center">
+                    <div className="col-6">
+                      <ProfileDiv
+                      label={"Waga"}
+                      value={props.medicalInfo.Weight}
+                      />
+
+                    </div>
+
+                    </div>
+
+                  <div className="row justify-content-center">
+                    <div className="col-6">
                       <ProfileDiv
                         label={"Chip"}
                         value={
@@ -190,7 +201,9 @@ function MedicalInfo(props) {
                         }
                       />
                     </div>
-                    <div className="col-12">
+                    </div>
+                    <div className="row justify-content-center">
+                    <div className="col-6">
                       <ProfileDiv
                         label={"Steryzlizacja"}
                         value={
@@ -199,6 +212,7 @@ function MedicalInfo(props) {
                       />
                     </div>
                   </div>
+                
                 </div>
 
                 <div

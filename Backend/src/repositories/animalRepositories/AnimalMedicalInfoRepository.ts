@@ -19,6 +19,7 @@ exports.getAnimalMedicalInformation = async (AnimalId: string) => {
         if (animalMedInfoRecord) {
             const animalMedicalInfo= new AnimalMedicalInfo(
                 animalMedInfoRecord.AnimalId,
+                animalMedInfoRecord.Weight,
                 animalMedInfoRecord.Chipped,
                 animalMedInfoRecord.Sterilized,
                 animalMedInfoRecord.Skeletal,
@@ -58,7 +59,7 @@ export async function createAnimalMedicalInformation  (
         const results = await new sql.Request(transaction)
             .input('AnimalId', sql.VarChar, AnimalId)
             .query(
-                'Insert into AnimalMedicalInfo(AnimalId,Chipped,Sterilized,Skeletal,Muscular,Nervous,Endocrine,Cardiovascular,Lymphatic,Respiratory,Digestive,Urinary,Reproductive,Optical,Dental,Dermatological ,Others) values(@AnimalId,null,null,\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\')'
+                'Insert into AnimalMedicalInfo(AnimalId,Chipped,Sterilized,Skeletal,Muscular,Nervous,Endocrine,Cardiovascular,Lymphatic,Respiratory,Digestive,Urinary,Reproductive,Optical,Dental,Dermatological ,Others,Weight) values(@AnimalId,null,null,\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',null)'
             );
         const rowsAffected = results.rowsAffected[0];
   
@@ -70,6 +71,7 @@ export async function createAnimalMedicalInformation  (
             return AnimalId;
         }
     } catch (error) {
+        console.log(error);
         throw Error('');
     }
 }
@@ -83,6 +85,7 @@ exports.updateAnimalMedicalInfo = async (
         const animalMedInfoPool = await pool
             .request()
             .input('AnimalId', sql.VarChar, AnimalMedicalInfo.AnimalId)
+            .input('Weight',sql.Decimal,AnimalMedicalInfo.Weight)
             .input('Chipped', sql.Bit, AnimalMedicalInfo.Chipped)
             .input('Sterilized', sql.Bit, AnimalMedicalInfo.Sterilized)
             .input('Skeletal', sql.VarChar, AnimalMedicalInfo.Skeletal)
@@ -101,7 +104,7 @@ exports.updateAnimalMedicalInfo = async (
             .input('Others', sql.VarChar, AnimalMedicalInfo.Others)
   
             .query(
-                'Update  AnimalMedicalInfo set Chipped=@Chipped, Sterilized=@Sterilized, Skeletal=@Skeletal, Muscular=@Muscular,Nervous=@Nervous,Endocrine=@Endocrine,Cardiovascular=@Cardiovascular,Lymphatic =@Lymphatic ,Respiratory=@Respiratory,Digestive=@Digestive,Urinary=@Urinary, Reproductive=@Reproductive,Optical=@Optical, Dental=@Dental, Dermatological=@Dermatological,Others=@Others Where AnimalId=@AnimalId'
+                'Update  AnimalMedicalInfo set Chipped=@Chipped, Sterilized=@Sterilized, Skeletal=@Skeletal, Muscular=@Muscular,Nervous=@Nervous,Endocrine=@Endocrine,Cardiovascular=@Cardiovascular,Lymphatic =@Lymphatic ,Respiratory=@Respiratory,Digestive=@Digestive,Urinary=@Urinary, Reproductive=@Reproductive,Optical=@Optical, Dental=@Dental, Dermatological=@Dermatological,Others=@Others, Weight=@Weight Where AnimalId=@AnimalId'
             );
         console.log(animalMedInfoPool);
   

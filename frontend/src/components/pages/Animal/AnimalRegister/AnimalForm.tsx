@@ -15,11 +15,12 @@ import { isManager, isOwner, isVet } from "../../../other/userType";
 import AnimalMainInfo from "./AnimalRegisterComponents/AnimalMainInfo";
 
 import PhotoForm from "../../Shared/PhotoForm";
+import AnimalType from "../../../classes/AnimalType";
 
 interface AnimalI {
   Name: undefined;
   BirthDate: undefined;
-  Weight: undefined;
+  
   OwnerId: undefined;
   Sex: undefined;
 
@@ -28,7 +29,7 @@ interface AnimalI {
 }
 
 function AnimalRegister() {
-  const [animalTypes, setAnimalTypes] = useState([]);
+  const [animalTypes, setAnimalTypes] = useState<AnimalType[]>([]);
   const location = useLocation();
 
   const [editForm, setEditForm] = useState(false);
@@ -38,7 +39,7 @@ function AnimalRegister() {
   const [animal, setAnimal] = useState<AnimalI>({
     Name: undefined,
     BirthDate: undefined,
-    Weight: undefined,
+    
 
     OwnerId: undefined,
     Sex: undefined,
@@ -139,7 +140,7 @@ function AnimalRegister() {
                   ...prev,
                   Name: data.Name,
                   BirthDate: data.BirthDate,
-                  Weight: data.Weight,
+               
                   AnimalTypeId: data.AnimalTypeId,
                   OwnerId: data.OwnerId,
                   ProfileImage: data.ProfileImage,
@@ -195,6 +196,23 @@ function AnimalRegister() {
           }));
           isValid = false;
         }
+      }
+      if(name=="AnimalTypeId"){
+       
+        const ft=animalTypes.filter(type=>{
+          if(type.AnimalTypeId==value){
+            return true
+          }
+        })
+        console.log(ft)
+        if(ft.length!=1){
+          setError((prevErrors) => ({
+            ...prevErrors,
+            [name]: "Niepoprawnie wypełnione pole",
+          }));
+          isValid = false;
+        }
+
       }
     }
     return isValid;
@@ -253,8 +271,8 @@ function AnimalRegister() {
 
   return (
     <form className="container " onSubmit={handleSubmit} noValidate style={{}}>
-      <div className="row">
-        <div className="col-4">
+      <div className="row just">
+        <div className="col-lg-4">
           <PhotoForm
             setPhoto={setPhoto}
             preview={animal.ProfileImage}
@@ -262,7 +280,7 @@ function AnimalRegister() {
           />
         </div>
 
-        <div className="col-8">
+        <div className="col-lg-4">
           <AnimalMainInfo
             ownerList={ownerList}
             handleChange={handleChange}

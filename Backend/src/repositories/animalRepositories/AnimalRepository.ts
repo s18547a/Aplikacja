@@ -1,9 +1,4 @@
-
-
-
 import Animal,{Sex} from '../../classes/Animal';
-
-
 import { AnimalParametersType } from '../../classes/Interfaces';
 import { createIDwithUUIDV4 } from '../../helpers/idHelpers';
 const config = require('../../db/userConnection');
@@ -37,7 +32,7 @@ exports.getAnimal=async(AnimalId:string)=>{
             AnimalId,
             animalRecord.Name,
             animalRecord.BirthDate.toISOString().split('T')[0],
-            animalRecord.Weight,
+            
 
             animalRecord.OwnerId,
             animalRecord.ProfileImage,
@@ -79,7 +74,7 @@ exports.getAnimals = async (parameters: AnimalParametersType) => {
             const result= await pool
                 .request()
                 .query(
-                    `Select AnimalId,Name,BirthDate,Weight,u.OwnerId,Sex,AnimalTypeId From Animal a join [User] u on a.OwnerId=u.OwnerId   where u.Email like '${parameters.Email}%'`
+                    `Select AnimalId,Name,BirthDate,u.OwnerId,Sex,AnimalTypeId From Animal a join [User] u on a.OwnerId=u.OwnerId   where u.Email like '${parameters.Email}%'`
                 );
             animalsRecordset = result.recordset;
         }
@@ -102,7 +97,7 @@ exports.getAnimals = async (parameters: AnimalParametersType) => {
                         animal.AnimalId,
                         animal.Name,
                         animal.BirthDate.toISOString().split('T')[0],
-                        animal.Weight,
+                    
 
                         animal.OwnerId,
                         animal.ProfileImage,
@@ -125,7 +120,7 @@ exports.getAnimals = async (parameters: AnimalParametersType) => {
 };
 
 exports.registerAnimal = async (newAnimal) => {
-    console.log(newAnimal);
+  
 
     try {
         const pool = await sql.connect(config);
@@ -136,7 +131,7 @@ exports.registerAnimal = async (newAnimal) => {
             const AnimalId: string = createIDwithUUIDV4();
             const Name: string = newAnimal.Name;
             const BirthDate: string = newAnimal.BirthDate;
-            const Weight: number = newAnimal.Weight;
+           
             const AnimalTypeId: string = newAnimal.AnimalTypeId;
             const OwnerId: string = newAnimal.OwnerId;
             const Sex: Sex = newAnimal.Sex;
@@ -149,19 +144,20 @@ exports.registerAnimal = async (newAnimal) => {
                 .input('AnimalId', sql.VarChar, AnimalId)
                 .input('Name', sql.VarChar, Name)
                 .input('BirthDate', sql.Date, BirthDate)
-                .input('Weight', sql.Decimal, Weight)
+                
                 .input('AnimalTypeId', sql.VarChar, AnimalTypeId)
                 .input('OwnerId', sql.VarChar, OwnerId)
                 .input('Sex', sql.TinyInt, Sex)
 
                 .input('ProfileImage', sql.VarChar, ProfileImage)
                 .query(
-                    'Insert into Animal(AnimalId,Name,BirthDate,Weight,AnimalTypeId,OwnerId,ProfileImage,Sex) values(@AnimalId,@Name,@BirthDate,@Weight,@AnimalTypeId,@OwnerId,@ProfileImage,@Sex)'
+                    'Insert into Animal(AnimalId,Name,BirthDate,AnimalTypeId,OwnerId,ProfileImage,Sex) values(@AnimalId,@Name,@BirthDate,@AnimalTypeId,@OwnerId,@ProfileImage,@Sex)'
                 );
             rowsAffected = results.rowsAffected[0];
-            console.log(rowsAffected);
+          
 
             if (rowsAffected != 1) {
+                console.log('falied to inser');
                 throw Error('');
             } else {
                 const createAnimalMedicalInformationResult = await AnimalMedicalInfoRepository.createAnimalMedicalInformation(AnimalId,transaction);
@@ -199,13 +195,13 @@ exports.updateAnimal = async (Animal: Animal)=> {
     const ProfileImage: string | null = Animal.ProfileImage;
 
     try {
-        console.log(Animal.Weight);
+       
         const pool = await sql.connect(config);
         const animalRegisterPool = await pool
             .request()
             .input('Name', sql.VarChar, Name)
             .input('BirthDate', sql.Date, BirthDate)
-            .input('Weight', sql.Decimal, Animal.Weight)
+          
             .input('AnimalTypeId', sql.VarChar, AnimalTypeId)
             .input('OwnerId', sql.VarChar, OwnerId)
             .input('Sex', sql.TinyInt, Sex)
@@ -214,7 +210,7 @@ exports.updateAnimal = async (Animal: Animal)=> {
             .input('ProfileImage', sql.VarChar, ProfileImage)
 
             .query(
-                'Update Animal set Name=@Name, BirthDate = @BirthDate, Weight=@Weight,Sex=@Sex, ProfileImage=@ProfileImage where AnimalId=@AnimalId'
+                'Update Animal set Name=@Name, BirthDate = @BirthDate,Sex=@Sex, ProfileImage=@ProfileImage where AnimalId=@AnimalId'
             );
         console.log(animalRegisterPool);
    

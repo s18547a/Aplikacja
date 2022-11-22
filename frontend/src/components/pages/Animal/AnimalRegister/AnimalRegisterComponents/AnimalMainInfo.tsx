@@ -55,7 +55,7 @@ function AnimalMainInfo(props: {
         <h5>Informacje podstawowe</h5>
       </div>
       <div className="row">
-        <div className="col-6">
+        <div className="col-12">
           <FormDiv
             label="Imie"
             name="Name"
@@ -65,7 +65,7 @@ function AnimalMainInfo(props: {
             value={props.animal.Name}
           />
         </div>
-        <div className="col-6">
+        <div className="col-12">
           <FormDateReactDiv
             label={"Data urodzenia"}
             value={props.animal.BirthDate}
@@ -73,19 +73,9 @@ function AnimalMainInfo(props: {
             error={props.error.BirthDate}
           />
         </div>
-        <div className="col-6">
-          <FormDiv
-            label="Waga (kg)"
-            name="Weight"
-            error={props.error.Weight}
-            type="number"
-            onChange={handleChange}
-            placeholder={"0.00"}
-            value={props.animal.Weight}
-          />
-        </div>
+      
 
-        <div className="col-6">
+        <div className="col-12">
           <FormAnimalTypeSelect
             label="Rodzaj"
             name="AnimalTypeId"
@@ -97,8 +87,8 @@ function AnimalMainInfo(props: {
             selectedValue={props.animal.AnimalTypeId}
           />
         </div>
-        <div className="col-6">{isOwner() ? null : ownerField}</div>
-        <div className="col-6">
+        <div className="col-12">{isOwner() ? null : ownerField}</div>
+        <div className="col-12">
           <FormCheck
             label="Płeć"
             name="Sex"
@@ -124,7 +114,7 @@ function AnimalMainInfo(props: {
             ]}
           />
         </div>
-        <div className="col-12">
+        <div className="col-12 mt-3">
           <SubmitFormButton
             label={props.editForm === true ? "Zapisz zmiany" : "Zarejestruj"}
           />

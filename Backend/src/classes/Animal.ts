@@ -10,7 +10,7 @@ class Animal {
     AnimalId: string | null;
     Name: string;
     BirthDate: string;
-    Weight: number;
+   
 
     OwnerId: string;
     ProfileImage: string | null;
@@ -23,7 +23,7 @@ class Animal {
         AnimalId: string | null,
         Name: string,
         BirthDate: string,
-        Weight: number,
+      
 
         OwnerId: string,
         ProfileImage: string | null,
@@ -35,7 +35,7 @@ class Animal {
         this.AnimalId = AnimalId;
         this.Name = Name;
         this.BirthDate = BirthDate;
-        this.Weight = Weight;
+      
 
         this.OwnerId = OwnerId;
         this.ProfileImage = ProfileImage;

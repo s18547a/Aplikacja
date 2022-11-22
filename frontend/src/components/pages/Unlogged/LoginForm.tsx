@@ -88,7 +88,7 @@ function LoginForm(props) {
   return (
     <form onSubmit={handleSubmit} className="">
       <div className="row justify-content-center">
-        <div className="col-6">
+        <div className="col-4">
           <div className="card card-body  border-0">
             <div className="row justify-content-center">
               <div className="col-12">
@@ -113,8 +113,8 @@ function LoginForm(props) {
               </div>
             </div>
 
-            <div className="row justify-content-center">
-              <div className="col-6">
+            <div className="row mt-3">
+              <div className="col-1">
                 <button
                   type="submit"
                   className="btn btn-primary"
@@ -125,18 +125,7 @@ function LoginForm(props) {
               </div>
             </div>
 
-            <div className="row justify-content-center mt-3">
-              <div className="col-6 ">
-                <button
-                  className="btn btn-primary"
-                  onClick={() => {
-                    navigate("/register");
-                  }}
-                >
-                  Zarejestruj
-                </button>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>

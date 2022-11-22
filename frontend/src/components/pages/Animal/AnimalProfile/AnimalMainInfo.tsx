@@ -65,12 +65,7 @@ function AnimalProfile(props) {
                           value={`${props.animal?.AnimalType.Race},${props.animal?.AnimalType.Family}`}
                         />
                       </div>
-                      <div className="col-12">
-                        <ProfileDiv
-                          label={"Waga"}
-                          value={props.animal?.Weight}
-                        />
-                      </div>
+                    
                       <div className="col-12">
                         <ProfileDiv
                           label={"Płeć"}
