@@ -6,32 +6,32 @@ export interface  AnimalParametersType {
 
 export interface GetOwnerParamters {
    
-    AnimalId: String;
+    AnimalId: string;
   }
 
- export interface GetReservationParameters {
+export interface GetReservationParameters {
     VetId: string;
     Date: string;
     OwnerId: string|null;
   }
 
-  export interface GetScheduldeParamters {
+export interface GetScheduldeParamters {
     Date: string;
     VetId: string;
     isSurgery:boolean;
   }
 
-  export interface getSurgeryPrameters {
+export interface getSurgeryPrameters {
  
     OwnerId:string;
     VetId:string,
     Date:string
   }
 
-  export interface GetVetParameters {
+export interface GetVetParameters {
     Date: string;
    
-    VetType: String;
+    VetType: string;
   }
 
   
@@ -43,13 +43,13 @@ export interface GetVisitPrarameters {
     Name: string;
   }
 
-  export interface IllnessCuredParameters {
-    AnimalId: String;
-    Description: String;
-    VisitId: String;
-    RecoveryDate: String;
+export interface IllnessCuredParameters {
+    AnimalId: string;
+    Description: string;
+    VisitId: string;
+    RecoveryDate: string;
   }
 
-  export interface getVetTypesParameters {
+export interface getVetTypesParameters {
     VetId: string;
   }

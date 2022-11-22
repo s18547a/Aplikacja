@@ -1,1 +1,1 @@
-export default { secret: "very_secret_key" };
+export default { secret: 'very_secret_key' };

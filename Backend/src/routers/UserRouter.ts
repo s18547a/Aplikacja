@@ -1,7 +1,7 @@
-import express, { Response } from "express";
+import express from 'express';
 const router = express.Router();
-const UserController=require("../controllers/UserController");
+const UserController=require('../controllers/UserController');
 
-router.post("/", UserController.login);
+router.post('/', UserController.login);
 
-module.exports=router
+module.exports=router;

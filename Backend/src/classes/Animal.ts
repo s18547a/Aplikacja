@@ -1,4 +1,4 @@
-import AnimalType from "./AnimalType";
+import AnimalType from './AnimalType';
 
 export enum Sex {
   UNKNOWN,
@@ -7,45 +7,45 @@ export enum Sex {
 }
 
 class Animal {
-  AnimalId: string | null;
-  Name: string;
-  BirthDate: string;
-  Weight: number;
+    AnimalId: string | null;
+    Name: string;
+    BirthDate: string;
+    Weight: number;
 
-  OwnerId: string;
-  ProfileImage: string | null;
-  Sex: Sex;
+    OwnerId: string;
+    ProfileImage: string | null;
+    Sex: Sex;
 
-  AnimalTypeId: number;
-  AnimalType: AnimalType;
+    AnimalTypeId: number;
+    AnimalType: AnimalType;
 
-  constructor(
-    AnimalId: string | null,
-    Name: string,
-    BirthDate: string,
-    Weight: number,
+    constructor(
+        AnimalId: string | null,
+        Name: string,
+        BirthDate: string,
+        Weight: number,
 
-    OwnerId: string,
-    ProfileImage: string | null,
-    Sex: number,
+        OwnerId: string,
+        ProfileImage: string | null,
+        Sex: number,
 
-    AnimalTypeId: number,
-    AnimalType: AnimalType
-  ) {
-    this.AnimalId = AnimalId;
-    this.Name = Name;
-    this.BirthDate = BirthDate;
-    this.Weight = Weight;
+        AnimalTypeId: number,
+        AnimalType: AnimalType
+    ) {
+        this.AnimalId = AnimalId;
+        this.Name = Name;
+        this.BirthDate = BirthDate;
+        this.Weight = Weight;
 
-    this.OwnerId = OwnerId;
-    this.ProfileImage = ProfileImage;
-    this.Sex = Sex;
+        this.OwnerId = OwnerId;
+        this.ProfileImage = ProfileImage;
+        this.Sex = Sex;
 
-    this.AnimalTypeId = AnimalTypeId;
-    this.AnimalType = AnimalType;
-  }
+        this.AnimalTypeId = AnimalTypeId;
+        this.AnimalType = AnimalType;
+    }
 
- /**
+    /**
   * name
   */
 

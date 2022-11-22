@@ -1,29 +1,29 @@
 const jwt =require('jsonwebtoken');
- var config = require('../auth/key');
+const configAuthKey = require('../auth/key');
 exports.isAuthorizated=async(req,res,next)=>{
 
     const authHeader= req.headers['authorization'];
 
     const token = authHeader && authHeader&& authHeader.split(' ')[1];
 
-    console.log(token)
+    console.log(token);
 
     if(token==null)
     {
-        return res.status(401).json({})
+        return res.status(401).json({});
     }
     else{
-        await jwt.verify(token,config.secret,(err,user)=>{
-            console.log(user)
+        await jwt.verify(token,configAuthKey.secret,(err,user)=>{
+            console.log(user);
             if(err){
                 return res.status(403).json({});
             }
             else 
-          {
-            req.user=user
-            next()
-        }
-        })
+            {
+                req.user=user;
+                next();
+            }
+        });
 
     }
 
@@ -31,4 +31,4 @@ exports.isAuthorizated=async(req,res,next)=>{
     
 
 
-}
+};

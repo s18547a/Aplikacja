@@ -1,21 +1,21 @@
 
-import Vaccination from "../classes/Vaccination";
-import VaccineType from "../classes/VaccineType";
+import Vaccination from '../classes/Vaccination';
+import VaccineType from '../classes/VaccineType';
 
 
-var config = require("../db/userConnection");
-var sql = require("mssql");
+const config = require('../db/userConnection');
+const sql = require('mssql');
 
 
 
 exports.getAnimalCoreVaccineTypes=async(AnimalId:string)=>{
     try {
 
-        let pool =await sql.connect(config);
+        const pool =await sql.connect(config);
 
-        let results =await pool.request().input("AnimalId",sql.VarChar,AnimalId).
-        query(
-        "Select VaccineType,Species,Core From VaccineType where Species=(Select Family \
+        const results =await pool.request().input('AnimalId',sql.VarChar,AnimalId).
+            query(
+                'Select VaccineType,Species,Core From VaccineType where Species=(Select Family \
         From AnimalType aty \
             join Animal a on aty.AnimalTypeId=a.AnimalTypeId \
             where a.AnimalId=@AnimalId) \
@@ -23,7 +23,7 @@ exports.getAnimalCoreVaccineTypes=async(AnimalId:string)=>{
             (Select VaccineType From AnimalVaccine where AnimalId=@AnimalId) and Core=1 \
         union Select * From VaccineType where Species is null and core=1 and \
         VaccineType NOT IN \
-        (Select VaccineType From AnimalVaccine  where AnimalId=@AnimalId )");
+        (Select VaccineType From AnimalVaccine  where AnimalId=@AnimalId )');
 
         const vaccineRecordset=results.recordset;
         if(vaccineRecordset.length==0){
@@ -33,30 +33,30 @@ exports.getAnimalCoreVaccineTypes=async(AnimalId:string)=>{
         const coreVacciness:VaccineType[]=vaccineRecordset.map(vaccineRecord=>{
 
             return new VaccineType(vaccineRecord.VaccineType,vaccineRecord.Species,vaccineRecord.Core);
-        })
+        });
 
-        return coreVacciness
+        return coreVacciness;
 
        
 
        
         
     } catch (error) {
-        console.log(error)
+        console.log(error);
 
-        return error
+        return error;
     }
 
 
-}
+};
 
 exports.getAnimalVaccines=async(AnimalId:string)=>{
 
     try {
 
-        let pool =await sql.connect(config);
+        const pool =await sql.connect(config);
 
-        let results =await pool.request().input("AnimalId",sql.VarChar,AnimalId).query("Select * From AnimalVaccine Where AnimalId=@AnimalId");
+        const results =await pool.request().input('AnimalId',sql.VarChar,AnimalId).query('Select * From AnimalVaccine Where AnimalId=@AnimalId');
 
         const vaccineRecordset=results.recordset;
         if(vaccineRecordset.length==0){
@@ -67,25 +67,25 @@ exports.getAnimalVaccines=async(AnimalId:string)=>{
         const animalVaccinations:Vaccination[]=vaccineRecordset.map(vaccinationRecord=>{
 
             return new Vaccination(vaccinationRecord.AnimalId,vaccinationRecord.VaccineType,vaccinationRecord.Date.toISOString().split('T')[0]);
-        })
+        });
 
-        return animalVaccinations
+        return animalVaccinations;
         
     } catch (error) {
-        console.log(error)
+        console.log(error);
 
-        return error
+        return error;
     }
-}
+};
 
 
 exports.getVaccineTypes=async(parameters:{unAdministratedAnimalId:string})=>{
     try {
-        let pool =await sql.connect(config);
-        let vaccineRecordset
+        const pool =await sql.connect(config);
+        let vaccineRecordset;
         if(parameters.unAdministratedAnimalId){
-            let results = await pool.request().input("AnimalId",sql.VarChar,parameters.unAdministratedAnimalId).query(
-              "  Select * From VaccineType vt \
+            const results = await pool.request().input('AnimalId',sql.VarChar,parameters.unAdministratedAnimalId).query(
+                '  Select * From VaccineType vt \
                 Where vt.VaccineType not in \
                 ( \
                 Select VaccineType \
@@ -99,20 +99,20 @@ exports.getVaccineTypes=async(parameters:{unAdministratedAnimalId:string})=>{
                 on a.AnimalTypeId=aty.AnimalTypeId \
                 where AnimalId=@AnimalId)\
                 or vt.Species is null\
-                )"
+                )'
 
-            )
+            );
 
-            vaccineRecordset=results.recordset
+            vaccineRecordset=results.recordset;
         }
         else{
-            let results = await pool.request().query("Select * From VaccineType");
+            const results = await pool.request().query('Select * From VaccineType');
 
-         vaccineRecordset=results.recordset;
+            vaccineRecordset=results.recordset;
         }
         if(vaccineRecordset.length==0){
 
-            return null
+            return null;
         }
 
        
@@ -120,18 +120,18 @@ exports.getVaccineTypes=async(parameters:{unAdministratedAnimalId:string})=>{
         const vaccineTypes:VaccineType[]=vaccineRecordset.map(vaccineRecord=>{
 
             return new VaccineType(vaccineRecord.VaccineType,vaccineRecord.Species,vaccineRecord.Core);
-        })
+        });
 
-        return vaccineTypes
+        return vaccineTypes;
         
     } catch (error) {
 
-        console.log(error)
+        console.log(error);
 
-        return error
+        return error;
         
     }
 
 
-}
+};
 

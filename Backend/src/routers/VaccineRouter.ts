@@ -1,4 +1,4 @@
-import express, { Response } from "express";
+import express from 'express';
 const router = express.Router();
 
 const VaccineController = require('../controllers/VaccineController');

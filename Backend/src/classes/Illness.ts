@@ -1,23 +1,23 @@
 class Illness {
-  AnimalId: String;
-  VisitId: String;
-  Description: String;
-  DiagnosisDate: String;
-  RecoveryDate: String | null;
+    AnimalId: string;
+    VisitId: string;
+    Description: string;
+    DiagnosisDate: string;
+    RecoveryDate: string | null;
 
-  constructor(
-    AnimalId: String,
-    VisitId: String,
-    Description: String,
-    DiagnosisDate: String,
-    RecoveryDate: String | null
-  ) {
-    this.AnimalId = AnimalId;
-    this.VisitId = VisitId;
-    this.Description = Description;
-    this.DiagnosisDate = DiagnosisDate;
-    this.RecoveryDate = RecoveryDate;
-  }
+    constructor(
+        AnimalId: string,
+        VisitId: string,
+        Description: string,
+        DiagnosisDate: string,
+        RecoveryDate: string | null
+    ) {
+        this.AnimalId = AnimalId;
+        this.VisitId = VisitId;
+        this.Description = Description;
+        this.DiagnosisDate = DiagnosisDate;
+        this.RecoveryDate = RecoveryDate;
+    }
 }
 
 export default Illness;

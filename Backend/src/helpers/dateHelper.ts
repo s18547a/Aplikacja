@@ -1,24 +1,24 @@
 
-  import translate from "translate"
+import translate from 'translate';
 export function getCurrentDate() {
-    let date = new Date();
+    const date = new Date();
   
-    return date.toISOString().split("T")[0];
-  }
+    return date.toISOString().split('T')[0];
+}
 
 
 
 export function getDayOfAWeekName(NewDate: string): string {
 
-  const newDate: Date = new Date(NewDate);
-  console.log(newDate)
-  return newDate.toLocaleDateString("en-PL", { weekday: "long" });
+    const newDate: Date = new Date(NewDate);
+    console.log(newDate);
+    return newDate.toLocaleDateString('en-PL', { weekday: 'long' });
 }
 
 export async function translateDayOfWeekName(englishName:string){
 
-  translate.engine="google";
-  const translatedName= await translate(englishName,"pl")
+    translate.engine='google';
+    const translatedName= await translate(englishName,'pl');
 
-  return translatedName
+    return translatedName;
 } 

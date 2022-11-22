@@ -1,162 +1,162 @@
-const config = require("../db/userConnection");
+const config = require('../db/userConnection');
 
-import sql from "mssql";
-import { GetReservationParameters } from "../classes/Interfaces";
-import Owner from "../classes/Owner";
-import Reservation from "../classes/Reservation";
-import Vet from "../classes/Vet";
-import { createIDwithUUIDV4 } from "../helpers/idHelpers";
+import sql from 'mssql';
+import { GetReservationParameters } from '../classes/Interfaces';
+import Owner from '../classes/Owner';
+import Reservation from '../classes/Reservation';
+import Vet from '../classes/Vet';
+import { createIDwithUUIDV4 } from '../helpers/idHelpers';
 
-const VetRepository = require("../repositories/vetRepositories/VetRepository");
-const OwnerRepository = require("../repositories/OwnerRepository");
+const VetRepository = require('../repositories/vetRepositories/VetRepository');
+const OwnerRepository = require('../repositories/OwnerRepository');
 
 
 exports.getReservations = async (parameters: GetReservationParameters) => {
-  try {
-    let returnList: boolean = true;
+    try {
+        const returnList = true;
 
-    let pool = await sql.connect(config);
-    let reservationRecordset;
-    if (!parameters.VetId && !parameters.Date && !parameters.OwnerId) {
-      const reservationPool = await pool
-        .request()
-        .query("Select * From Reservation Order by Date,Hour");
-      reservationRecordset = reservationPool.recordset;
-      console.log(reservationRecordset);
-    } else if (parameters.VetId && parameters.Date) {
-      const reservationPool = await pool
-        .request()
-        .input("VetId", sql.VarChar, parameters.VetId)
-        .input("Date", sql.Date, parameters.Date)
-        .query(
-          "Select * From Reservation Where VetId=@VetId and Date=@Date Order by Date,Hour"
-        );
-      reservationRecordset = reservationPool.recordset;
-    } else if (parameters.VetId && !parameters.Date && !parameters.OwnerId) {
-      const reservationPool = await pool
-        .request()
-        .input("VetId", sql.VarChar, parameters.VetId)
-        .query(
-          "Select * From Reservation  Where VetId=@VetId Order by Date,Hour"
-        );
-      reservationRecordset = reservationPool.recordset;
-    } else if (parameters.Date && !parameters.VetId && !parameters.OwnerId) {
-      const reservationPool = await pool
-        .request()
-        .input("Date", sql.Int, parameters.Date)
-        .query(
-          "Select * From Reservation  Where Date=@Date Order by Date,Hour"
-        );
-      reservationRecordset = reservationPool.recordset;
-    } else if (parameters.OwnerId && !parameters.VetId && !parameters.Date) {
-      const reservationPool = await pool
-        .request()
-        .input("OwnerId", sql.VarChar, parameters.OwnerId)
-        .query(
-          "Select * From Reservation Where OwnerId=@OwnerId Order by Date,Hour"
-        );
-      reservationRecordset = reservationPool.recordset;
+        const pool = await sql.connect(config);
+        let reservationRecordset;
+        if (!parameters.VetId && !parameters.Date && !parameters.OwnerId) {
+            const reservationPool = await pool
+                .request()
+                .query('Select * From Reservation Order by Date,Hour');
+            reservationRecordset = reservationPool.recordset;
+            console.log(reservationRecordset);
+        } else if (parameters.VetId && parameters.Date) {
+            const reservationPool = await pool
+                .request()
+                .input('VetId', sql.VarChar, parameters.VetId)
+                .input('Date', sql.Date, parameters.Date)
+                .query(
+                    'Select * From Reservation Where VetId=@VetId and Date=@Date Order by Date,Hour'
+                );
+            reservationRecordset = reservationPool.recordset;
+        } else if (parameters.VetId && !parameters.Date && !parameters.OwnerId) {
+            const reservationPool = await pool
+                .request()
+                .input('VetId', sql.VarChar, parameters.VetId)
+                .query(
+                    'Select * From Reservation  Where VetId=@VetId Order by Date,Hour'
+                );
+            reservationRecordset = reservationPool.recordset;
+        } else if (parameters.Date && !parameters.VetId && !parameters.OwnerId) {
+            const reservationPool = await pool
+                .request()
+                .input('Date', sql.Int, parameters.Date)
+                .query(
+                    'Select * From Reservation  Where Date=@Date Order by Date,Hour'
+                );
+            reservationRecordset = reservationPool.recordset;
+        } else if (parameters.OwnerId && !parameters.VetId && !parameters.Date) {
+            const reservationPool = await pool
+                .request()
+                .input('OwnerId', sql.VarChar, parameters.OwnerId)
+                .query(
+                    'Select * From Reservation Where OwnerId=@OwnerId Order by Date,Hour'
+                );
+            reservationRecordset = reservationPool.recordset;
+        }
+
+        let isEmpty;
+        reservationRecordset[0] == undefined ? (isEmpty = true) : (isEmpty = false);
+        if (isEmpty) {
+            return null;
+        } else {
+          
+            const reservations: Reservation[] = await Promise.all(
+                reservationRecordset.map(async (reservation) => {
+                    const vetObject: Vet = await VetRepository.getVet(
+                        reservation.VetId,
+                    );
+                    const ownerObject: Owner = await OwnerRepository.getOwner(
+                        reservation.OwnerId,
+                    );
+                    return new Reservation(
+                        reservation.ReservationId,
+                        reservation.Date.toISOString().split('T')[0],
+                        reservation.VetId,
+                        reservation.OwnerId,
+                        reservation.Hour,
+                        vetObject,
+                        ownerObject
+                    );
+                })
+            );
+
+      
+            if (reservations.length == 1 && !returnList) {
+      
+                return reservations[0];
+            } else {
+      
+                return reservations;
+            }
+        }
+    } catch (error) {
+        return error;
     }
-
-    let isEmpty;
-    reservationRecordset[0] == undefined ? (isEmpty = true) : (isEmpty = false);
-    if (isEmpty) {
-      return null;
-    } else {
-      let reservations: Reservation[];
-      reservations = await Promise.all(
-        reservationRecordset.map(async (reservation) => {
-          const vetObject: Vet = await VetRepository.getVet(
-            reservation.VetId,
-          );
-          const ownerObject: Owner = await OwnerRepository.getOwner(
-          reservation.OwnerId,
-          );
-          return new Reservation(
-            reservation.ReservationId,
-            reservation.Date.toISOString().split("T")[0],
-            reservation.VetId,
-            reservation.OwnerId,
-            reservation.Hour,
-            vetObject,
-            ownerObject
-          );
-        })
-      );
-
-      
-      if (reservations.length == 1 && !returnList) {
-      
-        return reservations[0];
-      } else {
-      
-        return reservations;
-      }
-    }
-  } catch (error) {
-    return error;
-  }
 };
 
 exports.createReservation = async (Reservation: Reservation) => {
-  try {
-    const ReservationId = createIDwithUUIDV4();
-    const Date: string = Reservation.Date;
-    const VetId: string = Reservation.VetId;
-    const OwnerId: string = Reservation.OwnerId;
-    const Hour: string = Reservation.Hour;
+    try {
+        const ReservationId = createIDwithUUIDV4();
+        const Date: string = Reservation.Date;
+        const VetId: string = Reservation.VetId;
+        const OwnerId: string = Reservation.OwnerId;
+        const Hour: string = Reservation.Hour;
   
 
-    let pool = await sql.connect(config);
+        const pool = await sql.connect(config);
 
-    let reservationPool = await pool
-      .request()
-      .input("ReservationId", sql.VarChar, ReservationId)
-      .input("Date", sql.Date, Date)
-      .input("VetId", sql.VarChar, VetId)
-      .input("OwnerId", sql.VarChar, OwnerId)
-      .input("Hour", sql.VarChar, Hour)
-      .query(
-        "INSERT INTO RESERVATION(ReservationId,Date,VetId,OwnerId,Hour) values(@ReservationId, @Date, @VetId, @OwnerId, @Hour)"
-      );
+        const reservationPool = await pool
+            .request()
+            .input('ReservationId', sql.VarChar, ReservationId)
+            .input('Date', sql.Date, Date)
+            .input('VetId', sql.VarChar, VetId)
+            .input('OwnerId', sql.VarChar, OwnerId)
+            .input('Hour', sql.VarChar, Hour)
+            .query(
+                'INSERT INTO RESERVATION(ReservationId,Date,VetId,OwnerId,Hour) values(@ReservationId, @Date, @VetId, @OwnerId, @Hour)'
+            );
   
 
-    if (reservationPool.rowsAffected[0] == 1) {
-      console.log("NEW ID" + ReservationId);
-      return ReservationId;
-    } else throw Error();
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
+        if (reservationPool.rowsAffected[0] == 1) {
+            console.log('NEW ID' + ReservationId);
+            return ReservationId;
+        } else throw Error();
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
 };
 
 exports.cancelReservation = async (ReservationId: string,transaction) => {
-  try {
+    try {
 
-    let pool = await sql.connect(config);
-    let rowsAffected: number 
-    if(transaction==null){
-      let reservationPool = await pool
-      .request()
-      .input("ReservationId", sql.VarChar, ReservationId)
-      .query("Delete From Reservation Where ReservationId=@ReservationId");
-      rowsAffected = reservationPool.rowsAffected[0];
-    }
-    else {
-      let result= await new sql.Request(transaction).
-      input("ReservationId", sql.VarChar, ReservationId)
-      .query("Delete From Reservation Where ReservationId=@ReservationId");
-      rowsAffected = result.rowsAffected[0];
-    }
+        const pool = await sql.connect(config);
+        let rowsAffected: number; 
+        if(transaction==null){
+            const reservationPool = await pool
+                .request()
+                .input('ReservationId', sql.VarChar, ReservationId)
+                .query('Delete From Reservation Where ReservationId=@ReservationId');
+            rowsAffected = reservationPool.rowsAffected[0];
+        }
+        else {
+            const result= await new sql.Request(transaction).
+                input('ReservationId', sql.VarChar, ReservationId)
+                .query('Delete From Reservation Where ReservationId=@ReservationId');
+            rowsAffected = result.rowsAffected[0];
+        }
 
 
     
 
    
-    return rowsAffected;
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
+        return rowsAffected;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
 };

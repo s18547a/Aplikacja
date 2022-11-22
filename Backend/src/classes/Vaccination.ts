@@ -1,20 +1,18 @@
-
-
 class Vaccination{
 
-    AnimalId:string
-    VaccineType:string
-    Date:string
+    AnimalId:string;
+    VaccineType:string;
+    Date:string;
 
     constructor(AnimalId:string,
         VaccineType:string,
         Date:string,
     ){
-        this.AnimalId=AnimalId
-        this.VaccineType=VaccineType
-        this.Date=Date
+        this.AnimalId=AnimalId;
+        this.VaccineType=VaccineType;
+        this.Date=Date;
     }
 }
 
 
-export default Vaccination
+export default Vaccination;

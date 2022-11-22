@@ -1,5 +1,5 @@
 
-const VaccineRepository=require('../repositories/VaccineRepository')
+const VaccineRepository=require('../repositories/VaccineRepository');
 
 
 export const getAnimalCoreVaccineTypes=async(req,res)=>{
@@ -10,15 +10,15 @@ export const getAnimalCoreVaccineTypes=async(req,res)=>{
 
     if(results instanceof Error){
 
-        return res.status(500).json({})
+        return res.status(500).json({});
     }
     else if(results ==null){
-        return res.status(404).json({})
+        return res.status(404).json({});
     }
-    else return res.status(200).json(results)
+    else return res.status(200).json(results);
 
 
-}
+};
 
 export const getAnimalVaccines=async(req,res)=>{
 
@@ -29,37 +29,37 @@ export const getAnimalVaccines=async(req,res)=>{
 
     if(results instanceof Error){
 
-        return res.status(500).json({})
+        return res.status(500).json({});
     }
     else if(results ==null){
-        return res.status(404).json({})
+        return res.status(404).json({});
     }
-    else return res.status(200).json(results)
+    else return res.status(200).json(results);
 
-}
+};
 
 interface getVaccineTypesParameters{unAdministratedAnimalId:string}
 
 export const getVaccineTypes=async (req,res)=>{
 
 
-    const parameters:getVaccineTypesParameters={ unAdministratedAnimalId:req.query.unAdministratedAnimalId}
-    console.log(parameters)
+    const parameters:getVaccineTypesParameters={ unAdministratedAnimalId:req.query.unAdministratedAnimalId};
+    console.log(parameters);
    
     const results = await VaccineRepository.getVaccineTypes(parameters);
 
     if(results instanceof Error){
 
-        return res.status(500).json({})
+        return res.status(500).json({});
     }
     else if (results == null){
 
-        return res.status(404).json({})
+        return res.status(404).json({});
     }
-    else return res.status(200).json(results)
+    else return res.status(200).json(results);
 
-}
+};
 
 
-export const registerVaccination=async(req,res)=>{}
+
 
