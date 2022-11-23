@@ -3,7 +3,7 @@ import TableOrEmpty from "../../../List/TableOrEmpty";
 
 function AnimalVaccines(props) {
   return (
-    <div className="card card-body border-0 ">
+    <div className="card card-body border-0 mt-8 shadow">
       <div className="row">
         <div className="col-lg-9 ">
           <div className="card-title">

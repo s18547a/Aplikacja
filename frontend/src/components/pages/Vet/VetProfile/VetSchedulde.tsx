@@ -52,7 +52,7 @@ function VetSchedulde(props) {
   }, []);
 
   return (
-    <div className="card card-body ">
+    <div className="card card-body shadow">
       <div className="card-title">
         <div className="row">
           <div className="col-12">

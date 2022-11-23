@@ -8,7 +8,7 @@ function SearchInput(props) {
   }
 
   return (
-    <div className="card card-body">
+    
       <div className="input-group justify-content-center">
         <div className="row">
           <div className="col-12 ">
@@ -22,7 +22,7 @@ function SearchInput(props) {
               />
               <button
                 type="button"
-                className="btn btn-outline-primary"
+                className="btn btn-outline-primary bg-white"
                 onClick={handleSearch}
               >
                 Szukaj
@@ -31,7 +31,7 @@ function SearchInput(props) {
           </div>
         </div>
       </div>
-    </div>
+   
   );
 }
 

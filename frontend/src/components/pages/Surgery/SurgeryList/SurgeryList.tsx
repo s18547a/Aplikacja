@@ -80,7 +80,7 @@ function SurgeryList() {
       
       <RegiserSuccessInfo newId={newId} message={"Nowy zabieg: "} />
 
-      <div className="card card-body">
+      <div className="card card-body shadow">
         <h5 className="card-title">Zabiegi</h5>
         <TableOrEmpty Empty={empty}>
           <table className="table table-hover">

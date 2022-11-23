@@ -98,7 +98,7 @@ function AnimalList() {
   }
 
   const serchDiv = (
-    <div className="card card-body">
+    
       <div className="input-group justify-content-center">
         <div className="row">
           <div className="col-12 ">
@@ -112,7 +112,7 @@ function AnimalList() {
               />
               <button
                 type="button"
-                className="btn btn-outline-primary"
+                className="btn btn-outline-primary bg-white"
                 onClick={handleSearch}
               >
                 Szukaj
@@ -121,14 +121,14 @@ function AnimalList() {
           </div>
         </div>
       </div>
-    </div>
+  
   );
 
   return (
     <div className="container">
       <RegiserSuccessInfo newId={newId} message={"Zarejestrowane zwierzę: "} />
       {isVet() ? serchDiv : null}
-      <div className="card card-body">
+      <div className="card card-body mt-4 shadow">
         <h5>Zwierzęta</h5>
         <div>
           <div>

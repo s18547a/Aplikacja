@@ -144,7 +144,7 @@ function SurgeryProfile(props) {
       <div className="">
         <div className="row">
           <div className="col-lg-4 ">
-            <div className="card card-body">
+            <div className="card card-body shadow">
               <ProfileDiv label={"Data"} value={surgery?.Date} />
               <ProfileDiv label={"Rodzaj"} value={surgery?.SurgeryType} />
               <ProfileDiv
@@ -171,7 +171,7 @@ function SurgeryProfile(props) {
             </div>
           </div>
           <div className="col-lg-4">
-            <div className="card card-body">
+            <div className="card card-body shadow">
               <div className="card-title">
                 <h5>Opis</h5>
               </div>
@@ -179,7 +179,7 @@ function SurgeryProfile(props) {
             </div>
           </div>
           <div className="col-lg-4">
-            <div className="card card-body">
+            <div className="card card-body shadow">
               <div className="row">
                 <div className="col-6">
                   <div className="card-title">

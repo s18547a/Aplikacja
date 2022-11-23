@@ -89,7 +89,7 @@ function LoginForm(props) {
     <form onSubmit={handleSubmit} className="">
       <div className="row justify-content-center">
         <div className="col-4">
-          <div className="card card-body  border-0">
+          <div className="card card-body  border-0 shadow">
             <div className="row justify-content-center">
               <div className="col-12">
                 <FormDiv

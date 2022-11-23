@@ -10,11 +10,11 @@ function TodayReservationList(props) {
 
   return (
     <div className="row">
-      <div className="card card-body border-0">
+      <div className="card card-body border-0 shadow">
         <div className="card-title">
           <h5>Dzisiejsze rezerwacje</h5>
           <div className="row">
-            <div className="col-6">
+            <div className="col-12">
               <TableOrEmpty Empty={props.list.length == 0 ? true : false}>
                 <table className="table">
                   <thead>

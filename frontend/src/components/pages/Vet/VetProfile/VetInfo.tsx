@@ -4,7 +4,7 @@ import { getDefalutProfileImage } from "../../../other/imageHelper";
 
 function VetInfo(props) {
   return (
-    <div className="card card-body border-0">
+    <div className="card card-body border-0 shadow">
       <div className="row align-items-center">
         <div className="col-lg-4 ">
           <div className="row justify-content-center">

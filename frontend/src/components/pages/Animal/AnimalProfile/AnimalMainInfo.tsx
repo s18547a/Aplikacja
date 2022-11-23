@@ -6,7 +6,7 @@ function AnimalProfile(props) {
   const navigate = useNavigate();
 
   return (
-    <div className="card card-body border-0">
+    <div className="card card-body border-0 shadow">
       <div className="row ">
         <div className="col-12 ">
           <div className="row">

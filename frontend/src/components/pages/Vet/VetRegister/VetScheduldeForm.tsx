@@ -191,7 +191,7 @@ function VetScheduldeForm() {
     <form className="container" onSubmit={handleSubmit}>
       <div className="row">
         <div className="col-5 offset-4">
-          <div className="card card-body">
+          <div className="card card-body shadow">
             <div className="card-title">
               <h5>Harmonogram</h5>
             </div>

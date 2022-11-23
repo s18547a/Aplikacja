@@ -35,15 +35,17 @@ function ReservationVetChoice(props) {
                       }
                     />
                   </div>
-                  <div className="col-6">
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="">{vet.Name + " " + vet.LastName}</div>
-                      </div>
-                      <div className="col-12">
-                        <div className="">{vet.Contact}</div>
-                      </div>
+                  <div className="col-6 align-baseline">
+                    <div className="d-flex flex-column ">
+                    <div className=" ">{vet.Name + " " + vet.LastName}</div>
+                     
+                     
+                     <div className="">{`tel. ${vet.Contact}`}</div>
                     </div>
+                    
+                       
+                     
+                  
                   </div>
                 </div>
               </button>

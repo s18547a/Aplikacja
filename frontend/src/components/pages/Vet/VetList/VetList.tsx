@@ -36,7 +36,7 @@ function VetList() {
 
   return (
     <div className="container">
-      <div className="card card-body">
+      <div className="card card-body shadow">
         <div className="card-title">
           <h5>Lista weterynarzy</h5>
         </div>

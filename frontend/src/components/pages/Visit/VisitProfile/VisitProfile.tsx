@@ -45,7 +45,7 @@ function VisitProfile() {
     <div className="container ">
       <div className="row justify-content-center">
         <div className="col-lg-5">
-          <div className="card card-body">
+          <div className="card card-body shadow">
             <div className="row justify-content-center">
               <div className="col-12 ">
                 <ProfileDiv value={visit?.Date} label="Data" />
@@ -70,7 +70,7 @@ function VisitProfile() {
         </div>
 
         <div className="col-lg-4">
-          <div className="card card-body">
+          <div className="card card-body shadow">
             <div>
               <p>Czynności</p>
             </div>

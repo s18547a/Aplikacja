@@ -25,11 +25,11 @@ function MedicalInfo(props) {
   return (
     <div className="row justify-content-center">
       <div className="col-10">
-        <div className="container card card-body border-0">
+        <div className="container  border-0 ">
           <div className="row">
             {showBtn}
             <div className="col-3">
-              <div className="list-group" id="list-tab" role="tablist">
+              <div className="list-group shadow" id="list-tab" role="tablist">
                 <a
                   className="list-group-item list-group-item-action active"
                   id="list-settings-list"
@@ -173,7 +173,7 @@ function MedicalInfo(props) {
                 </a>
               </div>
             </div>
-            <div className="col-9 card">
+            <div className="col-9 card card-body shadow">
               <div className="tab-content" id="nav-tabContent">
                 <div
                   className="tab-pane fade show active"

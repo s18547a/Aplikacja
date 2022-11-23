@@ -18,7 +18,7 @@ function VisitMainInfoForm(props) {
   }
 
   return (
-    <div className="card card-body ">
+    <div className="card card-body shadow">
       <div className="d-flex mb-3">
         <SubmitFormButton label="Zapisz" />
       </div>

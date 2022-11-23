@@ -135,7 +135,7 @@ function VisitList() {
           placeholder="Imie"
         />
       }
-      <div className="card card-body">
+      <div className="card card-body shadow mt-5">
         <h5 className="card-title">Wizyty</h5>
         <TableOrEmpty Empty={empty}>
           <table className="table table-hover ">

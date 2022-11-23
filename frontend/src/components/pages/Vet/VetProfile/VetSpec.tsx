@@ -3,7 +3,7 @@ function VetSpec(props) {
     <div className="mt-2">
       <div className="row">
         <div className="col-lg-3">
-          <div className="card card-body card-title">
+          <div className="card card-body card-title shadow">
             <h5 className="text-center">Specjalizacje</h5>
           </div>
         </div>
@@ -13,7 +13,7 @@ function VetSpec(props) {
             {props.types.map((type) => {
               return (
                 <div className="col-lg-3 text-center">
-                  <div className="card card-body">{type.VetType}</div>;
+                  <div className="card card-body shadow">{type.VetType}</div>;
                 </div>
               );
             })}

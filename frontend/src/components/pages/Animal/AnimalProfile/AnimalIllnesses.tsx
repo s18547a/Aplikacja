@@ -9,7 +9,7 @@ function AnimalIllnesses(props) {
   }
 
   return (
-    <div className="card card-body border-0">
+    <div className="card card-body border-0 shadow">
       <table className="table table-hover">
         <thead className="">
           <tr>

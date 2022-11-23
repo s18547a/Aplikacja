@@ -7,7 +7,7 @@ function SurgeryVetChoice(props) {
   }
 
   return (
-    <div className="card card-body">
+    <div className="card card-body shadow">
       <div className="card-title">
         <h5>Prowadzący</h5>
       </div>

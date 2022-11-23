@@ -142,7 +142,7 @@ function OwnerRegister(props) {
       <div className="row">
       
         <div className="col-lg-6 offset-lg-3">
-          <div className="card card-body border-0">
+          <div className="card card-body border-0 shadow">
             
             <div className="row">
               <div className="col-12">

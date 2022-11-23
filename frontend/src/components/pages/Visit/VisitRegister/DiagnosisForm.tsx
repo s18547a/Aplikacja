@@ -59,7 +59,7 @@ function DiagnosisForm(props) {
       <div className="">
         <div className="row">
           <div className="col-5">
-            <div className="card accordion-body ">
+            <div className="m-2">
               <div className="row">
                 <div className="col-12">
                   <a
@@ -79,7 +79,7 @@ function DiagnosisForm(props) {
           {diagnosisList.map((d) => {
             return (
               <div className="col-6" key={d.Number}>
-                <div className=" card card-body">
+                <div className=" card card-body shadow">
                   <div>
                     <button
                       className="btn btn-close"

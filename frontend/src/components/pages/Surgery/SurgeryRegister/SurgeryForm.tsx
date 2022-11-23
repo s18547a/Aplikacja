@@ -295,7 +295,7 @@ function SurgeryForm() {
     <form className="container " onSubmit={handleSubmit}>
       <div className="row ">
         <div className="col-4  offset-4">
-          <div className="row card card-body">
+          <div className="row card card-body shadow">
             <div className="col-12">
               <SelectOwnerComponent
                 onChange={onChangeOwner}

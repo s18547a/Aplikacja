@@ -3,7 +3,7 @@ function VisitActivitiesForm(props) {
     props.changeActivity(e);
   }
   return (
-    <div className="card card-body">
+    <div className="card card-body shadow">
       <div className="card-title">
         <h5 className="form-label">Czynności</h5>
       </div>

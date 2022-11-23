@@ -211,7 +211,7 @@ function ReservationForm() {
     <form className="container" onSubmit={handleSubmit}>
       <div className="row justify-content-center">
         <div className="col-lg-4 ">
-          <div className="card card-body">
+          <div className="card card-body shadow">
             <ReservationMainInfo
               handleDateChange={handleDateChange}
               handleOwnerChange={handleOwnerChange}

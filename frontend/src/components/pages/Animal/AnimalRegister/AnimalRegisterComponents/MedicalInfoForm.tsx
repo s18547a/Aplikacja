@@ -90,7 +90,7 @@ function MedicalInfoForm(props) {
     >
       <div className="row justify-content-center ">
         <div className="col-6">
-        <div className="row  card card-body">
+        <div className="row  card card-body shadow">
         <div className="col-12">
           <SubmitFormButton label={"Zapisz"} />
         </div>
