@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getVetTypes, registerVet } from "../../../api/vetApiCalls";
-import { useNavigate } from "react-router-dom";
+import { getVetByVetId, getVetTypes, registerVet, updateVet } from "../../../api/vetApiCalls";
+import { useLocation, useNavigate } from "react-router-dom";
 import PhotoForm from "../../Shared/PhotoForm";
 import VetMainInfo from "./VetMainInfo";
 
@@ -44,7 +44,8 @@ function VetForm() {
     Password: "",
     HireDate: "",
   });
-
+  const location = useLocation();
+  const [editForm,setEditForm]=useState(false);
   useEffect(() => {
     let response;
     let promise;
@@ -66,6 +67,47 @@ function VetForm() {
             console.log(error);
           }
         );
+    }
+    
+    const state = location.state as { VetId: string };
+    if (state != null) {
+      setEditForm(true);
+    
+      promise = getVetByVetId(state.VetId);
+      if (promise) {
+        promise
+          .then((data) => {
+            response = data;
+            return response.json();
+          })
+          .then(
+            (data) => {
+              if (response.status == 200) {
+                const types=data.Types;
+                let formTypes:string[]=[];
+                types.forEach(element => {
+                  formTypes.push(element.VetType)
+                });
+                setVet((prev) => ({
+                  ...prev,
+                  VetId:data.VetId,
+                  Name: data.Name,
+                  LastName: data.LastName,
+                  Contact: data.Contact,
+                  OldEmail: data.Email,
+                  Email:data.Email,
+                  Password: "Pass",
+                  HireDate: data.HireDate,
+                  ProfileImage: data.ProfileImage,
+                  VetType: formTypes,
+                }));
+              }
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      }
     }
   }, []);
 
@@ -103,8 +145,17 @@ function VetForm() {
     e.preventDefault();
     console.log(vet);
     if (validateForm()) {
+      
       let response;
-      let promise = registerVet(vet);
+
+      let promise 
+      if(editForm){
+        promise=updateVet(vet);
+      }else
+      {
+        promise= registerVet(vet);
+      }
+    
       if (promise) {
         promise
           .then((data) => {
@@ -154,6 +205,7 @@ function VetForm() {
         }));
         isValid = false;
       }
+    
     }
     return isValid;
   }
@@ -168,17 +220,23 @@ function VetForm() {
     <form className="container" onSubmit={handleSubmit}>
       <div className="row">
         <div className="col-4">
-          <PhotoForm setPhoto={setPhoto} preview={vet.ProfileImage} />
+          <PhotoForm setPhoto={setPhoto}
+           preview={vet.ProfileImage}
+          editForm={editForm}
+          />
         </div>
 
         <div className="col-4">
-          <VetMainInfo handleChange={handleChange} error={error} vet={vet} />
+          <VetMainInfo handleChange={handleChange} error={error} vet={vet} 
+          editForm={editForm}
+          />
         </div>
 
         <div className="col-4">
           <VetSpecForm
             handleChange={handleVetTypeChange}
             vetTypeList={vetTypeList}
+            vetTypes={vet.VetType}
           />
         </div>
       </div>

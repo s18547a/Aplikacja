@@ -46,7 +46,7 @@ function BannerComponent(props) {
           />
       
         <nav
-          className="nav navbar-dark  sticky-top"
+          className="nav navbar-dark  sticky-top "
           style={{ background: "#3373C4", height: "75px" , width:"100%"}}
         >
           <div className="row justify-content-between" style={{width:"100%"}}>

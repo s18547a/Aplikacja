@@ -8,9 +8,6 @@ import Vet from "../../../classes/Vet";
 
 import { getCurrentUser } from "../../../../components/other/authHelper";
 import TodayReservationList from "./TodayReservationList";
-import VetInfo from "./VetInfo";
-import VetSchedulde from "./VetSchedulde";
-import VetSpec from "./VetSpec";
 import VetProfileNav from "./VetProfileNav";
 import VetProfileTab from "./VetProfileTab";
 function VetProfile() {
@@ -22,7 +19,7 @@ function VetProfile() {
     Name: undefined,
     LastName: undefined,
     Contact: undefined,
-
+    Email:undefined,
     HireDate: undefined,
     ProfileImage: undefined,
     Types: [],

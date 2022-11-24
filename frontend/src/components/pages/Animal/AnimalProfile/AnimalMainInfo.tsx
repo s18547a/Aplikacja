@@ -6,28 +6,14 @@ function AnimalProfile(props) {
   const navigate = useNavigate();
 
   return (
-    <div className="card card-body border-0 shadow">
+    <div className="">
       <div className="row ">
-        <div className="col-12 ">
-          <div className="row">
-            <div className="col-1 offset-6 mb-3">
-              <button
-                className="btn btn-primary btn-sm"
-                onClick={() =>
-                  navigate(`/animals/${props.animal?.AnimalId}/edit`, {
-                    state: { AnimalId: props.animal?.AnimalId },
-                  })
-                }
-              >
-                Edytuj
-              </button>
-            </div>
-          </div>
-        </div>
+        
 
         <div className="row ">
           <div className="col-lg-6 col-12">
-            <div className="row ">
+            <div className="row card card-body border-0 shadow">
+              
               <div className="col-12 text-center">
                 <img
                   height="400px"
@@ -42,13 +28,32 @@ function AnimalProfile(props) {
             </div>
           </div>
           <div className="col-lg-6 col-12 justify-content-center">
+         
             <div className="row">
               <div className="col-12">
-                <div className="row justify-content-center">
-                  <div className="col-lg-12 col-10">
-                    <div className="card-title">
+                
+                <div className="row justify-content-center ">
+                  <div className="col-lg-12 col-10 card card-body border-0 shadow ms-5">
+                    <div className="row">
+                      <div className="col-4">
+                      <div className="card-title">
                       <h5>Informacje główne</h5>
                     </div>
+                      </div>
+                    <div className="col-1 offset-1 mb-3  ">
+                          <button
+                            className="btn btn-primary btn-sm"
+                            onClick={() =>
+                              navigate(`/animals/${props.animal?.AnimalId}/edit`, {
+                                state: { AnimalId: props.animal?.AnimalId },
+                              })
+                            }
+                          >
+                            Edytuj
+                          </button>
+                        </div>
+                    </div>
+                  
                     <div className="row">
                       <div className="col-12">
                         <ProfileDiv label={"Imie"} value={props.animal?.Name} />
@@ -82,10 +87,11 @@ function AnimalProfile(props) {
                   </div>
                 </div>
               </div>
-
+                </div>
+                <div className="row">          
               <div className="col-12 mt-5">
                 <div className=" row justify-content-center">
-                  <div className="col-lg-12 col-10 ">
+                  <div className="col-lg-12 col-10 card card-body border-0 shadow ms-5">
                     <div className="card-title">
                       <h5>Informacje właściciela</h5>
                     </div>

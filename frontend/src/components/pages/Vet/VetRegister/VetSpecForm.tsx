@@ -20,6 +20,7 @@ function VetSpecForm(props) {
                     type="checkbox"
                     value={type.VetType}
                     id="flexCheckDefault"
+                    checked={props.vetTypes.includes(type.VetType)}
                   />
                   <label
                     className="form-check-label"

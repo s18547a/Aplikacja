@@ -36,8 +36,8 @@ function ReservationVetChoice(props) {
                     />
                   </div>
                   <div className="col-6 align-baseline">
-                    <div className="d-flex flex-column ">
-                    <div className=" ">{vet.Name + " " + vet.LastName}</div>
+                    <div className="d-flex flex-column">
+                    <div className=" p-3">{vet.Name + " " + vet.LastName}</div>
                      
                      
                      <div className="">{`tel. ${vet.Contact}`}</div>

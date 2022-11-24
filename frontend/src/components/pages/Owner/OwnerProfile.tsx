@@ -42,7 +42,10 @@ function OwnerProfile() {
   }, []);
 
   return (
-    <div className="container card card-body shadow">
+    <div className="row justify-content-center">
+      <div className="col-3">
+      <div className="container card card-body shadow">
+      
       <div className="row">
         <div className="col-12">
           <ProfileDiv label={"Imie"} value={owner.Name} />
@@ -66,6 +69,11 @@ function OwnerProfile() {
         </div>
       </div>
     </div>
+
+      </div>
+
+    </div>
+    
   );
 }
 

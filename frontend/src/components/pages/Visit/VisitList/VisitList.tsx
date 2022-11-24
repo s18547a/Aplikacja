@@ -6,6 +6,7 @@ import {
   getVisitListByOwner,
 } from "../../../api/visitApiCalls";
 import Visit from "../../../classes/Visit";
+import Pagination from "../../../List/Pagination";
 
 import RegiserSuccessInfo from "../../../List/RegisterSuccessInfo";
 import TableOrEmpty from "../../../List/TableOrEmpty";
@@ -20,6 +21,31 @@ function VisitList() {
   const navigate = useNavigate();
   const [newId, setNewId] = useState("");
   const location = useLocation();
+
+  const [pagedList,setPagedList]=useState<Visit[][]>([])
+  const [selectedPage,setSelectedPage]=useState<number>(0);
+
+
+  const divideListIntoPages=(visitList:Visit[])=>{
+      const dowloadListLength:number=visitList.length;
+    
+      let numberOfPages=Math.ceil(dowloadListLength/10);
+      
+      
+     
+      const listOfListOnPage:Visit[][]=[];
+      for(let i=0;i<numberOfPages*10;i=i+10){
+       
+        const pageList:Visit[]=visitList.slice(i,i+10);
+        
+        listOfListOnPage.push(pageList);
+      }
+      setPagedList(listOfListOnPage);
+     
+
+     
+
+  }
 
   const loadVisits = async () => {
     let promise;
@@ -42,6 +68,7 @@ function VisitList() {
             if (response.status == 200) {
               setVisitList(data);
               setEmpty(false);
+              divideListIntoPages(data)
             }
             if (response.status == 404) {
               setEmpty(true);
@@ -84,6 +111,7 @@ function VisitList() {
             if (results.status == 200) {
               setEmpty(false);
               setVisitList(data);
+              divideListIntoPages(data);
               navigate("/visits");
             }
             if (results.status == 404) {
@@ -98,32 +126,18 @@ function VisitList() {
     }
   }
 
-  const searchDiv = (
-    <div className="card card-body">
-      <div className="input-group justify-content-center">
-        <div className="row">
-          <div className="col-12 ">
-            <div className="input-group">
-              <input
-                onChange={handleChange}
-                className="form-control rounded"
-                placeholder="Imie"
-                aria-label="Search"
-                aria-describedby="search-addon"
-              />
-              <button
-                type="button"
-                className="btn btn-outline-primary"
-                onClick={handleSearch}
-              >
-                Szukaj
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+
+
+  const changePage=(e)=>{
+    e.preventDefault();
+    const {name,value}=e.target;
+    setSelectedPage(value)
+
+
+  }
+ 
+  
+
 
   return (
     <div className="container">
@@ -148,7 +162,7 @@ function VisitList() {
             </thead>
 
             <tbody>
-              {visitList.map((visit) => {
+              {pagedList[selectedPage]?.map((visit) => {
                 return (
                   <tr
                     key={visit.VisitId}
@@ -166,6 +180,14 @@ function VisitList() {
           </table>
         </TableOrEmpty>
       </div>
+     
+        <Pagination
+        pagedList={pagedList}
+        selectedPage={selectedPage}
+        changePage={changePage}
+        setSelectedPage={setSelectedPage}
+        />
+   
     </div>
   );
 }

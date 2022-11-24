@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-const AnimalController=require('../controllers/AnimalController.ts')
+const AnimalController=require('../controllers/AnimalController.ts');
 router.get('/types', AnimalController.getAnimalTypes);
 router.get('/:AnimalId', AnimalController.getAnimal);
 router.get('/', AnimalController.getAnimals);

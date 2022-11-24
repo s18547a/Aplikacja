@@ -44,9 +44,26 @@ function PhotoForm(props) {
         <h5>Zdjęcie profilowe</h5>
       </div>
       <div className="row">
-        <img width="250px" height="250px " src={props.preview} />
+        <div className="col-12">
+        <div className="row justify-content-center">
+          <div className="col-10">
+          <input style={{width:"300px"}} type={"file"} accept={"image/*"} onChange={handleImage} className="form-control "/>
+          </div>
+          </div>
+        <div className="row justify-content-center">
+          <div className="col-10">
+          <img width="300px" height="300px " src={props.preview} className=""/>
+          </div>
 
-        <input type={"file"} accept={"image/*"} onChange={handleImage} />
+        </div>
+       
+        
+       
+
+      
+     </div>
+
+       
       </div>
     </div>
   );

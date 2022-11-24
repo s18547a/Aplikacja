@@ -7,7 +7,7 @@ function VetProfileTab(props) {
   return (
     <div className="">
       <div className="row">
-        <div className="col-lg-8">
+        <div className="col-lg-9">
           <div className="row">
             <div className="col-12">
               <VetInfo vet={props.vet} />
@@ -18,7 +18,7 @@ function VetProfileTab(props) {
           </div>
         </div>
 
-        <div className="col-lg-4">
+        <div className="col-lg-3">
           <VetSchedulde
             VetId={
               props.vetId == undefined

@@ -10,6 +10,7 @@ function VetProfileNav(props) {
           className={props.activeTab == "" ? "nav-link active " : "nav-link"}
           value={""}
           onClick={onChangeTab}
+          style={{"fontWeight":"bold"}}
         >
           Profil
         </button>
@@ -19,6 +20,7 @@ function VetProfileNav(props) {
           className={props.activeTab == "res" ? "nav-link active" : "nav-link"}
           value={"res"}
           onClick={onChangeTab}
+          style={{"fontWeight":"bold"}}
         >
           {" "}
           Dziesiejsze rezerwacje

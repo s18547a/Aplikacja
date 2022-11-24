@@ -74,7 +74,7 @@ function SideBar() {
   };
 
   return (
-    <ul className="nav flex-column" style={{ background: "white" }}>
+    <ul className="nav flex-column shadow" style={{ background: "white" }}>
       {userNaviagion()}
     </ul>
   );

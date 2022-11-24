@@ -6,11 +6,13 @@ import {
   getAnimalsByOwnerEmail,
 } from "../../../api/animalApiCalls";
 import Animal from "../../../classes/Animal";
+import Pagination from "../../../List/Pagination";
 
 import RegiserSuccessInfo from "../../../List/RegisterSuccessInfo";
 import TableOrEmpty from "../../../List/TableOrEmpty";
 import { getCurrentUser } from "../../../other/authHelper";
 import { isManager, isOwner, isVet } from "../../../other/userType";
+import SearchInput from "../../Shared/SearchImput";
 
 function AnimalList() {
   const [animals, setAnimalList] = useState<Animal[]>([]);
@@ -20,6 +22,32 @@ function AnimalList() {
   const [search, setSearch] = useState("");
   const location = useLocation();
   const [newId, setNewId] = useState("");
+
+  
+  const [pagedList,setPagedList]=useState<Animal[][]>([])
+  const [selectedPage,setSelectedPage]=useState<number>(0);
+
+
+  const divideListIntoPages=(visitList:Animal[])=>{
+      const dowloadListLength:number=visitList.length;
+    
+      let numberOfPages=Math.ceil(dowloadListLength/10);
+      
+      
+     
+      const listOfListOnPage:Animal[][]=[];
+      for(let i=0;i<numberOfPages*10;i=i+10){
+       
+        const pageList:Animal[]=visitList.slice(i,i+10);
+        
+        listOfListOnPage.push(pageList);
+      }
+      setPagedList(listOfListOnPage);
+     
+
+     
+
+  }
 
   useEffect(() => {
     const loadAnimals = async () => {
@@ -40,6 +68,7 @@ function AnimalList() {
           .then(
             (data) => {
               if (response.status == 200) {
+                divideListIntoPages(data);
                 setAnimalList(data);
               }
               if (response.status == 500) {
@@ -82,6 +111,7 @@ function AnimalList() {
           (data) => {
             if (results.status == 200) {
               setEmpty(false);
+              divideListIntoPages(data)
               setAnimalList(data);
               navigate("/animals");
             }
@@ -95,6 +125,14 @@ function AnimalList() {
           }
         );
     }
+  }
+  
+  const changePage=(e)=>{
+    e.preventDefault();
+    const {name,value}=e.target;
+    setSelectedPage(value)
+
+
   }
 
   const serchDiv = (
@@ -127,7 +165,7 @@ function AnimalList() {
   return (
     <div className="container">
       <RegiserSuccessInfo newId={newId} message={"Zarejestrowane zwierzę: "} />
-      {isVet() ? serchDiv : null}
+      {isVet() ? <SearchInput handleSearch={handleSearch} onChange={handleChange} placeholder={'Email właściela'}/> : null}
       <div className="card card-body mt-4 shadow">
         <h5>Zwierzęta</h5>
         <div>
@@ -142,7 +180,7 @@ function AnimalList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {animals.map((animal) => {
+                  {pagedList[selectedPage]?.map((animal) => {
                     return (
                       <tr
                         key={animal.AnimalId}
@@ -164,8 +202,15 @@ function AnimalList() {
               </table>
             </TableOrEmpty>
           </div>
+          
         </div>
       </div>
+      <Pagination
+        pagedList={pagedList}
+        selectedPage={selectedPage}
+        changePage={changePage}
+        setSelectedPage={setSelectedPage}
+        />
     </div>
   );
 }

@@ -16,6 +16,7 @@ function VetMainInfo(props) {
               error={props.error.Name}
               onChange={props.handleChange}
               type="text"
+              value={props.vet.Name}
             />
           </div>
           <div className="col-12">
@@ -25,6 +26,7 @@ function VetMainInfo(props) {
               error={props.error.LastName}
               onChange={props.handleChange}
               type="text"
+              value={props.vet.LastName}
             />
           </div>
           <div className="col-12">
@@ -34,6 +36,7 @@ function VetMainInfo(props) {
               error={props.error.Email}
               onChange={props.handleChange}
               type="text"
+              value={props.vet.Email}
             />
           </div>
           <div className="col-12">
@@ -43,18 +46,22 @@ function VetMainInfo(props) {
               error={props.error.Contact}
               onChange={props.handleChange}
               type="text"
+              value={props.vet.Contact}
             />
           </div>
-
+        {props.editFrom?
           <div className="col-12">
-            <FormDiv
-              name="Password"
-              label="Hasło"
-              error={props.error.Password}
-              onChange={props.handleChange}
-              type="text"
-            />
-          </div>
+          <FormDiv
+            name="Password"
+            label="Hasło"
+            error={props.error.Password}
+            onChange={props.handleChange}
+            type="text"
+            
+          />
+        </div>:null
+        }
+        
 
           <div className="col-12">
             <FormDate
@@ -63,11 +70,14 @@ function VetMainInfo(props) {
               error={props.error.HireDate}
               onChange={props.handleChange}
               type="date"
+              value={props.vet.HireDate}
             />
           </div>
 
           <div className="col-12">
-            <SubmitFormButton label="Zarejestruj" />
+          <SubmitFormButton
+            label={props.editForm === true ? "Zapisz " : "Zarejestruj"}
+          />
           </div>
         </div>
       </div>

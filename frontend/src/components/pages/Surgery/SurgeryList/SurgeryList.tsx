@@ -8,6 +8,7 @@ import {
 } from "../../../api/reservationApiCalls";
 import { cancelSurgery, getSurgeries } from "../../../api/surgeryApiCalls";
 import Surgery from "../../../classes/Surgery";
+import Pagination from "../../../List/Pagination";
 import RegiserSuccessInfo from "../../../List/RegisterSuccessInfo";
 
 import TableOrEmpty from "../../../List/TableOrEmpty";
@@ -25,6 +26,30 @@ function SurgeryList() {
 
   const [empty, setEmpty] = useState<boolean>(false);
 
+  const [pagedList,setPagedList]=useState<Surgery[][]>([])
+  const [selectedPage,setSelectedPage]=useState<number>(0);
+
+
+  const divideListIntoPages=(visitList:Surgery[])=>{
+      const dowloadListLength:number=visitList.length;
+    
+      let numberOfPages=Math.ceil(dowloadListLength/10);
+      
+      
+     
+      const listOfListOnPage:Surgery[][]=[];
+      for(let i=0;i<numberOfPages*10;i=i+10){
+       
+        const pageList:Surgery[]=visitList.slice(i,i+10);
+        
+        listOfListOnPage.push(pageList);
+      }
+      setPagedList(listOfListOnPage);
+     
+
+     
+
+  }
   async function loadSurgeryList() {
     const currentUserId = getCurrentUser().userTypeId;
 
@@ -48,6 +73,7 @@ function SurgeryList() {
           (data) => {
             if (response.status == 200) {
               setSurgeryList(data);
+              divideListIntoPages(data)
               setEmpty(false);
             }
             if (response.status == 404) {
@@ -73,6 +99,13 @@ function SurgeryList() {
 
   
 
+  const changePage=(e)=>{
+    e.preventDefault();
+    const {name,value}=e.target;
+    setSelectedPage(value)
+
+
+  }
  
 
   return (
@@ -96,7 +129,7 @@ function SurgeryList() {
             </thead>
 
             <tbody>
-              {surgeryList.map((surgery) => {
+              {pagedList[selectedPage]?.map((surgery) => {
                 return (
                   <tr
                     onClick={() => {
@@ -117,6 +150,12 @@ function SurgeryList() {
           </table>
         </TableOrEmpty>
       </div>
+      <Pagination
+        pagedList={pagedList}
+        selectedPage={selectedPage}
+        changePage={changePage}
+        setSelectedPage={setSelectedPage}
+        />
     </div>
   );
 }

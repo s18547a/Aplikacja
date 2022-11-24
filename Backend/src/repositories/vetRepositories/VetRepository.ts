@@ -218,6 +218,99 @@ exports.registerVet = async (vet) => {
 };
 
 
+exports.updateVet=async(Vet)=>
+{
+    try {
+        console.log(Vet);
+        const pool = await sql.connect(config);
+        const transaction = await new sql.Transaction(pool);
+        try{
+           
+            const VetId:string=Vet.VetId;
+            const Name:string=Vet.Name;
+            const LastName=Vet.LastName;
+            const Email=Vet.Email;
+            const Contact=Vet.Contact;
+            const HireDate=Vet.HireDate;
+            const ProfileImage=Vet.ProfileImage;
+            const OldEmail=Vet.OldEmail;
+            const VetTypes=Vet.VetType;
+            if(OldEmail!=Email){
+                const emailExists = await SharedRepository.emailExists(Email);
+                console.log(emailExists);
+                if (emailExists) {
+                    return null;
+                }
+            }
+         
+            await transaction.begin();
+            let results = await new sql.Request(transaction)
+                .input('VetId',sql.VarChar,VetId)
+                .input('Name',sql.VarChar,Name)
+                .input('LastName',sql.VarChar,LastName)
+                .input('Contact',sql.VarChar,Contact)
+                .input('ProfileImage',sql.VarChar,ProfileImage)
+                .input('HireDate',sql.VarChar,HireDate)
+                .query('Update Vet set Name=@Name, LastName=@LastName, Contact=@Contact, ProfileImage=@ProfileImage, HireDate=@HireDate  Where VetId=@VetId');
+            console.log(results.rowsAffected);
+            if(results.rowsAffected[0]!=1){
+                throw Error('');
+            }
+
+            results=await new sql.Request(transaction)
+                .input('Email',sql.VarChar,Email)
+                .input('VetId',sql.VarChar,VetId)
+                .query('Update [User] set Email=@Email Where VetId=@VetId');
+            
+            console.log(results.rowsAffected);
+            if(results.rowsAffected[0]!=1){
+                throw Error('');
+            }
+
+           
+           
+            results= await new sql.Request(transaction)
+                .input('VetId',sql.VarChar,VetId)
+                .query('Delete From VetTypeVet Where VetId=@VetId');
+
+            console.log(results);
+            if( results instanceof Error ){
+                throw Error('Failed to delete from VetType');
+            }
+            if(VetTypes.length>0){
+                for await (const type of VetTypes){
+                    const results = await new sql.Request(transaction)
+                        .input('VetId',sql.VarChar,VetId)
+                        .input('VetType',sql.VarChar,type)
+                        .query('Insert Into VetTypeVet(VetId,VetType) values(@VetId,@VetType)');
+
+                    console.log(results);
+                    if(results.rowsAffected[0]!=1){
+                        throw Error('Failed to insert into VetTypeVet');
+                    }
+                }
+            }
+            
+            await transaction.commit();
+            return VetId;
+
+
+        }catch(error){
+            await transaction.rollback();
+            console.log('Rollbacked');
+            console.log(error);
+            throw Error('');
+        }
+
+
+    } catch (error) {
+        console.log(error);
+        return error;
+
+        
+    }
+};
+
 
 
 

@@ -35,7 +35,7 @@ function NavElement(props: {
           }}
           style={{background: "#3373C4"}}
         >
-          <h5>{props.label}</h5>
+          <h5 style={{"fontWeight":"bold"}}>{props.label}</h5>
         </a>
       </li>
       <div
@@ -52,7 +52,7 @@ function NavElement(props: {
 
                 href={element.link}
               >
-                <h6> {element.label}</h6>
+                <h6 style={{"fontWeight":"bold"}}> {element.label}</h6>
               </a>
             </li>
           );

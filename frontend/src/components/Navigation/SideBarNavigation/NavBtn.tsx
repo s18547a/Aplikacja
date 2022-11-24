@@ -3,7 +3,7 @@ function NavBtn(props: { link: string; label: string }) {
     <div className="   border " style={{background: "#3373C4"}}>
       <li className="nav-item">
         <h5 className="">
-          <a
+          <a style={{"fontWeight":"bold"}}
             className={"nav-link text-white"}
             aria-current="page"
             href={props.link}

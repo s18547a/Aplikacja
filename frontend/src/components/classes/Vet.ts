@@ -3,7 +3,7 @@ class Vet {
   Name: string | undefined;
   LastName: String | undefined;
   Contact: string | undefined;
-
+  Email:null|string|undefined;
   HireDate: string | undefined;
   ProfileImage: string | null | undefined;
   Types: { VetType: string; Salary: number }[];

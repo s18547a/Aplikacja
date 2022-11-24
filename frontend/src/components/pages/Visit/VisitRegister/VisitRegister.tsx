@@ -157,7 +157,7 @@ function VisitRegister() {
         .then(
           (data) => {
             if (result.status == 201) {
-              navigate("/visits");
+              navigate("/visits",{ state: { id: data.newId } });
             } else {
               console.log(error);
             }

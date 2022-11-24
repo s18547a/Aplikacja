@@ -10,5 +10,5 @@ router.get('/schedulde/availableHours',VetController.getAvailableHours);
 router.get('/:VetId/schedulde',VetController.getVetSchedulde);
 router.get('/:VetId/daysOfWeek',VetController.getVetDaysOfWeek);
 router.put('/schedulde', VetController.updateSchedulde);
-
+router.put('/',VetController.updateVet);
 module.exports=router;

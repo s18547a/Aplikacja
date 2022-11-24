@@ -160,10 +160,15 @@ function App() {
                 path="/vets/:VetId"
                 element={isNotManager(<VetProfile />)}
               />
+               <Route
+                path="/vets/:VetId/edit"
+                element={isNotManager(<VetForm/>)}
+              />
               <Route
                 path="/vets/:VetId/schedulde/edit"
                 element={isNotManager(<VetScheduldeForm />)}
               />
+              
               <Route
                 path="/animals/:AnimalId/medicalInfo/edit"
                 element={isNotPersonel(<MedicalInfoForm />)}

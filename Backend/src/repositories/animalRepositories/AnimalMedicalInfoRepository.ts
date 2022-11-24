@@ -81,11 +81,11 @@ exports.updateAnimalMedicalInfo = async (
 ) => {
     try {
         const pool = await sql.connect(config);
-  
+        console.log(AnimalMedicalInfo);
         const animalMedInfoPool = await pool
             .request()
             .input('AnimalId', sql.VarChar, AnimalMedicalInfo.AnimalId)
-            .input('Weight',sql.Decimal,AnimalMedicalInfo.Weight)
+            .input('Weight',sql.Decimal(5,2), AnimalMedicalInfo.Weight)
             .input('Chipped', sql.Bit, AnimalMedicalInfo.Chipped)
             .input('Sterilized', sql.Bit, AnimalMedicalInfo.Sterilized)
             .input('Skeletal', sql.VarChar, AnimalMedicalInfo.Skeletal)

@@ -66,14 +66,14 @@ exports.getVisits = async (parameters: GetVisitPrarameters) => {
         let visitRecordset;
         if ( !parameters.AnimalId &&!parameters.VetId &&!parameters.OwnerId && !parameters.Name
         ) {
-            const visitsPool = await pool.request().query('Select * From Visit');
+            const visitsPool = await pool.request().query('Select * From Visit Order By Date DESC');
             visitRecordset = visitsPool.recordset;
         } else if (parameters.AnimalId) {
             const visitsPool = await pool
                 .request()
                 .input('AnimalId', sql.VarChar, parameters.AnimalId)
                 .query(
-                    'Select VisitId, Date,Hour,v.Note,a.AnimalId, v.VetId, v.Bill ,a.Name as \'AnimalName\',vt.Name as \'VetName\',vt.LastName as \'VetLastName\' From Visit v join Animal a  on v.AnimalId=a.AnimalId join Vet vt on v.VetId=vt.VetId Where a.AnimalId=@AnimalId'
+                    'Select VisitId, Date,Hour,v.Note,a.AnimalId, v.VetId, v.Bill ,a.Name as \'AnimalName\',vt.Name as \'VetName\',vt.LastName as \'VetLastName\' From Visit v join Animal a  on v.AnimalId=a.AnimalId join Vet vt on v.VetId=vt.VetId Where a.AnimalId=@AnimalId order by Date DESC'
                 );
             visitRecordset = visitsPool.recordset;
         } else if (parameters.VetId) {
@@ -81,7 +81,7 @@ exports.getVisits = async (parameters: GetVisitPrarameters) => {
                 .request()
                 .input('VetId', sql.VarChar, parameters.VetId)
                 .query(
-                    'Select VisitId, Date,Hour,v.Note,a.AnimalId, v.VetId, v.Bill , a.Name as \'AnimalName\',vt.Name as \'VetName\',vt.LastName as \'VetLastName\' From Visit v join Animal a  on v.AnimalId=a.AnimalId join Vet vt on v.VetId=vt.VetId Where VetId=@VetId'
+                    'Select VisitId, Date,Hour,v.Note,a.AnimalId, v.VetId, v.Bill , a.Name as \'AnimalName\',vt.Name as \'VetName\',vt.LastName as \'VetLastName\' From Visit v join Animal a  on v.AnimalId=a.AnimalId join Vet vt on v.VetId=vt.VetId Where VetId=@VetId order by Date DESC'
                 );
             visitRecordset = visitsPool.recordset;
         }  else if (parameters.OwnerId) {
@@ -89,7 +89,7 @@ exports.getVisits = async (parameters: GetVisitPrarameters) => {
                 .request()
                 .input('OwnerId', sql.VarChar, parameters.OwnerId)
                 .query(
-                    'Select VisitId, Date,Hour,v.Note,a.AnimalId, v.VetId, v.Bill , a.Name as \'AnimalName\',vt.Name as \'VetName\',vt.LastName as \'VetLastName\' From Visit v join Animal a  on v.AnimalId=a.AnimalId join Vet vt on v.VetId=vt.VetId  Where OwnerId=@OwnerId'
+                    'Select VisitId, Date,Hour,v.Note,a.AnimalId, v.VetId, v.Bill , a.Name as \'AnimalName\',vt.Name as \'VetName\',vt.LastName as \'VetLastName\' From Visit v join Animal a  on v.AnimalId=a.AnimalId join Vet vt on v.VetId=vt.VetId  Where OwnerId=@OwnerId order by Date DESC'
                 );
             visitRecordset = visitsPool.recordset;
       
@@ -98,7 +98,7 @@ exports.getVisits = async (parameters: GetVisitPrarameters) => {
                 .request()
 
                 .query(
-                    `Select VisitId, Date,Hour,v.Note,a.AnimalId, v.VetId, v.Bill , a.Name as 'AnimalName',vt.Name as 'VetName',vt.LastName as 'VetLastName' From Visit v join Animal a  on v.AnimalId=a.AnimalId join Vet vt on v.VetId=vt.VetId  Where a.Name like '${parameters.Name}%'`
+                    `Select VisitId, Date,Hour,v.Note,a.AnimalId, v.VetId, v.Bill , a.Name as 'AnimalName',vt.Name as 'VetName',vt.LastName as 'VetLastName' From Visit v join Animal a  on v.AnimalId=a.AnimalId join Vet vt on v.VetId=vt.VetId  Where a.Name like '${parameters.Name}%' order by Date DESC`
                 );
             visitRecordset = visitsPool.recordset;
    

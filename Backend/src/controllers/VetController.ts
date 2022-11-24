@@ -58,6 +58,17 @@ export const registerVet=  async (req, res) => {
     } else return res.status(201).json({});
 };
 
+export const updateVet=async(req,res)=>{
+    const updateVet=req.body;
+    const results =await VetRepository.updateVet(updateVet);
+    if (results instanceof Error) {
+        return res.status(500).json({});
+    } else if (results == null) {
+        return res.status(404).json({});
+    } else return res.status(201).json({VetId:results});
+
+};
+
 
 
 
