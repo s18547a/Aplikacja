@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getAnimalUnadminstratedVaccines } from "../../../api/animalApiCalls";
-import VaccineType from "../../../classes/VaccineType";
+import { getAnimalUnadminstratedVaccines } from "../../../../api/animalApiCalls";
+import VaccineType from "../../../../classes/VaccineType";
 import FormCheck from "../../../Form/FormCheck";
 
 function VisitVaccineForm(props) {

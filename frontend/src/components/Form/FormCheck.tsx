@@ -33,6 +33,7 @@ function FormCheck(props) {
                     />
                     <label htmlFor={element.id} className="form-check-label">
                       {element.label}
+                   
                     </label>
                   </div>
                 </div>

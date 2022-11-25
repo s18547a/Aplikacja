@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../../other/authHelper";
-import { getMedicalAtivities, registerVisit } from "../../../api/visitApiCalls";
+import { getMedicalAtivities, registerVisit } from "../../../../api/visitApiCalls";
 
-import Animal from "../../../classes/Animal";
+import Animal from "../../../../classes/Animal";
 import VisitActivitiesForm from "./VisitActivitesForm";
 import DiagnosisForm from "./DiagnosisForm";
 import VisitMainInfoForm from "./VisitMainInfoForm";
 import VisitVaccineForm from "./VisitVaccineForm";
-import { cancelReservation } from "../../../api/reservationApiCalls";
-import Reservation from "../../../classes/Reservation";
-import { getAnimalUnadminstratedVaccines } from "../../../api/animalApiCalls";
-import VaccineType from "../../../classes/VaccineType";
+import { cancelReservation } from "../../../../api/reservationApiCalls";
+import Reservation from "../../../../classes/Reservation";
+import { getAnimalUnadminstratedVaccines } from "../../../../api/animalApiCalls";
+import VaccineType from "../../../../classes/VaccineType";
 
 interface VisitI {
   Date: string;

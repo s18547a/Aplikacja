@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getOwners } from "../../api/ownerApiCalls";
-import Owner from "../../classes/Owner";
+import { getOwners } from "../../../api/ownerApiCalls";
+import Owner from "../../../classes/Owner";
 import FormSelect from "../../Form/FormSelect";
 
 function SelectOwnerComponent(props) {

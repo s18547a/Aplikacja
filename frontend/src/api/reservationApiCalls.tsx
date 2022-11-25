@@ -1,4 +1,4 @@
-import { getCurrentDate } from "../../components/other/getCurrentDate";
+import { getCurrentDate } from "../components/other/getCurrentDate";
 
 const baseUrl = "http://localhost:8000/reservations";
 

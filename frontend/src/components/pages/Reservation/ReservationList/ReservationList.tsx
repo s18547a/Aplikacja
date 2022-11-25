@@ -5,8 +5,8 @@ import {
   cancelReservation,
   getReservations,
   getReservationsByVetId,
-} from "../../../api/reservationApiCalls";
-import Reservation from "../../../classes/Reservation";
+} from "../../../../api/reservationApiCalls";
+import Reservation from "../../../../classes/Reservation";
 
 import RegiserSuccessInfo from "../../../List/RegisterSuccessInfo";
 import TableOrEmpty from "../../../List/TableOrEmpty";

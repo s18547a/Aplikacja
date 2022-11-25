@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Owner from "../../../../classes/Owner";
+import Owner from "../../../../../classes/Owner";
 import FormAnimalTypeSelect from "./FormAnimalTypeSelect";
 import FormDate from "../../../../Form/FormDate";
 import FormDiv from "../../../../Form/FormDiv";

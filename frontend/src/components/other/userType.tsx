@@ -1,4 +1,4 @@
-import { UserType } from "../classes/Other";
+import { UserType } from "../../classes/Other";
 import { getCurrentUser } from "./authHelper";
 
 export function isOwner() {

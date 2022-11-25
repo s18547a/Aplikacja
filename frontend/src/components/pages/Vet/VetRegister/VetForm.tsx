@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getVetByVetId, getVetTypes, registerVet, updateVet } from "../../../api/vetApiCalls";
+import { getVetByVetId, getVetTypes, registerVet, updateVet } from "../../../../api/vetApiCalls";
 import { useLocation, useNavigate } from "react-router-dom";
 import PhotoForm from "../../Shared/PhotoForm";
 import VetMainInfo from "./VetMainInfo";

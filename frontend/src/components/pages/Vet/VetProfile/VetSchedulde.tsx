@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getVetSchedulde } from "../../../api/vetApiCalls";
+import { getVetSchedulde } from "../../../../api/vetApiCalls";
 import { isManager } from "../../../../components/other/userType";
 interface ScheduldeI {
   Monday: string | null | undefined;

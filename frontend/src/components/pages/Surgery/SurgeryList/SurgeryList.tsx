@@ -5,9 +5,9 @@ import {
   getReservationsByOwner,
   getReservations,
   cancelReservation,
-} from "../../../api/reservationApiCalls";
-import { cancelSurgery, getSurgeries } from "../../../api/surgeryApiCalls";
-import Surgery from "../../../classes/Surgery";
+} from "../../../../api/reservationApiCalls";
+import { cancelSurgery, getSurgeries } from "../../../../api/surgeryApiCalls";
+import Surgery from "../../../../classes/Surgery";
 import Pagination from "../../../List/Pagination";
 import RegiserSuccessInfo from "../../../List/RegisterSuccessInfo";
 

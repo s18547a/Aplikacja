@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { cancelSurgery, getSurgery, updateSurgeryReport } from "../../../api/surgeryApiCalls";
-import Surgery from "../../../classes/Surgery";
+import { cancelSurgery, getSurgery, updateSurgeryReport } from "../../../../api/surgeryApiCalls";
+import Surgery from "../../../../classes/Surgery";
 import Modal from "../../../Modal/Modal";
 import ModalEnableBtn from "../../../Modal/ModalEnableBtn";
 import { getCurrentUser } from "../../../other/authHelper";

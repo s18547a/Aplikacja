@@ -4,8 +4,8 @@ import {
   getVisitList,
   getVisitListByAnimal,
   getVisitListByOwner,
-} from "../../../api/visitApiCalls";
-import Visit from "../../../classes/Visit";
+} from "../../../../api/visitApiCalls";
+import Visit from "../../../../classes/Visit";
 import Pagination from "../../../List/Pagination";
 
 import RegiserSuccessInfo from "../../../List/RegisterSuccessInfo";

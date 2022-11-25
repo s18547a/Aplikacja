@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { getTodayReservationsByVetId } from "../../../api/reservationApiCalls";
-import { getVetByVetId } from "../../../api/vetApiCalls";
-import Reservation from "../../../classes/Reservation";
+import { getTodayReservationsByVetId } from "../../../../api/reservationApiCalls";
+import { getVetByVetId } from "../../../../api/vetApiCalls";
+import Reservation from "../../../../classes/Reservation";
 
-import Vet from "../../../classes/Vet";
+import Vet from "../../../../classes/Vet";
 
 import { getCurrentUser } from "../../../../components/other/authHelper";
 import TodayReservationList from "./TodayReservationList";

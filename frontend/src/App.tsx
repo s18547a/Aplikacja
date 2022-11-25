@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { isAuthenticated } from "./components/other/authHelper";
 
-import Navigation from "./components/Navigation/Banner/BannerComponent";
+import Navigation from "./components/Banner/BannerComponent";
 
 import OwnerRegister from "./components/pages/Owner/OwnerRegister";
 import AnimalList from "./components/pages/Animal/AnimalList/AnimalList";
@@ -28,7 +28,7 @@ import { isManager, isVet } from "./components/other/userType";
 import VetForm from "./components/pages/Vet/VetRegister/VetForm";
 import VetProfile from "./components/pages/Vet/VetProfile/VetProfile";
 import VetScheduldeForm from "./components/pages/Vet/VetRegister/VetScheduldeForm";
-import SideBar from "./components/Navigation/SideBarNavigation/SideBarComponent";
+import SideBar from "./components/Navigation/SideBarComponent";
 import HomePage from "./components/pages/Unlogged/HomePage";
 import MedicalInfoForm from "./components/pages/Animal/AnimalRegister/AnimalRegisterComponents/MedicalInfoForm";
 import SurgeryList from "./components/pages/Surgery/SurgeryList/SurgeryList";

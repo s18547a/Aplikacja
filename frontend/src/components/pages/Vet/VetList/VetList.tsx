@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getVets } from "../../../api/vetApiCalls";
-import Vet from "../../../classes/Vet";
+import { getVets } from "../../../../api/vetApiCalls";
+import Vet from "../../../../classes/Vet";
 import TableOrEmpty from "../../../List/TableOrEmpty";
 
 function VetList() {

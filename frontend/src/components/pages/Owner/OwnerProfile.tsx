@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getOwnerById } from "../../api/ownerApiCalls";
-import Owner from "../../classes/Owner";
+import { getOwnerById } from "../../../api/ownerApiCalls";
+import Owner from "../../../classes/Owner";
 import { getCurrentUser } from "../../../components/other/authHelper";
 import ProfileDiv from "../../other/ProfileDiv";
 

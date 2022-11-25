@@ -22,10 +22,10 @@ function NavElement(props: {
   });
 
   return (
-    <div className="border bg-white ">
+    <div className=" ">
       <li className="">
         <a
-          className="nav-link  text-white"
+          className="nav-link  "
           role={"button"}
           data-bs-toggle="collapse"
           data-bs-target={"#" + props.id}
@@ -33,9 +33,9 @@ function NavElement(props: {
           onClick={() => {
             setCollapsed(!collapsed);
           }}
-          style={{background: "#3373C4"}}
+         
         >
-          <h5 style={{"fontWeight":"bold"}}>{props.label}</h5>
+          <h5 >{props.label}</h5>
         </a>
       </li>
       <div
@@ -48,11 +48,11 @@ function NavElement(props: {
             <li className="nav-item border">
               <a
                 className=
-                  {currentLocation==(element.link)?"nav-link bg-primary text-white":"nav-link "} 
+                  {currentLocation==(element.link)?"nav-link ":"nav-link "} 
 
                 href={element.link}
               >
-                <h6 style={{"fontWeight":"bold"}}> {element.label}</h6>
+                <h6 > {element.label}</h6>
               </a>
             </li>
           );

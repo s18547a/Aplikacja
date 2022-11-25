@@ -4,8 +4,8 @@ import {
   getAnimals,
   getAnimalsbyOwner,
   getAnimalsByOwnerEmail,
-} from "../../../api/animalApiCalls";
-import Animal from "../../../classes/Animal";
+} from "../../../../api/animalApiCalls";
+import Animal from "../../../../classes/Animal";
 import Pagination from "../../../List/Pagination";
 
 import RegiserSuccessInfo from "../../../List/RegisterSuccessInfo";

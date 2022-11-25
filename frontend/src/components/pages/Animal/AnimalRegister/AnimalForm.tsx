@@ -3,19 +3,19 @@ import {
   getAnimalById,
   getAnimalTypes,
   registerAnimal,
-} from "../../../api/animalApiCalls";
+} from "../../../../api/animalApiCalls";
 import { getCurrentUser } from "../../../other/authHelper";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { updateAnimal } from "../../../api/animalApiCalls";
-import { getOwners } from "../../../api/ownerApiCalls";
+import { updateAnimal } from "../../../../api/animalApiCalls";
+import { getOwners } from "../../../../api/ownerApiCalls";
 
 import { isManager, isOwner, isVet } from "../../../other/userType";
 
 import AnimalMainInfo from "./AnimalRegisterComponents/AnimalMainInfo";
 
 import PhotoForm from "../../Shared/PhotoForm";
-import AnimalType from "../../../classes/AnimalType";
+import AnimalType from "../../../../classes/AnimalType";
 
 interface AnimalI {
   Name: undefined;

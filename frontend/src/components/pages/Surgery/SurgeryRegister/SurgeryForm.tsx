@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { getSurgeryTypes, registerSurgery } from "../../../api/surgeryApiCalls";
+import { getSurgeryTypes, registerSurgery } from "../../../../api/surgeryApiCalls";
 import {
   getValiableHourForSurgery,
   getVetBySurgeryType,
   getVetDaysOfWeek,
-} from "../../../api/vetApiCalls";
-import Animal from "../../../classes/Animal";
-import SurgeryType from "../../../classes/SurgeryType";
-import Vet from "../../../classes/Vet";
+} from "../../../../api/vetApiCalls";
+import Animal from "../../../../classes/Animal";
+import SurgeryType from "../../../../classes/SurgeryType";
+import Vet from "../../../../classes/Vet";
 import FormSelectLimit from "../../../Form/FormSelectLimit";
 import SelectOwnerComponent from "../../Shared/SelectOwnerComponent";
 import SelectAnimalComponent from "../../Shared/SelectAnimalComponent";

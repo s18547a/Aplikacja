@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { getVetsOnDay, getValiableHours } from "../../../api/vetApiCalls";
+import { getVetsOnDay, getValiableHours } from "../../../../api/vetApiCalls";
 import { getCurrentUser } from "../../../other/authHelper";
 import { useNavigate } from "react-router-dom";
-import { registerReservation } from "../../../api/reservationApiCalls";
+import { registerReservation } from "../../../../api/reservationApiCalls";
 
-import Vet from "../../../classes/Vet";
-import Owner from "../../../classes/Owner";
+import Vet from "../../../../classes/Vet";
+import Owner from "../../../../classes/Owner";
 
 import SubmitFormButton from "../../../General/SubmitFormButton";
 import FormSelectLimit from "../../../Form/FormSelectLimit";
@@ -211,14 +211,15 @@ function ReservationForm() {
     <form className="container" onSubmit={handleSubmit}>
       <div className="row justify-content-center">
         <div className="col-lg-4 ">
-          <div className="card card-body shadow">
+          <div className="">
             <ReservationMainInfo
               handleDateChange={handleDateChange}
               handleOwnerChange={handleOwnerChange}
               error={error}
               ownerList={ownerList}
             />
-
+          </div>
+          <div className="card card-body shadow mt-3">
             <div className="">{vetChoiceComponent}</div>
             <div className="">{hourChoiceComponenet}</div>
 

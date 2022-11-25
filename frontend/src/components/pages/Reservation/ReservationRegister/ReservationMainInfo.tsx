@@ -22,7 +22,7 @@ function ReservationMainInfo(props) {
   );
 
   return (
-    <div className="">
+    <div className="card card-body shadow">
       <div className="row">
         <div className="col-12">
           {isVet() || isManager() ? selectOwner : null}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { registerOwnerApiCall } from "../../api/ownerApiCalls";
+import { registerOwnerApiCall } from "../../../api/ownerApiCalls";
 import { useNavigate } from "react-router-dom";
 import FormDiv from "../../../components/Form/FormDiv";
 import SubmitFormButton from "../../../components/General/SubmitFormButton";

@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import { isAuthenticated } from "../../../other/authHelper";
-import { isOwner } from "../../../other/userType";
+import { isAuthenticated } from "../../other/authHelper";
+import { isOwner } from "../../other/userType";
 import NavBtn from "../NavBtn";
 import NavElement from "../NavElement";
 

@@ -1,11 +1,7 @@
 import { useLocation } from "react-router-dom";
-import ModalEnableBtn from "../../Modal/ModalEnableBtn";
-import { isAuthenticated } from "../../other/authHelper";
-import { isOwner, isVet, isManager } from "../../other/userType";
+import { isAuthenticated } from "../other/authHelper";
+import { isOwner, isVet, isManager } from "../other/userType";
 import AnimalDropdown from "./Dropdowns/AnimalDropdown";
-import ClinicInfoDropdown from "./Dropdowns/ClinicInfoDropdown";
-import LoginDropdown from "./Dropdowns/LoginDropdown";
-import RegisterDropdown from "./Dropdowns/RegisterDropdown";
 import ReservationDropdown from "./Dropdowns/ReservationDropdown";
 import SurgeryDropdown from "./Dropdowns/SurgeryDropdown";
 import UserProfileDropdown from "./Dropdowns/UserProfileDropdown";
@@ -74,7 +70,7 @@ function SideBar() {
   };
 
   return (
-    <ul className="nav flex-column shadow" style={{ background: "white" }}>
+    <ul className="nav flex-column shadow">
       {userNaviagion()}
     </ul>
   );

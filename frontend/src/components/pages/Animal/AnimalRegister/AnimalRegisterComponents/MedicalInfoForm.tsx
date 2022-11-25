@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { updateMedicalInfo } from "../../../../api/animalApiCalls";
-import AnimalMedicalInfo from "../../../../classes/AnimalMedicalInfo";
+import { updateMedicalInfo } from "../../../../../api/animalApiCalls";
+import AnimalMedicalInfo from "../../../../../classes/AnimalMedicalInfo";
 import FormCheck from "../../../../Form/FormCheck";
 import FormDiv from "../../../../Form/FormDiv";
 import FormTextField from "../../../../Form/FormTextField";

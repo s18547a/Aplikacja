@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getVisitById } from "../../../api/visitApiCalls";
-import Visit from "../../../classes/Visit";
+import { getVisitById } from "../../../../api/visitApiCalls";
+import Visit from "../../../../classes/Visit";
 
 import ProfileDiv from "../../../other/ProfileDiv";
 

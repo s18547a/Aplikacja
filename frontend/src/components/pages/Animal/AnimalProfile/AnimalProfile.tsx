@@ -7,12 +7,12 @@ import {
   getAnimalMedicalInfo,
   getAnimalVaccines,
   setRecoveryIllness,
-} from "../../../api/animalApiCalls";
-import { getOwnerById } from "../../../api/ownerApiCalls";
-import Animal from "../../../classes/Animal";
-import AnimalMedicalInfo from "../../../classes/AnimalMedicalInfo";
-import Illness from "../../../classes/Illness";
-import Owner from "../../../classes/Owner";
+} from "../../../../api/animalApiCalls";
+import { getOwnerById } from "../../../../api/ownerApiCalls";
+import Animal from "../../../../classes/Animal";
+import AnimalMedicalInfo from "../../../../classes/AnimalMedicalInfo";
+import Illness from "../../../../classes/Illness";
+import Owner from "../../../../classes/Owner";
 
 import { getCurrentDate } from "../../../other/getCurrentDate";
 import AnimalAddInfo from "./MedicalInfo";
@@ -21,8 +21,8 @@ import AnimalMainInfo from "./AnimalMainInfo";
 import AnimalProfileNav from "./AnimalProfileNav";
 import MedicalInfo from "./MedicalInfo";
 import AnimalVaccines from "./AnimalVaccines";
-import Vaccination from "../../../classes/Vaccination";
-import VaccineType from "../../../classes/VaccineType";
+import Vaccination from "../../../../classes/Vaccination";
+import VaccineType from "../../../../classes/VaccineType";
 
 function AnimalProfile() {
   const [animal, setAnimal] = useState<Animal>();

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Navigate, Link, useNavigate, useLocation } from "react-router-dom";
-import Modal from "../../Modal/Modal";
+import Modal from "../Modal/Modal";
 
-import ModalEnableBtn from "../../Modal/ModalEnableBtn";
-import { getCurrentUser, isAuthenticated } from "../../other/authHelper";
-import { getLogo } from "../../other/imageHelper";
-import { getUserName, isManager, isOwner, isVet } from "../../other/userType";
+import ModalEnableBtn from "../Modal/ModalEnableBtn";
+import { getCurrentUser, isAuthenticated } from "../other/authHelper";
+import { getLogo } from "../other/imageHelper";
+import { getUserName, isManager, isOwner, isVet } from "../other/userType";
 
 function BannerComponent(props) {
   function handleLogout() {

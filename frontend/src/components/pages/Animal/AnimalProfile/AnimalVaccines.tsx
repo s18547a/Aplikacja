@@ -1,4 +1,4 @@
-import Vaccination from "../../../classes/Vaccination";
+import Vaccination from "../../../../classes/Vaccination";
 import TableOrEmpty from "../../../List/TableOrEmpty";
 
 function AnimalVaccines(props) {

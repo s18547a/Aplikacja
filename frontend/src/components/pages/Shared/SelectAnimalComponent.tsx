@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getAnimalsbyOwner } from "../../api/animalApiCalls";
-import Animal from "../../classes/Animal";
+import { getAnimalsbyOwner } from "../../../api/animalApiCalls";
+import Animal from "../../../classes/Animal";
 import FormCheck from "../../Form/FormCheck";
 import FormSelect from "../../Form/FormSelect";
 
