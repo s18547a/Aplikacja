@@ -8,7 +8,7 @@ function FormCheck(props) {
       <div className="row">
         <div className="col-12">
           <div className="row">
-            <div className="col-6">
+            <div className="col-3">
               <label className="form-label">{props.label}</label>
             </div>
             <div className="col-6">
@@ -27,13 +27,12 @@ function FormCheck(props) {
                       type="radio"
                       id={element.id}
                       value={element.value}
-                      className="form-check-input"
+                      className="form-check-input "
                       onChange={handleChange}
                       checked={props.selected == element.value}
                     />
                     <label htmlFor={element.id} className="form-check-label">
                       {element.label}
-                   
                     </label>
                   </div>
                 </div>

@@ -1,3 +1,4 @@
+import { ListUl, PersonPlus, PlusSquare } from "react-bootstrap-icons";
 import { useLocation } from "react-router-dom";
 import { isAuthenticated } from "../../other/authHelper";
 import { isOwner } from "../../other/userType";
@@ -13,8 +14,8 @@ function VisitDropdown() {
           label={"Wizyty"}
           mainLink={"/visits"}
           elements={[
-            { label: "Lista", link: "/visits" },
-            { label: "Zarejestruj", link: "/visits/register" },
+            { label: "Lista", link: "/visits" , icon:<ListUl/>},
+            { label: "Zarejestruj", link: "/visits/register", icon:<PlusSquare/>},
           ]}
         />
       );

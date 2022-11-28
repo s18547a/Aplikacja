@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { ReactComponentElement, useEffect, useState } from "react";
+import { List, ListUl } from "react-bootstrap-icons";
 import { useLocation } from "react-router-dom";
 interface elementType {
   label: string;
   link: string;
+  icon:any;
 }
 function NavElement(props: {
   id: string;
@@ -22,10 +24,11 @@ function NavElement(props: {
   });
 
   return (
-    <div className=" ">
-      <li className="">
+    < >
+      <li className="hover-overlay " style={{}}>
+     
         <a
-          className="nav-link  "
+          className="text-decoration-none btn btn-toogle rounded collapsed"
           role={"button"}
           data-bs-toggle="collapse"
           data-bs-target={"#" + props.id}
@@ -35,9 +38,13 @@ function NavElement(props: {
           }}
          
         >
-          <h5 >{props.label}</h5>
+          <h5>  {props.label}</h5>
+       
         </a>
+     
+       
       </li>
+      
       <div
         id={props.id}
         className={currentLocation.includes(props.mainLink) ? "" : "collapse "}
@@ -45,20 +52,30 @@ function NavElement(props: {
       >
         {props.elements.map((element) => {
           return (
-            <li className="nav-item border">
+            <li className="d-flex justify-content-start ms-4 ">
+              <div className="d-flex align-items-center">
+              {element.icon}
+              </div>
+             <div className="">
               <a
                 className=
-                  {currentLocation==(element.link)?"nav-link ":"nav-link "} 
+                  {currentLocation==(element.link)?
+                    " text-decoration-none btn btn-group-toggle d-flex align-items-center":
+                  "  text-decoration-none btn btn-group-toggle d-flex align-items-center"} 
 
                 href={element.link}
               >
-                <h6 > {element.label}</h6>
+               {element.label}
+              
+
               </a>
+              </div>
+              
             </li>
           );
         })}
       </div>
-    </div>
+    </>
   );
 }
 

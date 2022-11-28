@@ -14,7 +14,7 @@ function FormDiv(props) {
             <div className="col-12">
               <input
                 type={props.type}
-                className="form-control "
+                className={props.error==""?"form-control ":"form-control border border-danger"}
                 name={props.name}
                 onChange={props.onChange}
                 value={props.value}

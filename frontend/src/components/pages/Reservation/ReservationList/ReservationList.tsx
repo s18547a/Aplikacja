@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { X, XCircle } from "react-bootstrap-icons";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import {
   getReservationsByOwner,
@@ -169,6 +170,7 @@ function ReservationList() {
                             label="Anuluj"
                             onClick={handleRowCancel}
                             value={reservation.ReservationId}
+                           
                           />
                         </div>
                         <div className="col-auto">

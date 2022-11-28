@@ -69,11 +69,19 @@ function SideBar() {
     }
   };
 
-  return (
-    <ul className="nav flex-column shadow">
-      {userNaviagion()}
-    </ul>
-  );
+  const authorizatedSideBar=()=>{
+    if(isAuthenticated()){
+      return (<div style={{"width":"170px",height:"100%"}}>
+     
+      
+      <ul  className="list-unstyled bg-white shadow width" style={{"width":"170px",height:"100%"}}>
+         {userNaviagion()}
+       </ul>
+       </div>)
+    } else return null
+  } 
+
+  return authorizatedSideBar();
 }
 
 export default SideBar;

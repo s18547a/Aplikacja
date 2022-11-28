@@ -16,7 +16,7 @@ function FormAnimalTypeSelect(props) {
           <div className="row">
             <div className="col-12">
               <input
-                className="form-control"
+                  className={props.error==""?"form-control ":"form-control border border-danger"}
                 list={props.dataListOptions}
                 id="exampleDataList"
                 placeholder=""

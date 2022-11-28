@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import EditButton from "../../../General/EditButton";
 import ProfileDiv from "../../../other/ProfileDiv";
 import { isManager, isOwner, isVet } from "../../../other/userType";
 
@@ -8,17 +9,16 @@ function MedicalInfo(props) {
 
   const showBtn =
     isManager() || isVet() ? (
-      <div className="col-12">
-        <button
-          className="btn-sm btn-primary mb-3"
+      <div className="row m-1">
+        <div className="col-1">
+        <EditButton
           onClick={() => {
             navigate(`/animals/${props.animalId}/medicalInfo/edit`, {
               state: { medicalInfo: props.medicalInfo },
             });
           }}
-        >
-          Edytuj
-        </button>
+        />
+        </div>
       </div>
     ) : null;
 
@@ -26,7 +26,7 @@ function MedicalInfo(props) {
     <div className="row justify-content-center">
       <div className="col-10">
         <div className="container  border-0 ">
-          <div className="row">
+          <div className="row ">
             {showBtn}
             <div className="col-3">
               <div className="list-group shadow" id="list-tab" role="tablist">

@@ -1,18 +1,31 @@
+import { PersonFill } from "react-bootstrap-icons";
+import { useLocation } from "react-router-dom";
+
 function NavBtn(props: { link: string; label: string }) {
+  const location = useLocation().pathname;
+  console.log(location)
   return (
-    <div className="   border " >
-      <li className="nav-item">
-        <h5 className="">
+    
+      <li className="">
+       
+          
+         
           <a 
-            className={"nav-link "}
+            className={location=="/"?"text-decoration-none btn btn-group-toggle ":"text-decoration-none btn btn-group-toggle" }
             aria-current="page"
             href={props.link}
+            
           >
-            {props.label}
+            <h5>  {props.label}</h5>
+          
           </a>
-        </h5>
+       
+
+        
+         
+       
       </li>
-    </div>
+   
   );
 }
 

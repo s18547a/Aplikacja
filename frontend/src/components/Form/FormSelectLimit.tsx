@@ -13,7 +13,7 @@ function FormSelectLimit(props) {
         </div>
       </div>
       <div className="col-12">
-        <select name={props.name} onChange={onChange} className="form-select ">
+        <select name={props.name} onChange={onChange}   className={props.error==""?"form-select ":"form-select border border-danger"}>
           <option value="" disabled selected>
             Wybierz
           </option>

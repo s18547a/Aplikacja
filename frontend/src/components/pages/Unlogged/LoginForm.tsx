@@ -5,7 +5,7 @@ import FormDiv from "../../../components/Form/FormDiv";
 import SubmitFormButton from "../../../components/General/SubmitFormButton";
 function LoginForm(props) {
   const [loginForm, editLoginForm] = useState({ Email: "", Password: "" });
-  const [error, setError] = useState({ Email: "", Password: " " });
+  const [error, setError] = useState({ Email: "", Password: "" });
   const [connectionError, setConnectionError] = useState<string | null>("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();

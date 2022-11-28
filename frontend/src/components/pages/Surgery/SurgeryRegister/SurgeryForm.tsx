@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 import FormTextField from "../../../Form/FormTextField";
 import FormDiv from "../../../Form/FormDiv";
 import ProfileDiv from "../../../other/ProfileDiv";
+import FormDateReactDiv from "../../../Form/FormDateRectDiv";
+import SubmitFormButton from "../../../General/SubmitFormButton";
 interface SurgeryI {
   OwnerId: string;
   Date: string;
@@ -113,6 +115,7 @@ function SurgeryForm() {
   function onChangeType(e) {
     const { name, value } = e.target;
     setVets([]);
+    setAvailableHours([])
 
     setSurgery((prev) => ({
       ...prev,
@@ -149,7 +152,10 @@ function SurgeryForm() {
   const [availableDayListError, setavailableDaysListError] = useState("");
   function onChangeVet(e) {
     const { name, value } = e.target;
-
+    setError((prev)=>({
+      ...prev,
+      StartTime:""
+    }))
     setAvailableHours([]);
     setSurgery((prev) => ({
       ...prev,
@@ -183,6 +189,10 @@ function SurgeryForm() {
 
   const navigate = useNavigate();
   function handleHourChange(e) {
+    setError((prev)=>({
+      ...prev,
+      StartTime:""
+    }))
     const { name, value } = e.target;
     setSurgery((prev) => ({
       ...prev,
@@ -242,13 +252,20 @@ function SurgeryForm() {
   }
 
   function handleReactDatePicker(e) {
-    const date: String = e.toISOString().split("T")[0];
-
+    const date: String = e;
+    console.log(e);
     setSurgery((prev) => ({
       ...prev,
       Date: date.toString(),
+      StartTime:""
     }));
+    setError((prev)=>({
+      ...prev,
+      StartTime:""
+    }))
+    
 
+    console.log(date)
     let promise;
     promise = getValiableHourForSurgery(date, surgery.LeadVetId);
     if (promise) {
@@ -293,26 +310,25 @@ function SurgeryForm() {
 
   return (
     <form className="container " onSubmit={handleSubmit}>
-      <div className="row ">
-        <div className="col-4  offset-4">
-          <div className="row card card-body shadow">
-            <div className="col-12">
+      
+          <div className="row ">
+            <div className="col-4 card card-body shadow">
+          
               <SelectOwnerComponent
                 onChange={onChangeOwner}
                 error={error.OwnerId}
                 OwnerId={surgery.OwnerId}
               />
-            </div>
+           
 
-            <div className="col-12">
+           
               <SelectAnimalComponent
                 onChange={onChange}
                 error={error.AnimalId}
                 OwnerId={surgery.OwnerId}
                 setAPIError={setAPIError}
               />
-            </div>
-            <div className="col-12">
+          
               <FormSelectLimit
                 label="Kategoria"
                 name="SurgeryType"
@@ -323,12 +339,11 @@ function SurgeryForm() {
                 error={error.SurgeryType}
                 arrayIsObjectList={true}
               />
-            </div>
-            <div className="col-12">
+          
               <ProfileDiv label="Cena:" value={`${surgeryPriece} zł`} />
+           
             </div>
-
-            <div className="col-12">
+            <div className="col-4">
               <VetChoiceComponent
                 label={"Prowadzący"}
                 selected={surgery.LeadVetId}
@@ -337,34 +352,27 @@ function SurgeryForm() {
               />
             </div>
 
-            <div className="col-12">
-              <div className="form-group">
-                <div className="form-label">
-                  <p>Data</p>
-                </div>
-                <div>
-                  <DatePicker
-                    className={"form-control"}
+            <div className="col-4 card card-body shadow">
+          
+              
+                  <FormDateReactDiv
+                  label="Termin"
+                    
                     onChange={handleReactDatePicker}
-                    filterDate={filterDate}
+                    filter={filterDate}
                     locale={pl}
                     name="date"
                     selected={
                       surgery.Date == "" ? null : new Date(surgery.Date)
                     }
                     dateFormat="yyyy-MM-dd"
-                    onKeyDown={(e) => {
-                      e.preventDefault();
-                    }}
+                    error={error.Date}
+                    disabled={surgery.LeadVetId==""}
                   />
-                </div>
-                <div>
-                  <label className="form-text text-danger ">{error.Date}</label>
-                </div>
-              </div>
-            </div>
+              
+           
 
-            <div className="col-12">
+          
               <FormSelectLimit
                 label="Godzina"
                 name="StartTime"
@@ -377,24 +385,21 @@ function SurgeryForm() {
                 selectedValue={""}
                 selected={false}
               />
-            </div>
-            <div className="col-12">
+           
+           
               <FormTextField
                 label="Opis"
                 name={"Description"}
                 onChange={onChange}
                 error={error.Description}
               />
-            </div>
-
+           
             <div className="col-12">
-              <button type="submit" className="btn btn-primary ">
-                Zarezerwuj
-              </button>
+             <SubmitFormButton label={"Zarezerwuj"}/>
+            </div>
             </div>
           </div>
-        </div>
-      </div>
+       
     </form>
   );
 }

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../../../components/other/authHelper";
 import ProfileDiv from "../../../../components/other/ProfileDiv";
+import EditButton from "../../../General/EditButton";
 import { getDefalutProfileImage } from "../../../other/imageHelper";
 
 function VetInfo(props) {
@@ -38,11 +39,10 @@ function VetInfo(props) {
             <div className="row mb-3">
               <div className="col-3"><div className="card-title"><h5>Główne informacje</h5></div></div>
               <div className="col-3">
-            <button className="btn btn-primary btn-sm" onClick={() =>
+           <EditButton onClick={() =>
                         navigate(`/vets/${props.vet?.VetId}/edit`, {
                           state: { VetId: props.vet?.VetId },
-                        })
-                      }>Edytuj</button>
+                        })}/>
               
 
             </div>

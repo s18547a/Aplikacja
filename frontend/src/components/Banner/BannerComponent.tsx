@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { DoorClosed } from "react-bootstrap-icons";
 import { Navigate, Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "../Modal/Modal";
 
@@ -14,11 +15,14 @@ function BannerComponent(props) {
   const navigate = useNavigate();
 
   let logoutBtn = (
+    <div>
     <ModalEnableBtn
       label="Wyloguj"
       className="btn btn-danger"
       id={"logoutModal"}
+      icon={<DoorClosed className="me-2"/>}
     />
+    </div>
   );
 
   const [userType, setUserType] = useState("");
@@ -46,7 +50,7 @@ function BannerComponent(props) {
           />
       
         <nav
-          className="nav navbar-dark  sticky-top "
+          className="nav navbar-dark  sticky-top shadow"
           style={{ background: "#3373C4", height: "75px" , width:"100%"}}
         >
           <div className="row justify-content-between" style={{width:"100%"}}>
@@ -55,13 +59,7 @@ function BannerComponent(props) {
               <div className="col-2">
                 <img height="75px" width="100px" src={getLogo()} />
               </div>
-              <div
-                className="col-6 "
-                style={{ color: "white" }}
-              >
-                <h4>Klinka</h4>
-                <h4>Vet</h4>
-              </div>
+             
             </div>
           </div>
           <div className="col-6 row justify-content-end">

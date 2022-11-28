@@ -1,3 +1,4 @@
+import { ListUl, PersonPlus, PlusSquare } from "react-bootstrap-icons";
 import { useLocation } from "react-router-dom";
 import NavElement from "../NavElement";
 
@@ -8,8 +9,8 @@ function ReservationDropdown() {
       mainLink={"/reservations"}
       label={"Rezerwacje"}
       elements={[
-        { label: "Lista", link: "/reservations" },
-        { label: "Zarezerwuj", link: "/reservations/register" },
+        { label: "Lista", link: "/reservations", icon:<ListUl/>},
+        { label: "Zarezerwuj", link: "/reservations/register", icon:<PlusSquare/> },
       ]}
     />
   );

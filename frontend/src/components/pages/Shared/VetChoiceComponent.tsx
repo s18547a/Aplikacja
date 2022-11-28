@@ -8,8 +8,8 @@ function VetChoiceComponent(props) {
 
   return (
     <div className="form-group">
-      <div className="form-label">{props.label}</div>
-      <div className="list-group">
+      <div className="form-label card card-body shadow">{props.label}</div>
+      <div className="">
         {props.vets.map((vet) => {
           return (
             <button
@@ -17,8 +17,8 @@ function VetChoiceComponent(props) {
               value={vet.VetId}
               className={
                 props.selected == vet.VetId
-                  ? "list-group-item active stretched-link"
-                  : "list-group-item stretched-link"
+                  ? " card card-body active stretched-link bg-primary"
+                  : "card card-body stretched-link"
               }
               onClick={handleVetChange}
             >

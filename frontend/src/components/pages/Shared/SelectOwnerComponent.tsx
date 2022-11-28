@@ -20,6 +20,7 @@ function SelectOwnerComponent(props) {
         .then(
           (data) => {
             if (response.status === 200) {
+              console.log(data)
               setOwnerList(data);
             }
           },

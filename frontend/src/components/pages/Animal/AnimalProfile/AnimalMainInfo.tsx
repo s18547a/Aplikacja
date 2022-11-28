@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ProfileDiv from "../../../../components/other/ProfileDiv";
+import EditButton from "../../../General/EditButton";
 import { getDefalutProfileImage } from "../../../other/imageHelper";
 
 function AnimalProfile(props) {
@@ -35,22 +36,22 @@ function AnimalProfile(props) {
                 <div className="row justify-content-center ">
                   <div className="col-lg-12 col-10 card card-body border-0 shadow ms-5">
                     <div className="row">
-                      <div className="col-4">
+                      <div className="col-5">
                       <div className="card-title">
                       <h5>Informacje główne</h5>
                     </div>
                       </div>
-                    <div className="col-1 offset-1 mb-3  ">
-                          <button
-                            className="btn btn-primary btn-sm"
+                    <div className="col-1   ">
+                          <EditButton
+                           
                             onClick={() =>
                               navigate(`/animals/${props.animal?.AnimalId}/edit`, {
                                 state: { AnimalId: props.animal?.AnimalId },
                               })
                             }
-                          >
-                            Edytuj
-                          </button>
+                          
+                           
+                          />
                         </div>
                     </div>
                   

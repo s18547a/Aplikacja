@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getVetSchedulde } from "../../../../api/vetApiCalls";
 import { isManager } from "../../../../components/other/userType";
+import EditButton from "../../../General/EditButton";
 interface ScheduldeI {
   Monday: string | null | undefined;
   Tuesday: string | null | undefined;
@@ -21,7 +23,7 @@ function VetSchedulde(props) {
     Saturday: undefined,
     Sunday: undefined,
   });
-
+  const navigate= useNavigate();
   useEffect(() => {
     let response;
     let promise;
@@ -61,14 +63,9 @@ function VetSchedulde(props) {
                 <h5>Godziny</h5>
               </div>
               <div className="col-auto">
-                {isManager() ? (
-                  <a
-                    className="btn btn-primary btn-sm"
-                    href={`/vets/${props.VetId}/schedulde/edit`}
-                  >
-                    Edytuj
-                  </a>
-                ) : null}
+                {isManager() ? 
+                <EditButton onClick={()=>{ navigate(`/vets/${props.VetId}/schedulde/edit`)}}/>
+                : null}
               </div>
             </div>
           </div>

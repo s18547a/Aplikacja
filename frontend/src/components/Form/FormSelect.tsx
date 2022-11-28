@@ -17,10 +17,10 @@ function FormSelect(props) {
             <div className="col-12">
               <input
                 name={props.name}
-                className="form-control"
+                className={props.error==""?"form-select ":"form-select border border-danger"}
                 list={props.dataListOptions}
                 id="exampleDataListA"
-                placeholder=""
+                placeholder="Wybierz"
                 onChange={onChange}
                 defaultValue={props.selectedValue}
                 disabled={props.disabled}
