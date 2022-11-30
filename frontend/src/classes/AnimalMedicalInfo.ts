@@ -16,12 +16,12 @@ class AnimalMedicalInfo {
   Dental: String;
   Dermalogical: String;
   Others: String;
-
+  Weight:number|null;
   constructor(
     AnimalId: String,
     Chipped: Boolean | null,
     Sterilized: Boolean | null,
-
+    Weight:number|null,
     Skeletal: String,
     Muscular: String,
     Nervous: String,
@@ -54,6 +54,7 @@ class AnimalMedicalInfo {
     this.Optical = Optical;
     this.Others = Others;
     this.Dermalogical = Dermalogical;
+    this.Weight=Weight
   }
 }
 

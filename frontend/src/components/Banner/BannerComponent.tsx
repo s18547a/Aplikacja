@@ -85,12 +85,12 @@ function BannerComponent(props) {
         </nav>
       </>
     ) : <nav
-    className=" nav navbar-dark  sticky-top d-flex justify-content-center"
-    style={{ background: "#3373C4", height: "75px" , width:"100%"}}
+    className=" nav navbar-dark  sticky-top d-flex justify-content-center aling-items-center shadow"
+    style={{ background: "#3373C4", height: "100%" , width:"100%"}}
   >
     
       <div className="row ">
-        <div className="col-6">
+        <div className="col-6 align-items-center">
         <img height="75px" width="100px" src={getLogo()} />
 
         </div>

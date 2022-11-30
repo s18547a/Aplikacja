@@ -16,7 +16,7 @@ function FormTextField(props) {
           <div className="row">
             <div className="col-12">
               <textarea
-               className={props.error==""?"form-control ":"form-control border border-danger"}
+               className={props.error==""||props.error==undefined?"form-control ":"form-control border border-danger"}
                 name={props.name}
                 onChange={handleChange}
                 value={props.value}

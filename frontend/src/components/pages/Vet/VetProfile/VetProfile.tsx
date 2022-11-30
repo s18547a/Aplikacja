@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { getTodayReservationsByVetId } from "../../../../api/reservationApiCalls";
+import { getTodaySurgeries } from "../../../../api/surgeryApiCalls";
 import { getVetByVetId } from "../../../../api/vetApiCalls";
 import Reservation from "../../../../classes/Reservation";
+import Surgery from "../../../../classes/Surgery";
 
 import Vet from "../../../../classes/Vet";
 
@@ -28,6 +30,8 @@ function VetProfile() {
   const [todayReservationList, setTodayReservations] = useState<Reservation[]>(
     []
   );
+
+  const [todaySurgeriesList,setTodaySurgeries]=useState<Surgery[]>([])
 
   useEffect(() => {
     let VetId = getCurrentUser().userTypeId;
@@ -90,8 +94,38 @@ function VetProfile() {
       }
     };
 
+    const loadVetSurgeries=async()=>{
+      let response;
+      let promise;
+      promise = getTodaySurgeries(VetId);
+      if (promise) {
+        promise
+          .then((data) => {
+            response = data;
+            return response.json();
+          })
+          .then(
+            (data) => {
+              if (response.status == 200) {
+                setTodaySurgeries(data);
+              }
+              if (response.status == 404) {
+                setTodaySurgeries([]);
+              }
+              if (response.status == 500) {
+              }
+            },
+            (error) => {}
+          );
+      }
+
+    }
+
+
+
     loadVet();
     loadVetReservations();
+    loadVetSurgeries();
   }, []);
 
   const [activeTab, setActiveTab] = useState("");
@@ -103,7 +137,7 @@ function VetProfile() {
   const profileTab = (
     <VetProfileTab vet={vet} types={vet.Types} vetId={params.VetId} />
   );
-  const reservationTab = <TodayReservationList list={todayReservationList} />;
+  const reservationTab = <TodayReservationList list={todayReservationList} surgeries={todaySurgeriesList}/>;
 
   function setContent() {
     if (activeTab == "") {

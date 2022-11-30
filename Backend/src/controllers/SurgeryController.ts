@@ -22,8 +22,8 @@ export const getSurgery=async(req,res)=>{
 export const getSurgeries= async (req, res) => {
     const parameters: getSurgeryPrameters = { 
         OwnerId:req.query.OwnerId as any ,
-        VetId:undefined as any,
-        Date:undefined as any
+        VetId:req.query.VetId as any,
+        Date:req.query.Date as any
     };
     const results = await SurgeryRepository.getSurgeries(parameters);
 

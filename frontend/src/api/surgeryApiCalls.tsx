@@ -1,3 +1,6 @@
+import Vet from "../classes/Vet";
+import { getCurrentDate } from "../components/other/getCurrentDate";
+
 const baseUrl = "http://localhost:8000/surgeries";
 
 export async function getSurgery(surgeryId) {
@@ -9,6 +12,14 @@ export async function getSurgery(surgeryId) {
 
 export async function getSurgeries() {
   const promise = await fetch(baseUrl);
+
+  return promise;
+}
+
+export async function getTodaySurgeries(VetId) {
+  const url = `${baseUrl}?VetId=${VetId}&Date=${getCurrentDate()}`
+
+  const promise = await fetch(url);
 
   return promise;
 }

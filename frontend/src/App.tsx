@@ -80,7 +80,7 @@ function App() {
     ? {
         height: "100%",
         width: "100%",
-        backgroundImage: `url(${require("../src/images/homePage.webp")})`,
+     //   backgroundImage: `url(${require("../src/images/homePage.webp")})`,
       }
     : { height: "100%", width: "100%" };
 
@@ -91,11 +91,13 @@ function App() {
       </header>
     
       <div className="row" style={{ height: "90%", width: "100%" }}>
+      {isAuthenticated()&&
         <div className="col-lg-1 col-12">
           <SideBar />
         </div>
-        <div className="col-lg-11 col-12">
-          <main className="" /*</div>style={{margin:"100px"}}*/>
+}
+        <div className={isAuthenticated()?"col-lg-11 col-12":"col-12"}>
+          <main className="" /*</div>style={{margin:"100px"}}*/  style={{height:"100%",width: "100%" }}>
             <Routes>
               <Route
                 path="/home"

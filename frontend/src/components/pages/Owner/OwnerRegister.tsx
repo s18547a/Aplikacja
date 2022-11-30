@@ -139,15 +139,15 @@ function OwnerRegister(props) {
 
   return (
     <form className="container " onSubmit={handleSubmit} noValidate={true}>
-      <div className="row">
+      <div className="row justify-content-center">
       
-        <div className="col-lg-6 offset-lg-3">
+        <div className="col-lg-6">
           <div className="card card-body border-0 shadow">
             
             <div className="row">
               <div className="col-12">
                 <div className="row">
-                  <div className="col-lg-6">
+                  <div className="col-lg-12">
                     <FormDiv
                       name="Name"
                       label="Imie"
@@ -156,7 +156,7 @@ function OwnerRegister(props) {
                       type="text"
                     />
                   </div>
-                  <div className="col-lg-6">
+                  <div className="col-lg-12">
                     <FormDiv
                       name="LastName"
                       label="Nazwisko"
@@ -170,7 +170,7 @@ function OwnerRegister(props) {
 
               <div className="col-12">
                 <div className="row">
-                  <div className="col-lg-6">
+                  <div className="col-lg-12">
                     <FormDiv
                       name="Contact"
                       label="Numer telefonu"
@@ -179,7 +179,7 @@ function OwnerRegister(props) {
                       type="text"
                     />
                   </div>
-                  <div className="col-lg-6">
+                  <div className="col-lg-12">
                     <FormDiv
                       name="Email"
                       label="Email"
@@ -192,7 +192,7 @@ function OwnerRegister(props) {
               </div>
               <div className="col-12">
                 <div className="row">
-                  <div className="col-lg-6">
+                  <div className="col-lg-12">
                     <FormDiv
                       name="Password"
                       label="Hasło"
@@ -201,7 +201,7 @@ function OwnerRegister(props) {
                       type="password"
                     />
                   </div>
-                  <div className="col-lg-6">
+                  <div className="col-lg-12">
                     <FormDiv
                       name="Password2"
                       label="Powtórz hasło"

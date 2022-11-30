@@ -26,6 +26,7 @@ function MedicalInfoForm(props) {
     Dental: "",
     Dermalogical: "",
     Others: "",
+    Weight:null
   });
   const location = useLocation();
   const navigate = useNavigate();
@@ -103,7 +104,7 @@ function MedicalInfoForm(props) {
                 label="Waga"
                 onChange={handleChange}
                  type="number"
-                  value={props.Weight}
+                  value={medicalInfo?.Weight}
                   name="Weight"
                 />
 
