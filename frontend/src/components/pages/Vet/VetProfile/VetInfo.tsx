@@ -37,7 +37,7 @@ function VetInfo(props) {
           <div className="row card card-body shadow ">
             <div className="col-12">
             <div className="row mb-3">
-              <div className="col-3"><div className="card-title"><h5>Główne informacje</h5></div></div>
+              <div className="col-5"><div className="card-title"><h5>Główne informacje</h5></div></div>
               <div className="col-3">
            <EditButton onClick={() =>
                         navigate(`/vets/${props.vet?.VetId}/edit`, {

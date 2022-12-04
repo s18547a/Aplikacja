@@ -54,13 +54,13 @@ function VetSchedulde(props) {
   }, []);
 
   return (
-    <div className="card card-body shadow">
+    <div className="card card-body shadow ">
       <div className="card-title">
         <div className="row">
           <div className="col-12">
             <div className="row mb-3">
               <div className="col-auto">
-                <h5>Godziny</h5>
+                <h5>Grafik</h5>
               </div>
               <div className="col-auto">
                 {isManager() ? 

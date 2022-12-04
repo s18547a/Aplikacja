@@ -5,7 +5,7 @@ import Vet from '../../classes/Vet';
 
 import { createIDwithUUIDV4 } from '../../helpers/idHelpers';
 import { GetVetParameters } from '../../classes/Interfaces';
-
+const authUtils = require('../../auth/authUtils');
 const SharedRepository = require('./../SharedRepository');
 const VetScheduldeRepository=require('./VetScheduldeRepository');
 const VetTypeRepository=require('./VetTypeRepository');
@@ -144,8 +144,8 @@ exports.registerVet = async (vet) => {
             const ProfileImage: string | null = vet.ProfileImage;
             const VetType: string[] = vet.VetType;
 
-            //  let hashedPassword = authUtils.hashPassword(Password);
-            const hashedPassword = Password;
+            const hashedPassword = authUtils.hashPassword(Password);
+            // const hashedPassword = Password;
 
             const emailExists = await SharedRepository.emailExists(Email);
             console.log(emailExists);

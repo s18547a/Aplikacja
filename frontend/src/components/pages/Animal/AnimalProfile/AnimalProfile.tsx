@@ -13,9 +13,7 @@ import Animal from "../../../../classes/Animal";
 import AnimalMedicalInfo from "../../../../classes/AnimalMedicalInfo";
 import Illness from "../../../../classes/Illness";
 import Owner from "../../../../classes/Owner";
-
 import { getCurrentDate } from "../../../other/getCurrentDate";
-import AnimalAddInfo from "./MedicalInfo";
 import AnimalIllnesses from "./AnimalIllnesses";
 import AnimalMainInfo from "./AnimalMainInfo";
 import AnimalProfileNav from "./AnimalProfileNav";
@@ -185,6 +183,9 @@ function AnimalProfile() {
             }
             if (response.status == 500) {
             }
+            if(response.status==404){
+              setCoreVaccinesList([])
+            }
           },
           (error) => {}
         );
@@ -257,7 +258,9 @@ function AnimalProfile() {
     }
   };
 
-  const page = (
+
+
+  return (
     <div className="container">
       <AnimalProfileNav
         setSelectedTab={setSelectedTabFunction}
@@ -268,8 +271,6 @@ function AnimalProfile() {
       </div>
     </div>
   );
-
-  return page;
 }
 
 export default AnimalProfile;

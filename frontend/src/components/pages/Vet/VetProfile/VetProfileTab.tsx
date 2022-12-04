@@ -9,12 +9,13 @@ function VetProfileTab(props) {
       <div className="row">
         <div className="col-lg-9">
           <div className="row">
+          <div className="col-12">
+              <VetSpec types={props.types} />
+            </div>
             <div className="col-12">
               <VetInfo vet={props.vet} />
             </div>
-            <div className="col-12">
-              <VetSpec types={props.types} />
-            </div>
+           
           </div>
         </div>
 
@@ -27,7 +28,7 @@ function VetProfileTab(props) {
             }
           />
         </div>
-        <div className="col-2"></div>
+    
       </div>
     </div>
   );

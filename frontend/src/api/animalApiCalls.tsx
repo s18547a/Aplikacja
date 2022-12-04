@@ -1,4 +1,5 @@
 import AnimalMedicalInfo from "../classes/AnimalMedicalInfo";
+import { getCurrentUser, isAuthenticated } from "../components/other/authHelper";
 
 const baseUrl = "http://localhost:8000/animals";
 
@@ -19,10 +20,16 @@ export function getAnimals() {
 export function registerAnimal(Animal) {
   const url = baseUrl;
   const animal = JSON.stringify(Animal);
+
+  let token=null
+  if(isAuthenticated()){
+    token=getCurrentUser().token;
+  }
   const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      'Authorization':'Bearer '+token
     },
     body: animal,
   };
@@ -54,10 +61,14 @@ export function updateAnimal(Animal) {
   console.log(Animal);
   const url = baseUrl;
   const stringifyAnimal = JSON.stringify(Animal);
+ 
+  const token= isAuthenticated()?getCurrentUser().token:null
+
   const options = {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      'Authorization':'Bearer '+token
     },
     body: stringifyAnimal,
   };

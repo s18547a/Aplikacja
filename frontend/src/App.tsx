@@ -33,6 +33,7 @@ import HomePage from "./components/pages/Unlogged/HomePage";
 import MedicalInfoForm from "./components/pages/Animal/AnimalRegister/AnimalRegisterComponents/MedicalInfoForm";
 import SurgeryList from "./components/pages/Surgery/SurgeryList/SurgeryList";
 import SurgeryProfile from "./components/pages/Surgery/SurgeryProfile/SurgeryProfile";
+import NotFoundPage from "./components/pages/General/NotFoundPage";
 const bootstrap = require("bootstrap");
 
 function App() {
@@ -75,11 +76,13 @@ function App() {
     } else return <Navigate to="/home" />;
   };
   const location = useLocation();
+
   const currentLocation = location.pathname;
   const style = currentLocation.includes("/home")
     ? {
         height: "100%",
         width: "100%",
+        
      //   backgroundImage: `url(${require("../src/images/homePage.webp")})`,
       }
     : { height: "100%", width: "100%" };
@@ -97,7 +100,7 @@ function App() {
         </div>
 }
         <div className={isAuthenticated()?"col-lg-11 col-12":"col-12"}>
-          <main className="" /*</div>style={{margin:"100px"}}*/  style={{height:"100%",width: "100%" }}>
+          <main className={currentLocation.includes('/home')?"": "pt-3"} /*</div>style={{margin:"100px"}}*/  style={{height:"100%",width: "100%" }}>
             <Routes>
               <Route
                 path="/home"
@@ -175,6 +178,8 @@ function App() {
                 path="/animals/:AnimalId/medicalInfo/edit"
                 element={isNotPersonel(<MedicalInfoForm />)}
               />
+
+              <Route path="*" element={<NotFoundPage/>}/>
             </Routes>
           </main>
         </div>

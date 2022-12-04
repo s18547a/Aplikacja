@@ -13,7 +13,7 @@ function VetSpec(props) {
             {props.types.map((type) => {
               return (
                 <div className="col-lg-3 text-center">
-                  <div className="card card-body shadow">{type.VetType}</div>;
+                  <div className="card card-body shadow">{type.VetType}</div>
                 </div>
               );
             })}

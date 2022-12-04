@@ -71,7 +71,7 @@ export const deleteSurgery=async(req,res)=>{
     if(results instanceof Error){
         return res.status(500).json(results);
     }
-    else return res.status(201).json({});
+    else return res.status(201).json({deletedId:results});
 
 };
 

@@ -107,7 +107,7 @@ exports.registerOwner = async (owner) => {
             // let hashedPassword = Password;
   
             const emailExists = await SharedRepository.emailExists(Email);
-            console.log(emailExists);
+          
             if (emailExists) {
                 return null;
             }
@@ -141,14 +141,6 @@ exports.registerOwner = async (owner) => {
                 return UserId;
             }
 
-
-
-  
-            //   pool.close();
-            //  const rowAffected = registerOwnerPool.rowsAffected;
-            // console.log(rowAffected);
-  
-            return UserId;
         } catch(error){
             transaction.rollback();
             console.log(error);

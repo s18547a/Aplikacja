@@ -20,7 +20,7 @@ import { isManager, isOwner, isVet } from "../../../other/userType";
 function ReservationList() {
   const navigate = useNavigate();
 
-  const [newId, setNewId] = useState("");
+  
 
   const [reservationList, setReservationList] = useState<Reservation[]>([]);
 
@@ -30,13 +30,18 @@ function ReservationList() {
 
   const [empty, setEmpty] = useState<boolean>(false);
 
+  const [message,setMessage]=useState({
+    id:"",
+    message:""
+  })
+
   async function loadReservationList() {
     const currentUserId = getCurrentUser().userTypeId;
 
     let response;
     let promise;
 
-    if (isVet()) {
+    if (isVet()&&!isManager()) {
       promise = getReservationsByVetId(currentUserId);
     }
     if (isOwner()) {
@@ -74,7 +79,12 @@ function ReservationList() {
 
     const state = location.state as { id: string };
     if (state != null) {
-      setNewId(state.id);
+      
+      setMessage((prev)=>({
+        ...prev,
+        id:state.id,
+        message:"Nowa rezerwacja: "
+      }))
     }
   }, []);
 
@@ -95,7 +105,18 @@ function ReservationList() {
         return res.json();
       })
       .then((data) => {
-        loadReservationList();
+        if(result.status==201){
+          
+          
+            
+           setMessage((prev)=>({
+            id:data.deletedId,
+            message:"Anulowano rezerwacje "
+           }))
+           loadReservationList();
+          
+        }
+     
       });
   };
 
@@ -121,7 +142,7 @@ function ReservationList() {
         function={handleClick}
         label={"Czy na pewno?"}
       />
-      <RegiserSuccessInfo newId={newId} message={"Nowa rezerwacja: "} />
+      <RegiserSuccessInfo newId={message.id} message={message.message} />
 
       <div className="card card-body shadow">
         <h5 className="card-title">Reserwacje</h5>
@@ -132,7 +153,8 @@ function ReservationList() {
                 <th>Weterynarz</th>
                 <th>Data</th>
                 <th>Godzina</th>
-                <th></th>
+                <th>Kontakt</th>
+                <th>Akcje</th>
               </tr>
             </thead>
 
@@ -160,6 +182,7 @@ function ReservationList() {
                     </td>
                     <td>{reservation.Date}</td>
                     <td>{reservation.Hour}</td>
+                    <td>{isOwner()?reservation.Vet?.Contact:reservation.Owner?.Contact}</td>
 
                     <td>
                       <div className="row">

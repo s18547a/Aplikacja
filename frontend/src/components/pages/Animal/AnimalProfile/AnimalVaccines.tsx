@@ -3,6 +3,8 @@ import TableOrEmpty from "../../../List/TableOrEmpty";
 
 function AnimalVaccines(props) {
   return (
+    <div className="row">
+      <div className="col-8">
     <div className="card card-body border-0 mt-8 shadow">
       <div className="row">
         <div className="col-lg-9 ">
@@ -31,11 +33,19 @@ function AnimalVaccines(props) {
           </TableOrEmpty>
         </div>
 
-        <div className="col-lg-3 ">
+       
+      </div>
+    </div>
+    <div>
+    </div>
+      
+    </div>
+    <div className="col-4">
+    <div className="card card-body border-0 mt-8 shadow">
           <div className="card-title">
             <h5 className=" text-danger">Szczepienia obowiazkowe</h5>
           </div>
-          {props.coreList.lenght != 0 ? (
+          {props.coreList.length != 0 ? (
             <table className="table">
               <thead>
                 <tr>
@@ -54,12 +64,14 @@ function AnimalVaccines(props) {
               </tbody>
             </table>
           ) : (
-            <div className="alert-success">
+            <div className="alert-success fw-bold">
               <div>Wykonano wszystkie obowiązkowe</div>
             </div>
           )}
-        </div>
-      </div>
+       
+
+    </div>
+    </div>
     </div>
   );
 }

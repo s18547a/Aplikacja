@@ -149,12 +149,16 @@ exports.cancelReservation = async (ReservationId: string,transaction) => {
                 .query('Delete From Reservation Where ReservationId=@ReservationId');
             rowsAffected = result.rowsAffected[0];
         }
+        if(rowsAffected!=1){
+            throw Error('');
+        }
+        else return ReservationId;
 
 
     
 
    
-        return rowsAffected;
+       
     } catch (error) {
         console.log(error);
         return error;

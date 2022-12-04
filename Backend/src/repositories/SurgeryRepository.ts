@@ -202,7 +202,7 @@ exports.deleteSurgery=async(SurgeryId:string)=>{
 
             throw Error('');
         }
-        return rowsAffected;
+        return SurgeryId;
     
     } catch (error) {
         console.log(error);

@@ -20,7 +20,12 @@ import { isVet, isOwner, isManager } from "../../../other/userType";
 function SurgeryList() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [newId, setNewId] = useState("");
+  
+  const [message,setMessage]=useState({
+    id:"",
+    message:""
+  })
+
 
   const [surgeryList, setSurgeryList] = useState<Surgery[]>([]);
 
@@ -92,7 +97,10 @@ function SurgeryList() {
 
     const state = location.state as { id: string };
     if (state != null) {
-      setNewId(state.id);
+      setMessage(()=>({
+        id:state.id,
+        message:"Nowy zabieg"
+      }))
     }
   }, []);
 
@@ -111,7 +119,7 @@ function SurgeryList() {
   return (
     <div className="container">
       
-      <RegiserSuccessInfo newId={newId} message={"Nowy zabieg: "} />
+      <RegiserSuccessInfo newId={message.id} message={message.message} />
 
       <div className="card card-body shadow">
         <h5 className="card-title">Zabiegi</h5>

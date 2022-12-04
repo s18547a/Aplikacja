@@ -4,7 +4,8 @@ function VetProfileNav(props) {
   }
 
   return (
-    <ul className="nav nav-pills mb-3">
+    <ul className="nav nav-pills  row justify-content-center mb-3">
+<div className="col-auto">
       <li>
         <button
           className={props.activeTab == "" ? "nav-link active " : "nav-link"}
@@ -15,6 +16,8 @@ function VetProfileNav(props) {
           Profil
         </button>
       </li>
+      </div>
+      <div className="col-auto">
       <li>
         <button
           className={props.activeTab == "res" ? "nav-link active" : "nav-link"}
@@ -26,6 +29,7 @@ function VetProfileNav(props) {
           Dziesiejsze rezerwacje
         </button>
       </li>
+      </div>
     </ul>
   );
 }

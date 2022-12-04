@@ -8,25 +8,31 @@ function AnimalProfile(props) {
 
   return (
     <div className="">
-      <div className="row ">
+     
         
 
         <div className="row ">
-          <div className="col-lg-6 col-12">
-            <div className="row card card-body border-0 shadow">
+          <div className="col-lg-4 col-12">
+          
               
-              <div className="col-12 text-center">
-                <img
+              <div className=" card card-body border-0 shadow">
+                <div className="row justify-content-center">
+                  <div className="col-12 ms-4">
+                  <img
                   height="400px"
-                  width="400px"
+                  width="350px"
                   src={
                     props.animal?.ProfileImage == null
                       ? getDefalutProfileImage()
                       : props.animal.ProfileImage
                   }
                 />
+                  </div>
+
+                </div>
+              
               </div>
-            </div>
+           
           </div>
           <div className="col-lg-6 col-12 justify-content-center">
          
@@ -122,7 +128,7 @@ function AnimalProfile(props) {
             </div>
           </div>
         </div>
-      </div>
+     
     </div>
   );
 }

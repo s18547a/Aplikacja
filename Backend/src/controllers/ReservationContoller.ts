@@ -40,11 +40,9 @@ export const deleteReservation= async (req, res) => {
 
     if (results instanceof Error) {
         return res.status(500).json({ message: results });
-    } else if (results != 1) {
-        return res.status(404).json({});
-    }
-    if (results == 1) {
-        return res.status(200).json({});
-    }
+    } else
+    
+        return res.status(201).json({deletedId:results});
+    
 };
 

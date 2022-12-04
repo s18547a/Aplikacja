@@ -5,7 +5,7 @@ function AnimalProfileNav(props) {
 
   return (
     <ul className="nav nav-pills border-0 row justify-content-center mb-3" >
-      <div className="col-lg-1 ">
+      <div className="col-lg-auto ">
         <li className="nav-item">
           <button
             className={props.activeTab == "" ? "nav-link active " : "nav-link"}
@@ -17,7 +17,7 @@ function AnimalProfileNav(props) {
           </button>
         </li>
       </div>
-      <div className="col-lg-1">
+      <div className="col-lg-auto">
         <li className="nav-item">
           <button
             className={
@@ -31,7 +31,7 @@ function AnimalProfileNav(props) {
           </button>
         </li>
       </div>
-      <div className="col-lg-2">
+      <div className="col-lg-auto">
         <li className="nav-item">
           <button
             className={
@@ -45,7 +45,7 @@ function AnimalProfileNav(props) {
           </button>
         </li>
       </div>
-      <div className="col-lg-1">
+      <div className="col-lg-auto">
         <li className="nav-item">
           <button
             className={

@@ -223,9 +223,11 @@ function ReservationForm() {
             <div className="">{vetChoiceComponent}</div>
             <div className="">{hourChoiceComponenet}</div>
 
+            {reservation.VetId&&
             <div className="">
               <SubmitFormButton label={"Zarezerwuj"} />
             </div>
+}
           </div>
         </div>
       </div>

@@ -1,10 +1,10 @@
 const UserRepository = require('../repositories/UserRepository');
 import config from '../auth/key';
-import User from '../classes/User';
+
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-import express from 'express';
-const router = express.Router();
+
+
 
 interface dataType {
   userId: string;
@@ -55,7 +55,7 @@ export const login=async (req, res) => {
                         const token=jwt.sign({
                             Email:user.Email,
                             UserId:user.UserId
-                        },config.secret,{expiresIn:'1h'});
+                        },config.secret,{expiresIn:'10h'});
                          
                         const data: dataType = {
                             userId: user.UserId,

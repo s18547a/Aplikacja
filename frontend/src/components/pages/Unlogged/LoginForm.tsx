@@ -55,7 +55,7 @@ function LoginForm(props) {
               if (response.status == 500) {
                 setError((prev) => ({
                   ...prev,
-                  Emai: "Błąd serwera",
+                  Email: "Błąd serwera",
                 }));
               }
             },

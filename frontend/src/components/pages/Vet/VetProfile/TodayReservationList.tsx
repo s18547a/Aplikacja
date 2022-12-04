@@ -56,12 +56,13 @@ function TodayReservationList(props) {
                 <table className="table">
                   <thead>
                     <tr>
+                      <th>Typ</th>
                       <th>Godzina</th>
                       <th>Klient</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {props.list.map((surgery) => {
+                    {props.surgeries.map((surgery) => {
                       return (
                         <tr onClick={()=>{navigate(`/surgeries/${surgery.SurgeryId}`)}}>
                           <td>{surgery.SurgeryType}</td>
