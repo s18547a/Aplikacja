@@ -1,12 +1,13 @@
 import express from 'express';
 const router = express.Router();
 const AnimalController=require('../controllers/AnimalController.ts');
-const auth= require('../middlewares/isAuthorizatied');
+
+const {isAuthorizated} = require('../middlewares/isAuthorizatied');
 router.get('/types', AnimalController.getAnimalTypes);
 router.get('/:AnimalId', AnimalController.getAnimal);
 router.get('/', AnimalController.getAnimals);
-router.post('/', auth.isAuthorizated,AnimalController.registerAnimal);
-router.put('/', auth.isAuthorizated,AnimalController.updateAnimal);
+router.post('/', isAuthorizated,AnimalController.registerAnimal);
+router.put('/', isAuthorizated, AnimalController.updateAnimal);
 router.get('/:AnimalId/illnesses', AnimalController.getIllnesses);
 router.put('/illnesses', AnimalController.updateIllness);
 router.get('/:AnimalId/medicalInfo', AnimalController.getMedicalInfo);

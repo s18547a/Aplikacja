@@ -4,12 +4,12 @@ function FormCheck(props) {
   }
 
   return (
-    <div className="form-check">
+    <div className="form-check ">
       <div className="row">
         <div className="col-12">
           <div className="row">
             <div className="col-3">
-              <label className="form-label">{props.label}</label>
+              <label className="form-label fw-bold">{props.label}</label>
             </div>
             <div className="col-6">
               <label className="form-text text-danger">{props.error}</label>

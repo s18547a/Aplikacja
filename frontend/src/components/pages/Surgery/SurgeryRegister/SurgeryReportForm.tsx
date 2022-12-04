@@ -14,6 +14,7 @@ function SurgeryReportForm(props) {
         className="form-control"
         onChange={onReportChange}
         value={props.value}
+        rows={10}
       />
     </div>
   );

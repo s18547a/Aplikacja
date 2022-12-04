@@ -316,8 +316,8 @@ function VisitRegister() {
     <form className=" container " onSubmit={handleSubmit}>
       <div className="row justify-content-center">
         <div className="col-lg-6">
-          <div className="row">
-            <div className="col-12">
+          <div className="row justify-content-center">
+            <div className="col-8">
               <VisitMainInfoForm
                 onChange={onChange}
                 onChangeOwner={onChangeOwner}
@@ -327,18 +327,11 @@ function VisitRegister() {
               />
             </div>
           </div>
-          <div className="row">
-            <div className="col-12">
-              <DiagnosisForm
-                setDiagnosisList={setDiagnosisList}
-                AnimalId={visit.AnimalId}
-              />
-            </div>
-          </div>
+         
         </div>
         <div className="col-lg-4">
           <div className="row">
-            <div className="col-12">
+            <div className="col-12 mb-4">
               <VisitActivitiesForm
                 changeActivity={changeActivity}
                 medicalActivities={medicalActivities}
@@ -351,6 +344,14 @@ function VisitRegister() {
                 AnimalId={visit.AnimalId}
                 onChange={changeVaccine}
                 vaccineList={vaccineList}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <DiagnosisForm
+                setDiagnosisList={setDiagnosisList}
+                AnimalId={visit.AnimalId}
               />
             </div>
           </div>

@@ -58,10 +58,10 @@ function DiagnosisForm(props) {
     props.AnimalId != "" ? (
       <div className="">
         <div className="row">
-          <div className="col-5">
-            <div className="m-2">
-              <div className="row">
-                <div className="col-12">
+          <div className="col-12">
+           
+            
+              
                   <a
                     className="btn btn-primary"
                     role={"button"}
@@ -69,16 +69,15 @@ function DiagnosisForm(props) {
                   >
                     Dodaj diagnozę
                   </a>
-                </div>
-              </div>
-            </div>
+               
+            
           </div>
         </div>
 
         <div className="row ">
           {diagnosisList.map((d) => {
             return (
-              <div className="col-6" key={d.Number}>
+              <div className="col-12" key={d.Number}>
                 <div className=" card card-body shadow">
                   <div>
                     <button

@@ -21,6 +21,7 @@ import FormDiv from "../../../Form/FormDiv";
 import ProfileDiv from "../../../other/ProfileDiv";
 import FormDateReactDiv from "../../../Form/FormDateRectDiv";
 import SubmitFormButton from "../../../General/SubmitFormButton";
+import { checkIfAllFieldAsFilled } from "../../../other/validatiorHelper";
 interface SurgeryI {
   OwnerId: string;
   Date: string;
@@ -311,9 +312,9 @@ function SurgeryForm() {
   return (
     <form className="container " onSubmit={handleSubmit}>
       
-          <div className="row ">
-            <div className="col-4 card card-body shadow">
-          
+          <div className="row justify-content-center">
+            <div className=" col-4 ">
+          <div className="card card-body shadow">
               <SelectOwnerComponent
                 onChange={onChangeOwner}
                 error={error.OwnerId}
@@ -342,19 +343,16 @@ function SurgeryForm() {
           
               <ProfileDiv label="Cena:" value={`${surgeryPriece} zł`} />
            
-            </div>
-            <div className="col-4">
+            
               <VetChoiceComponent
                 label={"Prowadzący"}
                 selected={surgery.LeadVetId}
                 onChange={onChangeVet}
                 vets={vets}
               />
-            </div>
-
-            <div className="col-4 card card-body shadow">
+         
           
-              
+          {surgery.LeadVetId&& 
                   <FormDateReactDiv
                   label="Termin"
                     
@@ -369,22 +367,25 @@ function SurgeryForm() {
                     error={error.Date}
                     disabled={surgery.LeadVetId==""}
                   />
+              }
               
            
-
+              {surgery.Date&&
+               <FormSelectLimit
+               label="Godzina"
+               name="StartTime"
+               onChange={handleHourChange}
+               array={availableHours}
+               id={"element"}
+               elementLabel={"element"}
+               error={error.StartTime}
+               arrayIsObjectList={false}
+               selectedValue={""}
+               selected={false}
+             />
+              }
           
-              <FormSelectLimit
-                label="Godzina"
-                name="StartTime"
-                onChange={handleHourChange}
-                array={availableHours}
-                id={"element"}
-                elementLabel={"element"}
-                error={error.StartTime}
-                arrayIsObjectList={false}
-                selectedValue={""}
-                selected={false}
-              />
+             
            
            
               <FormTextField
@@ -393,9 +394,13 @@ function SurgeryForm() {
                 onChange={onChange}
                 error={error.Description}
               />
-           
+           {
+            checkIfAllFieldAsFilled(surgery)&&
             <div className="col-12">
-             <SubmitFormButton label={"Zarezerwuj"}/>
+            <SubmitFormButton label={"Zarezerwuj"}/>
+           </div>
+           }
+           
             </div>
             </div>
           </div>

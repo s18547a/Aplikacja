@@ -19,22 +19,20 @@ function VisitMainInfoForm(props) {
 
   return (
     <div className="card card-body shadow">
-      <div className="d-flex mb-3">
-        <SubmitFormButton label="Zapisz" />
-      </div>
+     
       <div className="card-title">
         <h5>Informacje</h5>
       </div>
 
-      <div className="row">
-        <div className="col-6">
+     
+        <div className="row">
           <SelectOwnerComponent
             onChange={onChangeOwner}
             error={props.error.OwnerId}
             selectedValue={props.visit.OwnerId}
           />
         </div>
-        <div className="col-6">
+        <div className="row">
           <SelectAnimalComponent
             error={props.error.AnimalId}
             onChange={onChange}
@@ -42,9 +40,9 @@ function VisitMainInfoForm(props) {
             setAPIError={setAPIError}
           />
         </div>
-      </div>
-      <div className="row">
-        <div className="col-6">
+    
+     
+        <div className="row">
           <FormDiv
             label="Data "
             name="Date"
@@ -55,7 +53,7 @@ function VisitMainInfoForm(props) {
           />
         </div>
 
-        <div className="col-6">
+        <div className="row">
           <FormDiv
             label="Godzina "
             name="Hour"
@@ -65,9 +63,9 @@ function VisitMainInfoForm(props) {
             value={props.visit.Hour}
           />
         </div>
-      </div>
+     
 
-      <div className="col-12">
+      <div className="row">
         <div className="form-group">
           <div className="row">
             <div className="col-3">
@@ -87,7 +85,7 @@ function VisitMainInfoForm(props) {
         </div>
       </div>
 
-      <div className="col-12">
+      <div className="row">
         <div className="form-group">
           <div className="row">
             <div className="col-12">
@@ -103,6 +101,9 @@ function VisitMainInfoForm(props) {
             </div>
           </div>
         </div>
+      </div>
+      <div className="row d-flex m-3">
+        <SubmitFormButton label="Zapisz" />
       </div>
     </div>
   );

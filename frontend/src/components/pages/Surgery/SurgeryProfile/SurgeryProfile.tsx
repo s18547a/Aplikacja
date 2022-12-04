@@ -142,9 +142,10 @@ function SurgeryProfile(props) {
         label={"Czy na pewno?"}
       />
       <div className="">
-        <div className="row">
+        <div className="row justify-content-center">
           <div className="col-lg-4 ">
             <div className="card card-body shadow">
+              <div className="card-title"><h5 className="">Informacje</h5></div>
               <ProfileDiv label={"Data"} value={surgery?.Date} />
               <ProfileDiv label={"Rodzaj"} value={surgery?.SurgeryType} />
               <ProfileDiv
@@ -152,8 +153,8 @@ function SurgeryProfile(props) {
                 value={`${surgery?.Vet.Name} ${surgery?.Vet.LastName}`}
               />
 
-              <div className="row ">
-                <div className="col-4">
+              <div className="row">
+                <div className="col-6">
                   <p className=" ">{"Operowany"}</p>
                 </div>
                 <div className="col-6">
@@ -169,15 +170,17 @@ function SurgeryProfile(props) {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-lg-4">
+          
             <div className="card card-body shadow">
               <div className="card-title">
                 <h5>Opis</h5>
               </div>
-              <div>{surgery?.Description}</div>
+              <div className="">{surgery?.Description}</div>
             </div>
           </div>
+        
+          
+          
           <div className="col-lg-4">
             <div className="card card-body shadow">
               <div className="row">
@@ -200,7 +203,7 @@ function SurgeryProfile(props) {
                 </div>
               </div>
               <div className="row mt-3">
-                <div className="col-12">{reportContent}</div>
+                <div className="col-12 ">{reportContent}</div>
               </div>
             </div>
           </div>

@@ -44,35 +44,32 @@ function VisitProfile() {
   return (
     <div className="container ">
       <div className="row justify-content-center">
-        <div className="col-lg-5">
+        <div className="col-lg-4">
           <div className="card card-body shadow">
+            <div className="card-title"><h5>Informacje</h5></div>
             <div className="row justify-content-center">
-              <div className="col-12 ">
+            
                 <ProfileDiv value={visit?.Date} label="Data" />
-              </div>
-              <div className="col-12">
+             
                 <ProfileDiv value={visit?.Hour} label="Godzina" />
-              </div>
-              <div className="col-12">
+             
                 <ProfileDiv value={visit?.Animal.Name} label="Pacjent" />
-              </div>
-              <div className="col-12">
+             
                 <ProfileDiv
                   value={`${visit?.Vet.Name} ${visit?.Vet.LastName}`}
                   label="Weterynarz"
                 />
-              </div>
-              <div className="col-12">
+             
                 <ProfileDiv value={visit?.Bill} label="Rachunek" />
-              </div>
+             
             </div>
           </div>
         </div>
 
         <div className="col-lg-4">
           <div className="card card-body shadow">
-            <div>
-              <p>Czynności</p>
+            <div className="card-title">
+              <h5>Czynności</h5>
             </div>
             <ul className="list-group list-group-flush">
               {visit?.MedicalActivities.map((activity) => {

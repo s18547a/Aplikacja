@@ -3,7 +3,7 @@ function FormDate(props) {
     <div className="form-group">
       <div className="row">
         <div className="col-12">
-          <label className="form-label">{props.label}</label>
+          <label className="form-label fw-bold">{props.label}</label>
         </div>
 
         <div className="col-12">

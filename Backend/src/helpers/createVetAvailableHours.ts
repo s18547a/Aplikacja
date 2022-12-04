@@ -1,6 +1,7 @@
+import { createSurgeryAvailableHours, getBusyNextHourFromSurgery } from './createSurgeryAvailableHours';
 
 
-const hoursHelper = require('../helpers/hours');
+const {createVetVisitHours} = require('../helpers/hours');
 const ReservationRepository =require('../repositories/ReservationRepository');
 
 const SurgeryRepository = require('../repositories/SurgeryRepository');
@@ -9,10 +10,10 @@ export async function createVatAvailableHours(reccordset,paramters){
     const workHours= String(Object.values(reccordset)[0]);
          
     if (workHours!= null) {
-        let receptionHours = hoursHelper.createVetVisitHours(workHours);
+        let receptionHours = createVetVisitHours(workHours);
     
 
- 
+        console.log(receptionHours);
 
         const bookedReservations =
         await ReservationRepository.getReservations({
@@ -33,28 +34,30 @@ export async function createVatAvailableHours(reccordset,paramters){
         }
 
         const bookedSurgeries= await SurgeryRepository.getSurgeries({Date:paramters.Date,VetId:paramters.VetId});
-
+        
         if( bookedSurgeries!=null){
-
-            const bookedSurgeriesHour:string[]=bookedSurgeries.map(surgery=>{
-                return surgery.StartTime;
-            });
-
-         
-
-            receptionHours=receptionHours.filter((bookedHour)=>{
-             
-                const hour=bookedHour.split(':')[0];
-                let isHourReserved=false;
-                bookedSurgeriesHour.forEach(bookedSurgery=>{
-                    hour=== bookedSurgery.split(':')[0]||hour===String(parseInt(bookedSurgery.split(':')[0])+1)?isHourReserved=true:isHourReserved=false;
-                });
-            
-                if(isHourReserved){
-                    return false;
-                } else return true;
-            });
           
+
+            const unavalilableHoursArrays:[]=bookedSurgeries.map(surgery=>{
+                return getBusyNextHourFromSurgery(surgery.StartTime);
+            });
+            console.log(unavalilableHoursArrays);
+            let unavalilableHour:string[]=[];
+            unavalilableHoursArrays.forEach(hoursArray=>{
+                unavalilableHour=unavalilableHour.concat(hoursArray);
+
+                unavalilableHour=unavalilableHour.filter((item,index)=>{
+                    return (unavalilableHour.indexOf(item)==index);
+                });
+            });
+            console.log('Unavali',unavalilableHour);
+            receptionHours=receptionHours.filter((hour)=>{
+                return !unavalilableHour.includes(hour);
+            });
+            
+            console.log('Recepcion',receptionHours); 
+
+            
         }
 
      
@@ -63,76 +66,10 @@ export async function createVatAvailableHours(reccordset,paramters){
         }
         else {
            
-           
+            console.log(receptionHours);
           
-            const availableSurgeryTime= receptionHours.filter(surgeryHour=>{
-                console.log(surgeryHour);
-                const [hour,minute]=surgeryHour.split(':');
-                  
-                
-                const arrayToSlice=receptionHours.map(x=>x);
-               
-               
-                const index=receptionHours.indexOf(surgeryHour);
-              
-                const splicedArray=arrayToSlice.splice(index,6);
-         
-
-
-                const nextHour=parseInt(hour)+1;
-                const nextNextHour=nextHour+1;
-                const nextHourString=nextHour<10?`0${new String(nextHour)}`:new String(nextHour);
-                const nextNextHourString=nextNextHour<10?`0${new String(nextNextHour)}`:new String(nextNextHour);
-                let onePart=surgeryHour;
-                let  twoPart;
-                let  threePart;
-                let  fourPart;
-                let  fifthPart;
-                let  sixtPart;
-                   
-                if(minute==='00'){
-                    onePart=surgeryHour;
-                    twoPart=`${hour}:20`;
-                    threePart=`${hour}:40`;
-                    fourPart=`${nextHourString}:00`;
-                    fifthPart=`${nextHourString}:20`;
-                    sixtPart=`${nextHourString}:40`;
-                 
-                }else
-                if(minute==='20'){
-                      
-                    onePart=surgeryHour;
-                    twoPart=`${hour}:40`;
-                    threePart=`${nextHourString}:00`;
-                    fourPart=`${nextHourString}:20`;
-                    fifthPart=`${nextHourString}:40`;
-                    sixtPart=`${nextNextHourString}:00`;
-                  
-                }else
-                if(minute==='40'){
-                    onePart=surgeryHour;
-                    twoPart=`${nextHourString}:00`;
-                    threePart=`${nextHourString}:20`;
-                    fourPart=`${nextHourString}:40`;
-                    fifthPart=`${nextNextHourString}:00`;
-                    sixtPart=`${nextNextHourString}:20`;
-                  
-                }
-
-                    
-                const   necesseryHoursArray=[onePart,twoPart,threePart,fourPart,fifthPart,sixtPart];
-
-                const equals = JSON.stringify(necesseryHoursArray)===JSON.stringify(splicedArray);
-                console.log(necesseryHoursArray);
-                console.log(splicedArray);
-                console.log(equals);
-                return equals;
-                      
-                      
-            
-
-            });
-
+            const availableSurgeryTime= await createSurgeryAvailableHours(receptionHours);
+           
             if(availableSurgeryTime.length==0){
                 return null;
             }

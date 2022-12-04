@@ -58,10 +58,10 @@ function SelectAnimalComponent(props) {
   return (
     <div>
       <div className="form-group">
-        <div className="form-label">Zwierzę</div>
+        <div className="form-label fw-bold">Zwierzę</div>
         {animalList.map((animal) => {
           return (
-            <div className="form-check form-check-inline">
+            <div className="form-check mt-3">
               <input
                 className="form-check-input"
                 type="radio"

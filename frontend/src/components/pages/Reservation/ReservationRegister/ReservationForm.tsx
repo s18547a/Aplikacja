@@ -211,23 +211,24 @@ function ReservationForm() {
     <form className="container" onSubmit={handleSubmit}>
       <div className="row justify-content-center">
         <div className="col-lg-4 ">
-          <div className="">
+          <div className="card card-body shadow">
             <ReservationMainInfo
               handleDateChange={handleDateChange}
               handleOwnerChange={handleOwnerChange}
               error={error}
               ownerList={ownerList}
             />
-          </div>
-          <div className="card card-body shadow mt-3">
+         
+         
             <div className="">{vetChoiceComponent}</div>
             <div className="">{hourChoiceComponenet}</div>
 
-            {reservation.VetId&&
+            {reservation.Hour&&
             <div className="">
               <SubmitFormButton label={"Zarezerwuj"} />
             </div>
 }
+         
           </div>
         </div>
       </div>

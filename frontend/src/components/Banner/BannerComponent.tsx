@@ -89,18 +89,18 @@ function BannerComponent(props) {
     style={{ background: "#3373C4", height: "100%" , width:"100%"}}
   >
     
-      <div className="row ">
-        <div className="col-6 align-items-center">
+      <div className="row align-content-center">
+        <div className="col-6 ">
         <img height="75px" width="100px" src={getLogo()} />
 
         </div>
         <div className="col-6">
         <div
-          className="col-6 align-self-center"
+          className="col-6  d-flex justify-content-center"
           style={{ color: "white" }}
         >
-          <h4>Klinka</h4>
-          <h4>Vet</h4>
+          <h4 className=" display-5">Klinka </h4>
+          <h4 className="display-5"> Vet</h4>
         </div>
 
         </div>
