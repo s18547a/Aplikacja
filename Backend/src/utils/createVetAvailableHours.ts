@@ -1,10 +1,10 @@
 import { createSurgeryAvailableHours, getBusyNextHourFromSurgery } from './createSurgeryAvailableHours';
 
 
-const {createVetVisitHours} = require('../utils/hours');
-const ReservationRepository =require('../repositories/ReservationRepository');
+import { createVetVisitHours } from '../utils/hours';
+const ReservationRepository =require('../models/repositories/ReservationRepository');
 
-const SurgeryRepository = require('../repositories/SurgeryRepository');
+const SurgeryRepository = require('../models/repositories/SurgeryRepository');
 export async function createVatAvailableHours(reccordset,paramters){
 
     const workHours= String(Object.values(reccordset)[0]);

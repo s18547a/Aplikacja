@@ -1,7 +1,7 @@
-import { GetOwnerParamters } from '../classes/Interfaces';
+import { GetOwnerParamters } from '../models/classes/Interfaces';
 
 
-const OwnerRepository = require('../repositories/OwnerRepository');
+const OwnerRepository = require('../models/repositories/OwnerRepository');
 
 export const getOwner=async(req,res)=>{
 

@@ -1,11 +1,11 @@
-const config = require('../config/mssql/userConnection.js');
+const config = require('../../config/mssql/userConnection.js');
 
 import sql from 'mssql';
 import { GetReservationParameters } from '../classes/Interfaces';
 import Owner from '../classes/Owner';
 import Reservation from '../classes/Reservation';
 import Vet from '../classes/Vet';
-import { createIDwithUUIDV4 } from '../utils/idHelpers';
+import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 
 const VetRepository = require('../repositories/VetRepository');
 const OwnerRepository = require('../repositories/OwnerRepository');

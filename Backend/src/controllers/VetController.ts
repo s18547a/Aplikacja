@@ -1,11 +1,11 @@
-import { GetScheduldeParamters, GetVetParameters } from '../classes/Interfaces';
+import { GetScheduldeParamters, GetVetParameters } from '../models/classes/Interfaces';
 
 
-import Schedulde from '../classes/Schedulde';
+import Schedulde from '../models/classes/Schedulde';
 
-const VetRepository = require('../repositories/VetRepository');
-const VetScheduldeRepository=require('../repositories/VetScheduldeRepository');
-const VetTypeRepository=require('../repositories/vetTypeRepository');
+const VetRepository = require('../models/repositories/VetRepository');
+const VetScheduldeRepository=require('../models/repositories/VetScheduldeRepository');
+const VetTypeRepository=require('../models/repositories/vetTypeRepository');
 
 
 export const getVet= async (req, res) => {

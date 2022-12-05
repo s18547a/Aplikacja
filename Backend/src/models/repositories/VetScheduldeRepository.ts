@@ -1,9 +1,10 @@
 import { GetScheduldeParamters } from '../classes/Interfaces';
-import { createVatAvailableHours } from '../utils/createVetAvailableHours';
-const dateHelper=require('../utils/dateHelper');
+import { createVatAvailableHours } from '../../utils/createVetAvailableHours';
+import { getDayOfAWeekName } from '../../utils/dateHelper';
+
 
 const sql = require('mssql');
-const config = require('../config/mssql/userConnection.js');
+const config = require('../../config/mssql/userConnection.js');
 exports.getSchedulde = async (VetId: string) => {
     try {
         const pool = await sql.connect(config);
@@ -129,7 +130,7 @@ exports.getAvailableHours = async (paramters: GetScheduldeParamters) => {
      
         /*  const newDate=new Date(paramters.Date)
                 const day= newDate.toLocaleDateString("en-PL",{weekday:'long'})*/
-        const day: string = dateHelper.getDayOfAWeekName(paramters.Date);
+        const day: string =getDayOfAWeekName(paramters.Date);
         console.log(day);
         const scheduldePool = await pool
             .request()

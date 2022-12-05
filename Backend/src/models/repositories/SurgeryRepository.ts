@@ -1,9 +1,9 @@
-const config = require('../config/mssql/userConnection.js');
+const config = require('../../config/mssql/userConnection.js');
 import sql from 'mssql';
 import { getSurgeryPrameters } from '../classes/Interfaces';
 import Surgery from '../classes/Surgery';
 
-import { createIDwithUUIDV4 } from '../utils/idHelpers';
+import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 const VetRepository = require('../repositories/VetRepository');
 const AnimalRepository=require('../repositories/AnimalRepository');
 

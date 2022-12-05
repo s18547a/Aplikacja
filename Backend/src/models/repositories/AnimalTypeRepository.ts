@@ -1,5 +1,5 @@
 import AnimalType from '../classes/AnimalType';
-const config = require('../config/mssql/userConnection.js');
+const config = require('../../config/mssql/userConnection.js');
 const sql = require('mssql');
 
 exports.getAnimalTypes = async (parameters: {

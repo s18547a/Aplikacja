@@ -1,4 +1,4 @@
-const UserRepository = require('../repositories/UserRepository');
+const UserRepository = require('../models/repositories/UserRepository');
 import config from '../utils/auth/key';
 
 const jwt = require('jsonwebtoken');

@@ -1,10 +1,10 @@
-import Animal from '../classes/Animal';
-import { AnimalParametersType } from '../classes/Interfaces';
-import AnimalMedicalInfo from '../classes/AnimalMedicalInfo';
-const AnimalRepository = require('../repositories/AnimalRepository.ts');
-const AnimalTypeRepository = require('../repositories/AnimalTypeRepository');
-const AnimalMedicalInfoRepository=require('../repositories/AnimalMedicalInfoRepository');
-const AnimalIllnessRepository=require('../repositories/AnimalIllnessRepository');
+import Animal from '../models/classes/Animal';
+import { AnimalParametersType } from '../models/classes/Interfaces';
+import AnimalMedicalInfo from '../models/classes/AnimalMedicalInfo';
+const AnimalRepository = require('../models/repositories/AnimalRepository.ts');
+const AnimalTypeRepository = require('../models/repositories/AnimalTypeRepository');
+const AnimalMedicalInfoRepository=require('../models/repositories/AnimalMedicalInfoRepository');
+const AnimalIllnessRepository=require('../models/repositories/AnimalIllnessRepository');
 
 
 export const getAnimal=async(req,res)=>{

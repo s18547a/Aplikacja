@@ -1,6 +1,6 @@
-import { getSurgeryPrameters } from '../classes/Interfaces';
+import { getSurgeryPrameters } from '../models/classes/Interfaces';
 
-const SurgeryRepository = require('../repositories/SurgeryRepository');
+const SurgeryRepository = require('../models/repositories/SurgeryRepository');
 import express from 'express';
 const router = express.Router();
 

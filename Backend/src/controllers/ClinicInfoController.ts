@@ -1,4 +1,4 @@
-const ClinicInfoRepository = require('../repositories/ClinicInfoRepository');
+const ClinicInfoRepository = require('../models/repositories/ClinicInfoRepository');
 
 
 export const getClinicSchedulde =async (req, res) => {

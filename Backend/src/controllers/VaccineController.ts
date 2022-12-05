@@ -1,5 +1,5 @@
 
-const VaccineRepository=require('../repositories/VaccineRepository');
+const VaccineRepository=require('../models/repositories/VaccineRepository');
 
 
 export const getAnimalCoreVaccineTypes=async(req,res)=>{

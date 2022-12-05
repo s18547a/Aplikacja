@@ -1,11 +1,11 @@
-const config = require('../config/mssql/userConnection.js');
+const config = require('../../config/mssql/userConnection.js');
 import sql from 'mssql';
 import { GetOwnerParamters } from '../classes/Interfaces';
 import Owner from '../classes/Owner';
-import { createIDwithUUIDV4 } from '../utils/idHelpers';
-import { validateContact } from '../utils/validator';
+import { createIDwithUUIDV4 } from '../../utils/idHelpers';
+import { validateContact } from '../../utils/validator';
 
-const authUtils = require('../utils/auth/authUtils');
+import {hashPassword} from '../../utils/auth/authUtils';
 const SharedRepository = require('./SharedRepository');
 
 
@@ -102,7 +102,7 @@ exports.registerOwner = async (owner) => {
 
 
 
-        const hashedPassword = authUtils.hashPassword(Password);
+        const hashedPassword = hashPassword(Password);
         // let hashedPassword = Password;
 
         const emailExists = await SharedRepository.emailExists(Email);

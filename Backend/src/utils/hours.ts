@@ -1,4 +1,4 @@
-exports.createVetVisitHours = (Hours:string) => {
+export function createVetVisitHours(Hours:string){
     const beginEndHours = Hours.split('-');
 
     const startHour = Number(beginEndHours[0].split(':')[0]);
@@ -18,4 +18,4 @@ exports.createVetVisitHours = (Hours:string) => {
         }
     }
     return times;
-};
+}

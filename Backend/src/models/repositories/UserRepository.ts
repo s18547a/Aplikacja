@@ -1,4 +1,4 @@
-const config = require('../config/mssql/userConnection.js');
+const config = require('../../config/mssql/userConnection.js');
 import sql from 'mssql';
 import User from '../classes/User';
 

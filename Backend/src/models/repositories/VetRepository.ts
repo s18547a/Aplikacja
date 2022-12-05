@@ -1,12 +1,13 @@
-const config = require('../config/mssql/userConnection.js');
+const config = require('../../config/mssql/userConnection.js');
 
-const dateHelper=require('../utils/dateHelper');
 import Vet from '../classes/Vet';
 
-import { createIDwithUUIDV4 } from '../utils/idHelpers';
+import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import { GetVetParameters } from '../classes/Interfaces';
-import { validateContact } from '../utils/validator';
-const authUtils = require('../utils/auth/authUtils');
+import { validateContact } from '../../utils/validator';
+import { hashPassword } from '../../utils/auth/authUtils';
+import { getDayOfAWeekName } from '../../utils/dateHelper';
+
 const SharedRepository = require('./SharedRepository');
 const VetScheduldeRepository=require('./VetScheduldeRepository');
 const VetTypeRepository=require('./VetTypeRepository');
@@ -64,7 +65,7 @@ exports.getVets = async (parameters: GetVetParameters) => {
         const pool = await sql.connect(config);
 
         if (parameters.Date) {
-            const newDate = dateHelper.getDayOfAWeekName(parameters.Date);
+            const newDate =getDayOfAWeekName(parameters.Date);
 
             const vetPool = await pool
                 .request()
@@ -141,7 +142,7 @@ exports.registerVet = async (vet) => {
         const ProfileImage: string | null = vet.ProfileImage;
         const VetType: string[] = vet.VetType;
 
-        const hashedPassword = authUtils.hashPassword(Password);
+        const hashedPassword = hashPassword(Password);
         
 
         const emailExists = await SharedRepository.emailExists(Email);
