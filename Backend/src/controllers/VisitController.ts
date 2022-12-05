@@ -1,8 +1,8 @@
 import { GetVisitPrarameters } from '../classes/Interfaces';
 
 
-const VisitRepository = require('../repositories/visitRepositories/VisitRepository');
-const VisitMedicalActivitiesRepository=require('../repositories/visitRepositories/MedicalActivityRepository');
+const VisitRepository = require('../repositories/VisitRepository');
+const VisitMedicalActivitiesRepository=require('../repositories/MedicalActivityRepository');
 
 
 export const getVisit=async (req, res) => {

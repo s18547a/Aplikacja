@@ -1,4 +1,4 @@
-const config = require('../services/userConnection');
+const config = require('../config/mssql/userConnection.js');
 
 import sql from 'mssql';
 import { GetReservationParameters } from '../classes/Interfaces';
@@ -7,7 +7,7 @@ import Reservation from '../classes/Reservation';
 import Vet from '../classes/Vet';
 import { createIDwithUUIDV4 } from '../utils/idHelpers';
 
-const VetRepository = require('../repositories/vetRepositories/VetRepository');
+const VetRepository = require('../repositories/VetRepository');
 const OwnerRepository = require('../repositories/OwnerRepository');
 
 

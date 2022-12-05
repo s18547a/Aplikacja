@@ -1,4 +1,4 @@
-const config = require('../services/UserConnection');
+const config = require('../config/mssql/userConnection.js');
 import sql from 'mssql';
 import { GetOwnerParamters } from '../classes/Interfaces';
 import Owner from '../classes/Owner';

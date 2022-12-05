@@ -3,7 +3,7 @@ import Vaccination from '../classes/Vaccination';
 import VaccineType from '../classes/VaccineType';
 
 
-const config = require('../services/userConnection');
+const config = require('../config/mssql/userConnection.js');
 const sql = require('mssql');
 
 

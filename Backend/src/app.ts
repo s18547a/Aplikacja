@@ -1,31 +1,33 @@
-import createError from 'http-errors';
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const cors = require('cors');
 
-const userRouter = require('./routers/UserRouter');
-
-const ownerRouter = require('./routers/OwnerRouter');
-
-const animalRouter = require('./routers/AnimalRouter');
-
-const reservationRouter = require('./routers/ReservationRouter');
-
-const visitRouter = require('./routers/VisitRouter');
-
-const vetRouter = require('./routers/VetRouter');
-
-const surgeryRouter = require('./routers/SurgeryRouter');
-
-const vaccineRouter =require('./routers/VaccineRouter');
-
-const clinicInfoRouter=require('./routers/ClinicInfoRouter');
 
 // eslint-disable-next-line require-jsdoc
 export default function() {
-    const app = express();
+
+   
+    const {createError} =require('http-errors');
+    const express = require('express');
+    const path = require('path');
+    const cookieParser = require('cookie-parser');
+    const logger = require('morgan');
+    const cors = require('cors');
+    
+    const userRouter = require('./routers/UserRouter');
+    
+    const ownerRouter = require('./routers/OwnerRouter');
+    
+    const animalRouter = require('./routers/AnimalRouter');
+    
+    const reservationRouter = require('./routers/ReservationRouter');
+    
+    const visitRouter = require('./routers/VisitRouter');
+    
+    const vetRouter = require('./routers/VetRouter');
+    
+    const surgeryRouter = require('./routers/SurgeryRouter');
+    
+    const vaccineRouter =require('./routers/VaccineRouter');
+    
+    const clinicInfoRouter=require('./routers/ClinicInfoRouter');    const app = express();
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'jade');
     app.use(logger('dev'));
@@ -44,7 +46,6 @@ export default function() {
     app.use('/owners', ownerRouter);
 
     app.use('/animals', animalRouter);
-
 
     app.use('/reservations', reservationRouter);
 

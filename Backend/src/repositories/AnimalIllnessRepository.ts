@@ -1,7 +1,7 @@
-import Illness from '../../classes/Illness';
-import { IllnessCuredParameters } from '../../classes/Interfaces';
+import Illness from '../classes/Illness';
+import { IllnessCuredParameters } from '../classes/Interfaces';
 
-const config = require('../../services/userConnection');
+const config = require('../config/mssql/userConnection.js');
 const sql = require('mssql');
 
 

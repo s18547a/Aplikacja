@@ -1,13 +1,13 @@
-const config = require('../../services/UserConnection');
+const config = require('../config/mssql/userConnection.js');
 
-const dateHelper=require('../../utils/dateHelper');
-import Vet from '../../classes/Vet';
+const dateHelper=require('../utils/dateHelper');
+import Vet from '../classes/Vet';
 
-import { createIDwithUUIDV4 } from '../../utils/idHelpers';
-import { GetVetParameters } from '../../classes/Interfaces';
-import { validateContact } from '../../utils/validator';
-const authUtils = require('../../utils/auth/authUtils');
-const SharedRepository = require('./../SharedRepository');
+import { createIDwithUUIDV4 } from '../utils/idHelpers';
+import { GetVetParameters } from '../classes/Interfaces';
+import { validateContact } from '../utils/validator';
+const authUtils = require('../utils/auth/authUtils');
+const SharedRepository = require('./SharedRepository');
 const VetScheduldeRepository=require('./VetScheduldeRepository');
 const VetTypeRepository=require('./VetTypeRepository');
 const sql = require('mssql');

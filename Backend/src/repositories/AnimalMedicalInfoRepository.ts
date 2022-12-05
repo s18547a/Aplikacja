@@ -1,5 +1,5 @@
-import AnimalMedicalInfo from '../../classes/AnimalMedicalInfo';
-const config = require('../../services/userConnection');
+import AnimalMedicalInfo from '../classes/AnimalMedicalInfo';
+const config = require('../config/mssql/userConnection.js');
 const sql = require('mssql');
 
 

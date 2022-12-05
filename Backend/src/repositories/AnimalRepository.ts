@@ -1,7 +1,7 @@
-import Animal,{Sex} from '../../classes/Animal';
-import { AnimalParametersType } from '../../classes/Interfaces';
-import { createIDwithUUIDV4 } from '../../utils/idHelpers';
-const config = require('../../services/userConnection');
+import Animal,{Sex} from '../classes/Animal';
+import { AnimalParametersType } from '../classes/Interfaces';
+import { createIDwithUUIDV4 } from '../utils/idHelpers';
+const config = require('../config/mssql/userConnection.js');
 const sql = require('mssql');
 
 const AnimalTypeRepository=require('./AnimalTypeRepository');

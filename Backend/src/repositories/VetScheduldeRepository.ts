@@ -1,9 +1,9 @@
-import { GetScheduldeParamters } from '../../classes/Interfaces';
-import { createVatAvailableHours } from '../../utils/createVetAvailableHours';
-const dateHelper=require('../../utils/dateHelper');
+import { GetScheduldeParamters } from '../classes/Interfaces';
+import { createVatAvailableHours } from '../utils/createVetAvailableHours';
+const dateHelper=require('../utils/dateHelper');
 
 const sql = require('mssql');
-const config = require('../../services/userConnection');
+const config = require('../config/mssql/userConnection.js');
 exports.getSchedulde = async (VetId: string) => {
     try {
         const pool = await sql.connect(config);

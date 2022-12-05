@@ -3,9 +3,9 @@ import { GetScheduldeParamters, GetVetParameters } from '../classes/Interfaces';
 
 import Schedulde from '../classes/Schedulde';
 
-const VetRepository = require('../repositories/vetRepositories/VetRepository');
-const VetScheduldeRepository=require('../repositories/vetRepositories/VetScheduldeRepository');
-const VetTypeRepository=require('../repositories/vetRepositories/vetTypeRepository');
+const VetRepository = require('../repositories/VetRepository');
+const VetScheduldeRepository=require('../repositories/VetScheduldeRepository');
+const VetTypeRepository=require('../repositories/vetTypeRepository');
 
 
 export const getVet= async (req, res) => {

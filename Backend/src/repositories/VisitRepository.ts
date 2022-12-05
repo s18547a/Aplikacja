@@ -1,16 +1,16 @@
-const config = require('../../services/userConnection');
+const config = require('../config/mssql/userConnection.js');
 const sql = require('mssql');
-import Animal from '../../classes/Animal';
-import { GetVisitPrarameters } from '../../classes/Interfaces';
-import Vet from '../../classes/Vet';
+import Animal from '../classes/Animal';
+import { GetVisitPrarameters } from '../classes/Interfaces';
+import Vet from '../classes/Vet';
 
-import Visit from '../../classes/Visit';
-import { createIDwithUUIDV4 } from '../../utils/idHelpers';
+import Visit from '../classes/Visit';
+import { createIDwithUUIDV4 } from '../utils/idHelpers';
 
-const AnimalRepository = require('../../repositories/animalRepositories/AnimalRepository');
-const VetRepository = require('../../repositories/vetRepositories/VetRepository');
+const AnimalRepository = require('../repositories/AnimalRepository');
+const VetRepository = require('../repositories/VetRepository');
 const VisitMedicalActivitiesRepository=require('./MedicalActivityRepository');
-const ReservationRepository=require('../ReservationRepository');
+const ReservationRepository=require('../repositories/ReservationRepository');
 exports.getVisit=async(VisitId)=>{
 
 
