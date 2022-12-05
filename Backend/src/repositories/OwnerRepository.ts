@@ -93,25 +93,26 @@ exports.registerOwner = async (owner) => {
     try {
         const pool = await sql.connect(config);
         const transaction = new sql.Transaction(pool);
+        const UserId: string = createIDwithUUIDV4();
+        const Email: string = owner.Email;
+        const Password: string | null = owner.Password;
+        const Name: string = owner.Name;
+        const LastName: string = owner.LastName;
+        const Contact: string = validateContact(owner.Contact);
+
+
+
+        const hashedPassword = authUtils.hashPassword(Password);
+        // let hashedPassword = Password;
+
+        const emailExists = await SharedRepository.emailExists(Email);
+      
+        if (emailExists) {
+            return null;
+        }
    
         try{
-            const UserId: string = createIDwithUUIDV4();
-            const Email: string = owner.Email;
-            const Password: string | null = owner.Password;
-            const Name: string = owner.Name;
-            const LastName: string = owner.LastName;
-            const Contact: string = validateContact(owner.Contact);
-    
-  
-  
-            const hashedPassword = authUtils.hashPassword(Password);
-            // let hashedPassword = Password;
-  
-            const emailExists = await SharedRepository.emailExists(Email);
-          
-            if (emailExists) {
-                return null;
-            }
+        
     
             await transaction.begin();
             const results = await new sql.Request(transaction)
@@ -148,9 +149,12 @@ exports.registerOwner = async (owner) => {
             return Error('');
         }
   
-    } catch (error: unknown) {
-        console.log(error);
+    } catch (error:any) {
 
+        console.log(error);
+        if(error.message=='validationError'){
+            return null;
+        }
         return error;
     }
 };

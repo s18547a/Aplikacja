@@ -5,6 +5,7 @@ import Vet from '../../classes/Vet';
 
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import { GetVetParameters } from '../../classes/Interfaces';
+import { validateContact } from '../../utils/validator';
 const authUtils = require('../../utils/auth/authUtils');
 const SharedRepository = require('./../SharedRepository');
 const VetScheduldeRepository=require('./VetScheduldeRepository');
@@ -130,28 +131,30 @@ exports.getVets = async (parameters: GetVetParameters) => {
 
 exports.registerVet = async (vet) => {
     try {
+        const VetId: string = createIDwithUUIDV4();
+        const Email: string = vet.Email;
+        const Password: string | null = vet.Password;
+        const Name: string = vet.Name;
+        const LastName: string = vet.LastName;
+        const Contact: string =validateContact(vet.Contact);
+        const HireDate: string = vet.HireDate;
+        const ProfileImage: string | null = vet.ProfileImage;
+        const VetType: string[] = vet.VetType;
+
+        const hashedPassword = authUtils.hashPassword(Password);
+        
+
+        const emailExists = await SharedRepository.emailExists(Email);
+        console.log(emailExists);
+        if (emailExists) {
+            return null;
+        }
         const pool = await sql.connect(config);
         const transaction = new sql.Transaction(pool);
+        
 
         try {
-            const VetId: string = createIDwithUUIDV4();
-            const Email: string = vet.Email;
-            const Password: string | null = vet.Password;
-            const Name: string = vet.Name;
-            const LastName: string = vet.LastName;
-            const Contact: string = vet.Contact;
-            const HireDate: string = vet.HireDate;
-            const ProfileImage: string | null = vet.ProfileImage;
-            const VetType: string[] = vet.VetType;
-
-            const hashedPassword = authUtils.hashPassword(Password);
-            // const hashedPassword = Password;
-
-            const emailExists = await SharedRepository.emailExists(Email);
-            console.log(emailExists);
-            if (emailExists) {
-                return null;
-            }
+         
 
             //    let registerOwnerPool=await pool.request()
           
@@ -211,7 +214,10 @@ exports.registerVet = async (vet) => {
             pool.close();
             throw Error('');
         }
-    } catch (error) {
+    } catch (error:any) {
+        if(error.message=='validationError'){
+            return null;
+        }
         console.log(error);
         return error;
     }
@@ -221,27 +227,28 @@ exports.registerVet = async (vet) => {
 exports.updateVet=async(Vet)=>
 {
     try {
-        console.log(Vet);
+        const VetId:string=Vet.VetId;
+        const Name:string=Vet.Name;
+        const LastName=Vet.LastName;
+        const Email=Vet.Email;
+        const Contact=validateContact(Vet.Contact);
+        const HireDate=Vet.HireDate;
+        const ProfileImage=Vet.ProfileImage;
+        const OldEmail=Vet.OldEmail;
+        const VetTypes=Vet.VetType;
+        if(OldEmail!=Email){
+            const emailExists = await SharedRepository.emailExists(Email);
+            console.log(emailExists);
+            if (emailExists) {
+                return null;
+            }
+        }
         const pool = await sql.connect(config);
+
         const transaction = await new sql.Transaction(pool);
         try{
            
-            const VetId:string=Vet.VetId;
-            const Name:string=Vet.Name;
-            const LastName=Vet.LastName;
-            const Email=Vet.Email;
-            const Contact=Vet.Contact;
-            const HireDate=Vet.HireDate;
-            const ProfileImage=Vet.ProfileImage;
-            const OldEmail=Vet.OldEmail;
-            const VetTypes=Vet.VetType;
-            if(OldEmail!=Email){
-                const emailExists = await SharedRepository.emailExists(Email);
-                console.log(emailExists);
-                if (emailExists) {
-                    return null;
-                }
-            }
+        
          
             await transaction.begin();
             let results = await new sql.Request(transaction)
@@ -303,7 +310,10 @@ exports.updateVet=async(Vet)=>
         }
 
 
-    } catch (error) {
+    } catch (error:any) {
+        if(error.message=='validationError'){
+            return null;
+        }
         console.log(error);
         return error;
 
