@@ -1,6 +1,6 @@
 import { getVetTypesParameters } from '../../classes/Interfaces';
 const sql = require('mssql');
-const config = require('../../db/UserConnection');
+const config = require('../../services/UserConnection');
 exports.getVetTypes=async(parameters:getVetTypesParameters)=>{
     try {
         const returnList=true;

@@ -1,5 +1,5 @@
 import MedicalActivity from '../../classes/MedicalActivity';
-const config = require('../../db/userConnection');
+const config = require('../../services/userConnection');
 const sql = require('mssql');
 
 

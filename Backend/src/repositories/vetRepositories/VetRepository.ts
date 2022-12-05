@@ -1,11 +1,11 @@
-const config = require('../../db/UserConnection');
+const config = require('../../services/UserConnection');
 
-const dateHelper=require('../../helpers/dateHelper');
+const dateHelper=require('../../utils/dateHelper');
 import Vet from '../../classes/Vet';
 
-import { createIDwithUUIDV4 } from '../../helpers/idHelpers';
+import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import { GetVetParameters } from '../../classes/Interfaces';
-const authUtils = require('../../auth/authUtils');
+const authUtils = require('../../utils/auth/authUtils');
 const SharedRepository = require('./../SharedRepository');
 const VetScheduldeRepository=require('./VetScheduldeRepository');
 const VetTypeRepository=require('./VetTypeRepository');

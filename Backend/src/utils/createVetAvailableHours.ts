@@ -1,7 +1,7 @@
 import { createSurgeryAvailableHours, getBusyNextHourFromSurgery } from './createSurgeryAvailableHours';
 
 
-const {createVetVisitHours} = require('../helpers/hours');
+const {createVetVisitHours} = require('../utils/hours');
 const ReservationRepository =require('../repositories/ReservationRepository');
 
 const SurgeryRepository = require('../repositories/SurgeryRepository');

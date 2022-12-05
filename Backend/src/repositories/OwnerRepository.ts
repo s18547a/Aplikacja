@@ -1,10 +1,11 @@
-const config = require('../db/UserConnection');
+const config = require('../services/UserConnection');
 import sql from 'mssql';
 import { GetOwnerParamters } from '../classes/Interfaces';
 import Owner from '../classes/Owner';
-import { createIDwithUUIDV4 } from '../helpers/idHelpers';
+import { createIDwithUUIDV4 } from '../utils/idHelpers';
+import { validateContact } from '../utils/validator';
 
-const authUtils = require('../auth/authUtils');
+const authUtils = require('../utils/auth/authUtils');
 const SharedRepository = require('./SharedRepository');
 
 
@@ -99,7 +100,7 @@ exports.registerOwner = async (owner) => {
             const Password: string | null = owner.Password;
             const Name: string = owner.Name;
             const LastName: string = owner.LastName;
-            const Contact: string = owner.Contact;
+            const Contact: string = validateContact(owner.Contact);
     
   
   

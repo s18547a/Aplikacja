@@ -1,7 +1,7 @@
 import Illness from '../../classes/Illness';
 import { IllnessCuredParameters } from '../../classes/Interfaces';
 
-const config = require('../../db/userConnection');
+const config = require('../../services/userConnection');
 const sql = require('mssql');
 
 

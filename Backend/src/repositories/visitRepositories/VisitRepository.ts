@@ -1,13 +1,11 @@
-const config = require('../../db/userConnection');
+const config = require('../../services/userConnection');
 const sql = require('mssql');
 import Animal from '../../classes/Animal';
 import { GetVisitPrarameters } from '../../classes/Interfaces';
-import MedicalActivity from '../../classes/MedicalActivity';
 import Vet from '../../classes/Vet';
 
 import Visit from '../../classes/Visit';
-import { getCurrentDate } from '../../helpers/dateHelper';
-import { createIDwithUUIDV4 } from '../../helpers/idHelpers';
+import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 
 const AnimalRepository = require('../../repositories/animalRepositories/AnimalRepository');
 const VetRepository = require('../../repositories/vetRepositories/VetRepository');

@@ -1,5 +1,5 @@
 export{};
-const config = require('../db/userConnection');
+const config = require('../services/userConnection');
 const sql = require('mssql');
 
 exports.emailExists = async (Email: string) => {

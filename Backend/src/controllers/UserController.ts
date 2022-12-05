@@ -1,5 +1,5 @@
 const UserRepository = require('../repositories/UserRepository');
-import config from '../auth/key';
+import config from '../utils/auth/key';
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');

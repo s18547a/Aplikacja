@@ -1,9 +1,9 @@
-const config = require('../db/UserConnection');
+const config = require('../services/UserConnection');
 import sql from 'mssql';
 import { getSurgeryPrameters } from '../classes/Interfaces';
 import Surgery from '../classes/Surgery';
 
-import { createIDwithUUIDV4 } from '../helpers/idHelpers';
+import { createIDwithUUIDV4 } from '../utils/idHelpers';
 const VetRepository = require('../repositories/vetRepositories/VetRepository');
 const AnimalRepository=require('../repositories/animalRepositories/AnimalRepository');
 

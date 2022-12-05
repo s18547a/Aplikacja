@@ -1,4 +1,4 @@
-const config = require('../db/UserConnection');
+const config = require('../services/UserConnection');
 const sql = require('mssql');
 
 function getScheduldeEarliestHour(daySchedulde: string[]) {

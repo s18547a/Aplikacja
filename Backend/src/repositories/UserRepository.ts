@@ -1,4 +1,4 @@
-const config = require('../db/userConnection');
+const config = require('../services/userConnection');
 import sql from 'mssql';
 import User from '../classes/User';
 

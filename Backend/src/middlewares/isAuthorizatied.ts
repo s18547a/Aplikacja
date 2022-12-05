@@ -1,5 +1,5 @@
 const jwt =require('jsonwebtoken');
-const configAuthKey = require('../auth/key');
+const configAuthKey = require('../utils/auth/key');
 export const isAuthorizated=async(req,res,next)=>{
 
     const authHeader= req.headers['authorization'];
