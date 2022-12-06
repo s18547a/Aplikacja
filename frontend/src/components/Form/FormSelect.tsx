@@ -7,7 +7,7 @@ function FormSelect(props) {
     <div className="form-group  ">
       <div className="row">
         <div className="col-lg-3 col-md-12">
-          <label htmlFor="exampleDataListA" className="form-label fw-bold">
+          <label htmlFor="exampleDataListA" className="form-label ">
             {props.label}
           </label>
         </div>

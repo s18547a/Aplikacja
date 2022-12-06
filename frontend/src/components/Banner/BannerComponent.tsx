@@ -50,8 +50,8 @@ function BannerComponent(props) {
           />
       
         <nav
-          className="nav navbar-dark  sticky-top shadow"
-          style={{ background: "#3373C4", height: "75px" , width:"100%"}}
+          className="nav navbar-dark shadow "
+          style={{ background: "#3373C4", height: "75px" , width:"100%", }}
         >
           <div className="row justify-content-between" style={{width:"100%"}}>
           <div className="col-6 ">
@@ -64,19 +64,14 @@ function BannerComponent(props) {
           </div>
           <div className="col-6 row justify-content-end">
           
-              <div className="col-auto align-self-center">
-                <div className="row ">
-                  <div className="col-6 ">
-                    <h6 style={{ color: "white" }}>
-                      <p>{getCurrentUser().Email}</p>
-                    </h6>
-                  </div>
-                  </div>
-                  <div className="row">
-                  <div className="col-6">
-                    <h6 style={{ color: "white" }}>{getUserName()}</h6>
-                  </div>
+              <div className="col-auto align-self-center ">
+             
+                <div className="d-flex flex-column">
+
+                <p className="text-white">{`Użytkownik: ${getUserName()}`}</p>
+                <p className=" text-white dis">{`Email: ${getCurrentUser().Email}`}</p>
                 </div>
+                  
               </div>
               <div className="col-auto align-self-center">{logoutBtn}</div>
           

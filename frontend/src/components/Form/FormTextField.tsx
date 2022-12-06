@@ -7,7 +7,7 @@ function FormTextField(props) {
     <div className="form-group">
       <div className="row">
         <div className="col-12">
-          <label className="form-label fw-bold">
+          <label className="form-label ">
             <h5>{props.label}</h5>
           </label>
         </div>

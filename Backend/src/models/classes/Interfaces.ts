@@ -40,7 +40,7 @@ export interface GetVisitPrarameters {
     VetId: string;
    
     OwnerId: string;
-    Name: string;
+ 
   }
 
 export interface IllnessCuredParameters {

@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   getVisitList,
-  getVisitListByAnimal,
+ 
   getVisitListByOwner,
+  searchVisitList,
 } from "../../../../api/visitApiCalls";
 import Visit from "../../../../classes/Visit";
 import Pagination from "../../../List/Pagination";
@@ -11,13 +12,17 @@ import Pagination from "../../../List/Pagination";
 import RegiserSuccessInfo from "../../../List/RegisterSuccessInfo";
 import TableOrEmpty from "../../../List/TableOrEmpty";
 import { getCurrentUser } from "../../../other/authHelper";
+import { VisitListParamter } from "../../../other/helperClass/VisitListParameters";
 import { isManager, isOwner, isVet } from "../../../other/userType";
 import SearchInput from "../../Shared/SearchImput";
+import VisitSearch from "./VisitSearch";
+
+
 
 function VisitList() {
   const [visitList, setVisitList] = useState<Visit[]>([]);
   const [empty, setEmpty] = useState<boolean | undefined>(undefined);
-  const [search, setSearch] = useState("");
+
   const navigate = useNavigate();
   const [newId, setNewId] = useState("");
   const location = useLocation();
@@ -92,16 +97,12 @@ function VisitList() {
     }
   }, []);
 
-  function handleChange(e) {
-    const { name, value } = e.target;
 
-    setSearch(value);
-  }
-  async function handleSearch() {
+  async function handleSearch(paramters:VisitListParamter) {
     let results;
-    console.log(search);
-    if (search != "") {
-      await getVisitListByAnimal(search)
+
+    if (paramters.allUndefined()) {
+      await searchVisitList(paramters)
         .then((res) => {
           results = res;
           return res.json();
@@ -141,15 +142,19 @@ function VisitList() {
 
   return (
     <div className="container">
-      <RegiserSuccessInfo newId={newId} message={"Nowa wizyta: "} />
-      {
-        <SearchInput
-          onChange={handleChange}
-          handleSearch={handleSearch}
-          placeholder="Imie"
-        />
-      }
-      <div className="card card-body shadow mt-5">
+ 
+      <div className="row">
+      <RegiserSuccessInfo newId={newId} message={"Nowa wizyta: "} />       
+      </div>
+      <div className="row align-items-center">
+        <div className="col-12">
+        <VisitSearch onSearch={handleSearch} />
+        </div>
+    
+      </div>
+      <div className="row">
+        <div className="col-12">
+        <div className="card card-body shadow mt-5">
         <h5 className="card-title">Wizyty</h5>
         <TableOrEmpty Empty={empty}>
           <table className="table table-hover ">
@@ -188,6 +193,13 @@ function VisitList() {
         setSelectedPage={setSelectedPage}
         />
    
+        </div>
+        
+      
+
+      </div>
+       
+      
     </div>
   );
 }

@@ -6,6 +6,7 @@ import Vet from '../classes/Vet';
 
 import Visit from '../classes/Visit';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
+import { createVisitSearchQueryString } from '../../utils/queryStringHelpers';
 
 const AnimalRepository = require('../repositories/AnimalRepository');
 const VetRepository = require('../repositories/VetRepository');
@@ -62,7 +63,7 @@ exports.getVisits = async (parameters: GetVisitPrarameters) => {
    
         const pool = await sql.connect(config);
         let visitRecordset;
-        if ( !parameters.AnimalId &&!parameters.VetId &&!parameters.OwnerId && !parameters.Name
+        if ( !parameters.AnimalId &&!parameters.VetId &&!parameters.OwnerId 
         ) {
             const visitsPool = await pool.request().query('Select * From Visit Order By Date DESC');
             visitRecordset = visitsPool.recordset;
@@ -91,15 +92,6 @@ exports.getVisits = async (parameters: GetVisitPrarameters) => {
                 );
             visitRecordset = visitsPool.recordset;
       
-        } else if (parameters.Name) {
-            const visitsPool = await pool
-                .request()
-
-                .query(
-                    `Select VisitId, Date,Hour,v.Note,a.AnimalId, v.VetId, v.Bill , a.Name as 'AnimalName',vt.Name as 'VetName',vt.LastName as 'VetLastName' From Visit v join Animal a  on v.AnimalId=a.AnimalId join Vet vt on v.VetId=vt.VetId  Where a.Name like '${parameters.Name}%' order by Date DESC`
-                );
-            visitRecordset = visitsPool.recordset;
-   
         } 
 
         let isEmpty: boolean;
@@ -143,6 +135,63 @@ exports.getVisits = async (parameters: GetVisitPrarameters) => {
         return error;
     }
 };
+
+exports.searchVisits=async(parameters)=>{
+    try {
+      
+        
+        const queryString=createVisitSearchQueryString(parameters);
+        console.log(queryString);
+        const pool = await sql.connect(config);
+        const visitsPool = await pool.request()
+           
+            // eslint-disable-next-line quotes
+            .query(`Select visit.VisitId , visit.VetId, visit.AnimalId, visit.Date, visit.Hour, visit.Note, visit.Bill, animal.Name, us.Email  From Visit visit join Animal animal on visit.AnimalId=animal.AnimalId  join Vet vet on visit.VetId=vet.VetId join [User] us on vet.VetId=us.VetId ${queryString}  order by Date DESC`);
+        const visitRecordset = visitsPool.recordset;
+       
+
+        let isEmpty: boolean;
+
+        visitRecordset[0] == undefined ? (isEmpty = true) : (isEmpty = false);
+        if (isEmpty) {
+            pool.close();
+            return null;
+        } else {
+      
+
+            const  visits = await Promise.all(
+                visitRecordset.map(async (visit) => {
+          
+                    const visitMedicalActivies =await VisitMedicalActivitiesRepository.getVisitMedicalActivies(visit.VisitId);
+
+                    const visitVet: Vet = await VetRepository.getVet( visit.VetId);
+                    const visitAnimal: Animal = await AnimalRepository.getAnimal(visit.AnimalId);
+
+                    return new Visit(
+                        visit.VisitId,
+                        visit.VetId,
+                        visit.AnimalId,
+                        visit.Date.toISOString().split('T')[0],
+                        visit.Hour,
+                        visit.Note,
+                        visit.Bill,
+                        visitMedicalActivies,
+                        visitVet,
+                        visitAnimal
+                    );
+                })
+            );
+    
+
+    
+            return visits;
+        }
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
+
 
 exports.createVisit = async (Visit) => {
     try {

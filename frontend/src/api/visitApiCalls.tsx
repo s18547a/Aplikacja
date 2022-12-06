@@ -1,3 +1,5 @@
+import { VisitListParamter } from "../components/other/helperClass/VisitListParameters";
+
 const baseURL = "http://localhost:8000/visits";
 
 export async function getVisitList() {
@@ -21,8 +23,11 @@ export async function getVisitById(VisitId) {
   return promise;
 }
 
-export async function getVisitListByAnimal(Name) {
-  const url = `${baseURL}?Name=${Name}`;
+export async function searchVisitList(paramters:VisitListParamter) {
+  const queryURL=paramters.createURLString();
+  console.log(queryURL)
+  const url = `${baseURL}/search${paramters.createURLString()}`;
+  
   const promise = await fetch(url);
 
   return promise;

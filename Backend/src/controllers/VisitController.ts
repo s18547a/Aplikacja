@@ -21,8 +21,9 @@ export const getVisits=async (req, res) => {
     const parameters: GetVisitPrarameters = {
         AnimalId: req.query.AnimalId as any,
         VetId: req.query.VetId as any,   
-        OwnerId: req.query.OwnerId as any,
-        Name: req.query.Name as any,
+        OwnerId: req.query.OwnerId as any
+      
+        
     };
 
     const results = await VisitRepository.getVisits(parameters);
@@ -33,6 +34,27 @@ export const getVisits=async (req, res) => {
         return res.status(404).json({});
     } else return res.status(200).json(results);
 };
+
+export const searchVisits=async(req,res)=>{
+    const parameters={
+        Email:req.query.Email,
+        Name:req.query.Name,
+        Date:req.query.Date,
+        OwnerId:req.query.OwnerId,
+      
+    };
+
+    const results= await VisitRepository.searchVisits(parameters);
+
+    if (results instanceof Error) {
+        return res.status(500).json({});
+    } else if (!results || null) {
+        return res.status(404).json({});
+    } else return res.status(200).json(results);
+
+};
+
+
 
 export const registerVisit= async (req, res) => {
     const Visist = req.body;

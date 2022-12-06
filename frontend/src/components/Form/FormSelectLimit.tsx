@@ -7,7 +7,7 @@ function FormSelectLimit(props) {
     <div className="row">
       <div className="col-12">
         <div className="col-lg-3 col-md-12">
-          <label htmlFor="exampleDataListA" className="form-label fw-bold">
+          <label htmlFor="exampleDataListA" className="form-label ">
             {props.label}
           </label>
         </div>
