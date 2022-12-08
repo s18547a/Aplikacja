@@ -4,7 +4,7 @@ function SearchButton(props){
 
     return <button
     type="submit"
-    className="btn btn-outline-primary bg-primary text-white d-flex align-items-center"
+    className="btn btn-outline-primary bg-primary text-white d-flex align-items-center btn-sm"
    
   >
     <Search className="me-2"/>

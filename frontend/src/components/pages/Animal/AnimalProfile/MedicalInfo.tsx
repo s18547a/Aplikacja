@@ -24,7 +24,7 @@ function MedicalInfo(props) {
 
   return (
     <div className="row justify-content-center">
-      <div className="col-10">
+      <div className="col-8">
         <div className="container  border-0 ">
           <div className="row ">
             {showBtn}

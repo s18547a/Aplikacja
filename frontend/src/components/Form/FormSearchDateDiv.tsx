@@ -19,14 +19,14 @@ function FormSearchDateDiv(props) {
     <div className="form-group">
       <div className="d-flex align-items-center">
        
-          <label className="form-label me-3">{props.label}</label>
+        
       
 
       
               <DatePicker
                   className={"form-select form-select-sm"}
                 onChange={onChange}
-               
+                placeholderText={props.label}
                 locale={pl}
                 name={props.name}
                 value={props.value}

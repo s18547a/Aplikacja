@@ -1,14 +1,15 @@
 import express from 'express';
+import VetController from '../controllers/VetController';
 const router = express.Router();
-const VetController = require('../controllers/VetController');
-
-router.get('/types',VetController.getVetTypes);
-router.get('/:VetId',VetController.getVet);
-router.get('/',VetController.getVets);
-router.post('/',VetController.registerVet);
-router.get('/schedulde/availableHours',VetController.getAvailableHours);
-router.get('/:VetId/schedulde',VetController.getVetSchedulde);
-router.get('/:VetId/daysOfWeek',VetController.getVetDaysOfWeek);
-router.put('/schedulde', VetController.updateSchedulde);
-router.put('/',VetController.updateVet);
+//const VetController = require('../controllers/VetController');
+const vetController=new VetController();
+router.get('/types',vetController.getVetTypes);
+router.get('/:VetId',vetController.getVet);
+router.get('/',vetController.getVets);
+router.post('/',vetController.registerVet);
+router.get('/schedulde/availableHours',vetController.getAvailableHours);
+router.get('/:VetId/schedulde',vetController.getVetSchedulde);
+router.get('/:VetId/daysOfWeek',vetController.getVetDaysOfWeek);
+router.put('/schedulde', vetController.updateSchedulde);
+router.put('/',vetController.updateVet);
 module.exports=router;

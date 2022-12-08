@@ -1,15 +1,38 @@
 import express from 'express';
+import AnimalController from '../controllers/AnimalController';
 const router = express.Router();
-const AnimalController=require('../controllers/AnimalController.ts');
+//const AnimalController=require('../controllers/AnimalController.ts');
 
 const {isAuthorizated} = require('../middlewares/isAuthorizatied');
-router.get('/types', AnimalController.getAnimalTypes);
-router.get('/:AnimalId', AnimalController.getAnimal);
-router.get('/', AnimalController.getAnimals);
-router.post('/', isAuthorizated,AnimalController.registerAnimal);
-router.put('/', isAuthorizated, AnimalController.updateAnimal);
-router.get('/:AnimalId/illnesses', AnimalController.getIllnesses);
-router.put('/illnesses', AnimalController.updateIllness);
-router.get('/:AnimalId/medicalInfo', AnimalController.getMedicalInfo);
-router.put('/medicalInfo', AnimalController.updateMedicalInfo);
+
+
+
+   
+const animalController=new AnimalController();
+   
+    
+    
+router.get('/types', animalController.getAnimalTypes);
+    
+router.get('/:AnimalId', animalController.getAnimal);
+    
+router.get('/', animalController.getAnimals);
+    
+router.post('/', isAuthorizated, animalController.registerAnimal);
+    
+router.put('/', isAuthorizated,  animalController.updateAnimal);
+    
+router.get('/:AnimalId/illnesses',  animalController.getIllnesses);
+    
+router.put('/illnesses',  animalController.updateIllness);
+    
+router.get('/:AnimalId/medicalInfo',  animalController.getMedicalInfo);
+    
+router.put('/medicalInfo',  animalController.updateMedicalInfo);
+ 
+
+
+
+
 module.exports=router;
+

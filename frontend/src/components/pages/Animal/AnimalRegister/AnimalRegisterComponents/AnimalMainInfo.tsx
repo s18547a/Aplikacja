@@ -85,6 +85,7 @@ function AnimalMainInfo(props: {
             arrayIsObjectList={true}
             dataListOptions="Animals"
             selectedValue={props.animal.AnimalTypeId}
+            disabled={props.editForm}
           />
         </div>
         <div className="col-12">{isOwner() ? null : ownerField}</div>

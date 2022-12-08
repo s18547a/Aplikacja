@@ -3,7 +3,7 @@ function FormSearchDiv(props) {
       <div className="form-group">
         <div className="align-items-center d-flex ">
          
-            <label className="form-label me-3">{props.label}</label>
+          
          
   
           
@@ -13,7 +13,7 @@ function FormSearchDiv(props) {
                   name={props.name}
                   onChange={props.onChange}
                   value={props.value}
-                  placeholder={props.placeholder}
+                  placeholder={props.label}
                   min={props.min}
                   disabled={props.disabled}
                   step={props.type == "number" ? 0.01 : undefined}

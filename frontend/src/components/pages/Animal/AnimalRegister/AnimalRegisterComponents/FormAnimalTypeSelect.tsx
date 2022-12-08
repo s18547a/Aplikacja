@@ -23,6 +23,7 @@ function FormAnimalTypeSelect(props) {
                 name="AnimalTypeId"
                 onChange={onChange}
                 defaultValue={props.selectedValue}
+                disabled={props.disabled}
               />
               <datalist id={props.dataListOptions}>
                 {props.animalTypes.map((element) => {

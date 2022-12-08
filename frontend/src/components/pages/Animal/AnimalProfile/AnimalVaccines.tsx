@@ -3,11 +3,11 @@ import TableOrEmpty from "../../../List/TableOrEmpty";
 
 function AnimalVaccines(props) {
   return (
-    <div className="row">
-      <div className="col-8">
+    <div className="row justify-content-center">
+      <div className="col-6 offset-2">
     <div className="card card-body border-0 mt-8 shadow">
       <div className="row">
-        <div className="col-lg-9 ">
+        <div className="col-lg-12 ">
           <div className="card-title">
             <h5>Historia szczepień</h5>
           </div>
@@ -43,26 +43,22 @@ function AnimalVaccines(props) {
     <div className="col-4">
     <div className="card card-body border-0 mt-8 shadow">
           <div className="card-title">
-            <h5 className=" text-danger">Szczepienia obowiazkowe</h5>
+            <h5 className=" text-danger">Wymagane szczepienia</h5>
           </div>
           {props.coreList.length != 0 ? (
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>{"Szczepionka"}</th>
-                </tr>
-              </thead>
+            <ul className=" list-group">
+              
 
-              <tbody>
+            
                 {props.coreList.map((vaccine) => {
                   return (
-                    <tr>
-                      <td>{vaccine.VaccineType}</td>
-                    </tr>
+                  
+                      <li className=" list-group-item">{vaccine.VaccineType}</li>
+                    
                   );
                 })}
-              </tbody>
-            </table>
+              
+            </ul>
           ) : (
             <div className="alert-success fw-bold">
               <div>Wykonano wszystkie obowiązkowe</div>

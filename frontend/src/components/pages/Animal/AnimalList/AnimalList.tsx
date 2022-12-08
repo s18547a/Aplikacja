@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   getAnimals,
   getAnimalsbyOwner,
@@ -12,14 +12,14 @@ import RegiserSuccessInfo from "../../../List/RegisterSuccessInfo";
 import TableOrEmpty from "../../../List/TableOrEmpty";
 import { getCurrentUser } from "../../../other/authHelper";
 import { isManager, isOwner, isVet } from "../../../other/userType";
-import SearchInput from "../../Shared/SearchImput";
+import AnimalSearch from "./AnimalSearch";
 
 function AnimalList() {
   const [animals, setAnimalList] = useState<Animal[]>([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [empty, setEmpty] = useState<boolean>(false);
-  const [search, setSearch] = useState("");
+
   const location = useLocation();
   const [newId, setNewId] = useState("");
 
@@ -93,16 +93,12 @@ function AnimalList() {
     }
   }, []);
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setSearch(value);
-  }
-  async function handleSearch() {
+  
+  async function handleSearch(Email) {
     let results;
-    console.log(search);
-    if (search != "") {
-      await getAnimalsByOwnerEmail(search)
+  
+    if (Email!= "") {
+      await getAnimalsByOwnerEmail(Email)
         .then((res) => {
           results = res;
           return res.json();
@@ -129,43 +125,18 @@ function AnimalList() {
   
   const changePage=(e)=>{
     e.preventDefault();
-    const {name,value}=e.target;
+    const {value}=e.target;
     setSelectedPage(value)
 
 
   }
 
-  const serchDiv = (
-    
-      <div className="input-group justify-content-center">
-        <div className="row">
-          <div className="col-12 ">
-            <div className="input-group">
-              <input
-                onChange={handleChange}
-                className="form-control rounded"
-                placeholder="Email właściciela"
-                aria-label="Search"
-                aria-describedby="search-addon"
-              />
-              <button
-                type="button"
-                className="btn btn-outline-primary bg-white"
-                onClick={handleSearch}
-              >
-                Szukaj
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-  );
+ 
 
   return (
     <div className="container">
       <RegiserSuccessInfo newId={newId} message={"Zarejestrowane zwierzę: "} />
-      {isVet() ? <SearchInput handleSearch={handleSearch} onChange={handleChange} placeholder={'Email właściela'}/> : null}
+      {isVet() ? <AnimalSearch onSearch={handleSearch}/> : null}
       <div className="card card-body mt-4 shadow">
         <h5>Zwierzęta</h5>
         <div>

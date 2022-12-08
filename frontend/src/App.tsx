@@ -30,7 +30,7 @@ import VetProfile from "./components/pages/Vet/VetProfile/VetProfile";
 import VetScheduldeForm from "./components/pages/Vet/VetRegister/VetScheduldeForm";
 import SideBar from "./components/Navigation/SideBarComponent";
 import HomePage from "./components/pages/Unlogged/HomePage";
-import MedicalInfoForm from "./components/pages/Animal/AnimalRegister/AnimalRegisterComponents/MedicalInfoForm";
+import MedicalInfoForm from "./components/pages/Animal/AnimalRegister/AnimalMedicalInfoEdit/MedicalInfoForm";
 import SurgeryList from "./components/pages/Surgery/SurgeryList/SurgeryList";
 import SurgeryProfile from "./components/pages/Surgery/SurgeryProfile/SurgeryProfile";
 import NotFoundPage from "./components/pages/General/NotFoundPage";

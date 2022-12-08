@@ -4,14 +4,14 @@ function AnimalProfileNav(props) {
   }
 
   return (
-    <ul className="nav nav-pills border-0 row justify-content-center mb-3" >
+    <ul className="nav nav-pills border-0 row justify-content-center mb-5" >
       <div className="col-lg-auto ">
         <li className="nav-item">
           <button
-            className={props.activeTab == "" ? "nav-link active " : "nav-link"}
+            className={props.activeTab == "" ? "nav-link active" : "nav-link"}
             value={""}
             onClick={setSelectedTabFunction}
-            style={{"fontWeight":"bold"}}
+          
           >
             Profil
           </button>
@@ -25,7 +25,7 @@ function AnimalProfileNav(props) {
             }
             value={"ill"}
             onClick={setSelectedTabFunction}
-            style={{"fontWeight":"bold"}}
+         
           >
             Choroby
           </button>
@@ -39,7 +39,7 @@ function AnimalProfileNav(props) {
             }
             value={"add"}
             onClick={setSelectedTabFunction}
-            style={{"fontWeight":"bold"}}
+          
           >
             Informacje medyczne
           </button>
@@ -53,7 +53,7 @@ function AnimalProfileNav(props) {
             }
             value={"vacc"}
             onClick={setSelectedTabFunction}
-            style={{"fontWeight":"bold"}}
+         
           >
             Szczepienia
           </button>

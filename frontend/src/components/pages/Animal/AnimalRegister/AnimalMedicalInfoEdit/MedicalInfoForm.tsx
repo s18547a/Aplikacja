@@ -99,7 +99,8 @@ function MedicalInfoForm(props) {
         <div className="col-12 mt-5" style={{ overflowY: "scroll", height: "80vh" }}>
           <div className="row justify-content-between">
            
-              <div className="col-3">
+          <div className="row">
+           <div className="col-3">
                 <FormDiv
                 label="Waga"
                 onChange={handleChange}
@@ -158,6 +159,8 @@ function MedicalInfoForm(props) {
               />
           
             </div>
+
+    </div>
             
 
           

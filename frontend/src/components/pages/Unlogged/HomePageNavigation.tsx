@@ -10,7 +10,7 @@ function HomePageNavigation(props) {
           className={props.selected == "login" ? "nav-link active" : "nav-link"}
           value="login"
           onClick={onChangeTab}
-          style={{"fontWeight":"bold"}}
+          
         >
           Logowanie
         </button>
@@ -20,7 +20,7 @@ function HomePageNavigation(props) {
           className={props.selected == "sch" ? "nav-link active" : "nav-link"}
           value="sch"
           onClick={onChangeTab}
-          style={{"fontWeight":"bold"}}
+       
         >
           Godziny otwarcia
         </button>
@@ -30,7 +30,7 @@ function HomePageNavigation(props) {
         className={props.selected=="register"?"nav-link active" :"nav-link"}
         value="register"
         onClick={onChangeTab}
-        style={{"fontWeight":"bold"}}
+     
         >
           Zarejestruj
         </button>

@@ -1,7 +1,9 @@
 import express from 'express';
+import OwnerController from '../controllers/OwnerController';
 const router = express.Router();
-const OwnerController = require('../controllers/OwnerController');
-router.get('/:OwnerId', OwnerController.getOwner);
-router.get('/', OwnerController.getOwners);
-router.post('/',OwnerController.registerOwner);
+//const OwnerController = require('../controllers/OwnerController');
+const ownerController=new OwnerController();
+router.get('/:OwnerId', ownerController.getOwner);
+router.get('/', ownerController.getOwners);
+router.post('/',ownerController.registerOwner);
 module.exports=router;
