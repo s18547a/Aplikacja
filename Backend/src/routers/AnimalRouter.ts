@@ -1,14 +1,22 @@
 import express from 'express';
 import AnimalController from '../controllers/AnimalController';
+import AnimalIllnessRepository from '../models/repositories/AnimalIllnessRepository';
+import AnimalMedicalInfoRepository from '../models/repositories/AnimalMedicalInfoRepository';
+import AnimalRepostiory from '../models/repositories/AnimalRepository';
+import AnimalTypeRepository from '../models/repositories/AnimalTypeRepository';
+
 const router = express.Router();
 //const AnimalController=require('../controllers/AnimalController.ts');
 
 const {isAuthorizated} = require('../middlewares/isAuthorizatied');
 
+const animalTypeRepository=new AnimalTypeRepository();
+const animalRepository=new AnimalRepostiory(animalTypeRepository);
 
-
+const animalMedicalInfoRepository=new AnimalMedicalInfoRepository();
+const animalIllnessRepository=new AnimalIllnessRepository();
    
-const animalController=new AnimalController();
+const animalController=new AnimalController(animalRepository,animalTypeRepository,animalMedicalInfoRepository,animalIllnessRepository);
    
     
     

@@ -1,14 +1,19 @@
 import { getSurgeryPrameters } from '../models/classes/Interfaces';
 
-const SurgeryRepository = require('../models/repositories/SurgeryRepository');
-import express from 'express';
-const router = express.Router();
+//const SurgeryRepository = require('../models/repositories/SurgeryRepository');
+
+
 
 class SurgeryController{
-    async getSurgery(req,res){
+    surgeryRepository;
+
+    constructor(surgeryRepository){
+        this.surgeryRepository=surgeryRepository;
+    }
+    getSurgery=async(req,res)=>{
 
         const SurgeryId:string=req.params.SurgeryId;
-        const results= await SurgeryRepository.getSurgery(SurgeryId);
+        const results= await this.surgeryRepository.getSurgery(SurgeryId);
       
         if (results instanceof Error) {
             return res.status(500).json({});
@@ -17,15 +22,15 @@ class SurgeryController{
             return res.status(404).json({});
         } else return res.status(200).json(results);
     
-    }
+    };
     
-    async getSurgeries (req, res) {
+    getSurgeries= async (req, res)=>{
         const parameters: getSurgeryPrameters = { 
             OwnerId:req.query.OwnerId as any ,
             VetId:req.query.VetId as any,
             Date:req.query.Date as any
         };
-        const results = await SurgeryRepository.getSurgeries(parameters);
+        const results = await this.surgeryRepository.getSurgeries(parameters);
     
         if (results instanceof Error) {
             return res.status(500).json({});
@@ -33,47 +38,47 @@ class SurgeryController{
         if (results == null) {
             return res.status(404).json({});
         } else return res.status(200).json(results);
-    }
+    };
     
-    async getSurgeryTypes (req, res) {
-        const results = await SurgeryRepository.getSurgeryTypes();
+    getSurgeryTypes=async(req, res)=>{
+        const results = await this.surgeryRepository.getSurgeryTypes();
         if (results instanceof Error) {
             return res.status(500).json({});
         } else return res.status(200).json(results);
-    }
+    };
     
-    async registerSurgery(req,res){
+    registerSurgery=async(req,res)=>{
         const surgery=req.body;
     
-        const results = await SurgeryRepository.registerSurgery(surgery);
+        const results = await this.surgeryRepository.registerSurgery(surgery);
     
         if(results instanceof Error){
             return res.status(500).json(results);
         }
         else return res.status(201).json({newId:results});
     
-    }
+    };
     
-    async updateSurgeryReport(req,res){
+    updateSurgeryReport=async(req,res)=>{
         const surgeryReport=req.body;
     
-        const results = await SurgeryRepository.updateSurgeryReport(surgeryReport);
+        const results = await this.surgeryRepository.updateSurgeryReport(surgeryReport);
         if(results instanceof Error){
             return res.status(500).json(results);
         }
         else return res.status(201).json({});
-    }
+    };
     
-    async deleteSurgery(req,res){
+    deleteSurgery=async(req,res)=>{
         const SurgeryId=req.params.SurgeryId;
     
-        const results =await SurgeryRepository.deleteSurgery(SurgeryId);
+        const results =await this.surgeryRepository.deleteSurgery(SurgeryId);
         if(results instanceof Error){
             return res.status(500).json(results);
         }
         else return res.status(201).json({deletedId:results});
     
-    }
+    };
     
 }
 

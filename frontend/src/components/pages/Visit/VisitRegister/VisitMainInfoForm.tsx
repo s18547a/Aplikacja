@@ -30,6 +30,8 @@ function VisitMainInfoForm(props) {
             onChange={onChangeOwner}
             error={props.error.OwnerId}
             selectedValue={props.visit.OwnerId}
+            editForm={props.editForm}
+            
           />
         </div>
         <div className="row">
@@ -38,6 +40,7 @@ function VisitMainInfoForm(props) {
             onChange={onChange}
             OwnerId={props.visit.OwnerId}
             setAPIError={setAPIError}
+          
           />
         </div>
     
@@ -50,10 +53,13 @@ function VisitMainInfoForm(props) {
             type="date"
             onChange={onChange}
             value={props.visit.Date}
+            disabled={props.editForm}
+            
           />
         </div>
-
+      
         <div className="row">
+         {/*
           <FormDiv
             label="Godzina "
             name="Hour"
@@ -61,7 +67,30 @@ function VisitMainInfoForm(props) {
             placeholder="00:00"
             onChange={onChange}
             value={props.visit.Hour}
-          />
+            disabled={props.editForm}
+          />*/}
+          <div className="form-group">
+            <div className="row">
+              <div className="col-12">
+              <div className="form-label">Godzina</div>
+              </div>
+              <div className="col-12">
+                <input className={props.error.Hour!=""?"form-control border-danger":"form-control "}
+                disabled={props.editForm}
+                name="Hour"
+                type="time"
+                onChange={onChange}
+                ></input>
+
+              </div>
+              <div className="col-12">
+              <label className="form-text text-danger ">{props.error.Hour}</label>
+            </div>
+            </div>
+          
+            
+
+          </div>
         </div>
      
 

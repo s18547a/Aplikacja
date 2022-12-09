@@ -58,7 +58,7 @@ function SelectAnimalComponent(props) {
   return (
     <div>
       <div className="form-group">
-        <div className="form-label fw-bold">Zwierzę</div>
+        <div className="form-label ">Zwierzę</div>
         {animalList.map((animal) => {
           return (
             <div className="form-check mt-3">
@@ -69,6 +69,7 @@ function SelectAnimalComponent(props) {
                 id={`${animal.AnimalId}`}
                 value={`${animal.AnimalId}`}
                 onChange={onChange}
+                
               />
               <label
                 className="form-check-label"

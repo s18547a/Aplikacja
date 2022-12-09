@@ -1,19 +1,26 @@
 import { GetReservationParameters } from '../models/classes/Interfaces';
 import Reservation from '../models/classes/Reservation';
+import ReservationRepository from '../models/repositories/ReservationRepository';
 
-const ReservationRepositoy = require('../models/repositories/ReservationRepository');
+//const ReservationRepositoy = require('../models/repositories/ReservationRepository');
 
 
 class ReservationController{
 
+    reservationRepository:ReservationRepository;
+
+    constructor(reservationRepository:ReservationRepository){
+        this.reservationRepository=reservationRepository;
+    }
+
     
-    async getReservations(req, res){
+    getReservations=async(req, res)=>{
         const parameters: GetReservationParameters = {
             VetId: req.query.VetId as any,
             Date: req.query.Date as any,
             OwnerId: req.query.OwnerId as any,
         };
-        const results = await ReservationRepositoy.getReservations(parameters);
+        const results = await this.reservationRepository.getReservations(parameters);
 
         if (results instanceof Error) {
             return res.status(500).json({});
@@ -21,12 +28,12 @@ class ReservationController{
         if (!results || results == null) {
             return res.status(404).json({});
         } else return res.status(200).json(results);
-    } 
+    } ;
 
-    async registerReservation(req, res){
+    registerReservation=async(req, res)=>{
         const reservation: Reservation = req.body;
 
-        const results = await ReservationRepositoy.createReservation(reservation);
+        const results = await this.reservationRepository.createReservation(reservation);
 
         if (results instanceof Error) {
             return res.status(500).json({ message: results });
@@ -34,10 +41,12 @@ class ReservationController{
             console.log(results);
             return res.status(201).json({ newId: results });
         }
-    }
-    async deleteReservation(req, res) {
-        const ReservationId: number = req.params.ReservationId as any;
-        const results = await ReservationRepositoy.cancelReservation(ReservationId,null);
+    };
+
+    deleteReservation=async(req, res)=>{
+        const ReservationId: string = req.params.ReservationId as any;
+
+        const results = await this.reservationRepository.cancelReservation(ReservationId,null);
 
         if (results instanceof Error) {
             return res.status(500).json({ message: results });
@@ -45,7 +54,7 @@ class ReservationController{
     
             return res.status(201).json({deletedId:results});
     
-    }
+    };
 
 
 }

@@ -1,24 +1,33 @@
 import { GetVisitPrarameters } from '../models/classes/Interfaces';
+import MedicalActivityRepository from '../models/repositories/MedicalActivityRepository';
+import VisitRepository from '../models/repositories/VisitRepository';
 
 
-const VisitRepository = require('../models/repositories/VisitRepository');
+//const VisitRepository = require('../models/repositories/VisitRepository');
 const VisitMedicalActivitiesRepository=require('../models/repositories/MedicalActivityRepository');
 
 class VisitController{
 
-    async getVisit(req, res){
+    visitRepository:VisitRepository;
+    medicalActivityRepository:MedicalActivityRepository;
+    constructor(visitRepository:VisitRepository,medicalActivityRepsoitory:MedicalActivityRepository){
+        this.visitRepository=visitRepository;
+        this.medicalActivityRepository=medicalActivityRepsoitory;
+    }
+
+    getVisit=async(req, res)=>{
         const VisitId=req.params.VisitId;
     
-        const results = await VisitRepository.getVisit(VisitId);
+        const results = await this.visitRepository.getVisit(VisitId);
     
         if (results instanceof Error) {
             return res.status(500).json({});
         } else if (!results || null) {
             return res.status(404).json({});
         } else return res.status(200).json(results);
-    }
+    };
     
-    async getVisits(req, res){
+    getVisits=async(req, res)=>{
         const parameters: GetVisitPrarameters = {
             AnimalId: req.query.AnimalId as any,
             VetId: req.query.VetId as any,   
@@ -27,16 +36,16 @@ class VisitController{
             
         };
     
-        const results = await VisitRepository.getVisits(parameters);
+        const results = await this.visitRepository.getVisits(parameters);
     
         if (results instanceof Error) {
             return res.status(500).json({});
         } else if (!results || null) {
             return res.status(404).json({});
         } else return res.status(200).json(results);
-    }
+    };
     
-    async searchVisits(req,res){
+    searchVisits=async(req,res)=>{
         const parameters={
             Email:req.query.Email,
             Name:req.query.Name,
@@ -45,7 +54,7 @@ class VisitController{
           
         };
     
-        const results= await VisitRepository.searchVisits(parameters);
+        const results= await this.visitRepository.searchVisits(parameters);
     
         if (results instanceof Error) {
             return res.status(500).json({});
@@ -53,24 +62,25 @@ class VisitController{
             return res.status(404).json({});
         } else return res.status(200).json(results);
     
-    }
+    };
     
     
     
-    async registerVisit(req, res){
+    registerVisit=async(req, res)=>{
         const Visist = req.body;
-        const results = await VisitRepository.createVisit(Visist);
+        const results = await this.visitRepository.createVisit(Visist);
         if (results instanceof Error) {
             return res.status(500).json({});
         } else return res.status(201).json({ newId: results });
-    }
-    async getVisitActivities(req, res){
+    };
+
+    getVisitActivities=async(req, res)=>{
         const results = await VisitMedicalActivitiesRepository.getMedicalActivities();
     
         if (results instanceof Error) {
             return res.status(500).json({ results });
         } else return res.status(200).json(results);
-    }
+    };
     
 
 }

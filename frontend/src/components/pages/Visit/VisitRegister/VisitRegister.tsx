@@ -94,7 +94,7 @@ function VisitRegister() {
     };
     if (state) {
       setReservedId(state.ReservationId);
-
+      setRealised(true);
       setVisit((prev) => ({
         ...prev,
         Date: state.Date,
@@ -103,7 +103,7 @@ function VisitRegister() {
       }));
     }
   }, []);
-
+  const [realised,setRealised]=useState(false);
   const [reservedId, setReservedId] = useState("");
 
   function onChange(e) {
@@ -324,6 +324,8 @@ function VisitRegister() {
                 setAPIError={setAPIError}
                 error={error}
                 visit={visit}
+                editForm={realised}
+                
               />
             </div>
           </div>

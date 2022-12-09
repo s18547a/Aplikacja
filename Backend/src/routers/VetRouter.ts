@@ -1,8 +1,15 @@
 import express from 'express';
 import VetController from '../controllers/VetController';
+import VetRepository from '../models/repositories/VetRepository';
+import VetScheduldeRepository from '../models/repositories/VetScheduldeRepository';
+import VetTypeRepository from '../models/repositories/VetTypeRepository';
 const router = express.Router();
 //const VetController = require('../controllers/VetController');
-const vetController=new VetController();
+const vetTypeRepository=new VetTypeRepository();
+const vetRepository=new VetRepository(vetTypeRepository);
+const vetScheduldeRepository=new VetScheduldeRepository();
+const vetController=new VetController(vetRepository,vetTypeRepository,vetScheduldeRepository);
+
 router.get('/types',vetController.getVetTypes);
 router.get('/:VetId',vetController.getVet);
 router.get('/',vetController.getVets);

@@ -1,12 +1,19 @@
+import VaccineRepository from '../models/repositories/VaccineRepository';
 
-const VaccineRepository=require('../models/repositories/VaccineRepository');
+//const VaccineRepository=require('../models/repositories/VaccineRepository');
 interface getVaccineTypesParameters{unAdministratedAnimalId:string}
 class VaccineController{
-    async getAnimalCoreVaccineTypes(req,res){
+
+    vaccineRepository:VaccineRepository;
+    constructor(vaccineReposity:VaccineRepository){
+        this.vaccineRepository=vaccineReposity;
+    }
+
+    getAnimalCoreVaccineTypes=async(req,res)=>{
 
         const AnimalId:string=req.params.AnimalId;
     
-        const results = await VaccineRepository.getAnimalCoreVaccineTypes(AnimalId);
+        const results = await this.vaccineRepository.getAnimalCoreVaccineTypes(AnimalId);
     
         if(results instanceof Error){
     
@@ -18,14 +25,14 @@ class VaccineController{
         else return res.status(200).json(results);
     
     
-    }
+    };
     
-    async getAnimalVaccines(req,res){
+    getAnimalVaccines=async(req,res)=>{
     
         const AnimalId:string=req.params.AnimalId;
         const UnusedVaccines=req.params.UnusedVaccines;
     
-        const results= await VaccineRepository.getAnimalVaccines(AnimalId);
+        const results= await this.vaccineRepository.getAnimalVaccines(AnimalId);
     
         if(results instanceof Error){
     
@@ -36,17 +43,17 @@ class VaccineController{
         }
         else return res.status(200).json(results);
     
-    }
+    };
     
   
     
-    async getVaccineTypes(req,res){
+    getVaccineTypes=async(req,res)=>{
     
     
         const parameters:getVaccineTypesParameters={ unAdministratedAnimalId:req.query.unAdministratedAnimalId};
         console.log(parameters);
        
-        const results = await VaccineRepository.getVaccineTypes(parameters);
+        const results = await this.vaccineRepository.getVaccineTypes(parameters);
     
         if(results instanceof Error){
     
@@ -58,7 +65,7 @@ class VaccineController{
         }
         else return res.status(200).json(results);
     
-    }
+    };
 
 }
 export default VaccineController;

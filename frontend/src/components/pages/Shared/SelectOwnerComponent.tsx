@@ -49,6 +49,7 @@ function SelectOwnerComponent(props) {
       arrayIsObjectList={true}
       selectedValue={props.selectedValue}
       dataListOptions="Owners"
+      disabled={props.editForm}
     />
   );
 }

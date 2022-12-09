@@ -1,5 +1,5 @@
-const UserRepository = require('../models/repositories/UserRepository');
-import User from '../models/classes/User';
+
+import UserRepository from '../models/repositories/UserRepository';
 import config from '../utils/auth/key';
 
 const jwt = require('jsonwebtoken');
@@ -22,11 +22,16 @@ enum UserType {
 
 class UserController{
 
-    async login(req,res){
+    userRepository;
+    constructor(userRepository:UserRepository){
+        this.userRepository=userRepository;
+    }
+
+    login=async(req,res)=>{
         const Email: string = req.body.Email;
         const Password: string = req.body.Password;
 
-        const user = await UserRepository.getUserByEmail(Email);
+        const user = await this.userRepository.getUserByEmail(Email);
         console.log(user);
 
         if (user == null) {
@@ -79,7 +84,7 @@ class UserController{
   
         }
 
-    }
+    };
 }
 export default UserController;
 /*

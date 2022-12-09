@@ -1,11 +1,16 @@
-const ClinicInfoRepository = require('../models/repositories/ClinicInfoRepository');
+import ClinicInfoRepository from '../models/repositories/ClinicInfoRepository';
+
+//const ClinicInfoRepository = require('../models/repositories/ClinicInfoRepository');
 
 class ClinicInfoController{
 
-  
+    clinicInfoRepository:ClinicInfoRepository;
+    constructor(clinicInfoSchedule){
+        this.clinicInfoRepository=clinicInfoSchedule;
+    }
     
     async getClinicSchedulde(req,res){
-        const results = await ClinicInfoRepository.getClinicSchedulde();
+        const results = await this.clinicInfoRepository.getClinicSchedulde();
         if (results instanceof Error) {
             return res.status(500).json({});
         } else {
