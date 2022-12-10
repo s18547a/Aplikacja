@@ -6,6 +6,7 @@ import MedicalActivityRepository from '../models/repositories/MedicalActivityRep
 import OwnerRepository from '../models/repositories/OwnerRepository';
 import ReservationRepository from '../models/repositories/ReservationRepository';
 import VetRepository from '../models/repositories/VetRepository';
+import VetScheduldeRepository from '../models/repositories/VetScheduldeRepository';
 import VetTypeRepository from '../models/repositories/VetTypeRepository';
 import VisitRepository from '../models/repositories/VisitRepository';
 const router = express.Router();
@@ -13,7 +14,8 @@ const router = express.Router();
 const animalTypeRepository=new AnimalTypeRepository();
 const animalRepository=new AnimalRepostiory(animalTypeRepository);
 const vetTypeRepository=new VetTypeRepository();
-const vetRepository=new VetRepository(vetTypeRepository);
+const vetScheduldeRepository=new VetScheduldeRepository();
+const vetRepository=new VetRepository(vetTypeRepository,vetScheduldeRepository);
 const medicalActivityRepository=new MedicalActivityRepository();
 const ownerRepository=new OwnerRepository();
 const reservationRepository=new ReservationRepository(ownerRepository,vetRepository);

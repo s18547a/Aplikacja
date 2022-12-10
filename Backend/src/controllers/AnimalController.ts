@@ -2,14 +2,10 @@ import Animal from '../models/classes/Animal';
 import { AnimalParametersType } from '../models/classes/Interfaces';
 import AnimalMedicalInfo from '../models/classes/AnimalMedicalInfo';
 import AnimalRepostiory from '../models/repositories/AnimalRepository';
-//import AnimalType from '../models/classes/AnimalType';
+
 import AnimalTypeRepository from '../models/repositories/AnimalTypeRepository';
 import AnimalMedicalInfoRepository from '../models/repositories/AnimalMedicalInfoRepository';
 import AnimalIllnessRepository from '../models/repositories/AnimalIllnessRepository';
-//const AnimalRepository = require('../models/repositories/AnimalRepository.ts');
-//const AnimalTypeRepository = require('../models/repositories/AnimalTypeRepository');
-//const AnimalMedicalInfoRepository=require('../models/repositories/AnimalMedicalInfoRepository');
-//const AnimalIllnessRepository=require('../models/repositories/AnimalIllnessRepository');
 
 class AnimalController{
     

@@ -1,14 +1,9 @@
 import Animal,{Sex} from '../classes/Animal';
 import { AnimalParametersType } from '../classes/Interfaces';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
-//import AnimalTypeRepository from './AnimalTypeRepository';
-//import AnimalType from '../classes/AnimalType';
+
 const config = require('../../config/mssql/userConnection.js');
 const sql = require('mssql');
-
-//const AnimalTypeRepository=require('./AnimalTypeRepository');
-//const AnimalMedicalInfoRepository=require('./AnimalMedicalInfoRepository');
-
 
 class AnimalRepostiory{
 

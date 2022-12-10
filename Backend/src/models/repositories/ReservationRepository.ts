@@ -8,8 +8,7 @@ import Vet from '../classes/Vet';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import OwnerRepository from './OwnerRepository';
 
-const VetRepository = require('../repositories/VetRepository');
-//const OwnerRepository = require('../repositories/OwnerRepository');
+
 
 class ReservationRepository{
 

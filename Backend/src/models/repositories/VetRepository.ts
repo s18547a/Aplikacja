@@ -8,17 +8,20 @@ import { validateContact } from '../../utils/validator';
 import { hashPassword } from '../../utils/auth/authUtils';
 import { getDayOfAWeekName } from '../../utils/dateHelper';
 import VetTypeRepository from './VetTypeRepository';
+import VetScheduldeRepository from './VetScheduldeRepository';
 
 const SharedRepository = require('./SharedRepository');
-const VetScheduldeRepository=require('./VetScheduldeRepository');
 //const VetTypeRepository=require('./VetTypeRepository');
 const sql = require('mssql');
 
 class VetRepository{
 
+   
     vetTypeRepository;
-    constructor(vetTypeRepository:VetTypeRepository){
+    vetScheduldeRepository;
+    constructor(vetTypeRepository:VetTypeRepository,vetScheduldeRepository:VetScheduldeRepository){
         this.vetTypeRepository=vetTypeRepository;
+        this.vetScheduldeRepository=vetScheduldeRepository;
 
     }
         
@@ -204,7 +207,7 @@ class VetRepository{
                     }
                 }
 
-                const createScheduldeResults = await VetScheduldeRepository.createSchedulde(
+                const createScheduldeResults = await this.vetScheduldeRepository.createSchedulde(
                     VetId,
                     transaction
                 );

@@ -5,9 +5,11 @@ import VetScheduldeRepository from '../models/repositories/VetScheduldeRepositor
 import VetTypeRepository from '../models/repositories/VetTypeRepository';
 const router = express.Router();
 //const VetController = require('../controllers/VetController');
+
 const vetTypeRepository=new VetTypeRepository();
-const vetRepository=new VetRepository(vetTypeRepository);
+
 const vetScheduldeRepository=new VetScheduldeRepository();
+const vetRepository=new VetRepository(vetTypeRepository,vetScheduldeRepository);
 const vetController=new VetController(vetRepository,vetTypeRepository,vetScheduldeRepository);
 
 router.get('/types',vetController.getVetTypes);

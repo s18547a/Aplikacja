@@ -12,10 +12,6 @@ import VetRepository from './VetRepository';
 import MedicalActivityRepository from './MedicalActivityRepository';
 import ReservationRepository from './ReservationRepository';
 
-//const AnimalRepository = require('../repositories/AnimalRepository');
-//const VetRepository = require('../repositories/VetRepository');
-//const VisitMedicalActivitiesRepository=require('./MedicalActivityRepository');
-//const ReservationRepository=require('../repositories/ReservationRepository');
 
 class VisitRepository{
     animalRepository;

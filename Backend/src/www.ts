@@ -4,7 +4,7 @@ const debug = require('debug')('backend:server');
 const http = require('http');
 import makeApp from './app';
 
-const app = makeApp();
+const app = makeApp(null);
 const port = normalizePort(process.env.PORT || '8000');
 app.set('port', port);
 
