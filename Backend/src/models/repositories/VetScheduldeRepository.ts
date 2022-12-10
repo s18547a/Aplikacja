@@ -1,15 +1,20 @@
 import { GetScheduldeParamters } from '../classes/Interfaces';
-import { createVatAvailableHours } from '../../utils/createVetAvailableHours';
+
 import { getDayOfAWeekName } from '../../utils/dateHelper';
 import Repository from './Repository';
+import ReservationRepository from './ReservationRepository';
+import ScheduldeHelperRepository from './ScheduldeHelperRepository';
 
 
 const sql = require('mssql');
 
 class VetScheduldeRepository extends Repository{
 
-    constructor(db){
+    scheduldeHelperRepository;  
+    constructor(db,scheduldeHelperRepository:ScheduldeHelperRepository){
         super(db);
+        this.scheduldeHelperRepository=scheduldeHelperRepository;
+        
     }
     
     getSchedulde = async (VetId: string) => {
@@ -69,27 +74,7 @@ class VetScheduldeRepository extends Repository{
         }
     };
   
-    createSchedulde = async (VetId: string, transaction) => {
-        try {
-            const vetId: string = VetId;
-  
-            //            const pool = await sql.connect(config)
-            const results = await new sql.Request(transaction)
-                .input('VetId', sql.VarChar, vetId)
-                .query(
-                    'Insert Into Schedulde(VetId,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) values (@VetId,null,null,null,null,null,null,null)'
-                );
-  
-            const rowsAffected = results.rowsAffected[0];
-            if (rowsAffected != 1) {
-                throw Error('');
-            } else return VetId;
-        } catch (error) {
-            console.log(error);
-  
-            return error;
-        }
-    };
+    
   
     updateSchedulde = async (schedulde) => {
         try {
@@ -154,7 +139,7 @@ class VetScheduldeRepository extends Repository{
                 return null;
             } else {
 
-                const results= await  createVatAvailableHours(scheduldeRecordset,paramters);
+                const results= await this.scheduldeHelperRepository.createVatAvailableHours(scheduldeRecordset,paramters);
 
                 return results;
          

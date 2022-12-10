@@ -144,6 +144,7 @@ function VetForm() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(vet);
+    
     if (validateForm()) {
       
       let response;

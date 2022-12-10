@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 
 
 import Vet from '../classes/Vet';
@@ -20,11 +21,11 @@ class VetRepository extends Repository{
 
    
     vetTypeRepository;
-    vetScheduldeRepository;
-    constructor(db,vetTypeRepository:VetTypeRepository,vetScheduldeRepository:VetScheduldeRepository){
+   
+    constructor(db,vetTypeRepository:VetTypeRepository){
         super(db);
         this.vetTypeRepository=vetTypeRepository;
-        this.vetScheduldeRepository=vetScheduldeRepository;
+      
 
     }
         
@@ -210,7 +211,7 @@ class VetRepository extends Repository{
                     }
                 }
 
-                const createScheduldeResults = await this.vetScheduldeRepository.createSchedulde(
+                const createScheduldeResults = await this.createVetSchedulde(
                     VetId,
                     transaction
                 );
@@ -336,8 +337,30 @@ class VetRepository extends Repository{
         }
     };
 
-}
+    createVetSchedulde = async (VetId: string, transaction) => {
+        try {
+            const vetId: string = VetId;
+    
+            //            const pool = await sql.connect(config)
+            const results = await new sql.Request(transaction)
+                .input('VetId', sql.VarChar, vetId)
+                .query(
+                    'Insert Into Schedulde(VetId,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) values (@VetId,null,null,null,null,null,null,null)'
+                );
+    
+            const rowsAffected = results.rowsAffected[0];
+            if (rowsAffected != 1) {
+                throw Error('');
+            } else return VetId;
+        } catch (error) {
+            console.log(error);
+    
+            return error;
+        }
+    };
 
+}
+    
 
 export default VetRepository;
 

@@ -15,6 +15,7 @@ import ClinicInfoRepository from './models/repositories/ClinicInfoRepository';
 import MedicalActivityRepository from './models/repositories/MedicalActivityRepository';
 import OwnerRepository from './models/repositories/OwnerRepository';
 import ReservationRepository from './models/repositories/ReservationRepository';
+import ScheduldeHelperRepository from './models/repositories/ScheduldeHelperRepository';
 import SurgeryRepository from './models/repositories/SurgeryRepository';
 import UserRepository from './models/repositories/UserRepository';
 import VaccineRepository from './models/repositories/VaccineRepository';
@@ -64,16 +65,30 @@ export default function(db) {
     const animalRepository=new AnimalRepostiory(db,animalTypeRepository);
     const animalMedicalInfoRepository=new AnimalMedicalInfoRepository(db);
     const animalIllnessRepository=new AnimalIllnessRepository(db);
+ 
     const clinicInfoRepository=new ClinicInfoRepository(db);
     const ownerRepository=new OwnerRepository(db);
     const vetTypeRepository=new VetTypeRepository(db);
-    const vetScheduldeRepository=new VetScheduldeRepository(db);
-    const vetRepository=new VetRepository(db,vetTypeRepository,vetScheduldeRepository);
-    const reservationRepository=new ReservationRepository(db,ownerRepository,vetRepository);
-    const medicalActivityRepository=new MedicalActivityRepository(db);
-    const visitRepository=new VisitRepository(db,animalRepository,vetRepository,medicalActivityRepository,reservationRepository);
-    const userRepository= new UserRepository(db);
+    const vetRepository=new VetRepository(db,vetTypeRepository);    
     const surgeryRepository=new SurgeryRepository(db,animalRepository,vetRepository);
+    const reservationRepository=new ReservationRepository(db,ownerRepository,vetRepository);
+    const scheduldeHelperRepository=new ScheduldeHelperRepository(db,reservationRepository,surgeryRepository);
+    const vetScheduldeRepository=new VetScheduldeRepository(db,scheduldeHelperRepository);
+
+   
+ 
+
+ 
+    
+   
+    
+   
+    const medicalActivityRepository=new MedicalActivityRepository(db);
+   
+    const userRepository= new UserRepository(db);
+
+    
+    const visitRepository=new VisitRepository(db,animalRepository,vetRepository,medicalActivityRepository,reservationRepository);
     const vaccineRepository=new VaccineRepository(db);
     //controllers
     const animalController=new AnimalController(animalRepository,animalTypeRepository,animalMedicalInfoRepository,animalIllnessRepository);
@@ -95,6 +110,8 @@ export default function(db) {
     const userRouter=new UserRouter(userController);
     const surgeryRouter=new SurgeryRouter(surgeryController);
     const vaccineRouter=new VaccineRouter(vaccineController);
+
+
     app.use('/users', userRouter.router);
 
     app.use('/owners', ownerRouter.router);

@@ -40,6 +40,9 @@ export async function registerVet(Vet) {
     },
     body: vet,
   };
+  const promise = await fetch(baseUrl, options);
+
+  return promise;
 }
   export async function updateVet(Vet) {
     const vet = JSON.stringify(Vet);

@@ -1,45 +1,46 @@
-var app = require("../src/app.ts");
+const app = require('../src/app.ts');
 
-var supertest = require('supertest')
+const supertest = require('supertest');
 
-describe("POST",()=>{
+describe('POST',()=>{
 
 
-    it("User have proper creditiental",async()=>{
+    it('User have proper creditiental',async()=>{
         const userCreditientals={
-            "Email":"jsmith@gmail.com",
-            "Password":"pass"
-        }
+            'Email':'testManager@gmail.com',
+            'Password':'pass'
+        };
 
         const response = 
-        await supertest(app).post("/users").send(userCreditientals);
+        await supertest(app).post('/users').send(userCreditientals);
 
-        expect(response.status).toBe(200)
+        expect(response.status).toBe(200);
         
 
-    })
+    });
 
-    it("User does not exists in database",async()=>{
+    it('User does not exists in database',async()=>{
         const userCreditientals={
-            "Email":"jsmit",
-            "Password":"pas"
-        }
+            'Email':'jsmit',
+            'Password':'pass'
+        };
 
         const response = 
-        await supertest(app).post("/users").send(userCreditientals);
+        await supertest(app).post('/users').send(userCreditientals);
 
-        expect(response.status).toBe(404)
-    })
+        expect(response.status).toBe(404);
+    });
 
-    it("Wrong password",async()=>{
+    it('Wrong password',async()=>{
         const userCreditientals={
-            "Email":"jsmith@gmail.com",
-            "Password":"pas"
-        }
+            'Email':'jsmith@gmail.com',
+            'Password':'pas'
+        };
 
         const response = 
-        await supertest(app).post("/users").send(userCreditientals);
+        await supertest(app).post('/users').send(userCreditientals);
 
-        expect(response.status).toBe(401)
-    })
-})
+        expect(response.status).toBe(401);
+    });
+
+});

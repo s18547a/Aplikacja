@@ -49,7 +49,7 @@ function VetMainInfo(props) {
               value={props.vet.Contact}
             />
           </div>
-        {props.editFrom?
+        {!props.editFrom?
           <div className="col-12">
           <FormDiv
             name="Password"

@@ -8,6 +8,9 @@ import Vet from '../classes/Vet';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import OwnerRepository from './OwnerRepository';
 import Repository from './Repository';
+import { createVetVisitHours } from '../../utils/hours';
+import { getBusyNextHourFromSurgery, createSurgeryAvailableHours } from '../../utils/createSurgeryAvailableHours';
+import SurgeryRepository from './SurgeryRepository';
 
 
 
@@ -15,10 +18,12 @@ class ReservationRepository extends Repository{
 
     ownerRepository;
     vetRepository;
+    
     constructor(db,ownerRepository:OwnerRepository,vetRepository){
         super(db);
         this.ownerRepository=ownerRepository;
         this.vetRepository=vetRepository;
+        
     }
 
     getReservations = async (parameters: GetReservationParameters) => {
@@ -76,7 +81,7 @@ class ReservationRepository extends Repository{
               
                 const reservations: Reservation[] = await Promise.all(
                     reservationRecordset.map(async (reservation) => {
-                        const vetObject: Vet = this.vetRepository.getVet(
+                        const vetObject: Vet = await this.vetRepository.getVet(
                             reservation.VetId,
                         );
                         const ownerObject = await this.ownerRepository.getOwner(
@@ -93,7 +98,10 @@ class ReservationRepository extends Repository{
                         );
                     })
                 );
-    
+                 
+                if(reservations.length==0){
+                    return null;
+                }
           
                 if (reservations.length == 1 && !returnList) {
           
@@ -175,5 +183,8 @@ class ReservationRepository extends Repository{
         }
     };
     
+    
+
+   
 }
 export default ReservationRepository;

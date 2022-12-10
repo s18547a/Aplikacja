@@ -1,10 +1,11 @@
-
+//jest
 //import {describe,expect,test} from '@jest/globals';
 //import supertest from "supertest"
 //test
 import makeApp from '../src/app';
+const testConfig=require('../src/config/mssql/testConnection');
 const supertest = require('supertest');
-const app = makeApp(null);
+const app = makeApp(testConfig);
 
 describe('GET /animals', () => {
    
@@ -31,7 +32,7 @@ describe('GET /animals', () => {
     });
    
 });
-
+/*
 describe('/POST /animals',()=>{
 
     const newAnimalTest={
@@ -53,4 +54,4 @@ describe('/POST /animals',()=>{
 });
 
   
-  
+  */

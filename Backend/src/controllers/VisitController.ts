@@ -75,7 +75,7 @@ class VisitController{
     };
 
     getVisitActivities=async(req, res)=>{
-        const results = await VisitMedicalActivitiesRepository.getMedicalActivities();
+        const results = await this.medicalActivityRepository.getMedicalActivities();
     
         if (results instanceof Error) {
             return res.status(500).json({ results });
