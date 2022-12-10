@@ -1,12 +1,16 @@
 import MedicalActivity from '../classes/MedicalActivity';
-const config = require('../../config/mssql/userConnection.js');
+import Repository from './Repository';
+
 const sql = require('mssql');
 
 
-class MedicalActivityRepository{
+class MedicalActivityRepository extends Repository{
+    constructor(db){
+        super(db);
+    }
     getMedicalActivities = async () => {
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const visitActivitiesPool = await pool
                 .request()
                 .query('Select * From MedicalActivity');
@@ -32,7 +36,7 @@ class MedicalActivityRepository{
     getVisitMedicalActivies=async(VisitId)=>{
     
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const results = await pool
                 .request()
                 .input('VisitId', sql.VarChar, VisitId)

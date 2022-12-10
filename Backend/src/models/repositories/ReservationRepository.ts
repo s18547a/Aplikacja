@@ -1,20 +1,22 @@
-const config = require('../../config/mssql/userConnection.js');
+
 
 import sql from 'mssql';
 import { GetReservationParameters } from '../classes/Interfaces';
-import Owner from '../classes/Owner';
+
 import Reservation from '../classes/Reservation';
 import Vet from '../classes/Vet';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import OwnerRepository from './OwnerRepository';
+import Repository from './Repository';
 
 
 
-class ReservationRepository{
+class ReservationRepository extends Repository{
 
     ownerRepository;
     vetRepository;
-    constructor(ownerRepository:OwnerRepository,vetRepository){
+    constructor(db,ownerRepository:OwnerRepository,vetRepository){
+        super(db);
         this.ownerRepository=ownerRepository;
         this.vetRepository=vetRepository;
     }
@@ -23,7 +25,7 @@ class ReservationRepository{
         try {
             const returnList = true;
     
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             let reservationRecordset;
             if (!parameters.VetId && !parameters.Date && !parameters.OwnerId) {
                 const reservationPool = await pool
@@ -115,7 +117,7 @@ class ReservationRepository{
             const Hour: string = Reservation.Hour;
       
     
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
     
             const reservationPool = await pool
                 .request()
@@ -142,7 +144,7 @@ class ReservationRepository{
     cancelReservation = async (ReservationId: string,transaction) => {
         try {
     
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             let rowsAffected: number; 
             if(transaction==null){
                 const reservationPool = await pool

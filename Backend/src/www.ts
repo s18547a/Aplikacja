@@ -3,8 +3,8 @@
 const debug = require('debug')('backend:server');
 const http = require('http');
 import makeApp from './app';
-
-const app = makeApp(null);
+const config = require('../src/config/mssql/UserConnection');
+const app = makeApp(config);
 const port = normalizePort(process.env.PORT || '8000');
 app.set('port', port);
 

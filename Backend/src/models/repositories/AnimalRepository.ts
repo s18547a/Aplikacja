@@ -1,16 +1,18 @@
 import Animal,{Sex} from '../classes/Animal';
 import { AnimalParametersType } from '../classes/Interfaces';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
+import Repository from './Repository';
 
-const config = require('../../config/mssql/userConnection.js');
 const sql = require('mssql');
 
-class AnimalRepostiory{
+class AnimalRepostiory extends Repository{
+    
 
     
     animalTypeRepository;
 
-    constructor(animalTypeRepository){
+    constructor(databse,animalTypeRepository){
+        super(databse);
         this.animalTypeRepository=animalTypeRepository;
         //
     }
@@ -18,7 +20,7 @@ class AnimalRepostiory{
 
         try {
     
-            const pool =await sql.connect(config);
+            const pool =await sql.connect(this.databaseConfiguration);
             const result = await pool.request().input('AnimalId',sql.VarChar,AnimalId).query('Select * From Animal where AnimalId=@AnimalId');
     
     
@@ -63,7 +65,7 @@ class AnimalRepostiory{
         try {
         
         
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             let animalsRecordset;
     
             if ( !parameters.OwnerId && !parameters.Email) {
@@ -127,7 +129,7 @@ class AnimalRepostiory{
       
     
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             let rowsAffected;
             const transaction = new sql.Transaction(pool);
     
@@ -205,7 +207,7 @@ class AnimalRepostiory{
     
         try {
            
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const animalRegisterPool = await pool
                 .request()
                 .input('Name', sql.VarChar, Name)

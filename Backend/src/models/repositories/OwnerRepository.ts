@@ -1,4 +1,4 @@
-const config = require('../../config/mssql/userConnection.js');
+
 import sql from 'mssql';
 import { GetOwnerParamters } from '../classes/Interfaces';
 import Owner from '../classes/Owner';
@@ -6,15 +6,19 @@ import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import { validateContact } from '../../utils/validator';
 
 import {hashPassword} from '../../utils/auth/authUtils';
-const SharedRepository = require('./SharedRepository');
+import Repository from './Repository';
+import SharedRepository from './SharedRepository';
 
 
-class OwnerRepository{
 
+class OwnerRepository extends Repository{
+    constructor(db){
+        super(db);
+    }
     
     getOwner=async(OwnerId)=>{
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const result = await pool
                 .request().input('OwnerId',sql.VarChar,OwnerId)
                 .query(
@@ -51,7 +55,7 @@ class OwnerRepository{
     getOwners = async (parameters: GetOwnerParamters) => {
         try {
   
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             let ownerRecordset;
             if (!parameters.AnimalId) {
                 const result = await pool
@@ -93,7 +97,7 @@ class OwnerRepository{
 
     registerOwner = async (owner) => {
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const transaction = new sql.Transaction(pool);
             const UserId: string = createIDwithUUIDV4();
             const Email: string = owner.Email;
@@ -107,7 +111,8 @@ class OwnerRepository{
             const hashedPassword = hashPassword(Password);
             // let hashedPassword = Password;
 
-            const emailExists = await SharedRepository.emailExists(Email);
+            const sharedRepository=new SharedRepository(this.databaseConfiguration);
+            const emailExists = await sharedRepository.emailExists(Email);
       
             if (emailExists) {
                 return null;

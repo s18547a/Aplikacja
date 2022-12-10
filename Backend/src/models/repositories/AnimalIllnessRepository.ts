@@ -1,15 +1,20 @@
 import Animal from '../classes/Animal';
 import Illness from '../classes/Illness';
 import { IllnessCuredParameters } from '../classes/Interfaces';
+import Repository from './Repository';
 
-const config = require('../../config/mssql/userConnection.js');
+
 const sql = require('mssql');
 
-class AnimalIllnessRepository{
-    
+class AnimalIllnessRepository extends Repository {
+
+    constructor(database){
+        super(database);
+    }
+
     getIllnesses = async (parameters) => {
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             let illnessRecordest;
             if (parameters.AnimalId) {
                 const illnessPool = await pool
@@ -58,7 +63,7 @@ class AnimalIllnessRepository{
       
     setIllnessCured = async (parameters: IllnessCuredParameters) => {
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
       
             const illenssPool = await pool
                 .request()

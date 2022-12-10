@@ -1,14 +1,17 @@
 import AnimalMedicalInfo from '../classes/AnimalMedicalInfo';
-const config = require('../../config/mssql/userConnection.js');
+import Repository from './Repository';
 const sql = require('mssql');
 
 
-class AnimalMedicalInfoRepository{
+class AnimalMedicalInfoRepository extends Repository{
 
+    constructor(db){
+        super(db);
+    }
 
     getAnimalMedicalInformation = async (AnimalId: string) => {
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             console.log(AnimalId);
           
             const animalMedInfoPool = await pool
@@ -82,7 +85,7 @@ class AnimalMedicalInfoRepository{
         AnimalMedicalInfo: AnimalMedicalInfo
     ) => {
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             console.log(AnimalMedicalInfo);
             const animalMedInfoPool = await pool
                 .request()

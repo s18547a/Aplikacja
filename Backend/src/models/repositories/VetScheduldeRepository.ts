@@ -1,16 +1,20 @@
 import { GetScheduldeParamters } from '../classes/Interfaces';
 import { createVatAvailableHours } from '../../utils/createVetAvailableHours';
 import { getDayOfAWeekName } from '../../utils/dateHelper';
+import Repository from './Repository';
 
 
 const sql = require('mssql');
-const config = require('../../config/mssql/userConnection.js');
-class VetScheduldeRepository{
 
+class VetScheduldeRepository extends Repository{
+
+    constructor(db){
+        super(db);
+    }
     
     getSchedulde = async (VetId: string) => {
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
   
             const scheduldePool = await pool
                 .request()
@@ -36,7 +40,7 @@ class VetScheduldeRepository{
 
     getVetDaysOfWeek = async (VetId: string) => {
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const scheduldePool = await pool
                 .request()
                 .input('VetId', sql.VarChar, VetId)
@@ -99,7 +103,7 @@ class VetScheduldeRepository{
             const saturday: string | null = schedulde.Saturday;
             const sunday: string | null = schedulde.Sunday;
   
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const scheduldePool = await pool
                 .request()
                 .input('VetId', sql.VarChar, vetId)
@@ -129,7 +133,7 @@ class VetScheduldeRepository{
     getAvailableHours = async (paramters: GetScheduldeParamters) => {
         try {
             let scheduldeRecordset = [];
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
      
             /*  const newDate=new Date(paramters.Date)
                 const day= newDate.toLocaleDateString("en-PL",{weekday:'long'})*/

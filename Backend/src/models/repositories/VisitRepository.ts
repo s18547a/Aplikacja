@@ -11,14 +11,16 @@ import AnimalRepostiory from './AnimalRepository';
 import VetRepository from './VetRepository';
 import MedicalActivityRepository from './MedicalActivityRepository';
 import ReservationRepository from './ReservationRepository';
+import Repository from './Repository';
 
 
-class VisitRepository{
+class VisitRepository extends Repository{
     animalRepository;
     vetRepository;
     visitMedicalActivtyRepository;
     reservationRepository;
-    constructor(animalRepository:AnimalRepostiory,vetRepository:VetRepository,visitMedicalActivtyRepository:MedicalActivityRepository,reservationRepository:ReservationRepository){
+    constructor(db,animalRepository:AnimalRepostiory,vetRepository:VetRepository,visitMedicalActivtyRepository:MedicalActivityRepository,reservationRepository:ReservationRepository){
+        super(db);
         this.animalRepository=animalRepository;
         this.vetRepository=vetRepository;
         this.visitMedicalActivtyRepository=visitMedicalActivtyRepository;

@@ -1,16 +1,20 @@
 import AnimalType from '../classes/AnimalType';
-const config = require('../../config/mssql/userConnection.js');
+import Repository from './Repository';
+
 const sql = require('mssql');
 
-class AnimalTypeRepository{
+class AnimalTypeRepository extends Repository{
 
+    constructor(db){
+        super(db);
+    }
 
     getAnimalTypes=async (parameters: {
     AnimalTypeId: string | undefined;
   })  =>{
         try {
             let animalTypeRecordSet;
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             let returnList = true;
             if (!parameters.AnimalTypeId) {
                 const animalTypePool = await pool

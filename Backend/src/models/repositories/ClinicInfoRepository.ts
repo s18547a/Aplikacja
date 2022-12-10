@@ -1,13 +1,17 @@
 import { getScheduldeEarliestHour, getScheduldeLatestHour } from '../../utils/clinicScheduldeUtils';
+import Repository from './Repository';
 
-const config = require('../../config/mssql/userConnection.js');
 const sql = require('mssql');
 
-class ClinicInfoRepository{
+class ClinicInfoRepository extends Repository{
+
+    constructor(db){
+        super(db);
+    }
     
     getClinicSchedulde = async () => {
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const scheduldePool = await pool
                 .request()
                 .query(

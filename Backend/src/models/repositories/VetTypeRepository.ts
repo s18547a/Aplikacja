@@ -1,14 +1,19 @@
 import { getVetTypesParameters } from '../classes/Interfaces';
+import Repository from './Repository';
 const sql = require('mssql');
-const config = require('../../config/mssql/userConnection.js');
 
-class VetTypeRepository{
+
+class VetTypeRepository extends Repository{
+
+    constructor(db){
+        super(db);
+    }
     
     getVetTypes=async(parameters:getVetTypesParameters)=>{
         try {
             const returnList=true;
             let VetTypeRecoordset;
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             if(parameters.VetId){
                 const vetTypePool= await pool.request().input('VetId',sql.VarChar,parameters.VetId).query('Select vtv.VetType, vt.Salary From Vet v inner join VetTypeVet vtv on v.VetId=vtv.VetId join VetType vt on vtv.VetType=vt.VetType where v.VetId=@VetId');
                 VetTypeRecoordset=vetTypePool.recordset;

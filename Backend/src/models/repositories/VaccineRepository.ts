@@ -1,17 +1,22 @@
 
 import Vaccination from '../classes/Vaccination';
 import VaccineType from '../classes/VaccineType';
+import Repository from './Repository';
 
 
-const config = require('../../config/mssql/userConnection.js');
+
 const sql = require('mssql');
 
-class VaccineRepository{
+class VaccineRepository extends Repository{
+
+    constructor(db){
+        super(db);
+    }
 
     getAnimalCoreVaccineTypes=async(AnimalId:string)=>{
         try {
     
-            const pool =await sql.connect(config);
+            const pool =await sql.connect(this.databaseConfiguration);
     
             const results =await pool.request().input('AnimalId',sql.VarChar,AnimalId).
                 query(
@@ -54,7 +59,7 @@ class VaccineRepository{
     
         try {
     
-            const pool =await sql.connect(config);
+            const pool =await sql.connect(this.databaseConfiguration);
     
             const results =await pool.request().input('AnimalId',sql.VarChar,AnimalId).query('Select * From AnimalVaccine Where AnimalId=@AnimalId');
     
@@ -81,7 +86,7 @@ class VaccineRepository{
     
     getVaccineTypes=async(parameters:{unAdministratedAnimalId:string})=>{
         try {
-            const pool =await sql.connect(config);
+            const pool =await sql.connect(this.databaseConfiguration);
             let vaccineRecordset;
             if(parameters.unAdministratedAnimalId){
                 const results = await pool.request().input('AnimalId',sql.VarChar,parameters.unAdministratedAnimalId).query(

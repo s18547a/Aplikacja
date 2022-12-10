@@ -1,10 +1,15 @@
 import express from 'express';
 import ClinicInfoController from '../controllers/ClinicInfoController';
-import ClinicInfoRepository from '../models/repositories/ClinicInfoRepository';
-const router = express.Router();
-const clinicInfoRepository=new ClinicInfoRepository();
 
-const clinicInfoController = new ClinicInfoController(clinicInfoRepository);
-router.get('/schedulde',clinicInfoController.getClinicSchedulde);
+class ClinicInfoRouter{
 
-module.exports=router;
+    router;
+    constructor(clinicInfoController:ClinicInfoController){
+        const router = express.Router();
+        router.get('/schedulde',clinicInfoController.getClinicSchedulde);
+
+        this.router=router;
+    }
+}
+
+export default ClinicInfoRouter;

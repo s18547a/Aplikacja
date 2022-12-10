@@ -1,11 +1,17 @@
 import express from 'express';
 import OwnerController from '../controllers/OwnerController';
-import OwnerRepository from '../models/repositories/OwnerRepository';
-const router = express.Router();
-//const OwnerController = require('../controllers/OwnerController');
-const ownerRepository=new OwnerRepository();
-const ownerController=new OwnerController(ownerRepository);
-router.get('/:OwnerId', ownerController.getOwner);
-router.get('/', ownerController.getOwners);
-router.post('/',ownerController.registerOwner);
-module.exports=router;
+
+class OwnerRouter{
+
+    router;
+
+    constructor(ownerController:OwnerController){
+        const router = express.Router();
+        router.get('/:OwnerId', ownerController.getOwner);
+        router.get('/', ownerController.getOwners);
+        router.post('/',ownerController.registerOwner);
+
+        this.router=router;
+    }
+}
+export default OwnerRouter;

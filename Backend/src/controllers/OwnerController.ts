@@ -14,7 +14,7 @@ class OwnerController{
 
         const OwnerId=req.params.OwnerId;
 
-        const results = this.ownerRepository.getOwner(OwnerId);
+        const results = await this.ownerRepository.getOwner(OwnerId);
 
         if (results instanceof Error) {
             return res.status(500).json({});

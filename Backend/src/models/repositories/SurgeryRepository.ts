@@ -1,4 +1,4 @@
-const config = require('../../config/mssql/userConnection.js');
+
 import sql from 'mssql';
 import { getSurgeryPrameters } from '../classes/Interfaces';
 import Surgery from '../classes/Surgery';
@@ -6,15 +6,17 @@ import Surgery from '../classes/Surgery';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import VetRepository from './VetRepository';
 import AnimalRepostiory from './AnimalRepository';
+import Repository from './Repository';
 //const VetRepository = require('../repositories/VetRepository');
 //const AnimalRepository=require('../repositories/AnimalRepository');
 
-class SurgeryRepository{
+class SurgeryRepository extends Repository{
 
     
     animalRepository;
     vetRepository;
-    constructor(animalRepository:AnimalRepostiory,vetRepository:VetRepository){
+    constructor(db,animalRepository:AnimalRepostiory,vetRepository:VetRepository){
+        super(db);
         this.animalRepository=animalRepository;
         this.vetRepository=vetRepository;
     }
@@ -22,7 +24,7 @@ class SurgeryRepository{
     getSurgery=async(SurgeryId:string)=>{
 
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
     
             const result = await pool.request().input('SurgeryId',sql.VarChar,SurgeryId)
                 .query('Select * From Surgery Where SurgeryId=@SurgeryId');
@@ -56,7 +58,7 @@ class SurgeryRepository{
         try {
        
             let surgeryRecordset: any[] = [];
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
        
     
        
@@ -122,7 +124,7 @@ class SurgeryRepository{
     registerSurgery = async (Surgery) => {
     
         try {
-            const pool =await sql.connect(config);
+            const pool =await sql.connect(this.databaseConfiguration);
             const transaction = new sql.Transaction(pool);
             const newSurgeryId=createIDwithUUIDV4();
             const date:string=Surgery.Date;
@@ -172,7 +174,7 @@ class SurgeryRepository{
         try {
             const surgeryId=surgeryReport.SurgeryId;
             const Report = surgeryReport.Report;
-            const pool =await sql.connect(config);
+            const pool =await sql.connect(this.databaseConfiguration);
             const results = await pool.request().input('SurgeryId',sql.VarChar,surgeryId).input('Report',sql.VarChar,Report).query('Update Surgery Set Report=@Report Where SurgeryId=@SurgeryId');
         
             const resultAffected=results.rowsAffected[0];
@@ -189,7 +191,7 @@ class SurgeryRepository{
    
     getSurgeryTypes = async () => {
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const poolSurgeryTypes = await pool
                 .request()
                 .query('Select * From SurgeryType');
@@ -206,7 +208,7 @@ class SurgeryRepository{
     deleteSurgery=async(SurgeryId:string)=>{
         try {
     
-            const pool =await sql.connect(config);
+            const pool =await sql.connect(this.databaseConfiguration);
             const results =await pool.request().input('SurgeryId',sql.VarChar,SurgeryId)
                 .query('Delete From Surgery Where SurgeryId=@SurgeryID ');
     

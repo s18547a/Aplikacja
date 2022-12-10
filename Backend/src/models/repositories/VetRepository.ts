@@ -1,4 +1,4 @@
-const config = require('../../config/mssql/userConnection.js');
+
 
 import Vet from '../classes/Vet';
 
@@ -9,17 +9,20 @@ import { hashPassword } from '../../utils/auth/authUtils';
 import { getDayOfAWeekName } from '../../utils/dateHelper';
 import VetTypeRepository from './VetTypeRepository';
 import VetScheduldeRepository from './VetScheduldeRepository';
+import Repository from './Repository';
+import SharedRepository from './SharedRepository';
 
-const SharedRepository = require('./SharedRepository');
+
 //const VetTypeRepository=require('./VetTypeRepository');
 const sql = require('mssql');
 
-class VetRepository{
+class VetRepository extends Repository{
 
    
     vetTypeRepository;
     vetScheduldeRepository;
-    constructor(vetTypeRepository:VetTypeRepository,vetScheduldeRepository:VetScheduldeRepository){
+    constructor(db,vetTypeRepository:VetTypeRepository,vetScheduldeRepository:VetScheduldeRepository){
+        super(db);
         this.vetTypeRepository=vetTypeRepository;
         this.vetScheduldeRepository=vetScheduldeRepository;
 
@@ -28,7 +31,7 @@ class VetRepository{
     getVet=async(VetId:string)=>{
 
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const results = await pool
                 .request()
                 .input('VetId', sql.VarChar, VetId)
@@ -72,7 +75,7 @@ class VetRepository{
         try {
   
             let vetsRecordset :any[]= [];
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
 
             if (parameters.Date) {
                 const newDate =getDayOfAWeekName(parameters.Date);
@@ -154,13 +157,13 @@ class VetRepository{
 
             const hashedPassword = hashPassword(Password);
         
-
-            const emailExists = await SharedRepository.emailExists(Email);
+            const sharedRepository=new SharedRepository(this.databaseConfiguration);
+            const emailExists = await sharedRepository.emailExists(Email);
             console.log(emailExists);
             if (emailExists) {
                 return null;
             }
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const transaction = new sql.Transaction(pool);
         
 
@@ -248,13 +251,14 @@ class VetRepository{
             const OldEmail=Vet.OldEmail;
             const VetTypes=Vet.VetType;
             if(OldEmail!=Email){
-                const emailExists = await SharedRepository.emailExists(Email);
+                const sharedRepository=new SharedRepository(this.databaseConfiguration);
+                const emailExists = await sharedRepository.emailExists(Email);
                 console.log(emailExists);
                 if (emailExists) {
                     return null;
                 }
             }
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
 
             const transaction = await new sql.Transaction(pool);
             try{
