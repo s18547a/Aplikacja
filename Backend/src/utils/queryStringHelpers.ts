@@ -11,7 +11,7 @@ export function createVisitSearchQueryString(parameters){
      
     let queryString='';
     if(OwnerId){
-        queryString=`Where animal.OwnerId='${OwnerId}' `;
+        queryString=`Where animal.OwnerId='${OwnerId}'`;
     }
     
     if(!Date&&!Email&&!Name)
@@ -25,9 +25,9 @@ export function createVisitSearchQueryString(parameters){
         else {
             queryString=queryString+' and ';
         }
-        const dateQuery=`Date='${Date}' `;
-        const emailQuery=`us.Email='${Email}' `;
-        const animalNameQuery=`animal.Name='${Name}' `;
+        const dateQuery=`Date='${Date}'`;
+        const emailQuery=`us.Email='${Email}'`;
+        const animalNameQuery=`animal.Name='${Name}'`;
         if(Date){
             queryString=queryString+ dateQuery;
         }

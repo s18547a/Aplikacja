@@ -8,9 +8,6 @@ import Vet from '../classes/Vet';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import OwnerRepository from './OwnerRepository';
 import Repository from './Repository';
-import { createVetVisitHours } from '../../utils/hours';
-import { getBusyNextHourFromSurgery, createSurgeryAvailableHours } from '../../utils/createSurgeryAvailableHours';
-import SurgeryRepository from './SurgeryRepository';
 
 
 

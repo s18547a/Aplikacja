@@ -1,7 +1,7 @@
-const app = require('../src/app.ts');
-
+import makeApp from '../../src/app';
+const testConfig=require('../../src/config/mssql/testConnection');
 const supertest = require('supertest');
-
+const app = makeApp(testConfig);
 describe('POST',()=>{
 
 
@@ -33,8 +33,8 @@ describe('POST',()=>{
 
     it('Wrong password',async()=>{
         const userCreditientals={
-            'Email':'jsmith@gmail.com',
-            'Password':'pas'
+            'Email':'testManager@gmail.com',
+            'Password':'wrongPass'
         };
 
         const response = 

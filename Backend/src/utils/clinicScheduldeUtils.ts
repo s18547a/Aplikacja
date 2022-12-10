@@ -37,4 +37,3 @@ export function getScheduldeLatestHour(daySchedulde: string[]) {
 
     return maxHour;
 }
-

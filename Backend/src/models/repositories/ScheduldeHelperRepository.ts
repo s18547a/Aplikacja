@@ -1,4 +1,4 @@
-import { getBusyNextHourFromSurgery, createSurgeryAvailableHours } from '../../utils/createSurgeryAvailableHours';
+import { getBusyNextHourFromSurgery, createSurgeryAvailableHours } from './../../utils/receptionHoursHelper';
 import { createVetVisitHours } from '../../utils/hours';
 import Reservation from '../classes/Reservation';
 import Repository from './Repository';
@@ -14,6 +14,7 @@ class ScheduldeHelperRepository extends Repository{
         this.reservationRepository=reservationRepository;
         this.surgeryRepository=surgeryRepository;
     }
+
     createVatAvailableHours=async (reccordset,paramters)=>{
 
         const workHours= String(Object.values(reccordset)[0]);

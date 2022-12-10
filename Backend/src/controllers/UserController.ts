@@ -32,7 +32,7 @@ class UserController{
         const Password: string = req.body.Password;
 
         const user = await this.userRepository.getUserByEmail(Email);
-        console.log(user);
+      
 
         if (user == null) {
             return res.status(404).json({ message: 'User not found' });
