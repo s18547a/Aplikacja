@@ -1,6 +1,6 @@
 
-import Vaccination from '../classes/Vaccination';
-import VaccineType from '../classes/VaccineType';
+import Vaccination from '../../models/classes/Vaccination';
+import VaccineType from '../../models/classes/VaccineType';
 import Repository from './Repository';
 
 

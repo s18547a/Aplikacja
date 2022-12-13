@@ -1,4 +1,4 @@
-import ClinicInfoRepository from '../models/repositories/ClinicInfoRepository';
+import ClinicInfoRepository from '../services/repositories/ClinicInfoRepository';
 
 
 

@@ -1,5 +1,6 @@
 import Vet from "../classes/Vet";
 import { getCurrentDate } from "../components/other/getCurrentDate";
+import { VisitListParamter } from "../components/other/helperClass/VisitListParameters";
 
 const baseUrl = "http://localhost:8000/surgeries";
 
@@ -16,6 +17,16 @@ export async function getSurgeries() {
   return promise;
 }
 
+export async function searchSurgeryList(paramters:VisitListParamter) {
+  const queryURL=paramters.createURLString();
+  console.log(queryURL)
+  const url = `${baseUrl}/search${paramters.createURLString()}`;
+  
+  const promise = await fetch(url);
+
+  return promise;
+}
+
 export async function getTodaySurgeries(VetId) {
   const url = `${baseUrl}?VetId=${VetId}&Date=${getCurrentDate()}`
 
@@ -23,6 +34,8 @@ export async function getTodaySurgeries(VetId) {
 
   return promise;
 }
+
+
 
 export async function getSurgeryTypes() {
   const url = `${baseUrl}/types`;

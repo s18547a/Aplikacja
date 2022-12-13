@@ -1,5 +1,5 @@
-import { GetOwnerParamters } from '../models/classes/Interfaces';
-import OwnerRepository from '../models/repositories/OwnerRepository';
+import { GetOwnerParamters } from '../dtos/dto';
+import OwnerRepository from '../services/repositories/OwnerRepository';
 
 
 //const OwnerRepository = require('../models/repositories/OwnerRepository');

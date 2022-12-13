@@ -1,10 +1,11 @@
 
 
 import sql from 'mssql';
-import { GetReservationParameters } from '../classes/Interfaces';
+import { GetReservationParameters } from '../../dtos/dto';
 
-import Reservation from '../classes/Reservation';
-import Vet from '../classes/Vet';
+
+import Reservation from '../../models/classes/Reservation';
+import Vet from '../../models/classes/Vet';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import OwnerRepository from './OwnerRepository';
 import Repository from './Repository';

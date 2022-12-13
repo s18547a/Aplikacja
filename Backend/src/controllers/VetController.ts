@@ -1,10 +1,11 @@
-import { GetScheduldeParamters, GetVetParameters } from '../models/classes/Interfaces';
 
 
+
+import { GetScheduldeParamters, GetVetParameters } from '../dtos/dto';
 import Schedulde from '../models/classes/Schedulde';
-import VetRepository from '../models/repositories/VetRepository';
-import VetScheduldeRepository from '../models/repositories/VetScheduldeRepository';
-import VetTypeRepository from '../models/repositories/VetTypeRepository';
+import VetRepository from '../services/repositories/VetRepository';
+import VetScheduldeRepository from '../services/repositories/VetScheduldeRepository';
+import VetTypeRepository from '../services/repositories/VetTypeRepository';
 
 //const VetRepository = require('../models/repositories/VetRepository');
 //const VetScheduldeRepository=require('../models/repositories/VetScheduldeRepository');
@@ -38,9 +39,9 @@ class VetController{
 
     getVets=async(req, res)=>{
         const parameters: GetVetParameters = {
-            Date: req.query.Date as any,
+            Date: req.query.Date,
   
-            VetType: req.query.VetType as any,
+            VetType: req.query.VetType
         };
         const results = await this.vetRepository.getVets(parameters);
 

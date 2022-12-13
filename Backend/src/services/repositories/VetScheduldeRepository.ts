@@ -1,8 +1,9 @@
-import { GetScheduldeParamters } from '../classes/Interfaces';
 
+
+import { GetScheduldeParamters } from '../../dtos/dto';
 import { getDayOfAWeekName } from '../../utils/dateHelper';
 import Repository from './Repository';
-import ReservationRepository from './ReservationRepository';
+
 import ScheduldeHelperRepository from './ScheduldeHelperRepository';
 
 

@@ -15,7 +15,7 @@ import { getCurrentUser } from "../../../other/authHelper";
 import { VisitListParamter } from "../../../other/helperClass/VisitListParameters";
 import { isManager, isOwner, isVet } from "../../../other/userType";
 import SearchInput from "../../Shared/SearchImput";
-import VisitSearch from "./VisitSearch";
+import VisitSearch from "../../Shared/VisitSearch";
 
 
 

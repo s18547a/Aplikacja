@@ -1,4 +1,4 @@
-import AnimalType from '../classes/AnimalType';
+import AnimalType from '../../models/classes/AnimalType';
 import Repository from './Repository';
 
 const sql = require('mssql');

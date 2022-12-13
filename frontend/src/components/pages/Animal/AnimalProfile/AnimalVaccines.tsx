@@ -4,7 +4,7 @@ import TableOrEmpty from "../../../List/TableOrEmpty";
 function AnimalVaccines(props) {
   return (
     <div className="row justify-content-center">
-      <div className="col-6 offset-2">
+      <div className="col-6 ">
     <div className="card card-body border-0 mt-8 shadow">
       <div className="row">
         <div className="col-lg-12 ">

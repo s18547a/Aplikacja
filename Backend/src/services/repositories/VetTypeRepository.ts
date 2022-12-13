@@ -1,4 +1,5 @@
-import { getVetTypesParameters } from '../classes/Interfaces';
+
+import { getVetTypesParameters } from '../../dtos/dto';
 import Repository from './Repository';
 const sql = require('mssql');
 

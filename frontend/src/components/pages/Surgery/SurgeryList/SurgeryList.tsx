@@ -6,7 +6,7 @@ import {
   getReservations,
   cancelReservation,
 } from "../../../../api/reservationApiCalls";
-import { cancelSurgery, getSurgeries } from "../../../../api/surgeryApiCalls";
+import { cancelSurgery, getSurgeries, searchSurgeryList } from "../../../../api/surgeryApiCalls";
 import Surgery from "../../../../classes/Surgery";
 import Pagination from "../../../List/Pagination";
 import RegiserSuccessInfo from "../../../List/RegisterSuccessInfo";
@@ -15,7 +15,9 @@ import TableOrEmpty from "../../../List/TableOrEmpty";
 import Modal from "../../../Modal/Modal";
 import ModalEnableBtn from "../../../Modal/ModalEnableBtn";
 import { getCurrentUser } from "../../../other/authHelper";
+import { VisitListParamter } from "../../../other/helperClass/VisitListParameters";
 import { isVet, isOwner, isManager } from "../../../other/userType";
+import VisitSearch from "../../Shared/VisitSearch";
 
 function SurgeryList() {
   const navigate = useNavigate();
@@ -114,14 +116,49 @@ function SurgeryList() {
 
 
   }
+  
+  async function handleSearch(paramters:VisitListParamter) {
+    let results;
+
+    if (paramters.allUndefined()) {
+      await searchSurgeryList(paramters)
+        .then((res) => {
+          results = res;
+          return res.json();
+        })
+        .then(
+          (data) => {
+            if (results.status == 200) {
+              setEmpty(false);
+              setSurgeryList(data);
+              divideListIntoPages(data);
+             
+            }
+            if (results.status == 404) {
+              setEmpty(true);
+              
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
+  }
  
 
   return (
     <div className="container">
-      
+        <div className="row">
       <RegiserSuccessInfo newId={message.id} message={message.message} />
-
-      <div className="card card-body shadow">
+    </div>
+    <div className="row align-items-center">
+        <div className="col-12">
+        <VisitSearch onSearch={handleSearch} />
+        </div>
+    
+      </div>
+      <div className="card card-body shadow mt-5">
         <h5 className="card-title">Zabiegi</h5>
         <TableOrEmpty Empty={empty}>
           <table className="table table-hover">

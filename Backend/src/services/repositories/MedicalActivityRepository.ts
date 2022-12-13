@@ -1,4 +1,4 @@
-import MedicalActivity from '../classes/MedicalActivity';
+import MedicalActivity from '../../models/classes/MedicalActivity';
 import Repository from './Repository';
 
 const sql = require('mssql');

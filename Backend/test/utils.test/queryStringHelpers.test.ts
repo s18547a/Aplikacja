@@ -31,6 +31,17 @@ describe('query string',()=>{
 
     });
 
+    it('OwnerId and animal',()=>{
+       
+        const queryString= createVisitSearchQueryString({OwnerId:ownerId,Name:name});
+
+        // eslint-disable-next-line quotes
+        const expectedString="Where animal.OwnerId='32331' and animal.Name='Reksio'";
+
+        expect(queryString).toEqual(expectedString);
+
+    });
+
     
 });
 

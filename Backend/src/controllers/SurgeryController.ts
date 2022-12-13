@@ -1,6 +1,4 @@
-import { getSurgeryPrameters } from '../models/classes/Interfaces';
-
-//const SurgeryRepository = require('../models/repositories/SurgeryRepository');
+import { getSurgeryPrameters } from '../dtos/dto';
 
 
 
@@ -45,6 +43,25 @@ class SurgeryController{
         if (results instanceof Error) {
             return res.status(500).json({});
         } else return res.status(200).json(results);
+    };
+
+    searchSurgeries=async(req,res)=>{
+        const parameters={
+            Email:req.query.Email,
+            Name:req.query.Name,
+            Date:req.query.Date,
+            OwnerId:req.query.OwnerId,
+          
+        };
+        
+        const results= await this.surgeryRepository.searchSurgeries(parameters);
+    
+        if (results instanceof Error) {
+            return res.status(500).json({});
+        } else if (!results || null) {
+            return res.status(404).json({});
+        } else return res.status(200).json(results);
+    
     };
     
     registerSurgery=async(req,res)=>{

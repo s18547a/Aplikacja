@@ -1,5 +1,5 @@
 import sql from 'mssql';
-import User from '../classes/User';
+import User from '../../models/classes/User';
 import Repository from './Repository';
 
 class UserRepository extends Repository{

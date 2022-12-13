@@ -22,21 +22,21 @@ export function createVisitSearchQueryString(parameters){
         if(!OwnerId){
             queryString='Where ';
         }
-        else {
-            queryString=queryString+' and ';
-        }
-        const dateQuery=`Date='${Date}'`;
-        const emailQuery=`us.Email='${Email}'`;
-        const animalNameQuery=`animal.Name='${Name}'`;
+       
+      
         if(Date){
-            queryString=queryString+ dateQuery;
+            if(OwnerId){
+                queryString=queryString+' and ';
+            }
+
+            queryString=queryString+ `Date='${Date}'`;
         }
         if(Email){
             let andEmail='';
             if(queryString!=='Where '){
                 andEmail=andEmail=' and ';
             }
-            queryString=queryString+andEmail+emailQuery;
+            queryString=queryString+andEmail+`us.Email='${Email}'`;
                
         }
         if(Name){
@@ -44,7 +44,7 @@ export function createVisitSearchQueryString(parameters){
             if(queryString!='Where '){
                 andName=' and ';
             }
-            queryString=queryString+andName+animalNameQuery;
+            queryString=queryString+andName+`animal.Name='${Name}'`;
         }
 
         

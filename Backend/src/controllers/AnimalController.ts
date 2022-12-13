@@ -1,11 +1,12 @@
 import Animal from '../models/classes/Animal';
-import { AnimalParametersType } from '../models/classes/Interfaces';
-import AnimalMedicalInfo from '../models/classes/AnimalMedicalInfo';
-import AnimalRepostiory from '../models/repositories/AnimalRepository';
 
-import AnimalTypeRepository from '../models/repositories/AnimalTypeRepository';
-import AnimalMedicalInfoRepository from '../models/repositories/AnimalMedicalInfoRepository';
-import AnimalIllnessRepository from '../models/repositories/AnimalIllnessRepository';
+import AnimalMedicalInfo from '../models/classes/AnimalMedicalInfo';
+import AnimalRepostiory from '../services/repositories/AnimalRepository';
+
+import AnimalTypeRepository from '../services/repositories/AnimalTypeRepository';
+import AnimalMedicalInfoRepository from '../services/repositories/AnimalMedicalInfoRepository';
+import AnimalIllnessRepository from '../services/repositories/AnimalIllnessRepository';
+import { AnimalParametersType } from '../dtos/dto';
 
 class AnimalController{
     
@@ -62,10 +63,10 @@ class AnimalController{
     registerAnimal= async (req, res)=>{
         const Animal: Animal = req.body;
         const results = await this.animalRepository.registerAnimal(Animal);
-        console.log(results);
+        
         if (results instanceof Error) {
             return res.status(500).json({ message: 'Błąd' });
-        } else return res.status(201).json({});
+        } else return res.status(201).json({newId:results});
     };
 
     updateAnimal=async(req, res)=>{

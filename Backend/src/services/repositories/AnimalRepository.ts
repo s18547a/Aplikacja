@@ -1,5 +1,5 @@
-import Animal,{Sex} from '../classes/Animal';
-import { AnimalParametersType } from '../classes/Interfaces';
+import { AnimalParametersType } from '../../dtos/dto';
+import Animal,{Sex} from '../../models/classes/Animal';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import Repository from './Repository';
 
@@ -139,11 +139,12 @@ class AnimalRepostiory extends Repository{
                 const BirthDate: string = newAnimal.BirthDate;
                
                 const AnimalTypeId: string = newAnimal.AnimalTypeId;
-                const OwnerId: string = newAnimal.OwnerId;
+                const OwnerId: string |null= newAnimal.OwnerId;
                 const Sex: Sex = newAnimal.Sex;
     
                 const ProfileImage: string = newAnimal.ProfileImage;
     
+                console.log(AnimalId);
        
                 await transaction.begin();
                 const results = await new sql.Request(transaction)
@@ -174,18 +175,18 @@ class AnimalRepostiory extends Repository{
                             'Insert into AnimalMedicalInfo(AnimalId,Chipped,Sterilized,Skeletal,Muscular,Nervous,Endocrine,Cardiovascular,Lymphatic,Respiratory,Digestive,Urinary,Reproductive,Optical,Dental,Dermatological ,Others,Weight) values(@AnimalId,null,null,\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',null)'
                         );
                     if (createAnimalMedicalInformationResult.rowsAffected[0]!=1) {
-             
+                        console.log(rowsAffected[0]);
                         throw Error('');
                     } else {
-              
+                        
                         await transaction.commit();
-              
+                        
                         return AnimalId;
                     }
                 }
             } catch (error) {
                 await transaction.rollback();
-         
+                console.log(error);    
                 throw Error('');
             }
         } catch (error) {

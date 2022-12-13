@@ -1,4 +1,4 @@
-import AnimalMedicalInfo from '../classes/AnimalMedicalInfo';
+import AnimalMedicalInfo from '../../models/classes/AnimalMedicalInfo';
 import Repository from './Repository';
 const sql = require('mssql');
 

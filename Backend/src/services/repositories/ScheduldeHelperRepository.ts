@@ -1,6 +1,6 @@
-import { getBusyNextHourFromSurgery, createSurgeryAvailableHours } from './../../utils/receptionHoursHelper';
+import { getBusyNextHourFromSurgery, createSurgeryAvailableHours } from '../../utils/receptionHoursHelper';
 import { createVetVisitHours } from '../../utils/hours';
-import Reservation from '../classes/Reservation';
+import Reservation from '../../models/classes/Reservation';
 import Repository from './Repository';
 import ReservationRepository from './ReservationRepository';
 import SurgeryRepository from './SurgeryRepository';

@@ -1,6 +1,7 @@
-import Animal from '../classes/Animal';
-import Illness from '../classes/Illness';
-import { IllnessCuredParameters } from '../classes/Interfaces';
+
+import { IllnessCuredParameters } from '../../dtos/dto';
+import Illness from '../../models/classes/Illness';
+
 import Repository from './Repository';
 
 

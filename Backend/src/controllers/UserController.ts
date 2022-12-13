@@ -1,5 +1,5 @@
 
-import UserRepository from '../models/repositories/UserRepository';
+import UserRepository from '../services/repositories/UserRepository';
 import config from '../utils/auth/key';
 
 const jwt = require('jsonwebtoken');

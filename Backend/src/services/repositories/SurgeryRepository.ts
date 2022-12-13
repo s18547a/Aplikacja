@@ -1,14 +1,14 @@
 
 import sql from 'mssql';
-import { getSurgeryPrameters } from '../classes/Interfaces';
-import Surgery from '../classes/Surgery';
+import Surgery from '../../models/classes/Surgery';
 
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import VetRepository from './VetRepository';
 import AnimalRepostiory from './AnimalRepository';
 import Repository from './Repository';
-//const VetRepository = require('../repositories/VetRepository');
-//const AnimalRepository=require('../repositories/AnimalRepository');
+import { createVisitSearchQueryString } from '../../utils/queryStringHelpers';
+import { getSurgeryPrameters } from '../../dtos/dto';
+
 
 class SurgeryRepository extends Repository{
 
@@ -34,7 +34,7 @@ class SurgeryRepository extends Repository{
             if(surgeryRecord==undefined){
                 return null;
             }
-            const surgerysVet= this.vetRepository.getVet(surgeryRecord.LeadVetId);
+            const surgerysVet= await this.vetRepository.getVet(surgeryRecord.LeadVetId);
     
             const surgerysAnimal=await this.animalRepository.getAnimal(surgeryRecord.AnimalId);
     
@@ -187,6 +187,60 @@ class SurgeryRepository extends Repository{
             return error;
         }
     
+    };
+
+    searchSurgeries= async(parameters)=>{
+        try {
+            
+        
+            const queryString=createVisitSearchQueryString(parameters);
+            console.log(queryString);
+            const pool = await sql.connect(this.databaseConfiguration);
+            const visitsPool = await pool.request()
+            
+            // eslint-disable-next-line quotes
+                .query(`Select SurgeryId,Date,SurgeryType,LeadVetId,Description,animal.AnimalId,Report,StartTime, animal.OwnerId ,us.Email From Surgery s join Animal animal on s.AnimalId=animal.AnimalId join [User] us on s.LeadVetId=us.VetId ${queryString}  order by Date DESC`);
+            const surgeryRecordset = visitsPool.recordset;
+       
+
+            let isEmpty: boolean;
+
+            surgeryRecordset[0] == undefined ? (isEmpty = true) : (isEmpty = false);
+            if (isEmpty) {
+                return null;
+            } else {
+                const surgeries = await Promise.all(
+                    surgeryRecordset.map(async (surgery) => {
+    
+                        const surgerysVet= await this.vetRepository.getVet(surgery.LeadVetId);
+    
+                        const surgerysAnimal=await this.animalRepository.getAnimal(surgery.AnimalId);
+                        return new Surgery(
+                            surgery.SurgeryId,
+                            surgery.Date.toISOString().split('T')[0],
+                            surgery.SurgeryType,
+                            surgery.LeadVetId,
+                            surgery.Description,
+                            surgery.AnimalId,
+                            surgery.Report,
+                            surgery.StartTime,
+                            surgerysVet,
+                            surgerysAnimal
+    
+                            // surgeryAssistants
+                        );
+              
+                    })
+                );
+    
+        
+                return surgeries;
+            }
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+
     };
    
     getSurgeryTypes = async () => {

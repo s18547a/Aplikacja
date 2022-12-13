@@ -1,10 +1,10 @@
 import { useState } from "react"
 
-import FormSearchDateDiv from "../../../Form/FormSearchDateDiv"
-import FormSearchDiv from "../../../Form/FormSearchDiv"
-import SearchButton from "../../../General/SearchButton"
+import FormSearchDateDiv from "../../Form/FormSearchDateDiv"
+import FormSearchDiv from "../../Form/FormSearchDiv"
+import SearchButton from "../../General/SearchButton"
 
-import { VisitListParamter } from "../../../other/helperClass/VisitListParameters"
+import { VisitListParamter } from "../../other/helperClass/VisitListParameters"
 
 
 function VisitSearch(props){

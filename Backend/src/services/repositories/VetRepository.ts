@@ -1,17 +1,18 @@
 /* eslint-disable indent */
 
 
-import Vet from '../classes/Vet';
+import Vet from '../../models/classes/Vet';
 
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
-import { GetVetParameters } from '../classes/Interfaces';
+
 import { validateContact } from '../../utils/validator';
 import { hashPassword } from '../../utils/auth/authUtils';
 import { getDayOfAWeekName } from '../../utils/dateHelper';
 import VetTypeRepository from './VetTypeRepository';
-import VetScheduldeRepository from './VetScheduldeRepository';
+
 import Repository from './Repository';
 import SharedRepository from './SharedRepository';
+import { GetVetParameters } from '../../dtos/dto';
 
 
 //const VetTypeRepository=require('./VetTypeRepository');

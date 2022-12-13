@@ -7,22 +7,22 @@ import UserController from './controllers/UserController';
 import VaccineController from './controllers/VaccineController';
 import VetController from './controllers/VetController';
 import VisitController from './controllers/VisitController';
-import AnimalIllnessRepository from './models/repositories/AnimalIllnessRepository';
-import AnimalMedicalInfoRepository from './models/repositories/AnimalMedicalInfoRepository';
-import AnimalRepostiory from './models/repositories/AnimalRepository';
-import AnimalTypeRepository from './models/repositories/AnimalTypeRepository';
-import ClinicInfoRepository from './models/repositories/ClinicInfoRepository';
-import MedicalActivityRepository from './models/repositories/MedicalActivityRepository';
-import OwnerRepository from './models/repositories/OwnerRepository';
-import ReservationRepository from './models/repositories/ReservationRepository';
-import ScheduldeHelperRepository from './models/repositories/ScheduldeHelperRepository';
-import SurgeryRepository from './models/repositories/SurgeryRepository';
-import UserRepository from './models/repositories/UserRepository';
-import VaccineRepository from './models/repositories/VaccineRepository';
-import VetRepository from './models/repositories/VetRepository';
-import VetScheduldeRepository from './models/repositories/VetScheduldeRepository';
-import VetTypeRepository from './models/repositories/VetTypeRepository';
-import VisitRepository from './models/repositories/VisitRepository';
+import AnimalIllnessRepository from './services/repositories/AnimalIllnessRepository';
+import AnimalMedicalInfoRepository from './services/repositories/AnimalMedicalInfoRepository';
+import AnimalRepostiory from './services/repositories/AnimalRepository';
+import AnimalTypeRepository from './services/repositories/AnimalTypeRepository';
+import ClinicInfoRepository from './services/repositories/ClinicInfoRepository';
+import MedicalActivityRepository from './services/repositories/MedicalActivityRepository';
+import OwnerRepository from './services/repositories/OwnerRepository';
+import ReservationRepository from './services/repositories/ReservationRepository';
+import ScheduldeHelperRepository from './services/repositories/ScheduldeHelperRepository';
+import SurgeryRepository from './services/repositories/SurgeryRepository';
+import UserRepository from './services/repositories/UserRepository';
+import VaccineRepository from './services/repositories/VaccineRepository';
+import VetRepository from './services/repositories/VetRepository';
+import VetScheduldeRepository from './services/repositories/VetScheduldeRepository';
+import VetTypeRepository from './services/repositories/VetTypeRepository';
+import VisitRepository from './services/repositories/VisitRepository';
 import AnimalRouter from './routers/AnimalRouter';
 import ClinicInfoRouter from './routers/ClinicInfoRouter';
 import OwnerRouter from './routers/OwnerRouter';
@@ -74,17 +74,7 @@ export default function(db) {
     const reservationRepository=new ReservationRepository(db,ownerRepository,vetRepository);
     const scheduldeHelperRepository=new ScheduldeHelperRepository(db,reservationRepository,surgeryRepository);
     const vetScheduldeRepository=new VetScheduldeRepository(db,scheduldeHelperRepository);
-
-   
- 
-
- 
-    
-   
-    
-   
     const medicalActivityRepository=new MedicalActivityRepository(db);
-   
     const userRepository= new UserRepository(db);
 
     

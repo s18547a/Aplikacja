@@ -1,13 +1,14 @@
 
 import sql from 'mssql';
-import { GetOwnerParamters } from '../classes/Interfaces';
-import Owner from '../classes/Owner';
+
+import Owner from '../../models/classes/Owner';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import { validateContact } from '../../utils/validator';
 
 import {hashPassword} from '../../utils/auth/authUtils';
 import Repository from './Repository';
 import SharedRepository from './SharedRepository';
+import { GetOwnerParamters } from '../../dtos/dto';
 
 
 

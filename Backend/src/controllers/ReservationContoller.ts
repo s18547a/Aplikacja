@@ -1,6 +1,6 @@
-import { GetReservationParameters } from '../models/classes/Interfaces';
+import { GetReservationParameters } from '../dtos/dto';
 import Reservation from '../models/classes/Reservation';
-import ReservationRepository from '../models/repositories/ReservationRepository';
+import ReservationRepository from '../services/repositories/ReservationRepository';
 
 //const ReservationRepositoy = require('../models/repositories/ReservationRepository');
 

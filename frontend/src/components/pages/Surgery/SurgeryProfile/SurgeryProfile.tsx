@@ -166,12 +166,11 @@ function SurgeryProfile(props) {
                     }}
                   >
                     {surgery?.Animal.Name}
-                  </p>
-                </div>
+                  </p>  </div>
               </div>
             </div>
           
-            <div className="card card-body shadow">
+            <div className="card card-body shadow mt-3">
               <div className="card-title">
                 <h5>Opis</h5>
               </div>

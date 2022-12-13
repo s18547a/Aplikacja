@@ -1,10 +1,10 @@
-const config = require('../../config/mssql/userConnection.js');
-const sql = require('mssql');
-import Animal from '../classes/Animal';
-import { GetVisitPrarameters } from '../classes/Interfaces';
-import Vet from '../classes/Vet';
 
-import Visit from '../classes/Visit';
+const sql = require('mssql');
+import Animal from '../../models/classes/Animal';
+
+import Vet from '../../models/classes/Vet';
+
+import Visit from '../../models/classes/Visit';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import { createVisitSearchQueryString } from '../../utils/queryStringHelpers';
 import AnimalRepostiory from './AnimalRepository';
@@ -12,6 +12,7 @@ import VetRepository from './VetRepository';
 import MedicalActivityRepository from './MedicalActivityRepository';
 import ReservationRepository from './ReservationRepository';
 import Repository from './Repository';
+import { GetVisitPrarameters } from '../../dtos/dto';
 
 
 class VisitRepository extends Repository{
@@ -32,7 +33,7 @@ class VisitRepository extends Repository{
 
 
         try {
-            const pool =await sql.connect(config);
+            const pool =await sql.connect(this.databaseConfiguration);
             const results = await pool
                 .request()
                 .input('VisitId', sql.VarChar, VisitId)
@@ -77,7 +78,7 @@ class VisitRepository extends Repository{
             console.log(parameters);
 
    
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             let visitRecordset;
             if ( !parameters.AnimalId &&!parameters.VetId &&!parameters.OwnerId 
             ) {
@@ -158,7 +159,7 @@ class VisitRepository extends Repository{
         
             const queryString=createVisitSearchQueryString(parameters);
             console.log(queryString);
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const visitsPool = await pool.request()
            
             // eslint-disable-next-line quotes
@@ -211,7 +212,7 @@ class VisitRepository extends Repository{
 
     createVisit = async (Visit) => {
         try {
-            const pool = await sql.connect(config);
+            const pool = await sql.connect(this.databaseConfiguration);
             const transaction = await new sql.Transaction(pool);
             try {
                 const VisitId = createIDwithUUIDV4();

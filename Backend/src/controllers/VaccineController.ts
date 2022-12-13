@@ -1,4 +1,4 @@
-import VaccineRepository from '../models/repositories/VaccineRepository';
+import VaccineRepository from '../services/repositories/VaccineRepository';
 
 //const VaccineRepository=require('../models/repositories/VaccineRepository');
 interface getVaccineTypesParameters{unAdministratedAnimalId:string}
