@@ -77,8 +77,8 @@ class VetScheduldeRepository extends Repository{
   
     
   
-    updateSchedulde = async (schedulde) => {
-        try {
+    updateSchedulde = async (schedulde) => {    
+        try{
             console.log(schedulde);
             const vetId: string = schedulde.VetId;
             const monday: string | null = schedulde.Monday;
@@ -88,10 +88,15 @@ class VetScheduldeRepository extends Repository{
             const friday: string | null = schedulde.Friday;
             const saturday: string | null = schedulde.Saturday;
             const sunday: string | null = schedulde.Sunday;
-  
             const pool = await sql.connect(this.databaseConfiguration);
-            const scheduldePool = await pool
-                .request()
+            const transaction = await new sql.Transaction(pool);
+
+        try {
+          
+            
+           
+                await transaction.begin();
+                let results = await new sql.Request(transaction)
                 .input('VetId', sql.VarChar, vetId)
                 .input('Monday', sql.VarChar, monday)
                 .input('Tuesday', sql.VarChar, tuesday)
@@ -101,18 +106,40 @@ class VetScheduldeRepository extends Repository{
                 .input('Saturday', sql.VarChar, saturday)
                 .input('Sunday', sql.VarChar, sunday)
                 .query(
-                    'Update Schedulde set Monday=@Monday,Tuesday=@Tuesday, Wednesday=@Wednesday, Thursday=@Thursday, Friday=@Friday, Saturday=@Saturday, Sunday=@Sunday where VetId=@VetId'
+                    'Update Schedulde set Monday=@Monday,Tuesday=@Tuesday, Wednesday=@Wednesday, Thursday=@Thursday, Friday=@Friday, Saturday=@Saturday, Sunday=@Sunday Where VetId=@VetId'
                 );
+
+           
   
-            const rowsAffected = scheduldePool.rowsAffected[0];
+            const rowsAffected = results.rowsAffected[0];
             if (rowsAffected != 1) {
-                throw Error;
-            } else return 1;
+                throw Error('Updating Schedulde failed');
+            } 
+
+            results=await new sql.Request(transaction).input('VetId', sql.VarChar,vetId)
+            .query('Delete From Reservation Where VetId=@VetId ');
+
+            results=await new sql.Request(transaction).input('LeadVetId', sql.VarChar,vetId)
+            .query('Delete From Surgery Where LeadVetId=@LeadVetId and Report=null');
+            
+
+           await transaction.commit();
+            return vetId;
+
+
+
+
+
         } catch (error) {
             console.log(error);
-  
-            return error;
+            transaction.rollback();
+            throw Error(String(error));
         }
+    }catch (error){
+     
+        console.log(error);
+        return error
+    }
     };
   
   
@@ -141,7 +168,7 @@ class VetScheduldeRepository extends Repository{
             } else {
 
                 const results= await this.scheduldeHelperRepository.createVatAvailableHours(scheduldeRecordset,paramters);
-
+                
                 return results;
          
             }

@@ -72,15 +72,21 @@ class ScheduldeHelperRepository extends Repository{
     
          
             if(paramters.isSurgery===false){
+               
+                if(receptionHours.length==0){
+                    return null;
+                }
                 return receptionHours;
             }
             else {
                
                 console.log(receptionHours);
+                
               
                 const availableSurgeryTime= await createSurgeryAvailableHours(receptionHours);
                
-                if(availableSurgeryTime.length==0){
+                if(availableSurgeryTime.length){
+                    
                     return null;
                 }
                 return availableSurgeryTime;
@@ -93,3 +99,4 @@ class ScheduldeHelperRepository extends Repository{
 }
 
 export default ScheduldeHelperRepository;
+
