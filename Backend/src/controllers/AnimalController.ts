@@ -61,7 +61,7 @@ class AnimalController{
 
 
     registerAnimal= async (req, res)=>{
-        const Animal: Animal = req.body;
+        const Animal = req.body;
         const results = await this.animalRepository.registerAnimal(Animal);
         
         if (results instanceof Error) {
@@ -70,7 +70,7 @@ class AnimalController{
     };
 
     updateAnimal=async(req, res)=>{
-        const updatedAnimal: Animal = req.body;
+        const updatedAnimal = req.body;
 
         const results = await this.animalRepository.updateAnimal(updatedAnimal);
 

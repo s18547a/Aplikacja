@@ -7,7 +7,7 @@ export enum Sex {
 }
 
 class Animal {
-    AnimalId: string | null;
+    AnimalId: string ;
     Name: string;
     BirthDate: string;
    
@@ -16,11 +16,11 @@ class Animal {
     ProfileImage: string | null;
     Sex: Sex;
 
-    AnimalTypeId: number;
+    AnimalTypeId: string;
     AnimalType: AnimalType;
 
     constructor(
-        AnimalId: string | null,
+        AnimalId: string ,
         Name: string,
         BirthDate: string,
       
@@ -29,7 +29,7 @@ class Animal {
         ProfileImage: string | null,
         Sex: number,
 
-        AnimalTypeId: number,
+        AnimalTypeId: string,
         AnimalType: AnimalType
     ) {
         this.AnimalId = AnimalId;

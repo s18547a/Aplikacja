@@ -1,16 +1,19 @@
 import makeApp from '../../src/app';
 import Animal from '../../src/models/classes/Animal';
+import AnimalMedicalInfo from '../../src/models/classes/AnimalMedicalInfo';
 const testConfig=require('../../src/config/mssql/testConnection');
 const supertest = require('supertest');
 const app = makeApp(testConfig);
 
-
+import config from './../../src/utils/auth/key';
+const jwt = require('jsonwebtoken');
 describe('Animal', ()=>{
 
     
-    const token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6Im1hbmFnZXJAZ21haWwuY29tIiwiVXNlcklkIjoiNzQiLCJpYXQiOjE2NzA5NTUwOTEsImV4cCI6MTY3MDk5MTA5MX0.Qazvk5YpRG9y4GCPyuaV7AmOYPX0XcWwrXuUZHePG6k';
-   
-   
+    const token=jwt.sign({
+        Email:'managerTest@gmail.com',
+        UserId:'a-3-adawd'
+    },config.secret,{expiresIn:'10h'});
 
     it('Animal exists in database',async()=>{
 
@@ -87,6 +90,45 @@ describe('Animal', ()=>{
 
         expect(response.status).toBe(201);
         expect(response.body.newId).toHaveLength(36);
+
+    });
+
+    it('Get Animal medical info',async()=>{
+
+        const results = await supertest(app).get('/animals/0b52c3e3-1ffb-4b1d-80c4-404ffcf2dadf/medicalInfo');
+        
+        expect(results.status).toBe(200);
+        
+    });
+
+
+    it('Update Animal medical info',async()=>{
+        const url='/animals/medicalInfo';
+        const animal={
+            AnimalId: '0b52c3e3-1ffb-4b1d-80c4-404ffcf2dadf',
+            Weight:3.2,
+            Chipped: 1,
+            Sterilized: 0,
+            Skeletal: '',
+            Muscular: '',
+            Nervous: '',
+            Endocrine: '',
+            Cardiovascular: '',
+            Lymphatic: '',
+            Respiratory: '',
+            Digestive: '',
+            Urinary: '',
+            Reproductive: '',
+            Optical: '',
+            Dental: '',
+            Dermatological: '',
+            Others: '',
+
+        };
+        const response=await supertest(app).put(url).send(animal).set('Authorization', `Bearer ${token}`,);
+
+        expect(response.status).toBe(201);
+        
 
     });
 

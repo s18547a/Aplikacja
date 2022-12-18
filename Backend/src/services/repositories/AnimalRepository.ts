@@ -195,12 +195,12 @@ class AnimalRepostiory extends Repository{
         }
     };
     
-    updateAnimal=async(Animal: Animal)=>{
+    updateAnimal=async(Animal)=>{
         const AnimalId: string | null = Animal.AnimalId;
         const Name: string = Animal.Name;
         const BirthDate: string = Animal.BirthDate;
     
-        const AnimalTypeId: number = Animal.AnimalTypeId;
+        const AnimalTypeId: string = Animal.AnimalTypeId;
         const OwnerId: string = Animal.OwnerId;
         const Sex: number = Animal.Sex;
     
