@@ -1,12 +1,12 @@
 class Owner {
-    OwnerId: string | null;
+    OwnerId: string 
     Name: string;
     LastName: string;
     Contact: string;
     Email: string;
     Password: string | null;
     constructor(
-        OwnerId: string | null,
+        OwnerId: string ,
         Name: string,
         LastName: string,
         Contact: string,

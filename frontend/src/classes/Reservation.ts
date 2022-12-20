@@ -1,31 +1,28 @@
-import Owner from "./Owner";
-import Vet from "./Vet";
-
 class Reservation {
-  ReservationId: string | undefined;
-  Date: string | undefined;
-  VetId: number | undefined;
-  OwnerId: number | undefined;
-  Hour: string | undefined;
-  Vet: Vet | undefined | null;
-  Owner: Owner | undefined | null;
+  ReservationId: string | null;
+  Date: string;
+  VetId: string;
+  OwnerId: string;
+  Hour: string;
+  Vet:{VetId:string,Name:string,LastName:string,Email:string,Contact:string};
+  Owner: {OwnerId:string,Name:string,LastName:string,Email:string,Contact:string};
 
   constructor(
-    ReservationId: string | undefined,
-    Date: string | undefined,
-    VetId: number | undefined,
-    OwnerId: number | undefined,
-    Hour: string | undefined,
-    Vet: Vet | undefined | null,
-    Owner: Owner | undefined | null
+      ReservationId: string | null,
+      Date: string,
+      VetId: string,
+      OwnerId: string,
+      Hour: string,
+      Vet: {VetId:string,Name:string,LastName:string,Email:string,Contact:string},
+      Owner: {OwnerId:string,Name:string,LastName:string,Email:string,Contact:string}
   ) {
-    this.ReservationId = ReservationId;
-    this.Date = Date;
-    this.VetId = VetId;
-    this.OwnerId = OwnerId;
-    this.Hour = Hour;
-    this.Vet = Vet;
-    this.Owner = Owner;
+      this.ReservationId = ReservationId;
+      this.Date = Date;
+      this.VetId = VetId;
+      this.OwnerId = OwnerId;
+      this.Hour = Hour;
+      this.Vet = Vet;
+      this.Owner = Owner;
   }
 }
 

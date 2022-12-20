@@ -70,9 +70,9 @@ class ScheduldeHelperRepository extends Repository{
                 
             }
     
-         
+            
             if(paramters.isSurgery===false){
-               
+                    
                 if(receptionHours.length==0){
                     return null;
                 }

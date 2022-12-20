@@ -1,5 +1,5 @@
 class Vet {
-    VetId: number;
+    VetId: string;
     Name: string;
     LastName: string;
     Contact: string;
@@ -8,7 +8,7 @@ class Vet {
     ProfileImage: string | null;
     Types: { VetType: string; Salary: number }[];
     constructor(
-        VetId: number,
+        VetId: string,
         Name: string,
         LastName: string,
         Contact: string,

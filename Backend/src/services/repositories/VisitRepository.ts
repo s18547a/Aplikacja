@@ -137,8 +137,8 @@ class VisitRepository extends Repository{
                             visit.Note,
                             visit.Bill,
                             visitMedicalActivies,
-                            visitVet,
-                            visitAnimal
+                            {VetId:visitVet.VetId,Name:visit.Name,LastName:visitVet.LastName,Email:visitVet.Email},
+                            {AnimalId:visit.AnimalId,OwnerId:visitAnimal.OwnerId,Name:visitAnimal.Name}
                         );
                     })
                 );
@@ -261,6 +261,7 @@ class VisitRepository extends Repository{
                             );
                         console.log('RESULTS');
                         if (resultsS.rowsAffected[0] != 1) {
+                            
                             throw Error('');
                         }
                     }
@@ -303,9 +304,9 @@ class VisitRepository extends Repository{
                 }
                 if(cannceledReservation!=''){
 
-                    const rowsAffected=await this.reservationRepository.cancelReservation(cannceledReservation,transaction);
-                    if(rowsAffected!=1){
-                        throw Error('');
+                    const canceledReservationId=await this.reservationRepository.cancelReservation(cannceledReservation,transaction);
+                    if(cannceledReservation!=canceledReservationId){
+                        throw Error('failed to cancel');
                     }
                 }
 

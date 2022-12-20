@@ -1,5 +1,3 @@
-import Owner from './Owner';
-import Vet from './Vet';
 
 class Reservation {
     ReservationId: string | null;
@@ -7,8 +5,8 @@ class Reservation {
     VetId: string;
     OwnerId: string;
     Hour: string;
-    Vet: Vet;
-    Owner: Owner;
+    Vet:{VetId:string,Name:string,LastName:string,Email:string,Contact:string};
+    Owner: {OwnerId:string,Name:string,LastName:string,Email:string,Contact:string};
 
     constructor(
         ReservationId: string | null,
@@ -16,8 +14,8 @@ class Reservation {
         VetId: string,
         OwnerId: string,
         Hour: string,
-        Vet: Vet,
-        Owner: Owner
+        Vet: {VetId:string,Name:string,LastName:string,Email:string,Contact:string},
+        Owner: {OwnerId:string,Name:string,LastName:string,Email:string,Contact:string}
     ) {
         this.ReservationId = ReservationId;
         this.Date = Date;

@@ -2,6 +2,7 @@
 
 import sql from 'mssql';
 import { GetReservationParameters } from '../../dtos/dto';
+import Owner from '../../models/classes/Owner';
 
 
 import Reservation from '../../models/classes/Reservation';
@@ -82,7 +83,8 @@ class ReservationRepository extends Repository{
                         const vetObject: Vet = await this.vetRepository.getVet(
                             reservation.VetId,
                         );
-                        const ownerObject = await this.ownerRepository.getOwner(
+
+                        const ownerObject:Owner = await this.ownerRepository.getOwner(
                             reservation.OwnerId,
                         );
                         return new Reservation(
@@ -91,8 +93,8 @@ class ReservationRepository extends Repository{
                             reservation.VetId,
                             reservation.OwnerId,
                             reservation.Hour,
-                            vetObject,
-                            ownerObject
+                            {VetId:vetObject.VetId,Name:vetObject.Name,LastName:vetObject.Name, Email:vetObject.Email,Contact:vetObject.Contact},
+                            {OwnerId:ownerObject.OwnerId,Name:ownerObject.Name,LastName:ownerObject.Name,Email:ownerObject.Email,Contact:ownerObject.Contact}
                         );
                     })
                 );
@@ -166,6 +168,7 @@ class ReservationRepository extends Repository{
                 rowsAffected = result.rowsAffected[0];
             }
             if(rowsAffected!=1){
+               
                 throw Error('');
             }
             else return ReservationId;

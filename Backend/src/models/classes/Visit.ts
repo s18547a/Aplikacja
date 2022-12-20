@@ -11,8 +11,8 @@ class Visit {
     Note: string;
     Bill: number;
     MedicalActivities: MedicalActivity[];
-    Vet: Vet;
-    Animal: Animal;
+    Vet: {VetId:string,Name:string,LastName:string,Email:string};
+    Animal:{AnimalId:string,OwnerId:string,Name:string};
     constructor(
         VisitId: string,
         VetId: string,
@@ -22,8 +22,8 @@ class Visit {
         Note: string,
         Bill: number,
         MedicalActivities: MedicalActivity[],
-        Vet: Vet,
-        Animal: Animal
+        Vet: {VetId:string,Name:string,LastName:string,Email:string},
+        Animal: {AnimalId:string,OwnerId:string,Name:string}
     ) {
         this.VisitId = VisitId;
         this.VetId = VetId;
