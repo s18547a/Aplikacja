@@ -27,7 +27,7 @@ class ReservationRepository extends Repository{
 
     getReservations = async (parameters: GetReservationParameters) => {
         try {
-            const returnList = true;
+         
     
             const pool = await sql.connect(this.databaseConfiguration);
             let reservationRecordset;
@@ -103,10 +103,7 @@ class ReservationRepository extends Repository{
                     return null;
                 }
           
-                if (reservations.length == 1 && !returnList) {
-          
-                    return reservations[0];
-                } else {
+                else {
           
                     return reservations;
                 }
@@ -140,7 +137,7 @@ class ReservationRepository extends Repository{
       
     
             if (reservationPool.rowsAffected[0] == 1) {
-                console.log('NEW ID' + ReservationId);
+               
                 return ReservationId;
             } else throw Error();
         } catch (error) {

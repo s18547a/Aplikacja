@@ -10,30 +10,31 @@ import { isAuthenticated } from './components/other/authHelper';
 
 import Navigation from './components/Banner/BannerComponent';
 
-import OwnerRegister from './components/pages/Owner/OwnerRegister';
-import AnimalList from './components/pages/Animal/AnimalList/AnimalList';
-import AnimalForm from './components/pages/Animal/AnimalRegister/AnimalForm';
+import OwnerRegister from './pages/Owner/OwnerRegister';
+import AnimalList from './pages/Animal/AnimalList/AnimalList';
+import AnimalForm from './pages/Animal/AnimalRegister/AnimalForm';
 
-import ReservationsList from './components/pages/Reservation/ReservationList/ReservationList';
-import ReservationForm from './components/pages/Reservation/ReservationRegister/ReservationForm';
-import VisitList from './components/pages/Visit/VisitList/VisitList';
-import VisitRegister from './components/pages/Visit/VisitRegister/VisitRegister';
-import AnimalInfo from './components/pages/Animal/AnimalProfile/AnimalProfile';
-import UserProfile from './components/pages/General/UserProfile';
+import ReservationsList from './pages/Reservation/ReservationList/ReservationList';
+import ReservationForm from './pages/Reservation/ReservationRegister/ReservationForm';
+import VisitList from './pages/Visit/VisitList/VisitList';
+import VisitRegister from './pages/Visit/VisitRegister/VisitRegister';
+import AnimalInfo from './pages/Animal/AnimalProfile/AnimalProfile';
+import UserProfile from './pages/General/UserProfile';
 
-import SurgeryForm from './components/pages/Surgery/SurgeryRegister/SurgeryForm';
-import VisitProfile from './components/pages/Visit/VisitProfile/VisitProfile';
-import VetList from './components/pages/Vet/VetList/VetList';
+import SurgeryForm from './pages/Surgery/SurgeryRegister/SurgeryForm';
+import VisitProfile from './pages/Visit/VisitProfile/VisitProfile';
+import VetList from './pages/Vet/VetList/VetList';
 import { isManager, isVet } from './components/other/userType';
-import VetForm from './components/pages/Vet/VetRegister/VetForm';
-import VetProfile from './components/pages/Vet/VetProfile/VetProfile';
-import VetScheduldeForm from './components/pages/Vet/VetRegister/VetScheduldeForm';
+import VetForm from './pages/Vet/VetRegister/VetForm';
+import VetProfile from './pages/Vet/VetProfile/VetProfile';
+import VetScheduldeForm from './pages/Vet/VetRegister/VetScheduldeForm';
 import SideBar from './components/Navigation/SideBarComponent';
-import HomePage from './components/pages/Unlogged/HomePage';
-import MedicalInfoForm from './components/pages/Animal/AnimalRegister/AnimalMedicalInfoEdit/MedicalInfoForm';
-import SurgeryList from './components/pages/Surgery/SurgeryList/SurgeryList';
-import SurgeryProfile from './components/pages/Surgery/SurgeryProfile/SurgeryProfile';
-import NotFoundPage from './components/pages/General/NotFoundPage';
+import HomePage from './pages/Unlogged/HomePage';
+import MedicalInfoForm from './pages/Animal/AnimalRegister/AnimalMedicalInfoEdit/MedicalInfoForm';
+import SurgeryList from './pages/Surgery/SurgeryList/SurgeryList';
+import SurgeryProfile from './pages/Surgery/SurgeryProfile/SurgeryProfile';
+import NotFoundPage from './pages/General/NotFoundPage';
+import AnimalProfile from './pages/Animal/AnimalProfile/AnimalProfile';
 const bootstrap = require('bootstrap');
 
 function App() {
