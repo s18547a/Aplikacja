@@ -137,7 +137,7 @@ class VisitRepository extends Repository{
                             visit.Note,
                             visit.Bill,
                             visitMedicalActivies,
-                            {VetId:visitVet.VetId,Name:visit.Name,LastName:visitVet.LastName,Email:visitVet.Email},
+                            {VetId:visitVet.VetId,Name:visitVet.Name,LastName:visitVet.LastName,Email:visitVet.Email},
                             {AnimalId:visit.AnimalId,OwnerId:visitAnimal.OwnerId,Name:visitAnimal.Name}
                         );
                     })

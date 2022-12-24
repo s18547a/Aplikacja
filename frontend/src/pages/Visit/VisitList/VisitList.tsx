@@ -9,6 +9,7 @@ import Visit from '../../../classes/Visit';
 import Pagination from '../../../components/List/Pagination';
 import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import { VisitListParamter } from '../../../components/other/helperClass/VisitListParameters';
 import { isVet, isManager, isOwner } from '../../../components/other/userType';
@@ -123,6 +124,13 @@ function VisitList() {
 
 	return (
 		<div className="container">
+			<div className="row">
+				<div className="col-6">
+					<BreadCrumbComponent
+						elements={[{ label: 'Wizyty', active: true, link: '' }]}
+					/>
+				</div>
+			</div>
 			<div className="row">
 				<RegiserSuccessInfo newId={newId} message={'Nowa wizyta: '} />
 			</div>

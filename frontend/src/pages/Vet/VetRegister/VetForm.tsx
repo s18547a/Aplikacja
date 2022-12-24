@@ -10,6 +10,7 @@ import PhotoForm from '../../Shared/PhotoForm';
 import VetMainInfo from './VetMainInfo';
 
 import VetSpecForm from './VetSpecForm';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 
 interface VetI {
 	Name: string;
@@ -51,6 +52,7 @@ function VetForm() {
 	});
 	const location = useLocation();
 	const [editForm, setEditForm] = useState(false);
+	const [editVetId, setVetId] = useState('');
 	useEffect(() => {
 		let response;
 		let promise;
@@ -77,6 +79,7 @@ function VetForm() {
 		const state = location.state as { VetId: string };
 		if (state != null) {
 			setEditForm(true);
+			setVetId(state.VetId);
 
 			promise = getVetByVetId(state.VetId);
 			if (promise) {
@@ -221,6 +224,27 @@ function VetForm() {
 	}
 	return (
 		<form className="container" onSubmit={handleSubmit}>
+			<div className="row">
+				<div className="col-12">
+					{editForm ? (
+						<BreadCrumbComponent
+							elements={[
+								{ label: 'Wetrynarze', active: false, link: '/vets' },
+								{ label: 'Profil', active: false, link: `vets/${editVetId}` },
+								{ label: 'Edycja', active: true, link: '' },
+							]}
+						/>
+					) : (
+						<BreadCrumbComponent
+							elements={[
+								{ label: 'Weterynarze', active: false, link: '/vets' },
+
+								{ label: 'Rejestracja', active: true, link: '' },
+							]}
+						/>
+					)}
+				</div>
+			</div>
 			<div className="row">
 				<div className="col-4">
 					<PhotoForm

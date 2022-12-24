@@ -8,6 +8,7 @@ import {
 } from '../../../api/animalApiCalls';
 import { getOwners } from '../../../api/ownerApiCalls';
 import AnimalType from '../../../classes/AnimalType';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import { isOwner, isVet, isManager } from '../../../components/other/userType';
 import PhotoForm from '../../Shared/PhotoForm';
@@ -262,8 +263,30 @@ function AnimalRegister() {
 		}));
 	}
 
+	const profileLink = {};
 	return (
 		<form className="container " onSubmit={handleSubmit} noValidate style={{}}>
+			<div className="row">
+				<div className="col-12">
+					{editForm ? (
+						<BreadCrumbComponent
+							elements={[
+								{ label: 'Zwierzęta', active: false, link: '/animals' },
+								{ label: 'Profil', active: false, link: `animals/${animalId}` },
+								{ label: 'Edycja', active: true, link: '' },
+							]}
+						/>
+					) : (
+						<BreadCrumbComponent
+							elements={[
+								{ label: 'Zwierzęta', active: false, link: '/animals' },
+
+								{ label: 'Rejestracja', active: true, link: '' },
+							]}
+						/>
+					)}
+				</div>
+			</div>
 			<div className="row just">
 				<div className="col-lg-4">
 					<PhotoForm

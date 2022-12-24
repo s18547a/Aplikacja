@@ -4,6 +4,7 @@ import { getAnimalUnadminstratedVaccines } from '../../../api/animalApiCalls';
 import { getMedicalAtivities, registerVisit } from '../../../api/visitApiCalls';
 import Animal from '../../../classes/Animal';
 import VaccineType from '../../../classes/VaccineType';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import DiagnosisForm from './DiagnosisForm';
 import VisitActivitiesForm from './VisitActivitesForm';
@@ -311,6 +312,20 @@ function VisitRegister() {
 
 	return (
 		<form className=" container " onSubmit={handleSubmit}>
+			<div className="row">
+				<div className="col-6">
+					<BreadCrumbComponent
+						elements={[
+							{ label: 'Wizyty', active: false, link: '/visits' },
+							{
+								label: 'Rejestracja',
+								active: true,
+								link: '',
+							},
+						]}
+					/>
+				</div>
+			</div>
 			<div className="row justify-content-center">
 				<div className="col-lg-6">
 					<div className="row justify-content-center">

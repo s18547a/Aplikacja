@@ -12,6 +12,7 @@ import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import Modal from '../../../components/Modal/Modal';
 import ModalEnableBtn from '../../../components/Modal/ModalEnableBtn';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import {
 	getCurrentDate,
@@ -136,6 +137,13 @@ function ReservationList() {
 				function={handleClick}
 				label={'Czy na pewno?'}
 			/>
+			<div className="row">
+				<div className="col-6">
+					<BreadCrumbComponent
+						elements={[{ label: 'Rezerwacje', active: true, link: '' }]}
+					/>
+				</div>
+			</div>
 			<RegiserSuccessInfo newId={message.id} message={message.message} />
 
 			<div className="card card-body shadow">

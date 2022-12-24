@@ -108,6 +108,9 @@ function App() {
 							width: '100%',
 						}}
 					>
+						<div className="row">
+							<div className="col-12"></div>
+						</div>
 						<Routes>
 							<Route
 								path="/home"

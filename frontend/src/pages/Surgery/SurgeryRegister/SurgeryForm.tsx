@@ -22,6 +22,7 @@ import FormSelectLimit from '../../../components/Form/FormSelectLimit';
 import FormTextField from '../../../components/Form/FormTextField';
 import ProfileDiv from '../../../components/other/ProfileDiv';
 import { checkIfAllFieldAsFilled } from '../../../components/other/validatiorHelper';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 
 interface SurgeryI {
 	OwnerId: string;
@@ -311,6 +312,20 @@ function SurgeryForm() {
 
 	return (
 		<form className="container " onSubmit={handleSubmit}>
+			<div className="row">
+				<div className="col-6">
+					<BreadCrumbComponent
+						elements={[
+							{ label: 'Zabiegi', active: false, link: '/surgeries' },
+							{
+								label: 'Rezerwacja',
+								active: true,
+								link: '',
+							},
+						]}
+					/>
+				</div>
+			</div>
 			<div className="row justify-content-center">
 				<div className=" col-4 ">
 					<div className="card card-body shadow">

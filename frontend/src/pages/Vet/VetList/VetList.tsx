@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getVets } from '../../../api/vetApiCalls';
 import Vet from '../../../classes/Vet';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 
 function VetList() {
 	const [vetList, setVetList] = useState<Vet[]>([]);
@@ -36,6 +37,13 @@ function VetList() {
 
 	return (
 		<div className="container">
+			<div className="row">
+				<div className="col-6">
+					<BreadCrumbComponent
+						elements={[{ label: 'Weterynarze', active: true, link: '' }]}
+					/>
+				</div>
+			</div>
 			<div className="card card-body shadow">
 				<div className="card-title">
 					<h5>Lista weterynarzy</h5>

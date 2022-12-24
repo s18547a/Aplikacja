@@ -6,7 +6,12 @@ import { getVetByVetId } from '../../../api/vetApiCalls';
 import Reservation from '../../../classes/Reservation';
 import Surgery from '../../../classes/Surgery';
 import Vet from '../../../classes/Vet';
-import { getCurrentUser } from '../../../components/other/authHelper';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
+import {
+	getCurrentUser,
+	isAuthenticated,
+} from '../../../components/other/authHelper';
+import { isManager } from '../../../components/other/userType';
 
 import TodayReservationList from './TodayReservationList';
 import VetProfileNav from './VetProfileNav';
@@ -150,6 +155,23 @@ function VetProfile() {
 	}
 	return (
 		<div className="container">
+			{isManager() && vet.VetId != getCurrentUser().userId ? (
+				<div className="row">
+					<div className="col-6">
+						<BreadCrumbComponent
+							elements={[
+								{ label: 'Weterynarze', active: false, link: '/vets' },
+								{
+									label: 'Profil',
+									active: true,
+									link: '',
+								},
+							]}
+						/>
+					</div>
+				</div>
+			) : null}
+
 			<VetProfileNav activeTab={activeTab} onChange={onChangTab} />
 			<div className="row">
 				<div className="col-12">{setContent()}</div>

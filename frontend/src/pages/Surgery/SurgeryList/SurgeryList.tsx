@@ -6,6 +6,7 @@ import Surgery from '../../../classes/Surgery';
 import Pagination from '../../../components/List/Pagination';
 import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import { VisitListParamter } from '../../../components/other/helperClass/VisitListParameters';
 import { isVet, isManager, isOwner } from '../../../components/other/userType';
@@ -124,6 +125,13 @@ function SurgeryList() {
 
 	return (
 		<div className="container">
+			<div className="row">
+				<div className="col-6">
+					<BreadCrumbComponent
+						elements={[{ label: 'Zabiegi', active: true, link: '' }]}
+					/>
+				</div>
+			</div>
 			<div className="row">
 				<RegiserSuccessInfo newId={message.id} message={message.message} />
 			</div>

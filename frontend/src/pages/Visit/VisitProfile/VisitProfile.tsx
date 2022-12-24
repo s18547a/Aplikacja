@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVisitById } from '../../../api/visitApiCalls';
 import Visit from '../../../classes/Visit';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ProfileDiv from '../../../components/other/ProfileDiv';
 
 function VisitProfile() {
@@ -42,6 +43,20 @@ function VisitProfile() {
 
 	return (
 		<div className="container ">
+			<div className="row">
+				<div className="col-6">
+					<BreadCrumbComponent
+						elements={[
+							{ label: 'Wizyty', active: false, link: '/visits' },
+							{
+								label: 'Informacje',
+								active: true,
+								link: '',
+							},
+						]}
+					/>
+				</div>
+			</div>
 			<div className="row justify-content-center">
 				<div className="col-lg-4">
 					<div className="card card-body shadow">

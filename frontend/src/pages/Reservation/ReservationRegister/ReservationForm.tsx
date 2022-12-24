@@ -6,6 +6,7 @@ import Owner from '../../../classes/Owner';
 import Vet from '../../../classes/Vet';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormSelectLimit from '../../../components/Form/FormSelectLimit';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import { isOwner } from '../../../components/other/userType';
 
@@ -209,6 +210,20 @@ function ReservationForm() {
 	) : null;
 	return (
 		<form className="container" onSubmit={handleSubmit}>
+			<div className="row">
+				<div className="col-6">
+					<BreadCrumbComponent
+						elements={[
+							{ label: 'Rezerwacje', active: false, link: '/reservations' },
+							{
+								label: 'Rejestracja',
+								active: true,
+								link: '',
+							},
+						]}
+					/>
+				</div>
+			</div>
 			<div className="row justify-content-center">
 				<div className="col-lg-4 ">
 					<div className="card card-body shadow">

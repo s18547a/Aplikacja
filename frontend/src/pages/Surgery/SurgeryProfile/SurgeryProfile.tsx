@@ -8,6 +8,7 @@ import {
 import Surgery from '../../../classes/Surgery';
 import Modal from '../../../components/Modal/Modal';
 import ModalEnableBtn from '../../../components/Modal/ModalEnableBtn';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import ProfileDiv from '../../../components/other/ProfileDiv';
 import { isManager } from '../../../components/other/userType';
@@ -147,7 +148,22 @@ function SurgeryProfile(props) {
 				function={handleClick}
 				label={'Czy na pewno?'}
 			/>
+
 			<div className="">
+				<div className="row">
+					<div className="col-6">
+						<BreadCrumbComponent
+							elements={[
+								{ label: 'Zabiegi', active: false, link: '/surgeries' },
+								{
+									label: 'Profil',
+									active: true,
+									link: '',
+								},
+							]}
+						/>
+					</div>
+				</div>
 				<div className="row justify-content-center">
 					<div className="col-lg-4 ">
 						<div className="card card-body shadow">

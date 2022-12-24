@@ -9,6 +9,7 @@ import Animal from '../../../classes/Animal';
 import Pagination from '../../../components/List/Pagination';
 import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import { isOwner, isVet, isManager } from '../../../components/other/userType';
 
@@ -121,6 +122,13 @@ function AnimalList() {
 
 	return (
 		<div className="container">
+			<div className="row">
+				<div className="col-6">
+					<BreadCrumbComponent
+						elements={[{ label: 'Zwierzęta', active: true, link: '/animals' }]}
+					/>
+				</div>
+			</div>
 			<RegiserSuccessInfo newId={newId} message={'Zarejestrowane zwierzę: '} />
 			{isVet() ? <AnimalSearch onSearch={handleSearch} /> : null}
 			<div className="card card-body mt-4 shadow">

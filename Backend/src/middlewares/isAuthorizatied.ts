@@ -4,7 +4,7 @@ export const isAuthorizated=async(req,res,next)=>{
 
     const authHeader= req.headers['authorization'];
 
-    const token = authHeader && authHeader&& authHeader.split(' ')[1];
+    const token = authHeader&& authHeader.split(' ')[1];
 
     console.log(token);
     console.log(configAuthKey);

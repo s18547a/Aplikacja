@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
 	getAnimalById,
 	getAnimalMedicalInfo,
@@ -15,6 +15,7 @@ import Illness from '../../../classes/Illness';
 import Owner from '../../../classes/Owner';
 import Vaccination from '../../../classes/Vaccination';
 import VaccineType from '../../../classes/VaccineType';
+import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentDate } from '../../../components/other/getCurrentDate';
 import AnimalIllnesses from './AnimalIllnesses';
 import AnimalMainInfo from './AnimalMainInfo';
@@ -27,7 +28,7 @@ function AnimalProfile() {
 	const param = useParams();
 
 	const navigate = useNavigate();
-
+	const location = useLocation();
 	const [illnessList, setIllnessList] = useState<Illness[]>([]);
 	const [owner, setOwner] = useState<Owner>();
 	const [medicalInfo, setMedicalInfo] = useState<AnimalMedicalInfo>();
@@ -260,6 +261,16 @@ function AnimalProfile() {
 
 	return (
 		<div className="container">
+			<div className="row">
+				<div className="col-12">
+					<BreadCrumbComponent
+						elements={[
+							{ label: 'Zwierzęta', active: false, link: '/animals' },
+							{ label: 'Profil', active: true, link: '' },
+						]}
+					/>
+				</div>
+			</div>
 			<AnimalProfileNav
 				setSelectedTab={setSelectedTabFunction}
 				activeTab={selectedTab}

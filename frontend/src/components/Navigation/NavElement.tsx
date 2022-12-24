@@ -42,7 +42,7 @@ function NavElement(props: {
 
 			<ul
 				id={props.id}
-				className={currentLocation.includes(props.mainLink) ? '' : 'collapse '}
+				className={'collapse'} //currentLocation.includes(props.mainLink) ? '' : 'collapse '}
 				data-parent="#accordion"
 			>
 				{props.elements.map((element) => {
