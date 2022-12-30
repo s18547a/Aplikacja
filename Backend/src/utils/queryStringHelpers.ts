@@ -1,5 +1,5 @@
 
-export function createVisitSearchQueryString(parameters){
+export function createVisitSearchQueryString(parameters):string{
     
     const Date:string|undefined = parameters.Date;
     const Email:string|undefined=parameters.Email;
@@ -9,7 +9,7 @@ export function createVisitSearchQueryString(parameters){
     
 
      
-    let queryString='';
+    let queryString:string='';
     if(OwnerId){
         queryString=`Where animal.OwnerId='${OwnerId}'`;
     }

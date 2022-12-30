@@ -54,7 +54,7 @@ class SurgeryRepository extends Repository{
     
     };
     
-    getSurgeries = async (parameters: getSurgeryPrameters) => {
+    getSurgeries = async (parameters: getSurgeryPrameters)=> {
         try {
        
             let surgeryRecordset: any[] = [];
@@ -117,7 +117,7 @@ class SurgeryRepository extends Repository{
             }
         } catch (error) {
             console.log(error);
-            return error;
+            return error as any;
         }
     };
     

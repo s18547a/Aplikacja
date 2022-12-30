@@ -8,7 +8,7 @@ export function getScheduldeEarliestHour(daySchedulde: string[]) {
     } else {
         let minHour: string | null = null;
         daySchedulde.forEach((day) => {
-            const starHour = day.split('-')[0];
+            const starHour:string = day.split('-')[0];
 
             if (minHour == null) {
                 minHour = starHour;
@@ -25,7 +25,7 @@ export function getScheduldeEarliestHour(daySchedulde: string[]) {
 export function getScheduldeLatestHour(daySchedulde: string[]) {
     let maxHour: string | null = null;
     daySchedulde.forEach((day) => {
-        const endHour = day.split('-')[1];
+        const endHour:string = day.split('-')[1];
         if (maxHour == null) {
             maxHour = endHour;
         } else {

@@ -1,8 +1,9 @@
-export function createVetVisitHours(Hours:string){
-    const beginEndHours = Hours.split('-');
+//stwarza listę dostępnych godzin na podstawie godzin pracy weterynarza
+export function createVetVisitHours(VetWorkingHours:string){
+    const beginEndHours = VetWorkingHours.split('-');
 
-    const startHour = Number(beginEndHours[0].split(':')[0]);
-    const endHour = Number(beginEndHours[1].split(':')[0]);
+    const startHour:number = Number(beginEndHours[0].split(':')[0]);
+    const endHour:number = Number(beginEndHours[1].split(':')[0]);
     console.log(startHour);
     console.log(endHour);
     const times: string[] = [];

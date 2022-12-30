@@ -15,7 +15,7 @@ export function getDayOfAWeekName(NewDate: string): string {
     return newDate.toLocaleDateString('en-PL', { weekday: 'long' });
 }
 
-export async function translateDayOfWeekName(englishName:string){
+export async function translateDayOfWeekName(englishName:string):Promise<string>{
 
     translate.engine='google';
     const translatedName= await translate(englishName,'pl');

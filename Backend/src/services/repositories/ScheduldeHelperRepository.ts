@@ -4,6 +4,7 @@ import Reservation from '../../models/classes/Reservation';
 import Repository from './Repository';
 import ReservationRepository from './ReservationRepository';
 import SurgeryRepository from './SurgeryRepository';
+import Surgery from '../../models/classes/Surgery';
 
 class ScheduldeHelperRepository extends Repository{
 
@@ -37,22 +38,24 @@ class ScheduldeHelperRepository extends Repository{
                 bookedHours = bookedReservations.map((reservation) => {
                     return reservation.Hour;
                 });
-    
+                //usuwa z listy termniów już zajęta
                 receptionHours = receptionHours.filter((bookedHour) => {
                     return !bookedHours.includes(bookedHour);
                 });
             }
     
-            const bookedSurgeries= await this.surgeryRepository.getSurgeries({Date:paramters.Date,VetId:paramters.VetId});
+            const bookedSurgeries:Surgery[]|null= await this.surgeryRepository.getSurgeries({Date:paramters.Date,VetId:paramters.VetId });
             
             if( bookedSurgeries!=null){
               
-    
-                const unavalilableHoursArrays:[]=bookedSurgeries.map(surgery=>{
+                //stwarza listę list potrzebnych terminów dla każdego dostępnego temniów zabiegu
+                const unavalilableHoursArrays:string[][]=bookedSurgeries.map(surgery=>{
                     return getBusyNextHourFromSurgery(surgery.StartTime);
                 });
-                console.log(unavalilableHoursArrays);
+                
                 let unavalilableHour:string[]=[];
+
+                //na podstawie listy list tworzy listę godzin będących potrzebnych do realizacji zabiegu
                 unavalilableHoursArrays.forEach(hoursArray=>{
                     unavalilableHour=unavalilableHour.concat(hoursArray);
     
@@ -60,7 +63,7 @@ class ScheduldeHelperRepository extends Repository{
                         return (unavalilableHour.indexOf(item)==index);
                     });
                 });
-                console.log('Unavali',unavalilableHour);
+                //przelifrowuje listę zabiegów z listy rezerwacji
                 receptionHours=receptionHours.filter((hour)=>{
                     return !unavalilableHour.includes(hour);
                 });
@@ -83,9 +86,9 @@ class ScheduldeHelperRepository extends Repository{
                 console.log(receptionHours);
                 
               
-                const availableSurgeryTime= await createSurgeryAvailableHours(receptionHours);
-               
-                if(availableSurgeryTime.length){
+                const availableSurgeryTime=  createSurgeryAvailableHours(receptionHours);
+                console.log('availabeSurgeryHours',availableSurgeryTime);
+                if(availableSurgeryTime.length==0){
                     
                     return null;
                 }
