@@ -25,7 +25,7 @@ function VetInfo(props) {
 					</div>
 				</div>
 
-				<div className="ms-3 col-lg-7  ">
+				<div className="ms-lg-3 col-lg-7  ">
 					<div className="row card card-body shadow ">
 						<div className="col-12">
 							<div className="row mb-3">

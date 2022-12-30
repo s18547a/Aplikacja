@@ -10,14 +10,14 @@ import { isAuthenticated } from './components/other/authHelper';
 
 import Navigation from './components/Banner/BannerComponent';
 
-import OwnerRegister from './pages/Owner/OwnerRegister';
+import OwnerRegister from './pages/Owner/OwnerForm/OwnerRegister';
 import AnimalList from './pages/Animal/AnimalList/AnimalList';
 import AnimalForm from './pages/Animal/AnimalRegister/AnimalForm';
 
 import ReservationsList from './pages/Reservation/ReservationList/ReservationList';
 import ReservationForm from './pages/Reservation/ReservationRegister/ReservationForm';
 import VisitList from './pages/Visit/VisitList/VisitList';
-import VisitRegister from './pages/Visit/VisitRegister/VisitRegister';
+import VisitRegister from './pages/Visit/VisitRegister/VisitForm';
 import AnimalInfo from './pages/Animal/AnimalProfile/AnimalProfile';
 import UserProfile from './pages/General/UserProfile';
 
@@ -30,7 +30,7 @@ import VetProfile from './pages/Vet/VetProfile/VetProfile';
 import VetScheduldeForm from './pages/Vet/VetRegister/VetScheduldeForm';
 import SideBar from './components/Navigation/SideBarComponent';
 import HomePage from './pages/Unlogged/HomePage';
-import MedicalInfoForm from './pages/Animal/AnimalRegister/AnimalMedicalInfoEdit/MedicalInfoForm';
+import MedicalInfoForm from './pages/Animal/AnimalRegister/MedicalInfoForm';
 import SurgeryList from './pages/Surgery/SurgeryList/SurgeryList';
 import SurgeryProfile from './pages/Surgery/SurgeryProfile/SurgeryProfile';
 import NotFoundPage from './pages/General/NotFoundPage';
@@ -96,7 +96,7 @@ function App() {
 
 			<div className="row" style={{ height: '90%', width: '100%' }}>
 				{isAuthenticated() && (
-					<div className="col-lg-1 col-1">
+					<div className="col-lg-1 col-12">
 						<SideBar />
 					</div>
 				)}

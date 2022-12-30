@@ -6,6 +6,7 @@ import Animal from '../../../classes/Animal';
 import VaccineType from '../../../classes/VaccineType';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
+import { errorAPIHandler } from '../../../components/other/errorAPIHelper';
 import DiagnosisForm from './DiagnosisForm';
 import VisitActivitiesForm from './VisitActivitesForm';
 import VisitMainInfoForm from './VisitMainInfoForm';
@@ -31,7 +32,7 @@ interface MedicalActivitiyI {
 	Price: number;
 }
 
-function VisitRegister() {
+function VisitForm() {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [visit, setVisit] = useState<VisitI>({
@@ -156,8 +157,14 @@ function VisitRegister() {
 					(data) => {
 						if (result.status == 201) {
 							navigate('/visits', { state: { id: data.newId } });
-						} else {
-							console.log(error);
+						}
+						if (result.status == 500) {
+							const error = errorAPIHandler(data);
+
+							setError((prevErrors) => ({
+								...prevErrors,
+								OwnerId: error,
+							}));
 						}
 					},
 					(error) => {
@@ -373,4 +380,4 @@ function VisitRegister() {
 	);
 }
 
-export default VisitRegister;
+export default VisitForm;

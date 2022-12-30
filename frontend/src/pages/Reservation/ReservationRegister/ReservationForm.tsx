@@ -8,6 +8,7 @@ import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormSelectLimit from '../../../components/Form/FormSelectLimit';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
+import { errorAPIHandler } from '../../../components/other/errorAPIHelper';
 import { isOwner } from '../../../components/other/userType';
 
 import ReservationMainInfo from './ReservationMainInfo';
@@ -171,6 +172,14 @@ function ReservationForm() {
 							if (response.status == 201) {
 								console.log(data.newId);
 								navigate('/reservations', { state: { id: data.newId } });
+							}
+							if (response.status == 500) {
+								const error = errorAPIHandler(data);
+
+								setError((prevErrors) => ({
+									...prevErrors,
+									OwnerId: error,
+								}));
 							}
 						},
 						(error) => {

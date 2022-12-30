@@ -12,7 +12,7 @@ import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbCompon
 import { getCurrentUser } from '../../../components/other/authHelper';
 import { isOwner, isVet, isManager } from '../../../components/other/userType';
 import PhotoForm from '../../Shared/PhotoForm';
-import AnimalMainInfo from './AnimalRegisterComponents/AnimalMainInfo';
+import AnimalMainInfo from './AnimalMainInfo';
 
 interface AnimalI {
 	Name: undefined;

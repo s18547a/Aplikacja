@@ -93,8 +93,8 @@ class ReservationRepository extends Repository{
                             reservation.VetId,
                             reservation.OwnerId,
                             reservation.Hour,
-                            {VetId:vetObject.VetId,Name:vetObject.Name,LastName:vetObject.Name, Email:vetObject.Email,Contact:vetObject.Contact},
-                            {OwnerId:ownerObject.OwnerId,Name:ownerObject.Name,LastName:ownerObject.Name,Email:ownerObject.Email,Contact:ownerObject.Contact}
+                            {VetId:vetObject.VetId,Name:vetObject.Name,LastName:vetObject.LastName, Email:vetObject.Email,Contact:vetObject.Contact},
+                            {OwnerId:ownerObject.OwnerId,Name:ownerObject.Name,LastName:ownerObject.LastName,Email:ownerObject.Email,Contact:ownerObject.Contact}
                         );
                     })
                 );
@@ -142,6 +142,7 @@ class ReservationRepository extends Repository{
             } else throw Error();
         } catch (error) {
             console.log(error);
+            
             return error;
         }
     };

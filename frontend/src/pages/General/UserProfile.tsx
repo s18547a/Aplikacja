@@ -1,6 +1,6 @@
 import { getCurrentUser } from '../../components/other/authHelper';
 import { isOwner, isVet } from '../../components/other/userType';
-import OwnerProfile from '../Owner/OwnerProfile';
+import OwnerProfile from '../Owner/OwnerProfile/OwnerProfile';
 import VetProfile from '../Vet/VetProfile/VetProfile';
 
 function UserProfile() {

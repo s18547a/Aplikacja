@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import Owner from '../../../../classes/Owner';
-import SubmitFormButton from '../../../../components/Buttons/SubmitFormButton';
-import FormCheck from '../../../../components/Form/FormCheck';
-import FormDateReactDiv from '../../../../components/Form/FormDateRectDiv';
-import FormDiv from '../../../../components/Form/FormDiv';
-import FormSelect from '../../../../components/Form/FormSelect';
-import { isOwner } from '../../../../components/other/userType';
+import Owner from '../../../classes/Owner';
+import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
+import FormCheck from '../../../components/Form/FormCheck';
+import FormDateReactDiv from '../../../components/Form/FormDateRectDiv';
+import FormDiv from '../../../components/Form/FormDiv';
+import FormSelect from '../../../components/Form/FormSelect';
+import { isOwner } from '../../../components/other/userType';
 import FormAnimalTypeSelect from './FormAnimalTypeSelect';
 
 function AnimalMainInfo(props: {

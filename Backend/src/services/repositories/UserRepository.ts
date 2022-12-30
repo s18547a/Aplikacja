@@ -21,6 +21,19 @@ class UserRepository extends Repository{
             }
     
             const userRecordset = userPool.recordset[0];
+            let profileImage=null;
+            if(userRecordset.VetId!=null){
+
+                const pool =await sql.connect(this.databaseConfiguration);
+                const imagePool=await pool.request().input('VetId',sql.VarChar,userRecordset.VetId)
+                .query("Select ProfileImage From Vet Where VetId=@VetId")
+
+
+                profileImage=imagePool.recordset[0].ProfileImage;
+
+
+                
+            }
     
             return new User(
                 userRecordset.UserId,
@@ -28,7 +41,8 @@ class UserRepository extends Repository{
                 userRecordset.Password,
                 userRecordset.OwnerId,
                 userRecordset.VetId,
-                userRecordset.Manager
+                userRecordset.Manager,
+                profileImage
             );
         } catch (error) {
             console.log(error);

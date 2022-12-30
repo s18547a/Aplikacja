@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerOwnerApiCall } from '../../api/ownerApiCalls';
-import SubmitFormButton from '../../components/Buttons/SubmitFormButton';
-import FormDiv from '../../components/Form/FormDiv';
+import { registerOwnerApiCall } from '../../../api/ownerApiCalls';
+import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
+import FormDiv from '../../../components/Form/FormDiv';
 
-function OwnerRegister(props) {
+function OwnerForm(props) {
 	const [owner, setOwner] = useState({
 		Name: '',
 		LastName: '',
@@ -213,4 +213,4 @@ function OwnerRegister(props) {
 	);
 }
 
-export default OwnerRegister;
+export default OwnerForm;

@@ -5,6 +5,7 @@ class User {
     OwnerId: string | null;
     VetId: string | null;
     Manager: boolean | null;
+    ProfileImage:string|null;
 
     constructor(
         UserId: string,
@@ -12,7 +13,8 @@ class User {
         Password: string,
         OwnerId: string | null,
         VetId: string | null,
-        Manager: boolean | null
+        Manager: boolean | null,
+        ProfileImage:string|null
     ) {
         this.UserId = UserId;
         this.Email = Email;
@@ -20,6 +22,7 @@ class User {
         this.OwnerId = OwnerId;
         this.VetId = VetId;
         this.Manager = Manager;
+        this.ProfileImage=ProfileImage;
     }
 }
 

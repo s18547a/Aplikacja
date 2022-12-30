@@ -14,6 +14,7 @@ interface dataType {
   isManager: boolean;
   token: string;
   Email: string;
+  ProfileImage:string|null
 }
 enum UserType {
   Owner,
@@ -71,6 +72,7 @@ class UserController{
                                 isManager: user.Manager,
                                 Email: user.Email,
                                 token: token,
+                                ProfileImage:user.ProfileImage,
                             };
                             return  res.status(200).json(data); 
                         }

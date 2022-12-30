@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { updateMedicalInfo } from '../../../../api/animalApiCalls';
-import AnimalMedicalInfo from '../../../../classes/AnimalMedicalInfo';
-import SubmitFormButton from '../../../../components/Buttons/SubmitFormButton';
-import FormCheck from '../../../../components/Form/FormCheck';
-import FormDiv from '../../../../components/Form/FormDiv';
-import FormTextField from '../../../../components/Form/FormTextField';
+import { updateMedicalInfo } from '../../../api/animalApiCalls';
+import AnimalMedicalInfo from '../../../classes/AnimalMedicalInfo';
+import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
+import FormCheck from '../../../components/Form/FormCheck';
+import FormDiv from '../../../components/Form/FormDiv';
+import FormTextField from '../../../components/Form/FormTextField';
 
 function MedicalInfoForm(props) {
 	const [medicalInfo, setMedicalInfo] = useState<AnimalMedicalInfo>({
