@@ -5,13 +5,16 @@ import { getVetsOnDay, getValiableHours } from '../../../api/vetApiCalls';
 import Owner from '../../../classes/Owner';
 import Vet from '../../../classes/Vet';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
+import FormDateReactDiv from '../../../components/Form/FormDateRectDiv';
+import FormDiv from '../../../components/Form/FormDiv';
 import FormSelectLimit from '../../../components/Form/FormSelectLimit';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import { errorAPIHandler } from '../../../components/other/errorAPIHelper';
-import { isOwner } from '../../../components/other/userType';
+import { getCurrentDate } from '../../../components/other/getCurrentDate';
+import { isManager, isOwner, isVet } from '../../../components/other/userType';
+import SelectOwnerComponent from '../../Shared/SelectOwnerComponent';
 
-import ReservationMainInfo from './ReservationMainInfo';
 import ReservationVetChoice from './ReservationVetChoice';
 
 interface ReservationI {
@@ -43,18 +46,19 @@ function ReservationForm() {
 	});
 
 	async function handleDateChange(e) {
-		e.preventDefault();
-		const { name, value } = e.target;
+		//	e.preventDefault();
+		console.log(e);
+		//const { name, value } = e.target;
 		setReservation((prev) => ({
 			...prev,
-			Date: value,
+			Date: e,
 		}));
 
-		setDate(value);
+		setDate(e);
 		setHours([]);
 		let promise;
 		let response;
-		promise = getVetsOnDay(value);
+		promise = getVetsOnDay(e);
 		if (promise) {
 			promise
 				.then((data) => {
@@ -190,33 +194,6 @@ function ReservationForm() {
 		}
 	}
 
-	const vetChoiceComponent = reservation.Date ? (
-		<ReservationVetChoice
-			reservation={reservation}
-			vets={vets}
-			error={error.VetId}
-			handleVetChange={handleVetChange}
-		/>
-	) : null;
-
-	const hourChoiceComponenet = reservation.VetId ? (
-		<div className="">
-			<div className="col-12">
-				<FormSelectLimit
-					label="Godzina"
-					name="hour"
-					onChange={handleHourChange}
-					array={hours}
-					id={'element'}
-					elementLabel={'element'}
-					error={error.Hour}
-					arrayIsObjectList={false}
-					selectedValue={''}
-					selected={false}
-				/>
-			</div>
-		</div>
-	) : null;
 	return (
 		<form className="container" onSubmit={handleSubmit}>
 			<div className="row">
@@ -236,15 +213,57 @@ function ReservationForm() {
 			<div className="row justify-content-center">
 				<div className="col-lg-4 ">
 					<div className="card card-body shadow">
-						<ReservationMainInfo
-							handleDateChange={handleDateChange}
-							handleOwnerChange={handleOwnerChange}
-							error={error}
-							ownerList={ownerList}
-						/>
+						<div className="col-12">
+							{isVet() || isManager() ? (
+								<SelectOwnerComponent
+									onChange={handleOwnerChange}
+									error={error.OwnerId}
+								/>
+							) : null}
+						</div>
 
-						<div className="">{vetChoiceComponent}</div>
-						<div className="">{hourChoiceComponenet}</div>
+						<div className="col-12">
+							<FormDateReactDiv
+								name="day"
+								label="Data"
+								error={error.Date}
+								onChange={handleDateChange}
+								type="date"
+								min={getCurrentDate()}
+								value={reservation.Date}
+							/>
+						</div>
+
+						<div className="col-12">
+							{reservation.Date ? (
+								<ReservationVetChoice
+									reservation={reservation}
+									vets={vets}
+									error={error.VetId}
+									handleVetChange={handleVetChange}
+								/>
+							) : null}
+						</div>
+						<div className="col-12">
+							{reservation.VetId ? (
+								<div className="">
+									<div className="col-12">
+										<FormSelectLimit
+											label="Godzina"
+											name="hour"
+											onChange={handleHourChange}
+											array={hours}
+											id={'element'}
+											elementLabel={'element'}
+											error={error.Hour}
+											arrayIsObjectList={false}
+											selectedValue={''}
+											selected={false}
+										/>
+									</div>
+								</div>
+							) : null}
+						</div>
 
 						{reservation.Hour && (
 							<div className="">

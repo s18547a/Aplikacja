@@ -23,6 +23,7 @@ import FormTextField from '../../../components/Form/FormTextField';
 import ProfileDiv from '../../../components/other/ProfileDiv';
 import { checkIfAllFieldAsFilled } from '../../../components/other/validatiorHelper';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
+import { getCurrentDate } from '../../../components/other/getCurrentDate';
 
 interface SurgeryI {
 	OwnerId: string;
@@ -262,6 +263,7 @@ function SurgeryForm() {
 			Date: date.toString(),
 			StartTime: '',
 		}));
+		setAvailableHours([]);
 		setError((prev) => ({
 			...prev,
 			StartTime: '',
@@ -373,6 +375,7 @@ function SurgeryForm() {
 								dateFormat="yyyy-MM-dd"
 								error={error.Date}
 								disabled={surgery.LeadVetId == ''}
+								min={new Date(getCurrentDate())}
 							/>
 						)}
 
