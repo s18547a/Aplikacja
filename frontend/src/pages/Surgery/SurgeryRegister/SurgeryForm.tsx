@@ -7,12 +7,15 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import pl from 'date-fns/locale/pl';
 import { useNavigate } from 'react-router-dom';
-import { getSurgeryTypes, registerSurgery } from '../../../api/surgeryApiCalls';
+import {
+	getSurgeryTypes,
+	registerSurgery,
+} from '../../../apiCalls/surgeryApiCalls';
 import {
 	getVetBySurgeryType,
 	getVetDaysOfWeek,
 	getValiableHourForSurgery,
-} from '../../../api/vetApiCalls';
+} from '../../../apiCalls/vetApiCalls';
 import Animal from '../../../classes/Animal';
 import SurgeryType from '../../../classes/SurgeryType';
 import Vet from '../../../classes/Vet';

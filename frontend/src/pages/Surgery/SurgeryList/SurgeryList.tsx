@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { getReservationsByOwner } from '../../../api/reservationApiCalls';
-import { getSurgeries, searchSurgeryList } from '../../../api/surgeryApiCalls';
+import { getReservationsByOwner } from '../../../apiCalls/reservationApiCalls';
+import {
+	getSurgeries,
+	searchSurgeryList,
+} from '../../../apiCalls/surgeryApiCalls';
 import Surgery from '../../../classes/Surgery';
 import Pagination from '../../../components/List/Pagination';
 import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';

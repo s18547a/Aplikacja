@@ -4,7 +4,7 @@ import {
 	getAnimalsbyOwner,
 	getAnimals,
 	getAnimalsByOwnerEmail,
-} from '../../../api/animalApiCalls';
+} from '../../../apiCalls/animalApiCalls';
 import Animal from '../../../classes/Animal';
 import Pagination from '../../../components/List/Pagination';
 import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';

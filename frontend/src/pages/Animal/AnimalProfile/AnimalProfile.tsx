@@ -7,8 +7,8 @@ import {
 	getAnimalVaccines,
 	getAnimalCoreVaccines,
 	setRecoveryIllness,
-} from '../../../api/animalApiCalls';
-import { getOwnerById } from '../../../api/ownerApiCalls';
+} from '../../../apiCalls/animalApiCalls';
+import { getOwnerById } from '../../../apiCalls/ownerApiCalls';
 import Animal from '../../../classes/Animal';
 import AnimalMedicalInfo from '../../../classes/AnimalMedicalInfo';
 import Illness from '../../../classes/Illness';

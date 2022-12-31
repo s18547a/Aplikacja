@@ -6,7 +6,7 @@ import {
 	getReservationsByOwner,
 	getReservations,
 	cancelReservation,
-} from '../../../api/reservationApiCalls';
+} from '../../../apiCalls/reservationApiCalls';
 import Reservation from '../../../classes/Reservation';
 import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';

@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getAnimalUnadminstratedVaccines } from '../../../api/animalApiCalls';
-import { getMedicalAtivities, registerVisit } from '../../../api/visitApiCalls';
+import { getAnimalUnadminstratedVaccines } from '../../../apiCalls/animalApiCalls';
+import {
+	getMedicalAtivities,
+	registerVisit,
+} from '../../../apiCalls/visitApiCalls';
 import Animal from '../../../classes/Animal';
 import VaccineType from '../../../classes/VaccineType';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';

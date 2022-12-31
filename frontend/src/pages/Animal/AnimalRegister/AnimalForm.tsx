@@ -5,8 +5,8 @@ import {
 	getAnimalById,
 	updateAnimal,
 	registerAnimal,
-} from '../../../api/animalApiCalls';
-import { getOwners } from '../../../api/ownerApiCalls';
+} from '../../../apiCalls/animalApiCalls';
+import { getOwners } from '../../../apiCalls/ownerApiCalls';
 import AnimalType from '../../../classes/AnimalType';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';

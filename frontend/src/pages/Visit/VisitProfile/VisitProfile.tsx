@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getVisitById } from '../../../api/visitApiCalls';
+import { getVisitById } from '../../../apiCalls/visitApiCalls';
 import Visit from '../../../classes/Visit';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ProfileDiv from '../../../components/other/ProfileDiv';

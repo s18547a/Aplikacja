@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { logIn } from '../../api/userApiCalls';
+import { logIn } from '../../apiCalls/userApiCalls';
 import FormDiv from '../../components/Form/FormDiv';
 import ServerErrorInfoComponenet from '../Shared/ServerErrorInfoComponent';
 

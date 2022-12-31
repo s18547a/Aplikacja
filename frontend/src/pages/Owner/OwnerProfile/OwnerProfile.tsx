@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getOwnerById } from '../../../api/ownerApiCalls';
+import { getOwnerById } from '../../../apiCalls/ownerApiCalls';
 import Owner from '../../../classes/Owner';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import ProfileDiv from '../../../components/other/ProfileDiv';

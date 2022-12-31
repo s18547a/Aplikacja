@@ -4,7 +4,7 @@ import {
 	getVisitList,
 	getVisitListByOwner,
 	searchVisitList,
-} from '../../../api/visitApiCalls';
+} from '../../../apiCalls/visitApiCalls';
 import Visit from '../../../classes/Visit';
 import Pagination from '../../../components/List/Pagination';
 import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';

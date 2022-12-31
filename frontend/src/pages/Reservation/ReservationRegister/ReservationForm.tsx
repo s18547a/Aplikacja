@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerReservation } from '../../../api/reservationApiCalls';
-import { getVetsOnDay, getValiableHours } from '../../../api/vetApiCalls';
+import { registerReservation } from '../../../apiCalls/reservationApiCalls';
+import { getVetsOnDay, getValiableHours } from '../../../apiCalls/vetApiCalls';
 import Owner from '../../../classes/Owner';
 import Vet from '../../../classes/Vet';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';

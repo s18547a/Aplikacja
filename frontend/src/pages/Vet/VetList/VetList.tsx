@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getVets } from '../../../api/vetApiCalls';
+import { getVets } from '../../../apiCalls/vetApiCalls';
 import Vet from '../../../classes/Vet';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';

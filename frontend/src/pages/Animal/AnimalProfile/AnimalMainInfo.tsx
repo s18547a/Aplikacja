@@ -8,7 +8,7 @@ function AnimalProfile(props) {
 
 	return (
 		<div className="">
-			<div className="row ">
+			<div className="row justify-content-center">
 				<div className="col-lg-4 col-12">
 					<div className=" card card-body border-0 shadow">
 						<div className="row justify-content-center">
@@ -28,7 +28,7 @@ function AnimalProfile(props) {
 				</div>
 				<div className="col-lg-6 col-12 justify-content-center">
 					<div className="row">
-						<div className="col-12">
+						<div className="col-10">
 							<div className="row justify-content-center ">
 								<div className="col-lg-12 col-10 card card-body border-0 shadow ms-5">
 									<div className="row">
@@ -83,7 +83,7 @@ function AnimalProfile(props) {
 						</div>
 					</div>
 					<div className="row">
-						<div className="col-12 mt-5">
+						<div className="col-8 mt-5">
 							<div className=" row justify-content-center">
 								<div className="col-lg-12 col-10 card card-body border-0 shadow ms-5">
 									<div className="card-title">

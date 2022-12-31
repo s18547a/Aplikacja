@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAnimalsbyOwner } from '../../api/animalApiCalls';
+import { getAnimalsbyOwner } from '../../apiCalls/animalApiCalls';
 import Animal from '../../classes/Animal';
 
 function SelectAnimalComponent(props) {

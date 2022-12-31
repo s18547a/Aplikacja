@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getVetSchedulde } from '../../../api/vetApiCalls';
+import { getVetSchedulde } from '../../../apiCalls/vetApiCalls';
 import EditButton from '../../../components/Buttons/EditButton';
 import { isManager } from '../../../components/other/userType';
 
@@ -81,7 +81,9 @@ function VetSchedulde(props) {
 								<p>Poniedziałek</p>
 							</div>
 							<div className="col-7">
-								<p>{schedulde.Monday == null ? 'Brak' : schedulde.Monday}</p>
+								<p>
+									{schedulde.Monday == null ? 'Nie pracuje' : schedulde.Monday}
+								</p>
 							</div>
 						</div>
 					</div>
@@ -92,7 +94,11 @@ function VetSchedulde(props) {
 								<p>Wtorek</p>
 							</div>
 							<div className="col-7">
-								<p>{schedulde.Tuesday == null ? 'Brak' : schedulde.Tuesday}</p>
+								<p>
+									{schedulde.Tuesday == null
+										? 'Nie pracuje'
+										: schedulde.Tuesday}
+								</p>
 							</div>
 						</div>
 					</div>
@@ -104,7 +110,9 @@ function VetSchedulde(props) {
 							</div>
 							<div className="col-7">
 								<p>
-									{schedulde.Wednesday == null ? 'Brak' : schedulde.Wednesday}
+									{schedulde.Wednesday == null
+										? 'Nie pracuje'
+										: schedulde.Wednesday}
 								</p>
 							</div>
 						</div>
@@ -117,7 +125,9 @@ function VetSchedulde(props) {
 							</div>
 							<div className="col-7">
 								<p>
-									{schedulde.Thursday == null ? 'Brak' : schedulde.Thursday}
+									{schedulde.Thursday == null
+										? 'Nie pracuje'
+										: schedulde.Thursday}
 								</p>
 							</div>
 						</div>
@@ -129,7 +139,9 @@ function VetSchedulde(props) {
 								<p>Piątek</p>
 							</div>
 							<div className="col-7">
-								<p>{schedulde.Friday == null ? 'Brak' : schedulde.Friday}</p>
+								<p>
+									{schedulde.Friday == null ? 'Nie pracuje' : schedulde.Friday}
+								</p>
 							</div>
 						</div>
 					</div>
@@ -141,7 +153,9 @@ function VetSchedulde(props) {
 							</div>
 							<div className="col-7">
 								<p>
-									{schedulde.Saturday == null ? 'Brak' : schedulde.Saturday}
+									{schedulde.Saturday == null
+										? 'Nie pracuje'
+										: schedulde.Saturday}
 								</p>
 							</div>
 						</div>
@@ -153,7 +167,9 @@ function VetSchedulde(props) {
 								<p>Niedziela</p>
 							</div>
 							<div className="col-7">
-								<p>{schedulde.Sunday == null ? 'Brak' : schedulde.Sunday}</p>
+								<p>
+									{schedulde.Sunday == null ? 'Nie pracuje' : schedulde.Sunday}
+								</p>
 							</div>
 						</div>
 					</div>

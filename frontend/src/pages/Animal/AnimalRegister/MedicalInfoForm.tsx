@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { updateMedicalInfo } from '../../../api/animalApiCalls';
+import { updateMedicalInfo } from '../../../apiCalls/animalApiCalls';
 import AnimalMedicalInfo from '../../../classes/AnimalMedicalInfo';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormCheck from '../../../components/Form/FormCheck';

@@ -90,11 +90,11 @@ function App() {
 
 	return (
 		<div style={style}>
-			<header style={{ width: '100%', height: '10%' }}>
+			<header style={{ width: '100%', height: '8%' }}>
 				<BannerComponent handleLogout={handleLogout} />
 			</header>
 
-			<div className="row" style={{ height: '90%', width: '100%' }}>
+			<div className="row" style={{ height: '92%', width: '100%' }}>
 				{isAuthenticated() && (
 					<div className="col-lg-1 col-12">
 						<SideBar />

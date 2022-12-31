@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getVetSchedulde, updateSchedulde } from '../../../api/vetApiCalls';
+import {
+	getVetSchedulde,
+	updateSchedulde,
+} from '../../../apiCalls/vetApiCalls';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import DayScheduldeComponenet from './DayScheduldeComponent';
 

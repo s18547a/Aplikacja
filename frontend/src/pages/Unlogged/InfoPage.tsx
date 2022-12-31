@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getClinicSchedulde } from '../../api/clinicInfoApiCalls';
+import { getClinicSchedulde } from '../../apiCalls/clinicInfoApiCalls';
 
 import ScheduldeRow from './ScheduldeRow';
 

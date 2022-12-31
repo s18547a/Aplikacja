@@ -4,7 +4,7 @@ import {
 	getSurgery,
 	updateSurgeryReport,
 	cancelSurgery,
-} from '../../../api/surgeryApiCalls';
+} from '../../../apiCalls/surgeryApiCalls';
 import Surgery from '../../../classes/Surgery';
 import Modal from '../../../components/Modal/Modal';
 import ModalEnableBtn from '../../../components/Modal/ModalEnableBtn';

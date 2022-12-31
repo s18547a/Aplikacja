@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { getTodayReservationsByVetId } from '../../../api/reservationApiCalls';
-import { getTodaySurgeries } from '../../../api/surgeryApiCalls';
-import { getVetByVetId } from '../../../api/vetApiCalls';
+import { getTodayReservationsByVetId } from '../../../apiCalls/reservationApiCalls';
+import { getTodaySurgeries } from '../../../apiCalls/surgeryApiCalls';
+import { getVetByVetId } from '../../../apiCalls/vetApiCalls';
 import Reservation from '../../../classes/Reservation';
 import Surgery from '../../../classes/Surgery';
 import Vet from '../../../classes/Vet';

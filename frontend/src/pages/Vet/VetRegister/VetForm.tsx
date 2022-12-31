@@ -4,7 +4,7 @@ import {
 	getVetTypes,
 	registerVet,
 	updateVet,
-} from '../../../api/vetApiCalls';
+} from '../../../apiCalls/vetApiCalls';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PhotoForm from '../../Shared/PhotoForm';
 import VetMainInfo from './VetMainInfo';
