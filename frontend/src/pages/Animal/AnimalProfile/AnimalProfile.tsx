@@ -17,6 +17,7 @@ import Vaccination from '../../../classes/Vaccination';
 import VaccineType from '../../../classes/VaccineType';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentDate } from '../../../components/other/getCurrentDate';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 import AnimalIllnesses from './AnimalIllnesses';
 import AnimalMainInfo from './AnimalMainInfo';
 import AnimalProfileNav from './AnimalProfileNav';
@@ -33,6 +34,7 @@ function AnimalProfile() {
 	const [owner, setOwner] = useState<Owner>();
 	const [medicalInfo, setMedicalInfo] = useState<AnimalMedicalInfo>();
 	const [vaccineList, setVaccineList] = useState<Vaccination[]>([]);
+	const [serverError, setServerError] = useState(false);
 
 	useEffect(() => {
 		loadAnimal();
@@ -61,10 +63,12 @@ function AnimalProfile() {
 								animalOwnerId = data.OwnerId;
 							}
 							if (response.status == 404 || response.status == 500) {
+								setServerError(true);
 							}
 						},
 						(error) => {
 							console.log(error.message);
+							setServerError(true);
 						}
 					)
 					.then(() => {
@@ -81,9 +85,12 @@ function AnimalProfile() {
 											setOwner(data);
 										}
 										if (response.status == 404 || response.status == 500) {
+											setServerError(true);
 										}
 									},
-									(error) => {}
+									(error) => {
+										setServerError(true);
+									}
 								);
 						}
 					});
@@ -108,9 +115,12 @@ function AnimalProfile() {
 							if (response.status == 200) {
 								setMedicalInfo(data);
 							} else if (response.status == 404 || response.status == 500) {
+								setServerError(true);
 							}
 						},
-						(error) => {}
+						(error) => {
+							setServerError(true);
+						}
 					);
 			}
 		}
@@ -135,9 +145,12 @@ function AnimalProfile() {
 						if (response.status == 404) {
 						}
 						if (response.status == 500) {
+							setServerError(true);
 						}
 					},
-					(error) => {}
+					(error) => {
+						setServerError(true);
+					}
 				);
 		}
 	};
@@ -159,9 +172,12 @@ function AnimalProfile() {
 							setVaccineList(data);
 						}
 						if (response.status == 500) {
+							setServerError(true);
 						}
 					},
-					(error) => {}
+					(error) => {
+						setServerError(true);
+					}
 				);
 		}
 	};
@@ -183,12 +199,15 @@ function AnimalProfile() {
 							setCoreVaccinesList(data);
 						}
 						if (response.status == 500) {
+							setServerError(true);
 						}
 						if (response.status == 404) {
 							setCoreVaccinesList([]);
 						}
 					},
-					(error) => {}
+					(error) => {
+						setServerError(true);
+					}
 				);
 		}
 	};
@@ -261,6 +280,7 @@ function AnimalProfile() {
 
 	return (
 		<div className="container">
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-12">
 					<BreadCrumbComponent

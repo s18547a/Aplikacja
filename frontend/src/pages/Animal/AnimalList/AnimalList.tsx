@@ -12,12 +12,13 @@ import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import { isOwner, isVet, isManager } from '../../../components/other/userType';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 import AnimalSearch from './AnimalSearch';
 
 function AnimalList() {
 	const [animals, setAnimalList] = useState<Animal[]>([]);
-	const [error, setError] = useState(null);
+
 	const navigate = useNavigate();
 	const [empty, setEmpty] = useState<boolean>(false);
 
@@ -26,6 +27,7 @@ function AnimalList() {
 
 	const [pagedList, setPagedList] = useState<Animal[][]>([]);
 	const [selectedPage, setSelectedPage] = useState<number>(0);
+	const [serverError, setServerError] = useState(false);
 
 	const divideListIntoPages = (visitList: Animal[]) => {
 		const dowloadListLength: number = visitList.length;
@@ -64,7 +66,7 @@ function AnimalList() {
 								setAnimalList(data);
 							}
 							if (response.status == 500) {
-								setError(data);
+								setServerError(true);
 							}
 							if (response.status == 404) {
 								setEmpty(true);
@@ -72,6 +74,7 @@ function AnimalList() {
 						},
 						(error) => {
 							console.log(error);
+							setServerError(true);
 						}
 					);
 			}
@@ -106,9 +109,13 @@ function AnimalList() {
 							setEmpty(true);
 							navigate('/animals');
 						}
+						if (results.status == 500) {
+							setServerError(serverError);
+						}
 					},
 					(error) => {
 						console.log(error);
+						setServerError(serverError);
 					}
 				);
 		}
@@ -122,6 +129,7 @@ function AnimalList() {
 
 	return (
 		<div className="container">
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-6">
 					<BreadCrumbComponent

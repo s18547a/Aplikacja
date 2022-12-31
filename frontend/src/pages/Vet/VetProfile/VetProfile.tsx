@@ -12,6 +12,8 @@ import {
 	isAuthenticated,
 } from '../../../components/other/authHelper';
 import { isManager } from '../../../components/other/userType';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import InfoBorder from '../../Shared/ServerErrorInfoComponent';
 
 import TodayReservationList from './TodayReservationList';
 import VetProfileNav from './VetProfileNav';
@@ -19,6 +21,7 @@ import VetProfileTab from './VetProfileTab';
 function VetProfile() {
 	const params = useParams();
 	const location = useLocation();
+	const [serverError, setServerError] = useState(false);
 
 	const [vet, setVet] = useState<Vet>({
 		VetId: undefined,
@@ -65,9 +68,12 @@ function VetProfile() {
 							}
 
 							if (response.status == 500) {
+								setServerError(true);
 							}
 						},
-						(error) => {}
+						(error) => {
+							setServerError(true);
+						}
 					);
 			}
 		};
@@ -91,9 +97,12 @@ function VetProfile() {
 								setTodayReservations([]);
 							}
 							if (response.status == 500) {
+								setServerError(true);
 							}
 						},
-						(error) => {}
+						(error) => {
+							setServerError(true);
+						}
 					);
 			}
 		};
@@ -117,9 +126,12 @@ function VetProfile() {
 								setTodaySurgeries([]);
 							}
 							if (response.status == 500) {
+								setServerError(true);
 							}
 						},
-						(error) => {}
+						(error) => {
+							setServerError(true);
+						}
 					);
 			}
 		};
@@ -155,6 +167,7 @@ function VetProfile() {
 	}
 	return (
 		<div className="container">
+			<ServerErrorInfoComponenet serverError={serverError} />
 			{isManager() && vet.VetId != getCurrentUser().userId ? (
 				<div className="row">
 					<div className="col-6">

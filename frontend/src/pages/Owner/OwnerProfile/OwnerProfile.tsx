@@ -14,6 +14,7 @@ function OwnerProfile() {
 		Password: undefined,
 	});
 	const [error, setError] = useState({});
+	const [serverError, setServerError] = useState(false);
 
 	const getOwnerFromApi = async () => {
 		const user = getCurrentUser();
@@ -30,9 +31,13 @@ function OwnerProfile() {
 					if (response.status == 200) {
 						setOwner(data);
 					}
+					if (response.status == 500) {
+						setServerError(true);
+					}
 				},
 				(error) => {
 					setError(error);
+					setServerError(true);
 				}
 			);
 	};

@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logIn } from '../../api/userApiCalls';
 import FormDiv from '../../components/Form/FormDiv';
+import ServerErrorInfoComponenet from '../Shared/ServerErrorInfoComponent';
 
 function LoginForm(props) {
 	const [loginForm, editLoginForm] = useState({ Email: '', Password: '' });
 	const [error, setError] = useState({ Email: '', Password: '' });
-	const [connectionError, setConnectionError] = useState<string | null>('');
+
 	const [isLoading, setIsLoading] = useState(false);
-	const navigate = useNavigate();
+
+	const [serverError, setServerError] = useState(false);
 
 	function handleChange(e) {
 		const { name, value } = e.target;
@@ -53,14 +55,11 @@ function LoginForm(props) {
 								props.handleLogin(user);
 							}
 							if (response.status == 500) {
-								setError((prev) => ({
-									...prev,
-									Email: 'Błąd serwera',
-								}));
+								setServerError(true);
 							}
 						},
 						(error) => {
-							setConnectionError(error);
+							setServerError(true);
 							console.log(error);
 						}
 					);
@@ -88,6 +87,7 @@ function LoginForm(props) {
 	return (
 		<form onSubmit={handleSubmit} className="">
 			<div className="row justify-content-center">
+				<ServerErrorInfoComponenet serverError={serverError} />
 				<div className="col-6">
 					<div className="card card-body  border-0 shadow">
 						<div className="row justify-content-center">

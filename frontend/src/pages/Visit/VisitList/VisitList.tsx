@@ -15,6 +15,7 @@ import { VisitListParamter } from '../../../components/other/helperClass/VisitLi
 import { isVet, isManager, isOwner } from '../../../components/other/userType';
 
 import SearchInput from '../../Shared/SearchImput';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 import VisitSearch from '../../Shared/VisitSearch';
 
 function VisitList() {
@@ -27,6 +28,8 @@ function VisitList() {
 
 	const [pagedList, setPagedList] = useState<Visit[][]>([]);
 	const [selectedPage, setSelectedPage] = useState<number>(0);
+
+	const [serverError, setServerError] = useState(false);
 
 	const divideListIntoPages = (visitList: Visit[]) => {
 		const dowloadListLength: number = visitList.length;
@@ -69,10 +72,12 @@ function VisitList() {
 							setEmpty(true);
 						}
 						if (response.status == 500) {
+							setServerError(true);
 						}
 					},
 					(error) => {
 						console.log(error);
+						setServerError(true);
 					}
 				);
 		}
@@ -108,9 +113,13 @@ function VisitList() {
 							setEmpty(true);
 							navigate('/visits');
 						}
+						if (results.status == 500) {
+							setServerError(true);
+						}
 					},
 					(error) => {
 						console.log(error);
+						setServerError(true);
 					}
 				);
 		}
@@ -124,6 +133,7 @@ function VisitList() {
 
 	return (
 		<div className="container">
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-6">
 					<BreadCrumbComponent

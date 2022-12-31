@@ -20,7 +20,6 @@ import VisitList from './pages/Visit/VisitList/VisitList';
 import VisitRegister from './pages/Visit/VisitRegister/VisitForm';
 import AnimalInfo from './pages/Animal/AnimalProfile/AnimalProfile';
 import UserProfile from './pages/General/UserProfile';
-
 import SurgeryForm from './pages/Surgery/SurgeryRegister/SurgeryForm';
 import VisitProfile from './pages/Visit/VisitProfile/VisitProfile';
 import VetList from './pages/Vet/VetList/VetList';
@@ -35,6 +34,7 @@ import SurgeryList from './pages/Surgery/SurgeryList/SurgeryList';
 import SurgeryProfile from './pages/Surgery/SurgeryProfile/SurgeryProfile';
 import NotFoundPage from './pages/General/NotFoundPage';
 import AnimalProfile from './pages/Animal/AnimalProfile/AnimalProfile';
+import BannerComponent from './components/Banner/BannerComponent';
 const bootstrap = require('bootstrap');
 
 function App() {
@@ -91,7 +91,7 @@ function App() {
 	return (
 		<div style={style}>
 			<header style={{ width: '100%', height: '10%' }}>
-				<Navigation handleLogout={handleLogout} />
+				<BannerComponent handleLogout={handleLogout} />
 			</header>
 
 			<div className="row" style={{ height: '90%', width: '100%' }}>

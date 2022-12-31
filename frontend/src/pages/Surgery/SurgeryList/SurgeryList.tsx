@@ -10,6 +10,7 @@ import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbCompon
 import { getCurrentUser } from '../../../components/other/authHelper';
 import { VisitListParamter } from '../../../components/other/helperClass/VisitListParameters';
 import { isVet, isManager, isOwner } from '../../../components/other/userType';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 import VisitSearch from '../../Shared/VisitSearch';
 
 function SurgeryList() {
@@ -27,6 +28,8 @@ function SurgeryList() {
 
 	const [pagedList, setPagedList] = useState<Surgery[][]>([]);
 	const [selectedPage, setSelectedPage] = useState<number>(0);
+
+	const [serverError, setServerError] = useState(false);
 
 	const divideListIntoPages = (visitList: Surgery[]) => {
 		const dowloadListLength: number = visitList.length;
@@ -70,9 +73,13 @@ function SurgeryList() {
 						if (response.status == 404) {
 							setEmpty(true);
 						}
+						if (response.status == 500) {
+							setServerError(true);
+						}
 					},
 					(error) => {
 						console.log(error);
+						setServerError(true);
 					}
 				);
 		}
@@ -115,9 +122,13 @@ function SurgeryList() {
 						if (results.status == 404) {
 							setEmpty(true);
 						}
+						if (results.status == 500) {
+							setServerError(true);
+						}
 					},
 					(error) => {
 						console.log(error);
+						setServerError(true);
 					}
 				);
 		}
@@ -125,6 +136,7 @@ function SurgeryList() {
 
 	return (
 		<div className="container">
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-6">
 					<BreadCrumbComponent

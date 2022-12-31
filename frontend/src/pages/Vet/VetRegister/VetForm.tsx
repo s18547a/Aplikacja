@@ -11,6 +11,7 @@ import VetMainInfo from './VetMainInfo';
 
 import VetSpecForm from './VetSpecForm';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 interface VetI {
 	Name: string;
@@ -53,6 +54,7 @@ function VetForm() {
 	const location = useLocation();
 	const [editForm, setEditForm] = useState(false);
 	const [editVetId, setVetId] = useState('');
+	const [serverError, setServerError] = useState(false);
 	useEffect(() => {
 		let response;
 		let promise;
@@ -69,9 +71,13 @@ function VetForm() {
 						if (response.status == 200) {
 							setVetTypeList(data);
 						}
+						if (response.status == 500) {
+							setServerError(true);
+						}
 					},
 					(error) => {
 						console.log(error);
+						setServerError(true);
 					}
 				);
 		}
@@ -109,10 +115,13 @@ function VetForm() {
 									ProfileImage: data.ProfileImage,
 									VetType: formTypes,
 								}));
+							} else {
+								setServerError(true);
 							}
 						},
 						(error) => {
 							console.log(error);
+							setServerError(true);
 						}
 					);
 			}
@@ -181,8 +190,12 @@ function VetForm() {
 									Email: 'Email jest już zarejestrowany',
 								}));
 							}
+							if (response.status == 500) {
+								setServerError(true);
+							}
 						},
 						(error) => {
+							setServerError(true);
 							console.log(error);
 						}
 					);
@@ -224,6 +237,7 @@ function VetForm() {
 	}
 	return (
 		<form className="container" onSubmit={handleSubmit}>
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-12">
 					{editForm ? (

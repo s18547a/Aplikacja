@@ -5,10 +5,9 @@ import Animal from '../../classes/Animal';
 function SelectAnimalComponent(props) {
 	const [animalList, setAnimalList] = useState<Animal[]>([]);
 
-	function setAPIError(value, errorField) {
-		props.setAPIError(value, errorField);
+	function setServerError() {
+		props.setServerError();
 	}
-
 	const getAnimalListFromApi = (OwnerId: String) => {
 		if (props.OwnerId) {
 			let promise;
@@ -27,18 +26,18 @@ function SelectAnimalComponent(props) {
 								setAnimalList(data);
 							}
 							if (response.status === 404) {
-								setAPIError('Brak wyników', 'AnimalId');
 								setAnimalList([]);
 							}
 							if (response.status === 500) {
-								setAPIError('Błąd serwera', 'AnimalId');
 								setAnimalList([]);
+								setServerError();
 							}
 						},
 						(error) => {
 							console.log(error);
-							setAPIError(error, 'AnimalId');
+
 							setAnimalList([]);
+							//setServerError();
 						}
 					);
 			}

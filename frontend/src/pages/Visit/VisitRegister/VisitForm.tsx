@@ -7,6 +7,7 @@ import VaccineType from '../../../classes/VaccineType';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import { errorAPIHandler } from '../../../components/other/errorAPIHelper';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 import DiagnosisForm from './DiagnosisForm';
 import VisitActivitiesForm from './VisitActivitesForm';
 import VisitMainInfoForm from './VisitMainInfoForm';
@@ -33,6 +34,7 @@ interface MedicalActivitiyI {
 }
 
 function VisitForm() {
+	const [serverError, setServerError] = useState(false);
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [visit, setVisit] = useState<VisitI>({
@@ -79,8 +81,12 @@ function VisitForm() {
 						if (response.status == 200) {
 							setMedicalActivities(data);
 						}
+						if (response.status == 500) {
+							setServerError(true);
+						}
 					},
 					(error) => {
+						setServerError(true);
 						console.log(error);
 					}
 				);
@@ -159,15 +165,11 @@ function VisitForm() {
 							navigate('/visits', { state: { id: data.newId } });
 						}
 						if (result.status == 500) {
-							const error = errorAPIHandler(data);
-
-							setError((prevErrors) => ({
-								...prevErrors,
-								OwnerId: error,
-							}));
+							setServerError(true);
 						}
 					},
 					(error) => {
+						setServerError(true);
 						console.log(error);
 					}
 				);
@@ -281,12 +283,9 @@ function VisitForm() {
 		}));
 	}
 
-	function setAPIError(value, errorField) {
-		setError((prev) => ({
-			...prev,
-			[errorField]: value,
-		}));
-	}
+	const setServerErrorChild = () => {
+		setServerError(true);
+	};
 	const [vaccineList, setVaccineList] = useState<VaccineType[]>([]);
 
 	async function getAnimalUnadminstratedVaccinesApiCall(AnimalId) {
@@ -307,9 +306,12 @@ function VisitForm() {
 							setVaccineList([]);
 						}
 						if (results.status == 500) {
+							setServerError(true);
 						}
 					},
-					(error) => {}
+					(error) => {
+						setServerError(true);
+					}
 				);
 		}
 	}
@@ -319,6 +321,7 @@ function VisitForm() {
 
 	return (
 		<form className=" container " onSubmit={handleSubmit}>
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-6">
 					<BreadCrumbComponent
@@ -340,10 +343,10 @@ function VisitForm() {
 							<VisitMainInfoForm
 								onChange={onChange}
 								onChangeOwner={onChangeOwner}
-								setAPIError={setAPIError}
 								error={error}
 								visit={visit}
 								editForm={realised}
+								setServerError={setServerErrorChild}
 							/>
 						</div>
 					</div>

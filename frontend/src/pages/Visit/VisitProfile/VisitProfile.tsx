@@ -4,9 +4,11 @@ import { getVisitById } from '../../../api/visitApiCalls';
 import Visit from '../../../classes/Visit';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ProfileDiv from '../../../components/other/ProfileDiv';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 function VisitProfile() {
 	const [visit, setVist] = useState<Visit>();
+	const [serverError, setServerError] = useState(false);
 
 	const param = useParams();
 
@@ -30,9 +32,13 @@ function VisitProfile() {
 							}
 							if (response.status == 404) {
 							}
+							if (response.status == 500) {
+								setServerError(true);
+							}
 						},
 						(error) => {
 							console.log(error);
+							setServerError(true);
 						}
 					);
 			}
@@ -43,6 +49,7 @@ function VisitProfile() {
 
 	return (
 		<div className="container ">
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-6">
 					<BreadCrumbComponent

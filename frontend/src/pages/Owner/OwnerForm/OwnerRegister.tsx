@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { registerOwnerApiCall } from '../../../api/ownerApiCalls';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormDiv from '../../../components/Form/FormDiv';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 function OwnerForm(props) {
 	const [owner, setOwner] = useState({
@@ -22,6 +23,7 @@ function OwnerForm(props) {
 
 	const [passwordError, setPasswordError] = useState('');
 	const [repeatPassword, setRepeatPassword] = useState('');
+	const [serverError, setServerError] = useState(false);
 	let naviage = useNavigate();
 
 	function handleChange(e) {
@@ -104,6 +106,7 @@ function OwnerForm(props) {
 					.then(
 						(data) => {
 							if (response.status === 500) {
+								setServerError(true);
 							}
 							if (response.status == 404) {
 								setError((prev) => ({
@@ -117,6 +120,7 @@ function OwnerForm(props) {
 						},
 						(error) => {
 							console.log(error);
+							setServerError(true);
 						}
 					);
 			}
@@ -130,6 +134,7 @@ function OwnerForm(props) {
 
 	return (
 		<form className="container " onSubmit={handleSubmit} noValidate={true}>
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row justify-content-center">
 				<div className="col-lg-6">
 					<div className="card card-body border-0 shadow">

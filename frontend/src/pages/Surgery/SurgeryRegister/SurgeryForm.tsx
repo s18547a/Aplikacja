@@ -24,6 +24,7 @@ import ProfileDiv from '../../../components/other/ProfileDiv';
 import { checkIfAllFieldAsFilled } from '../../../components/other/validatiorHelper';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentDate } from '../../../components/other/getCurrentDate';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 interface SurgeryI {
 	OwnerId: string;
@@ -63,6 +64,7 @@ function SurgeryForm() {
 	});
 	const [vets, setVets] = useState<Vet[]>([]);
 	const [availableHours, setAvailableHours] = useState<string[]>([]);
+	const [serverError, setServerError] = useState(false);
 
 	useEffect(() => {
 		getTypesFromApi();
@@ -82,12 +84,12 @@ function SurgeryForm() {
 						if (results.status == 200) {
 							setSurgeryTypes(data);
 						}
+						if (results.status == 500) {
+							setServerError(true);
+						}
 					},
 					(error) => {
-						setError((prev) => ({
-							...prev,
-							SurgeryType: 'Błąd',
-						}));
+						setServerError(true);
 					}
 				);
 		}
@@ -146,8 +148,12 @@ function SurgeryForm() {
 					if (results.status == 200) {
 						setVets(data);
 					}
+					if (results.status == 500) {
+						setServerError(true);
+					}
 				},
 				(error) => {
+					setServerError(true);
 					return error;
 				}
 			);
@@ -176,18 +182,23 @@ function SurgeryForm() {
 					response = data;
 					return data.json();
 				})
-				.then((data) => {
-					if (response.status == 200) {
-						setavailableDaysList(data);
-						console.log(data);
+				.then(
+					(data) => {
+						if (response.status == 200) {
+							setavailableDaysList(data);
+							console.log(data);
+						}
+						if (response.status == 404) {
+							setavailableDaysListError('Weterynarz nie przyjmuje');
+							console.log(404);
+						} else {
+							setServerError(true);
+						}
+					},
+					(error) => {
+						setServerError(true);
 					}
-					if (response.status == 404) {
-						setavailableDaysListError('Weterynarz nie przyjmuje');
-						console.log(404);
-					} else {
-						setavailableDaysListError('Błąd');
-					}
-				}, error);
+				);
 		}
 	}
 
@@ -222,9 +233,11 @@ function SurgeryForm() {
 							navigate('/surgeries', { state: { id: data.newId } });
 						} else {
 							console.log(error);
+							setServerError(true);
 						}
 					},
 					(error) => {
+						setServerError(true);
 						console.log(error);
 					}
 				);
@@ -290,17 +303,11 @@ function SurgeryForm() {
 								StartTime: 'Brak wyników',
 							}));
 						} else {
-							setError((prev) => ({
-								...prev,
-								StartTime: 'Błąd',
-							}));
+							setServerError(true);
 						}
 					},
 					(error) => {
-						setError((prev) => ({
-							...prev,
-							StartTime: error,
-						}));
+						setServerError(true);
 					}
 				);
 		}
@@ -312,8 +319,13 @@ function SurgeryForm() {
 		return availableDayList.includes(day);
 	};
 
+	const setServerErrorChild = () => {
+		setServerError(true);
+	};
+
 	return (
 		<form className="container " onSubmit={handleSubmit}>
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-6">
 					<BreadCrumbComponent
@@ -335,6 +347,7 @@ function SurgeryForm() {
 							onChange={onChangeOwner}
 							error={error.OwnerId}
 							OwnerId={surgery.OwnerId}
+							setServerError={setServerErrorChild}
 						/>
 
 						<SelectAnimalComponent
@@ -342,6 +355,7 @@ function SurgeryForm() {
 							error={error.AnimalId}
 							OwnerId={surgery.OwnerId}
 							setAPIError={setAPIError}
+							setServerError={setServerErrorChild}
 						/>
 
 						<FormSelectLimit

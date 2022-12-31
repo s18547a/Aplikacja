@@ -11,8 +11,8 @@ function VisitMainInfoForm(props) {
 		props.onChangeOwner(e);
 	}
 
-	function setAPIError(value, errorField) {
-		props.setAPIError(value, errorField);
+	function setServerError(e) {
+		props.setServerError();
 	}
 
 	return (
@@ -27,6 +27,7 @@ function VisitMainInfoForm(props) {
 					error={props.error.OwnerId}
 					selectedValue={props.visit.OwnerId}
 					editForm={props.editForm}
+					setServerError={setServerError}
 				/>
 			</div>
 			<div className="row">
@@ -34,7 +35,7 @@ function VisitMainInfoForm(props) {
 					error={props.error.AnimalId}
 					onChange={onChange}
 					OwnerId={props.visit.OwnerId}
-					setAPIError={setAPIError}
+					setServerError={setServerError}
 				/>
 			</div>
 
@@ -51,16 +52,6 @@ function VisitMainInfoForm(props) {
 			</div>
 
 			<div className="row">
-				{/*
-          <FormDiv
-            label="Godzina "
-            name="Hour"
-            error={props.error.Hour}
-            placeholder="00:00"
-            onChange={onChange}
-            value={props.visit.Hour}
-            disabled={props.editForm}
-          />*/}
 				<div className="form-group">
 					<div className="row">
 						<div className="col-12">

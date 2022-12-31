@@ -19,6 +19,7 @@ import {
 	getCurrentHour,
 } from '../../../components/other/getCurrentDate';
 import { isVet, isManager, isOwner } from '../../../components/other/userType';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 function ReservationList() {
 	const navigate = useNavigate();
@@ -36,6 +37,7 @@ function ReservationList() {
 		message: '',
 	});
 
+	const [serverError, setServerError] = useState(false);
 	async function loadReservationList() {
 		const currentUserId = getCurrentUser().userTypeId;
 
@@ -67,9 +69,13 @@ function ReservationList() {
 						if (response.status == 404) {
 							setEmpty(true);
 						}
+						if (response.status == 500) {
+							setServerError(true);
+						}
 					},
 					(error) => {
 						console.log(error);
+						setServerError(true);
 					}
 				);
 		}
@@ -137,6 +143,7 @@ function ReservationList() {
 				function={handleClick}
 				label={'Czy na pewno?'}
 			/>
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-6">
 					<BreadCrumbComponent

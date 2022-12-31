@@ -11,6 +11,7 @@ import AnimalType from '../../../classes/AnimalType';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import { isOwner, isVet, isManager } from '../../../components/other/userType';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 import PhotoForm from '../../Shared/PhotoForm';
 import AnimalMainInfo from './AnimalMainInfo';
 
@@ -50,11 +51,10 @@ function AnimalRegister() {
 		Weight: '',
 		AnimalTypeId: '',
 		Sex: '',
-
 		OwnerId: '',
 	});
 
-	const [serverError, setServerError] = useState('');
+	const [serverError, setServerError] = useState(false);
 
 	let navigate = useNavigate();
 
@@ -79,10 +79,7 @@ function AnimalRegister() {
 				.then(
 					(data) => {
 						if (response.status == 500) {
-							setError((prev) => ({
-								...prev,
-								AnimalTypeId: 'Nieudane pobranie',
-							}));
+							setServerError(true);
 						}
 						if (response.status == 200) {
 							setAnimalTypes(data);
@@ -107,12 +104,12 @@ function AnimalRegister() {
 							if (response.status == 200) {
 								setOwnerList(data);
 							}
+							if (response.status == 500) {
+								setServerError(true);
+							}
 						},
 						(error) => {
-							setError((prev) => ({
-								...prev,
-								OwnerId: 'Nieudane pobranie',
-							}));
+							setServerError(true);
 						}
 					);
 			}
@@ -143,9 +140,13 @@ function AnimalRegister() {
 									Sex: data.Sex,
 								}));
 							}
+							if (response.status == 500) {
+								setServerError(true);
+							}
 						},
 						(error) => {
 							console.log(error);
+							setServerError(true);
 						}
 					);
 			}
@@ -246,6 +247,9 @@ function AnimalRegister() {
 									navigate(`/animals/${animalId}`);
 								}
 							}
+							if (response.status == 500) {
+								setServerError(true);
+							}
 						},
 						(error) => {
 							console.log(error);
@@ -263,9 +267,9 @@ function AnimalRegister() {
 		}));
 	}
 
-	const profileLink = {};
 	return (
 		<form className="container " onSubmit={handleSubmit} noValidate style={{}}>
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-12">
 					{editForm ? (

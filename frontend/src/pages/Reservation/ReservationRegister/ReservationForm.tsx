@@ -14,6 +14,7 @@ import { errorAPIHandler } from '../../../components/other/errorAPIHelper';
 import { getCurrentDate } from '../../../components/other/getCurrentDate';
 import { isManager, isOwner, isVet } from '../../../components/other/userType';
 import SelectOwnerComponent from '../../Shared/SelectOwnerComponent';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 import ReservationVetChoice from './ReservationVetChoice';
 
@@ -29,7 +30,8 @@ function ReservationForm() {
 	const [date, setDate] = useState('');
 	const [vets, setVets] = useState<Vet[]>([]);
 	const [hours, setHours] = useState<string[]>([]);
-	const [ownerList, setOwnerList] = useState<Owner[]>([]);
+
+	const [serverError, setServerError] = useState(false);
 
 	const [reservation, setReservation] = useState<ReservationI>({
 		Date: '',
@@ -82,9 +84,13 @@ function ReservationForm() {
 							}));
 							setVets([]);
 						}
+						if (response.status == 500) {
+							setServerError(true);
+						}
 					},
 					(error) => {
 						console.log(error);
+						setServerError(true);
 					}
 				);
 		}
@@ -109,17 +115,25 @@ function ReservationForm() {
 					response = data;
 					return response.json();
 				})
-				.then((data) => {
-					if (response.status == 200) {
-						setHours(data);
+				.then(
+					(data) => {
+						if (response.status == 200) {
+							setHours(data);
+						}
+						if (response.status == 500) {
+							setServerError(true);
+						}
+						if (response.status == 404) {
+							setError((prev) => ({
+								...prev,
+								Hour: 'Błąd',
+							}));
+						}
+					},
+					(error) => {
+						setServerError(true);
 					}
-					if (response.status == 404) {
-						setError((prev) => ({
-							...prev,
-							Hour: 'Błąd',
-						}));
-					}
-				});
+				);
 		}
 	}
 
@@ -178,24 +192,24 @@ function ReservationForm() {
 								navigate('/reservations', { state: { id: data.newId } });
 							}
 							if (response.status == 500) {
-								const error = errorAPIHandler(data);
-
-								setError((prevErrors) => ({
-									...prevErrors,
-									OwnerId: error,
-								}));
+								setServerError(true);
 							}
 						},
 						(error) => {
 							console.log(error);
+							setServerError(true);
 						}
 					);
 			}
 		}
 	}
+	const setServerErrorChild = () => {
+		setServerError(true);
+	};
 
 	return (
 		<form className="container" onSubmit={handleSubmit}>
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-6">
 					<BreadCrumbComponent
@@ -218,6 +232,7 @@ function ReservationForm() {
 								<SelectOwnerComponent
 									onChange={handleOwnerChange}
 									error={error.OwnerId}
+									setServerError={setServerErrorChild}
 								/>
 							) : null}
 						</div>

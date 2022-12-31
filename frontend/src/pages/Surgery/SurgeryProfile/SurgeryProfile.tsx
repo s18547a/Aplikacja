@@ -12,6 +12,7 @@ import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbCompon
 import { getCurrentUser } from '../../../components/other/authHelper';
 import ProfileDiv from '../../../components/other/ProfileDiv';
 import { isManager } from '../../../components/other/userType';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 import SurgeryReportForm from '../SurgeryRegister/SurgeryReportForm';
 
@@ -20,6 +21,7 @@ function SurgeryProfile(props) {
 	const [editReport, setEditReport] = useState(false);
 	const [report, setReport] = useState('');
 	const [reload, setReload] = useState(false);
+	const [serverError, setServerError] = useState(false);
 	const navigate = useNavigate();
 
 	const param = useParams();
@@ -38,9 +40,13 @@ function SurgeryProfile(props) {
 						setSurgery(data);
 						setReport(data.Report);
 					}
+					if (response.status == 500) {
+						setServerError(true);
+					}
 				},
 				(error) => {
 					console.log(error);
+					setServerError(true);
 				}
 			);
 	}, []);
@@ -59,9 +65,13 @@ function SurgeryProfile(props) {
 					if (response.status == 200) {
 						setSurgery(data);
 					}
+					if (response.status == 500) {
+						setServerError(true);
+					}
 				},
 				(error) => {
 					console.log(error);
+					setServerError(true);
 				}
 			);
 	}, [reload]);
@@ -84,10 +94,13 @@ function SurgeryProfile(props) {
 						navigate(`/surgeries/${surgery?.SurgeryId}`);
 						setEditReport(false);
 						setReload(true);
-					} else console.log(data);
+					} else {
+						setServerError(true);
+					}
 				},
 				(error) => {
 					console.log(error);
+					setServerError(true);
 				}
 			);
 	}
@@ -99,9 +112,17 @@ function SurgeryProfile(props) {
 				result = res;
 				return res.json();
 			})
-			.then((data) => {
-				navigate('/surgeries');
-			});
+			.then(
+				(data) => {
+					if (result.status == 500) {
+						setServerError(true);
+					}
+					navigate('/surgeries');
+				},
+				(error) => {
+					setServerError(true);
+				}
+			);
 	};
 
 	const saveEditButton = (
@@ -150,6 +171,7 @@ function SurgeryProfile(props) {
 			/>
 
 			<div className="">
+				<ServerErrorInfoComponenet serverError={serverError} />
 				<div className="row">
 					<div className="col-6">
 						<BreadCrumbComponent

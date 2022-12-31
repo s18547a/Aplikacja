@@ -4,11 +4,12 @@ import { getVets } from '../../../api/vetApiCalls';
 import Vet from '../../../classes/Vet';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
+import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 function VetList() {
 	const [vetList, setVetList] = useState<Vet[]>([]);
 	const [empty, setEmpty] = useState<boolean>(false);
-
+	const [serverError, setServerError] = useState(false);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -27,9 +28,13 @@ function VetList() {
 						if (response.status == 200) {
 							setVetList(data);
 						}
+						if (response.status == 500) {
+							setServerError(true);
+						}
 					},
 					(error) => {
 						console.log(error);
+						setServerError(true);
 					}
 				);
 		}
@@ -37,6 +42,7 @@ function VetList() {
 
 	return (
 		<div className="container">
+			<ServerErrorInfoComponenet serverError={serverError} />
 			<div className="row">
 				<div className="col-6">
 					<BreadCrumbComponent

@@ -50,7 +50,7 @@ function BannerComponent(props) {
 
 				<nav
 					className="nav navbar-dark shadow "
-					style={{ background: '#3373C4', height: '75px', width: '100%' }}
+					style={{ background: '#3373C4', width: '100%', height: '100%' }}
 				>
 					<div
 						className="row justify-content-between"

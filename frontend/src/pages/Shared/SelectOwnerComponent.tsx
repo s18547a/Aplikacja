@@ -23,8 +23,13 @@ function SelectOwnerComponent(props) {
 							console.log(data);
 							setOwnerList(data);
 						}
+						if (response.status == 500) {
+							props.setServerError();
+						}
 					},
-					(error) => {}
+					(error) => {
+						props.setServerError();
+					}
 				);
 		}
 	};
