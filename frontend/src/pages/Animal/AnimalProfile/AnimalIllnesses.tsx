@@ -1,3 +1,4 @@
+import { CheckLg } from 'react-bootstrap-icons';
 import { isOwner } from '../../../components/other/userType';
 
 function AnimalIllnesses(props) {
@@ -18,7 +19,6 @@ function AnimalIllnesses(props) {
 								<th>Diagnoza</th>
 								<th>Zdiagnozowano</th>
 								<th>Wyleczono</th>
-								<th>Stan</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -27,7 +27,7 @@ function AnimalIllnesses(props) {
 									<tr>
 										<td>{illness?.Description}</td>
 										<td className="">{illness?.DiagnosisDate}</td>
-										<td>{illness?.RecoveryDate}</td>
+
 										<td>
 											{illness?.RecoveryDate == null ? (
 												isOwner() ? (
@@ -42,7 +42,7 @@ function AnimalIllnesses(props) {
 													</button>
 												)
 											) : (
-												<a className="btn btn-success">Wyleczone</a>
+												illness.RecoveryDate
 											)}
 										</td>
 									</tr>

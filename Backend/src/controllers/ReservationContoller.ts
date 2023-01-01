@@ -1,4 +1,5 @@
-import { GetReservationParameters } from '../dtos/dto';
+
+import { GetReservationParameters } from '../common/Types';
 import Reservation from '../models/classes/Reservation';
 import ReservationRepository from '../services/repositories/ReservationRepository';
 

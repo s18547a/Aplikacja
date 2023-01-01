@@ -1,4 +1,5 @@
-import { getSurgeryPrameters } from '../dtos/dto';
+import { getSurgeryPrameters } from "../common/Types";
+
 
 
 

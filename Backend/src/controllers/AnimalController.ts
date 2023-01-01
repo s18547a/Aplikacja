@@ -1,4 +1,4 @@
-import Animal from '../models/classes/Animal';
+
 
 import AnimalMedicalInfo from '../models/classes/AnimalMedicalInfo';
 import AnimalRepostiory from '../services/repositories/AnimalRepository';
@@ -6,7 +6,8 @@ import AnimalRepostiory from '../services/repositories/AnimalRepository';
 import AnimalTypeRepository from '../services/repositories/AnimalTypeRepository';
 import AnimalMedicalInfoRepository from '../services/repositories/AnimalMedicalInfoRepository';
 import AnimalIllnessRepository from '../services/repositories/AnimalIllnessRepository';
-import { AnimalParametersType } from '../dtos/dto';
+import { AnimalParametersType } from '../common/Types';
+
 
 class AnimalController{
     

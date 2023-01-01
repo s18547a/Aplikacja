@@ -1,4 +1,5 @@
-import { GetVisitPrarameters } from '../dtos/dto';
+
+import { GetVisitPrarameters } from '../common/Types';
 import MedicalActivityRepository from '../services/repositories/MedicalActivityRepository';
 import VisitRepository from '../services/repositories/VisitRepository';
 

@@ -1,4 +1,5 @@
-import { GetOwnerParamters } from '../dtos/dto';
+
+import { GetOwnerParamters } from '../common/Types';
 import OwnerRepository from '../services/repositories/OwnerRepository';
 
 

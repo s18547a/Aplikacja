@@ -6,7 +6,7 @@ class Vet {
   Email:null|string|undefined;
   HireDate: string | undefined;
   ProfileImage: string | null | undefined;
-  Types: { VetType: string; Salary: number }[];
+  Types: { VetType: string; }[];
   constructor(
     VetId: string | undefined,
     Name: string | undefined,
@@ -15,7 +15,7 @@ class Vet {
 
     HireDate: string | undefined,
     ProfileImage: string | null | undefined,
-    Types: { VetType: string; Salary: number }[]
+    Types: { VetType: string; }[]
   ) {
     this.VetId = VetId;
     this.Name = Name;

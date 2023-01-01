@@ -1,5 +1,6 @@
 
-import { IllnessCuredParameters } from '../../dtos/dto';
+
+import { IllnessCuredParameters } from '../../common/Types';
 import Illness from '../../models/classes/Illness';
 
 import Repository from './Repository';

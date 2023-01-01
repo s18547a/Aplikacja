@@ -70,6 +70,9 @@ function SideBar() {
 			<div className="col-12">
 				<VisitDropdown />
 			</div>
+			<div className="col-12">
+				<SurgeryDropdown />
+			</div>
 		</div>
 	);
 

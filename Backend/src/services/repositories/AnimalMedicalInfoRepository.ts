@@ -54,33 +54,7 @@ class AnimalMedicalInfoRepository extends Repository{
         }
     };
       
-    /* createAnimalMedicalInformation=async  (
-        AnimalId: string,
-        transaction
-    ) => {
-        try {
-           
-      
-            const results = await new sql.Request(transaction)
-                .input('AnimalId', sql.VarChar, AnimalId)
-                .query(
-                    'Insert into AnimalMedicalInfo(AnimalId,Chipped,Sterilized,Skeletal,Muscular,Nervous,Endocrine,Cardiovascular,Lymphatic,Respiratory,Digestive,Urinary,Reproductive,Optical,Dental,Dermatological ,Others,Weight) values(@AnimalId,null,null,\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',null)'
-                );
-            const rowsAffected = results.rowsAffected[0];
-      
-            if (rowsAffected != 1) {
-                throw Error;
-            } else {
-           
-      
-                return AnimalId;
-            }
-        } catch (error) {
-            console.log(error);
-            throw Error('');
-        }
-    };
-      */
+   
     updateAnimalMedicalInfo = async (
         AnimalMedicalInfo: AnimalMedicalInfo
     ) => {

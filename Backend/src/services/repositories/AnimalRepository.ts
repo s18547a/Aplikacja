@@ -1,4 +1,5 @@
-import { AnimalParametersType } from '../../dtos/dto';
+
+import { AnimalParametersType } from '../../common/Types';
 import Animal,{Sex} from '../../models/classes/Animal';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import Repository from './Repository';

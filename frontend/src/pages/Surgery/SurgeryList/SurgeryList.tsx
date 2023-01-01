@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { CheckLg } from 'react-bootstrap-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getReservationsByOwner } from '../../../apiCalls/reservationApiCalls';
 import {
 	getSurgeries,
+	getSurgeriesByOwner,
 	searchSurgeryList,
 } from '../../../apiCalls/surgeryApiCalls';
 import Surgery from '../../../classes/Surgery';
@@ -57,7 +59,7 @@ function SurgeryList() {
 			promise = getSurgeries();
 		}
 		if (isOwner()) {
-			promise = getReservationsByOwner(currentUserId);
+			promise = getSurgeriesByOwner(currentUserId);
 		}
 
 		if (promise) {
@@ -164,8 +166,9 @@ function SurgeryList() {
 								<th>Weterynarz</th>
 								<th>Data</th>
 								<th>Godzina</th>
-								<th>Rodzaj</th>
+
 								<th>Zwierzę</th>
+								<th>Raport</th>
 							</tr>
 						</thead>
 
@@ -176,12 +179,14 @@ function SurgeryList() {
 										onClick={() => {
 											navigate(`/surgeries/${surgery.SurgeryId}`);
 										}}
+										className={surgery.Report ? '' : ' table-danger'}
 									>
 										<td>{`${surgery.Vet.Name} ${surgery.Vet.LastName}`}</td>
 										<td>{surgery.Date}</td>
 										<td>{surgery.StartTime}</td>
-										<td>{surgery.SurgeryType}</td>
+
 										<td>{surgery.Animal.Name}</td>
+										<td>{surgery.Report ? <CheckLg /> : null}</td>
 									</tr>
 								);
 							})}

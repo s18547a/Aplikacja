@@ -1,7 +1,8 @@
 
 
 import sql from 'mssql';
-import { GetReservationParameters } from '../../dtos/dto';
+import { GetReservationParameters } from '../../common/Types';
+
 import Owner from '../../models/classes/Owner';
 
 

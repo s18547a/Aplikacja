@@ -8,7 +8,8 @@ import { validateContact } from '../../utils/validator';
 import {hashPassword} from '../../utils/auth/authUtils';
 import Repository from './Repository';
 import SharedRepository from './SharedRepository';
-import { GetOwnerParamters } from '../../dtos/dto';
+import { GetOwnerParamters } from '../../common/Types';
+
 
 
 

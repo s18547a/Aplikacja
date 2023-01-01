@@ -1,7 +1,5 @@
 
-
-
-import { GetScheduldeParamters, GetVetParameters } from '../dtos/dto';
+import { GetScheduldeParamters, GetVetParameters } from '../common/Types';
 import Schedulde from '../models/classes/Schedulde';
 import VetRepository from '../services/repositories/VetRepository';
 import VetScheduldeRepository from '../services/repositories/VetScheduldeRepository';

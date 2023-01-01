@@ -1,5 +1,6 @@
 
-import { getVetTypesParameters } from '../../dtos/dto';
+
+import { getVetTypesParameters } from '../../common/Types';
 import Repository from './Repository';
 const sql = require('mssql');
 
@@ -16,7 +17,7 @@ class VetTypeRepository extends Repository{
             let VetTypeRecoordset;
             const pool = await sql.connect(this.databaseConfiguration);
             if(parameters.VetId){
-                const vetTypePool= await pool.request().input('VetId',sql.VarChar,parameters.VetId).query('Select vtv.VetType, vt.Salary From Vet v inner join VetTypeVet vtv on v.VetId=vtv.VetId join VetType vt on vtv.VetType=vt.VetType where v.VetId=@VetId');
+                const vetTypePool= await pool.request().input('VetId',sql.VarChar,parameters.VetId).query('Select vtv.VetType From Vet v inner join VetTypeVet vtv on v.VetId=vtv.VetId join VetType vt on vtv.VetType=vt.VetType where v.VetId=@VetId');
                 VetTypeRecoordset=vetTypePool.recordset;
           
             }

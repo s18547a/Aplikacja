@@ -7,7 +7,8 @@ import VetRepository from './VetRepository';
 import AnimalRepostiory from './AnimalRepository';
 import Repository from './Repository';
 import { createVisitSearchQueryString } from '../../utils/queryStringHelpers';
-import { getSurgeryPrameters } from '../../dtos/dto';
+import { getSurgeryPrameters } from '../../common/Types';
+
 
 
 class SurgeryRepository extends Repository{
@@ -65,20 +66,20 @@ class SurgeryRepository extends Repository{
             if(parameters.OwnerId){
     
                 const surgeryPool= await pool.request().input('OwnerId',sql.VarChar,parameters.OwnerId)
-                    .query('Select SurgeryId,Date,SurgeryType,LeadVetId,Description,s.AnimalId,a.OwnerId,s.Report,s.StartTime From Surgery s join Animal a on s.AnimalId=a.AnimalId where a.OwnerId=@OwnerId');
+                    .query('Select SurgeryId,Date,SurgeryType,LeadVetId,Description,s.AnimalId,a.OwnerId,s.Report,s.StartTime From Surgery s join Animal a on s.AnimalId=a.AnimalId where a.OwnerId=@OwnerId order by Date');
     
                 surgeryRecordset=surgeryPool.recordset;
             } 
             else if(parameters.VetId&&parameters.Date){
                 const surgeryPool= await pool.request().input('LeadVetId',sql.VarChar,parameters.VetId).input('Date',sql.Date,parameters.Date)
-                    .query('Select SurgeryId,Date,SurgeryType,LeadVetId,Description,s.AnimalId,a.OwnerId,StartTime From Surgery s join Animal a on s.AnimalId=a.AnimalId where s.Date=@Date and s.LeadVetId=@LeadVetId');
+                    .query('Select SurgeryId,Date,SurgeryType,LeadVetId,Description,s.AnimalId,a.OwnerId,StartTime From Surgery s join Animal a on s.AnimalId=a.AnimalId where s.Date=@Date and s.LeadVetId=@LeadVetId order by Date');
     
                 surgeryRecordset=surgeryPool.recordset;
     
             }
         
             else {
-                const surgeryPool = await pool.request().query('Select * From Surgery');
+                const surgeryPool = await pool.request().query('Select * From Surgery Order by Date');
                 surgeryRecordset = surgeryPool.recordset;
         
             }
