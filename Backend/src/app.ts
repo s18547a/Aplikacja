@@ -124,6 +124,7 @@ export default function(db) {
         //  next(createError(404));
         return res.status(404).json({message:'Page not found'});
     });
+
     return app;
 }
 

@@ -1,11 +1,14 @@
+import { hover } from '@testing-library/user-event/dist/hover';
 import { ReactComponentElement, useEffect, useState } from 'react';
 import { List, ListUl } from 'react-bootstrap-icons';
 import { useLocation } from 'react-router-dom';
+import { hoverElement } from '../AdditionalStyles/NavigationAdditionalStyles';
 interface elementType {
 	label: string;
 	link: string;
 	icon: any;
 }
+
 function NavElement(props: {
 	id: string;
 	label: string;
@@ -22,29 +25,28 @@ function NavElement(props: {
 			setIsAcitve(true);
 		}
 	});
+	const [style, setStyle] = useState({});
 
 	return (
 		<div className="border">
-			<li className="hover-overlay " style={{}}>
+			<li
+				className=" "
+				style={style}
+				onMouseEnter={() => setStyle(hoverElement)}
+				onMouseLeave={() => setStyle({})}
+			>
 				<a
-					className="text-decoration-none btn btn-toogle rounded collapsed"
+					className="text-decoration-none btn btn-toogle rounded collapsed "
 					role={'button'}
 					data-bs-toggle="collapse"
 					data-bs-target={'#' + props.id}
 					aria-expanded="false"
-					onClick={() => {
-						setCollapsed(!collapsed);
-					}}
 				>
 					<h5> {props.label}</h5>
 				</a>
 			</li>
 
-			<ul
-				id={props.id}
-				className={'collapse'} //currentLocation.includes(props.mainLink) ? '' : 'collapse '}
-				data-parent="#accordion"
-			>
+			<ul id={props.id} className={'collapse'} data-parent="#accordion">
 				{props.elements.map((element) => {
 					return (
 						<li className="d-flex justify-content-start  ">

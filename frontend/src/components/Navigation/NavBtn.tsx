@@ -1,24 +1,33 @@
+import { useState } from 'react';
 import { PersonFill } from 'react-bootstrap-icons';
 import { useLocation } from 'react-router-dom';
+import { hoverElement } from '../AdditionalStyles/NavigationAdditionalStyles';
 
 function NavBtn(props: { link: string; label: string }) {
 	const location = useLocation().pathname;
 	console.log(location);
-
+	const [style, setStyle] = useState({});
 	return (
-		<li className="border-primary">
-			<a
-				className={
-					location == '/'
-						? 'text-decoration-none btn btn-group-toggle '
-						: 'text-decoration-none btn btn-group-toggle'
-				}
-				aria-current="page"
-				href={props.link}
-			>
-				<h5> {props.label}</h5>
-			</a>
-		</li>
+		<div
+			className="border"
+			style={style}
+			onMouseEnter={() => setStyle(hoverElement)}
+			onMouseLeave={() => setStyle({})}
+		>
+			<li>
+				<a
+					className={
+						location == '/'
+							? 'text-decoration-none btn btn-group-toggle '
+							: 'text-decoration-none btn btn-group-toggle'
+					}
+					aria-current="page"
+					href={props.link}
+				>
+					<h5> {props.label}</h5>
+				</a>
+			</li>
+		</div>
 	);
 }
 
