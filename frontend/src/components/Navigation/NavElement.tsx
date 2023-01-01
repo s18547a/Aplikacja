@@ -1,5 +1,10 @@
 import { hover } from '@testing-library/user-event/dist/hover';
-import { ReactComponentElement, useEffect, useState } from 'react';
+import {
+	ReactComponentElement,
+	ReactElement,
+	useEffect,
+	useState,
+} from 'react';
 import { List, ListUl } from 'react-bootstrap-icons';
 import { useLocation } from 'react-router-dom';
 import { hoverElement } from '../AdditionalStyles/NavigationAdditionalStyles';
@@ -14,7 +19,7 @@ function NavElement(props: {
 	label: string;
 	mainLink: string;
 	elements: elementType[];
-}) {
+}): ReactElement {
 	const [collapsed, setCollapsed] = useState(false);
 	const location = useLocation();
 	const currentLocation = location.pathname;

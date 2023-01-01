@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerReservation } from '../../../apiCalls/reservationApiCalls';
 import { getVetsOnDay, getValiableHours } from '../../../apiCalls/vetApiCalls';
@@ -18,14 +18,14 @@ import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 import ReservationVetChoice from './ReservationVetChoice';
 
-interface ReservationI {
+export interface IReservationForm {
 	Date: string | undefined;
 	VetId: string | undefined;
 	Hour: string | undefined;
-	OwnerId: string | undefined;
+	OwnerId: string;
 }
 
-function ReservationForm() {
+function ReservationForm(): ReactElement {
 	const navigate = useNavigate();
 	const [date, setDate] = useState('');
 	const [vets, setVets] = useState<Vet[]>([]);
@@ -33,21 +33,26 @@ function ReservationForm() {
 
 	const [serverError, setServerError] = useState(false);
 
-	const [reservation, setReservation] = useState<ReservationI>({
+	const [reservation, setReservation] = useState<IReservationForm>({
 		Date: '',
 		VetId: '',
 		Hour: '',
 		OwnerId: isOwner() ? getCurrentUser().userTypeId : '',
 	});
 
-	const [error, setError] = useState({
+	const [error, setError] = useState<{
+		Date: string;
+		VetId: string;
+		Hour: string;
+		OwnerId: string;
+	}>({
 		Date: '',
 		VetId: '',
 		Hour: '',
 		OwnerId: '',
 	});
 
-	async function handleDateChange(e) {
+	async function handleDateChange(e): Promise<void> {
 		//	e.preventDefault();
 		console.log(e);
 		//const { name, value } = e.target;
@@ -137,7 +142,7 @@ function ReservationForm() {
 		}
 	}
 
-	async function handleHourChange(e) {
+	async function handleHourChange(e): Promise<void> {
 		const { name, value } = e.target;
 
 		setReservation((prev) => ({
@@ -146,7 +151,7 @@ function ReservationForm() {
 		}));
 	}
 
-	async function handleOwnerChange(e) {
+	async function handleOwnerChange(e): Promise<void> {
 		const { name, value } = e.target;
 
 		setReservation((prev) => ({
@@ -155,8 +160,8 @@ function ReservationForm() {
 		}));
 	}
 
-	function validateForm() {
-		let isValid = true;
+	function validateForm(): boolean {
+		let isValid: boolean = true;
 		console.log(reservation);
 		for (const [name, value] of Object.entries(reservation)) {
 			error[name] = '';
@@ -172,7 +177,7 @@ function ReservationForm() {
 		return isValid;
 	}
 
-	function handleSubmit(e) {
+	function handleSubmit(e): void {
 		e.preventDefault();
 		console.log(reservation);
 		if (validateForm()) {
@@ -233,6 +238,8 @@ function ReservationForm() {
 									onChange={handleOwnerChange}
 									error={error.OwnerId}
 									setServerError={setServerErrorChild}
+									selectedValue={reservation.OwnerId}
+									editForm={false}
 								/>
 							) : null}
 						</div>

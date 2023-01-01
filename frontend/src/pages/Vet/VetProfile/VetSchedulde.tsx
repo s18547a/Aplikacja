@@ -14,7 +14,7 @@ interface ScheduldeI {
 	Sunday: string | null | undefined;
 }
 
-function VetSchedulde(props) {
+function VetSchedulde({ VetId }: { VetId: string }) {
 	const [schedulde, setSchedulde] = useState<ScheduldeI>({
 		Monday: undefined,
 		Tuesday: undefined,
@@ -29,7 +29,7 @@ function VetSchedulde(props) {
 		let response;
 		let promise;
 
-		promise = getVetSchedulde(props.VetId);
+		promise = getVetSchedulde(VetId);
 		if (promise) {
 			promise
 				.then((data) => {
@@ -67,7 +67,7 @@ function VetSchedulde(props) {
 								{isManager() ? (
 									<EditButton
 										onClick={() => {
-											navigate(`/vets/${props.VetId}/schedulde/edit`);
+											navigate(`/vets/${VetId}/schedulde/edit`);
 										}}
 									/>
 								) : null}

@@ -1,6 +1,15 @@
+import { ReactElement } from 'react';
+import Vaccination from '../../../classes/Vaccination';
+import VaccineType from '../../../classes/VaccineType';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 
-function AnimalVaccines(props) {
+function AnimalVaccines({
+	vaccineList,
+	coreList,
+}: {
+	vaccineList: Vaccination[];
+	coreList: VaccineType[];
+}): ReactElement {
 	return (
 		<div className="row justify-content-center">
 			<div className="col-6 ">
@@ -10,7 +19,7 @@ function AnimalVaccines(props) {
 							<div className="card-title">
 								<h5>Historia szczepień</h5>
 							</div>
-							<TableOrEmpty Empty={props.vaccineList.length == 0}>
+							<TableOrEmpty Empty={vaccineList.length == 0}>
 								<table className="table">
 									<thead>
 										<tr>
@@ -19,7 +28,7 @@ function AnimalVaccines(props) {
 										</tr>
 									</thead>
 									<tbody>
-										{props.vaccineList.map((vaccination) => {
+										{vaccineList.map((vaccination) => {
 											return (
 												<tr>
 													<td>{vaccination.VaccineType}</td>
@@ -40,9 +49,9 @@ function AnimalVaccines(props) {
 					<div className="card-title">
 						<h5 className=" text-danger">Wymagane szczepienia</h5>
 					</div>
-					{props.coreList.length != 0 ? (
+					{coreList.length != 0 ? (
 						<ul className=" list-group">
-							{props.coreList.map((vaccine) => {
+							{coreList.map((vaccine) => {
 								return (
 									<li className=" list-group-item">{vaccine.VaccineType}</li>
 								);

@@ -1,10 +1,11 @@
-import { useLocation } from "react-router-dom";
-import NavBtn from "../NavBtn";
+import { ReactElement } from 'react';
+import { useLocation } from 'react-router-dom';
+import NavBtn from '../NavBtn';
 
-function UserProfileDropdown() {
-  const location = useLocation();
-  const currentLocation = location.pathname;
+function UserProfileDropdown(): ReactElement {
+	const location = useLocation();
+	const currentLocation = location.pathname;
 
-  return <NavBtn link={"/"} label={"Profil"} />;
+	return <NavBtn link={'/'} label={'Profil'} />;
 }
 export default UserProfileDropdown;

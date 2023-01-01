@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
 	getSurgery,
@@ -16,7 +16,7 @@ import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 import SurgeryReportForm from '../SurgeryRegister/SurgeryReportForm';
 
-function SurgeryProfile(props) {
+function SurgeryProfile(): ReactElement {
 	const [surgery, setSurgery] = useState<Surgery>();
 	const [editReport, setEditReport] = useState(false);
 	const [report, setReport] = useState('');
@@ -76,12 +76,12 @@ function SurgeryProfile(props) {
 			);
 	}, [reload]);
 
-	function onReportChange(e) {
+	function onReportChange(e): void {
 		const value = e.target.value;
 		setReport(value);
 	}
 
-	function saveEditReport() {
+	function saveEditReport(): void {
 		let response;
 		updateSurgeryReport(report, surgery?.SurgeryId)
 			.then((data) => {
@@ -105,7 +105,7 @@ function SurgeryProfile(props) {
 			);
 	}
 
-	const handleClick = (event) => {
+	const handleClick = (): void => {
 		let result;
 		cancelSurgery(surgery?.SurgeryId)
 			.then((res) => {
@@ -113,13 +113,13 @@ function SurgeryProfile(props) {
 				return res.json();
 			})
 			.then(
-				(data) => {
+				() => {
 					if (result.status == 500) {
 						setServerError(true);
 					}
 					navigate('/surgeries');
 				},
-				(error) => {
+				() => {
 					setServerError(true);
 				}
 			);

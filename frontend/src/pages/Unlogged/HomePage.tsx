@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 
 import HomePageNavigation from './HomePageNavigation';
 import InfoPage from './InfoPage';
@@ -6,16 +6,20 @@ import LoginForm from './LoginForm';
 import MainPageCaroseul from './MainPageCaroseul';
 import RegisterPage from './RegisterPage';
 
-function HomePage(props) {
-	function handleLogin(e) {
-		props.handleLogin(e);
+function HomePage({
+	handleLogin,
+}: {
+	handleLogin: (any) => void;
+}): ReactElement {
+	function handleLoginFunction(e) {
+		handleLogin(e);
 	}
 
 	const [selectedTab, setSelectedTab] = useState('login');
 
 	function selectedComponent() {
 		if (selectedTab == 'login') {
-			return <LoginForm handleLogin={handleLogin} />;
+			return <LoginForm handleLogin={handleLoginFunction} />;
 		}
 		if (selectedTab == 'sch') {
 			return <InfoPage />;

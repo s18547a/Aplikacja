@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { ListUl, PersonPlus, PlusSquare } from 'react-bootstrap-icons';
 import { useLocation } from 'react-router-dom';
 import NavElement from '../NavElement';
 
-function AnimalDropdown() {
+function AnimalDropdown(): ReactElement {
 	const [collapsed, setCollapsed] = useState(false);
 	const location = useLocation();
 	const currentLocation = location.pathname;

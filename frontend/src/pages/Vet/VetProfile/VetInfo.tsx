@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
+import Vet from '../../../classes/Vet';
 import EditButton from '../../../components/Buttons/EditButton';
 import { getDefalutProfileImage } from '../../../components/other/imageHelper';
 import ProfileDiv from '../../../components/other/ProfileDiv';
 
-function VetInfo(props) {
+function VetInfo({ vet }: { vet: Vet }) {
 	const navigate = useNavigate();
 	return (
 		<div className="">
@@ -16,9 +17,9 @@ function VetInfo(props) {
 								width="250px"
 								className=""
 								src={
-									props.vet.ProfileImage == null
+									vet.ProfileImage == null
 										? getDefalutProfileImage()
-										: props.vet.ProfileImage
+										: vet.ProfileImage
 								}
 							/>
 						</div>
@@ -37,8 +38,8 @@ function VetInfo(props) {
 								<div className="col-3">
 									<EditButton
 										onClick={() =>
-											navigate(`/vets/${props.vet?.VetId}/edit`, {
-												state: { VetId: props.vet?.VetId },
+											navigate(`/vets/${vet?.VetId}/edit`, {
+												state: { VetId: vet?.VetId },
 											})
 										}
 									/>
@@ -46,14 +47,11 @@ function VetInfo(props) {
 							</div>
 							<div className="row justify-content-center">
 								<div className="col-12">
-									<ProfileDiv label={'Imie'} value={props.vet.Name} />
-									<ProfileDiv label={'Nazwisko'} value={props.vet.LastName} />
-									<ProfileDiv label={'Kontakt'} value={props.vet.Contact} />
-									<ProfileDiv label={'Email'} value={props.vet.Email} />
-									<ProfileDiv
-										label={'Zatrudniono'}
-										value={props.vet.HireDate}
-									/>
+									<ProfileDiv label={'Imie'} value={vet.Name} />
+									<ProfileDiv label={'Nazwisko'} value={vet.LastName} />
+									<ProfileDiv label={'Kontakt'} value={vet.Contact} />
+									<ProfileDiv label={'Email'} value={vet.Email} />
+									<ProfileDiv label={'Zatrudniono'} value={vet.HireDate} />
 								</div>
 							</div>
 						</div>

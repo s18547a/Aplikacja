@@ -1,4 +1,6 @@
-function MainPageCaroseul() {
+import { ReactElement } from 'react';
+
+function MainPageCaroseul(): ReactElement {
 	return (
 		<div className="" style={{ height: '100%', width: '100%' }}>
 			<div

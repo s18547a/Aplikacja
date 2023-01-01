@@ -1,10 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AnimalMedicalInfo from '../../../classes/AnimalMedicalInfo';
 import EditButton from '../../../components/Buttons/EditButton';
 import ProfileDiv from '../../../components/other/ProfileDiv';
 import { isManager, isVet } from '../../../components/other/userType';
 
-function MedicalInfo(props) {
+function MedicalInfo({
+	animalId,
+	medicalInfo,
+}: {
+	animalId: string | undefined | null;
+	medicalInfo: AnimalMedicalInfo | undefined;
+}) {
 	const navigate = useNavigate();
 
 	const showBtn =
@@ -13,8 +20,8 @@ function MedicalInfo(props) {
 				<div className="col-1">
 					<EditButton
 						onClick={() => {
-							navigate(`/animals/${props.animalId}/medicalInfo/edit`, {
-								state: { medicalInfo: props.medicalInfo },
+							navigate(`/animals/${animalId}/medicalInfo/edit`, {
+								state: { medicalInfo: medicalInfo },
 							});
 						}}
 					/>
@@ -183,10 +190,7 @@ function MedicalInfo(props) {
 								>
 									<div className="row justify-content-center">
 										<div className="col-6">
-											<ProfileDiv
-												label={'Waga'}
-												value={props.medicalInfo.Weight}
-											/>
+											<ProfileDiv label={'Waga'} value={medicalInfo?.Weight} />
 										</div>
 									</div>
 
@@ -194,9 +198,7 @@ function MedicalInfo(props) {
 										<div className="col-6">
 											<ProfileDiv
 												label={'Chip'}
-												value={
-													props.medicalInfo.Chipped == true ? 'Tak' : 'Nie'
-												}
+												value={medicalInfo?.Chipped == true ? 'Tak' : 'Nie'}
 											/>
 										</div>
 									</div>
@@ -204,9 +206,7 @@ function MedicalInfo(props) {
 										<div className="col-6">
 											<ProfileDiv
 												label={'Steryzlizacja'}
-												value={
-													props.medicalInfo.Sterilized == true ? 'Tak' : 'Nie'
-												}
+												value={medicalInfo?.Sterilized == true ? 'Tak' : 'Nie'}
 											/>
 										</div>
 									</div>
@@ -219,7 +219,7 @@ function MedicalInfo(props) {
 									aria-labelledby="list-home-list"
 								>
 									{' '}
-									{props.medicalInfo.Muscular}
+									{medicalInfo?.Muscular}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -227,7 +227,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-profile-list"
 								>
-									{props.medicalInfo.Nervous}
+									{medicalInfo?.Nervous}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -235,7 +235,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-messages-list"
 								>
-									{props.medicalInfo.Skeletal}
+									{medicalInfo?.Skeletal}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -243,7 +243,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-settings-list"
 								>
-									{props.medicalInfo.Endocrine}
+									{medicalInfo?.Endocrine}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -251,7 +251,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-settings-list"
 								>
-									{props.medicalInfo.Cardiovascular}
+									{medicalInfo?.Cardiovascular}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -259,7 +259,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-settings-list"
 								>
-									{props.medicalInfo.Cardiovascular}
+									{medicalInfo?.Cardiovascular}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -267,7 +267,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-settings-list"
 								>
-									{props.medicalInfo.Reproductive}
+									{medicalInfo?.Reproductive}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -275,7 +275,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-settings-list"
 								>
-									{props.medicalInfo.Respiratory}
+									{medicalInfo?.Respiratory}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -283,7 +283,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-settings-list"
 								>
-									{props.medicalInfo.Digestive}
+									{medicalInfo?.Digestive}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -291,7 +291,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-settings-list"
 								>
-									{props.medicalInfo.Urinary}
+									{medicalInfo?.Urinary}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -299,7 +299,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-settings-list"
 								>
-									{props.medicalInfo.Optical}
+									{medicalInfo?.Optical}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -307,7 +307,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-settings-list"
 								>
-									{props.medicalInfo.Dermatological}
+									{medicalInfo?.Dermalogical}
 								</div>
 								<div
 									className="tab-pane fade"
@@ -315,7 +315,7 @@ function MedicalInfo(props) {
 									role="tabpanel"
 									aria-labelledby="list-settings-list"
 								>
-									{props.medicalInfo.Others}
+									{medicalInfo?.Others}
 								</div>
 							</div>
 						</div>

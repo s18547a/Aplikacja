@@ -1,10 +1,18 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { getClinicSchedulde } from '../../apiCalls/clinicInfoApiCalls';
 
 import ScheduldeRow from './ScheduldeRow';
 
-function InfoPage() {
-	const [schedulde, setSchedulde] = useState({
+function InfoPage(): ReactElement {
+	const [schedulde, setSchedulde] = useState<{
+		Monday: string | undefined;
+		Tuesday: string | undefined;
+		Wednesday: string | undefined;
+		Thursday: string | undefined;
+		Friday: string | undefined;
+		Saturday: string | undefined;
+		Sunday: string | undefined;
+	}>({
 		Monday: undefined,
 		Tuesday: undefined,
 		Wednesday: undefined,

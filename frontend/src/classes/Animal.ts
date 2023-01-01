@@ -1,6 +1,6 @@
 import AnimalType from "./AnimalType";
 
-enum Sex {
+export enum Sex {
   UNKNOWN,
   MALE,
   FEMALE,

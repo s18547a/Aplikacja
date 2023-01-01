@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { PersonFill } from 'react-bootstrap-icons';
 import { useLocation } from 'react-router-dom';
 import { hoverElement } from '../AdditionalStyles/NavigationAdditionalStyles';
 
-function NavBtn(props: { link: string; label: string }) {
+function NavBtn(props: { link: string; label: string }): ReactElement {
 	const location = useLocation().pathname;
 	console.log(location);
 	const [style, setStyle] = useState({});

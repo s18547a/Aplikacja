@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import SearchButton from '../../components/Buttons/SearchButton';
 import FormSearchDateDiv from '../../components/Form/FormSearchDateDiv';
 import FormSearchDiv from '../../components/Form/FormSearchDiv';
-import { VisitListParamter } from '../../components/other/helperClass/VisitListParameters';
+import { SearchListParamter } from '../../components/other/helperClass/VisitListParameters';
 
-function VisitSearch(props) {
+function VisitSearch({ onSearch }: { onSearch: (any) => void }): ReactElement {
 	const [searchParameters, setSearchParamteters] = useState({
 		Name: '',
 		Email: '',
 		Date: '',
 	});
 
-	function onChange(e) {
+	function onChange(e): void {
 		console.log(e);
 		const { name, value } = e.target;
 
@@ -21,13 +21,13 @@ function VisitSearch(props) {
 		}));
 	}
 
-	function onSearch(e) {
+	function onSearchFuntion(e): void {
 		e.preventDefault();
-		const visitListParametersInstance = new VisitListParamter();
+		const visitListParametersInstance = new SearchListParamter();
 		visitListParametersInstance.setEmail(searchParameters.Email);
 		visitListParametersInstance.setDate(searchParameters.Date);
 		visitListParametersInstance.setName(searchParameters.Name);
-		props.onSearch(visitListParametersInstance);
+		onSearch(visitListParametersInstance);
 		setSearchParamteters(() => ({
 			Name: '',
 			Email: '',
@@ -36,7 +36,7 @@ function VisitSearch(props) {
 	}
 
 	return (
-		<form className=" card card-body shadow" onSubmit={onSearch}>
+		<form className=" card card-body shadow" onSubmit={onSearchFuntion}>
 			<div className=" row justify-content-center">
 				<div className="col-auto">
 					<FormSearchDiv

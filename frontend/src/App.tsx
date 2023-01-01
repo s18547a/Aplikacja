@@ -33,7 +33,7 @@ import MedicalInfoForm from './pages/Animal/AnimalRegister/MedicalInfoForm';
 import SurgeryList from './pages/Surgery/SurgeryList/SurgeryList';
 import SurgeryProfile from './pages/Surgery/SurgeryProfile/SurgeryProfile';
 import NotFoundPage from './pages/General/NotFoundPage';
-import AnimalProfile from './pages/Animal/AnimalProfile/AnimalProfile';
+
 import BannerComponent from './components/Banner/BannerComponent';
 const bootstrap = require('bootstrap');
 
@@ -116,7 +116,6 @@ function App() {
 								path="/home"
 								element={isLogged(<HomePage handleLogin={handleLogin} />)}
 							/>
-							<Route path="/register" element={<OwnerRegister />} />
 
 							<Route path="/" element={isNotLogged(<UserProfile />)} />
 

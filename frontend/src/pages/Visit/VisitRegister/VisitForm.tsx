@@ -1,4 +1,9 @@
-import { useEffect, useState } from 'react';
+import {
+	ReactComponentElement,
+	ReactElement,
+	useEffect,
+	useState,
+} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getAnimalUnadminstratedVaccines } from '../../../apiCalls/animalApiCalls';
 import {
@@ -6,6 +11,7 @@ import {
 	registerVisit,
 } from '../../../apiCalls/visitApiCalls';
 import Animal from '../../../classes/Animal';
+import MedicalActivity from '../../../classes/MedicalActivity';
 import VaccineType from '../../../classes/VaccineType';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
@@ -30,13 +36,7 @@ interface VisitI {
 	ReservationId: string;
 }
 
-interface MedicalActivitiyI {
-	MedicalActivityId: number;
-	ActivityName: string;
-	Price: number;
-}
-
-function VisitForm() {
+function VisitForm(): ReactElement {
 	const [serverError, setServerError] = useState(false);
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -54,13 +54,20 @@ function VisitForm() {
 		ReservationId: '',
 	});
 
-	const [medicalActivities, setMedicalActivities] = useState<
-		MedicalActivitiyI[]
-	>([]);
+	const [medicalActivities, setMedicalActivities] = useState<MedicalActivity[]>(
+		[]
+	);
 
 	const [animalList, setAnimalList] = useState<Animal[]>([]);
 
-	const [error, setError] = useState({
+	const [error, setError] = useState<{
+		Date: string;
+		VetId: string;
+		AnimalId: string;
+		Hour: string;
+		Note: string;
+		OwnerId: string;
+	}>({
 		Date: '',
 		VetId: '',
 		AnimalId: '',
@@ -361,14 +368,12 @@ function VisitForm() {
 								changeActivity={changeActivity}
 								medicalActivities={medicalActivities}
 								AnimalId={visit.AnimalId}
-								selectedActivites={visit.MedicalActivities}
 							/>
 						</div>
 						<div className="col-12">
 							<VisitVaccineForm
 								AnimalId={visit.AnimalId}
 								onChange={changeVaccine}
-								vaccineList={vaccineList}
 							/>
 						</div>
 					</div>

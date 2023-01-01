@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { getTodayReservationsByVetId } from '../../../apiCalls/reservationApiCalls';
 import { getTodaySurgeries } from '../../../apiCalls/surgeryApiCalls';
@@ -7,21 +7,17 @@ import Reservation from '../../../classes/Reservation';
 import Surgery from '../../../classes/Surgery';
 import Vet from '../../../classes/Vet';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import {
-	getCurrentUser,
-	isAuthenticated,
-} from '../../../components/other/authHelper';
+import { getCurrentUser } from '../../../components/other/authHelper';
 import { isManager } from '../../../components/other/userType';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
-import InfoBorder from '../../Shared/ServerErrorInfoComponent';
 
 import TodayReservationList from './TodayReservationList';
 import VetProfileNav from './VetProfileNav';
 import VetProfileTab from './VetProfileTab';
-function VetProfile() {
+function VetProfile(): ReactElement {
 	const params = useParams();
 	const location = useLocation();
-	const [serverError, setServerError] = useState(false);
+	const [serverError, setServerError] = useState<boolean>(false);
 
 	const [vet, setVet] = useState<Vet>({
 		VetId: undefined,

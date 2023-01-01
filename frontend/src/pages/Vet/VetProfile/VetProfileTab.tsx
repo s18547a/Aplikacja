@@ -1,30 +1,36 @@
+import { ReactElement } from 'react';
+import Vet from '../../../classes/Vet';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import VetInfo from './VetInfo';
 import VetSchedulde from './VetSchedulde';
 import VetSpec from './VetSpec';
 
-function VetProfileTab(props) {
+function VetProfileTab({
+	types,
+	vet,
+	vetId,
+}: {
+	types: any[];
+	vet: Vet;
+	vetId: string | undefined;
+}): ReactElement {
 	return (
 		<div className="">
 			<div className="row">
 				<div className="col-lg-9">
 					<div className="row">
 						<div className="col-12">
-							<VetSpec types={props.types} />
+							<VetSpec types={types} />
 						</div>
 						<div className="col-12">
-							<VetInfo vet={props.vet} />
+							<VetInfo vet={vet} />
 						</div>
 					</div>
 				</div>
 
 				<div className="col-lg-3">
 					<VetSchedulde
-						VetId={
-							props.vetId == undefined
-								? getCurrentUser().userTypeId
-								: props.vetId
-						}
+						VetId={vetId == undefined ? getCurrentUser().userTypeId : vetId}
 					/>
 				</div>
 			</div>

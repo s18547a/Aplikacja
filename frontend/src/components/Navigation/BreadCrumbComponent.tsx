@@ -1,9 +1,13 @@
+import { ReactElement } from 'react';
+
 interface BreadCrumbType {
 	label: string;
 	active: boolean;
 	link: string;
 }
-function BreadCrumbComponent(props: { elements: BreadCrumbType[] }) {
+function BreadCrumbComponent(props: {
+	elements: BreadCrumbType[];
+}): ReactElement {
 	return (
 		<nav aria-label="breadcrumb">
 			<ol className="breadcrumb">

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 import SelectOwnerComponent from '../../Shared/SelectOwnerComponent';
 import SelectAnimalComponent from '../../Shared/SelectAnimalComponent';
@@ -29,7 +29,7 @@ import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbCompon
 import { getCurrentDate } from '../../../components/other/getCurrentDate';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
-interface SurgeryI {
+interface ISurgeryForm {
 	OwnerId: string;
 	Date: string;
 	SurgeryType: string;
@@ -40,11 +40,11 @@ interface SurgeryI {
 	Description: string | null;
 	StartTime: string;
 }
-function SurgeryForm() {
+function SurgeryForm(): ReactElement {
 	const [surgeryTypes, setSurgeryTypes] = useState<SurgeryType[]>([]);
 
 	const [animalList, setAnimalList] = useState<Animal[]>([]);
-	const [surgery, setSurgery] = useState<SurgeryI>({
+	const [surgery, setSurgery] = useState<ISurgeryForm>({
 		OwnerId: '',
 		Date: '',
 		SurgeryType: '',
@@ -55,7 +55,16 @@ function SurgeryForm() {
 		Description: '',
 		StartTime: '',
 	});
-	const [error, setError] = useState({
+	const [error, setError] = useState<{
+		OwnerId: string;
+		Date: string;
+		SurgeryType: string;
+		LeadVetId: string;
+		AnimalId: string;
+
+		Description: string;
+		StartTime: string;
+	}>({
 		Date: '',
 		SurgeryType: '',
 		LeadVetId: '',
@@ -73,7 +82,7 @@ function SurgeryForm() {
 		getTypesFromApi();
 	}, []);
 
-	const getTypesFromApi = () => {
+	const getTypesFromApi = (): void => {
 		let results;
 		let promise = getSurgeryTypes();
 		if (promise) {
@@ -349,15 +358,15 @@ function SurgeryForm() {
 						<SelectOwnerComponent
 							onChange={onChangeOwner}
 							error={error.OwnerId}
-							OwnerId={surgery.OwnerId}
 							setServerError={setServerErrorChild}
+							selectedValue={surgery.OwnerId}
+							editForm={false}
 						/>
 
 						<SelectAnimalComponent
 							onChange={onChange}
 							error={error.AnimalId}
 							OwnerId={surgery.OwnerId}
-							setAPIError={setAPIError}
 							setServerError={setServerErrorChild}
 						/>
 

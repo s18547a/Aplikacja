@@ -1,7 +1,8 @@
-import { useLocation } from "react-router-dom";
-import NavBtn from "../NavBtn";
+import { ReactElement } from 'react';
+import { useLocation } from 'react-router-dom';
+import NavBtn from '../NavBtn';
 
-function LoginDropdown() {
-  return <NavBtn link={"/log"} label={"Logowanie"} />;
+function LoginDropdown(): ReactElement {
+	return <NavBtn link={'/log'} label={'Logowanie'} />;
 }
 export default LoginDropdown;

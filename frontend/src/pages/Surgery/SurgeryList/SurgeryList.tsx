@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import { CheckLg } from 'react-bootstrap-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { getReservationsByOwner } from '../../../apiCalls/reservationApiCalls';
+
 import {
 	getSurgeries,
 	getSurgeriesByOwner,
@@ -13,12 +13,13 @@ import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
-import { VisitListParamter } from '../../../components/other/helperClass/VisitListParameters';
+import { SearchListParamter } from '../../../components/other/helperClass/VisitListParameters';
+
 import { isVet, isManager, isOwner } from '../../../components/other/userType';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 import VisitSearch from '../../Shared/VisitSearch';
 
-function SurgeryList() {
+function SurgeryList(): ReactElement {
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -36,7 +37,7 @@ function SurgeryList() {
 
 	const [serverError, setServerError] = useState(false);
 
-	const divideListIntoPages = (visitList: Surgery[]) => {
+	const divideListIntoPages = (visitList: Surgery[]): void => {
 		const dowloadListLength: number = visitList.length;
 
 		let numberOfPages = Math.ceil(dowloadListLength / 10);
@@ -49,7 +50,7 @@ function SurgeryList() {
 		}
 		setPagedList(listOfListOnPage);
 	};
-	async function loadSurgeryList() {
+	async function loadSurgeryList(): Promise<void> {
 		const currentUserId = getCurrentUser().userTypeId;
 
 		let response;
@@ -108,7 +109,7 @@ function SurgeryList() {
 		setSelectedPage(value);
 	};
 
-	async function handleSearch(paramters: VisitListParamter) {
+	async function handleSearch(paramters: SearchListParamter) {
 		let results;
 
 		if (paramters.allUndefined()) {

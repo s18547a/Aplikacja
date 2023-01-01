@@ -1,11 +1,22 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { getOwners } from '../../apiCalls/ownerApiCalls';
 import Owner from '../../classes/Owner';
 import FormSelect from '../../components/Form/FormSelect';
 
-function SelectOwnerComponent(props) {
+function SelectOwnerComponent({
+	setServerError,
+	onChange,
+	error,
+	selectedValue,
+	editForm,
+}: {
+	setServerError: () => void;
+	onChange: (any) => void;
+	error: string;
+	selectedValue: string;
+	editForm: boolean;
+}): ReactElement {
 	const [ownerList, setOwnerList] = useState<Owner[]>([]);
-	const [error, setError] = useState();
 
 	const getOwnerListFromApi = () => {
 		let promise;
@@ -24,11 +35,11 @@ function SelectOwnerComponent(props) {
 							setOwnerList(data);
 						}
 						if (response.status == 500) {
-							props.setServerError();
+							setServerError();
 						}
 					},
 					(error) => {
-						props.setServerError();
+						setServerError();
 					}
 				);
 		}
@@ -38,23 +49,23 @@ function SelectOwnerComponent(props) {
 		getOwnerListFromApi();
 	}, []);
 
-	function onChange(e) {
-		props.onChange(e);
+	function onChangeFunction(e) {
+		onChange(e);
 	}
 
 	return (
 		<FormSelect
 			label="Właściciel"
 			name="OwnerId"
-			onChange={onChange}
+			onChange={onChangeFunction}
 			array={ownerList}
 			id={'OwnerId'}
 			elementLabel={'Email'}
-			error={props.error}
+			error={error}
 			arrayIsObjectList={true}
-			selectedValue={props.selectedValue}
+			selectedValue={selectedValue}
 			dataListOptions="Owners"
-			disabled={props.editForm}
+			disabled={editForm}
 		/>
 	);
 }

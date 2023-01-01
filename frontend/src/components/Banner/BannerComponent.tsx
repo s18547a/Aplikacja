@@ -12,9 +12,8 @@ function BannerComponent(props) {
 	function handleLogout() {
 		props.handleLogout();
 	}
-	const navigate = useNavigate();
 
-	let logoutBtn = (
+	let logoutBtn: JSX.Element = (
 		<div>
 			<ModalEnableBtn
 				label="Wyloguj"
@@ -25,7 +24,7 @@ function BannerComponent(props) {
 		</div>
 	);
 
-	const [userType, setUserType] = useState('');
+	const [userType, setUserType] = useState<string>('');
 
 	useEffect(() => {
 		if (isAuthenticated()) {
@@ -39,7 +38,7 @@ function BannerComponent(props) {
 		}
 	}, []);
 
-	const loggedUser = () => {
+	const loggedUser = (): JSX.Element => {
 		return isAuthenticated() ? (
 			<>
 				<Modal

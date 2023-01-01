@@ -1,8 +1,8 @@
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import pl from 'date-fns/locale/pl';
-import { getCurrentDate } from '../other/getCurrentDate';
-function FormDateReactDiv(props) {
+import { ReactElement } from 'react';
+function FormDateReactDiv(props): ReactElement {
 	function onChange(e) {
 		const date: string = e.toISOString().split('T')[0];
 		const ot = new Date(date);

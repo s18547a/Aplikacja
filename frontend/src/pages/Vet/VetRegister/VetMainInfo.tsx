@@ -1,8 +1,20 @@
+import { ReactElement } from 'react';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormDate from '../../../components/Form/FormDate';
 import FormDiv from '../../../components/Form/FormDiv';
+import { IVetError, IVetForm } from './VetForm';
 
-function VetMainInfo(props) {
+function VetMainInfo({
+	error,
+	handleChange,
+	vet,
+	editForm,
+}: {
+	error: IVetError;
+	handleChange: (any) => void;
+	vet: IVetForm;
+	editForm: boolean;
+}): ReactElement {
 	return (
 		<div className="card card-body shadow">
 			<div className="card-title">
@@ -13,49 +25,49 @@ function VetMainInfo(props) {
 						<FormDiv
 							name="Name"
 							label="Imie"
-							error={props.error.Name}
-							onChange={props.handleChange}
+							error={error.Name}
+							onChange={handleChange}
 							type="text"
-							value={props.vet.Name}
+							value={vet.Name}
 						/>
 					</div>
 					<div className="col-12">
 						<FormDiv
 							name="LastName"
 							label="Nazwisko"
-							error={props.error.LastName}
-							onChange={props.handleChange}
+							error={error.LastName}
+							onChange={handleChange}
 							type="text"
-							value={props.vet.LastName}
+							value={vet.LastName}
 						/>
 					</div>
 					<div className="col-12">
 						<FormDiv
 							name="Email"
 							label="Email"
-							error={props.error.Email}
-							onChange={props.handleChange}
+							error={error.Email}
+							onChange={handleChange}
 							type="text"
-							value={props.vet.Email}
+							value={vet.Email}
 						/>
 					</div>
 					<div className="col-12">
 						<FormDiv
 							name="Contact"
 							label="Numer telefonu"
-							error={props.error.Contact}
-							onChange={props.handleChange}
+							error={error.Contact}
+							onChange={handleChange}
 							type="text"
-							value={props.vet.Contact}
+							value={vet.Contact}
 						/>
 					</div>
-					{!props.editFrom ? (
+					{!editForm ? (
 						<div className="col-12">
 							<FormDiv
 								name="Password"
 								label="Hasło"
-								error={props.error.Password}
-								onChange={props.handleChange}
+								error={error.Password}
+								onChange={handleChange}
 								type="text"
 							/>
 						</div>
@@ -65,16 +77,16 @@ function VetMainInfo(props) {
 						<FormDate
 							name="HireDate"
 							label="Data zatrudnienia"
-							error={props.error.HireDate}
-							onChange={props.handleChange}
+							error={error.HireDate}
+							onChange={handleChange}
 							type="date"
-							value={props.vet.HireDate}
+							value={vet.HireDate}
 						/>
 					</div>
 
 					<div className="col-12">
 						<SubmitFormButton
-							label={props.editForm === true ? 'Zapisz ' : 'Zarejestruj'}
+							label={editForm === true ? 'Zapisz ' : 'Zarejestruj'}
 						/>
 					</div>
 				</div>

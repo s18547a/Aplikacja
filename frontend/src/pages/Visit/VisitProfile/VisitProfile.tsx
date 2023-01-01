@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVisitById } from '../../../apiCalls/visitApiCalls';
 import Visit from '../../../classes/Visit';
@@ -6,9 +6,9 @@ import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbCompon
 import ProfileDiv from '../../../components/other/ProfileDiv';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
-function VisitProfile() {
+function VisitProfile(): ReactElement {
 	const [visit, setVist] = useState<Visit>();
-	const [serverError, setServerError] = useState(false);
+	const [serverError, setServerError] = useState<boolean>(false);
 
 	const param = useParams();
 

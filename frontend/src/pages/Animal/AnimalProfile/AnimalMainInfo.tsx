@@ -1,9 +1,18 @@
+import { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Animal from '../../../classes/Animal';
+import Owner from '../../../classes/Owner';
 import EditButton from '../../../components/Buttons/EditButton';
 import { getDefalutProfileImage } from '../../../components/other/imageHelper';
 import ProfileDiv from '../../../components/other/ProfileDiv';
 
-function AnimalProfile(props) {
+function AnimalProfile({
+	animal,
+	owner,
+}: {
+	animal: Animal | undefined;
+	owner: Owner | undefined;
+}): ReactElement {
 	const navigate = useNavigate();
 
 	return (
@@ -17,9 +26,9 @@ function AnimalProfile(props) {
 									height="400px"
 									width="350px"
 									src={
-										props.animal?.ProfileImage == null
+										animal?.ProfileImage == null
 											? getDefalutProfileImage()
-											: props.animal.ProfileImage
+											: animal.ProfileImage
 									}
 								/>
 							</div>
@@ -40,8 +49,8 @@ function AnimalProfile(props) {
 										<div className="col-1   ">
 											<EditButton
 												onClick={() =>
-													navigate(`/animals/${props.animal?.AnimalId}/edit`, {
-														state: { AnimalId: props.animal?.AnimalId },
+													navigate(`/animals/${animal?.AnimalId}/edit`, {
+														state: { AnimalId: animal?.AnimalId },
 													})
 												}
 											/>
@@ -50,18 +59,18 @@ function AnimalProfile(props) {
 
 									<div className="row">
 										<div className="col-12">
-											<ProfileDiv label={'Imie'} value={props.animal?.Name} />
+											<ProfileDiv label={'Imie'} value={animal?.Name} />
 										</div>
 										<div className="col-12">
 											<ProfileDiv
 												label={'Data urodzenia'}
-												value={props.animal?.BirthDate}
+												value={animal?.BirthDate}
 											/>
 										</div>
 										<div className="col-12">
 											<ProfileDiv
 												label={'Rasa'}
-												value={`${props.animal?.AnimalType?.Race},${props.animal?.AnimalType?.Family}`}
+												value={`${animal?.AnimalType?.Race},${animal?.AnimalType?.Family}`}
 											/>
 										</div>
 
@@ -69,9 +78,9 @@ function AnimalProfile(props) {
 											<ProfileDiv
 												label={'Płeć'}
 												value={
-													props.animal?.Sex == 1
+													animal?.Sex == 1
 														? 'Samiec'
-														: props.animal?.Sex == 2
+														: animal?.Sex == 2
 														? 'Samica'
 														: 'Nieokreślono'
 												}
@@ -93,17 +102,14 @@ function AnimalProfile(props) {
 										<div className="col-12">
 											<ProfileDiv
 												label={'Właściciel'}
-												value={`${props.owner?.Name} ${props.owner?.LastName}`}
+												value={`${owner?.Name} ${owner?.LastName}`}
 											/>
 										</div>
 										<div className="col-12">
-											<ProfileDiv label={'Email'} value={props.owner?.Email} />
+											<ProfileDiv label={'Email'} value={owner?.Email} />
 										</div>
 										<div className="col-12">
-											<ProfileDiv
-												label={'Telefon'}
-												value={props.owner?.Contact}
-											/>
+											<ProfileDiv label={'Telefon'} value={owner?.Contact} />
 										</div>
 									</div>
 								</div>

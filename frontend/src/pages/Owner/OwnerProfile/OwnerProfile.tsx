@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { getOwnerById } from '../../../apiCalls/ownerApiCalls';
 import Owner from '../../../classes/Owner';
 import { getCurrentUser } from '../../../components/other/authHelper';
 import ProfileDiv from '../../../components/other/ProfileDiv';
 
-function OwnerProfile() {
+function OwnerProfile(): ReactElement {
 	const [owner, setOwner] = useState<Owner>({
 		OwnerId: undefined,
 		Name: undefined,
@@ -13,10 +13,10 @@ function OwnerProfile() {
 		Email: undefined,
 		Password: undefined,
 	});
-	const [error, setError] = useState({});
+
 	const [serverError, setServerError] = useState(false);
 
-	const getOwnerFromApi = async () => {
+	const getOwnerFromApi = async (): Promise<void> => {
 		const user = getCurrentUser();
 		console.log(user);
 
@@ -36,7 +36,6 @@ function OwnerProfile() {
 					}
 				},
 				(error) => {
-					setError(error);
 					setServerError(true);
 				}
 			);

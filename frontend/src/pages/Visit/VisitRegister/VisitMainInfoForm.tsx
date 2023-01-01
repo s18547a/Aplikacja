@@ -11,7 +11,7 @@ function VisitMainInfoForm(props) {
 		props.onChangeOwner(e);
 	}
 
-	function setServerError(e) {
+	function setServerError() {
 		props.setServerError();
 	}
 

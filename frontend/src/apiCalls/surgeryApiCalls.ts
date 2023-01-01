@@ -1,6 +1,6 @@
 import Vet from '../classes/Vet';
 import { getCurrentDate } from '../components/other/getCurrentDate';
-import { VisitListParamter } from '../components/other/helperClass/VisitListParameters';
+import { SearchListParamter } from '../components/other/helperClass/VisitListParameters';
 
 const baseUrl = 'http://localhost:8000/surgeries';
 
@@ -25,7 +25,7 @@ export async function getSurgeriesByOwner(OwnerId: string) {
 	return promise;
 }
 
-export async function searchSurgeryList(paramters: VisitListParamter) {
+export async function searchSurgeryList(paramters: SearchListParamter) {
 	const queryURL = paramters.createURLString();
 	console.log(queryURL);
 	const url = `${baseUrl}/search${paramters.createURLString()}`;

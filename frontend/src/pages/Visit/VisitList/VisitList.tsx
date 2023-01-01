@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
 	getVisitList,
@@ -11,16 +11,16 @@ import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
-import { VisitListParamter } from '../../../components/other/helperClass/VisitListParameters';
+import { SearchListParamter } from '../../../components/other/helperClass/VisitListParameters';
 import { isVet, isManager, isOwner } from '../../../components/other/userType';
 
 import SearchInput from '../../Shared/SearchImput';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 import VisitSearch from '../../Shared/VisitSearch';
 
-function VisitList() {
+function VisitList(): ReactElement {
 	const [visitList, setVisitList] = useState<Visit[]>([]);
-	const [empty, setEmpty] = useState<boolean | undefined>(undefined);
+	const [empty, setEmpty] = useState<boolean>(true);
 
 	const navigate = useNavigate();
 	const [newId, setNewId] = useState('');
@@ -45,7 +45,7 @@ function VisitList() {
 		setPagedList(listOfListOnPage);
 	};
 
-	const loadVisits = async () => {
+	const loadVisits = async (): Promise<any> => {
 		let promise;
 		let response;
 		const curretUserId = getCurrentUser().userTypeId;
@@ -92,7 +92,7 @@ function VisitList() {
 		}
 	}, []);
 
-	async function handleSearch(paramters: VisitListParamter) {
+	async function handleSearch(paramters: SearchListParamter) {
 		let results;
 
 		if (paramters.allUndefined()) {

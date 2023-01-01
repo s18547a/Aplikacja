@@ -1,8 +1,22 @@
-import { getDefalutProfileImage } from '../../../components/other/imageHelper';
+import { ReactElement } from 'react';
 
-function ReservationVetChoice(props) {
-	function handleVetChange(e) {
-		props.handleVetChange(e);
+import Vet from '../../../classes/Vet';
+import { getDefalutProfileImage } from '../../../components/other/imageHelper';
+import { IReservationForm } from './ReservationForm';
+
+function ReservationVetChoice({
+	handleVetChange,
+	vets,
+	reservation,
+	error,
+}: {
+	handleVetChange: (any) => void;
+	vets: Vet[];
+	reservation: IReservationForm;
+	error: string;
+}): ReactElement {
+	function handleVetChangeFunction(e) {
+		handleVetChange(e);
 	}
 
 	return (
@@ -11,18 +25,18 @@ function ReservationVetChoice(props) {
 				<div className="form-label fw-bold">Weterynarz</div>
 
 				<div className="list-group">
-					{props.vets.map((vet) => {
+					{vets.map((vet) => {
 						return (
 							<div className="col-6">
 								<button
 									name={'VetId'}
 									value={vet.VetId}
 									className={
-										props.reservation.VetId == vet.VetId
+										reservation.VetId == vet.VetId
 											? 'list-group-item active stretched-link m-2 border-1'
 											: 'list-group-item stretched-link m-2 border-1'
 									}
-									onClick={handleVetChange}
+									onClick={handleVetChangeFunction}
 								>
 									<div className="row p-3">
 										<div className="col-12">

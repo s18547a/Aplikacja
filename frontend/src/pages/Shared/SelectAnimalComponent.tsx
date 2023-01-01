@@ -1,15 +1,25 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { getAnimalsbyOwner } from '../../apiCalls/animalApiCalls';
 import Animal from '../../classes/Animal';
 
-function SelectAnimalComponent(props) {
+function SelectAnimalComponent({
+	setServerError,
+	OwnerId,
+	onChange,
+	error,
+}: {
+	setServerError: () => void;
+	OwnerId: string;
+	onChange: (any) => void;
+	error: string;
+}): ReactElement {
 	const [animalList, setAnimalList] = useState<Animal[]>([]);
 
-	function setServerError() {
-		props.setServerError();
+	function setServerErrorFunction() {
+		setServerError();
 	}
 	const getAnimalListFromApi = (OwnerId: String) => {
-		if (props.OwnerId) {
+		if (OwnerId) {
 			let promise;
 			let response;
 
@@ -30,7 +40,7 @@ function SelectAnimalComponent(props) {
 							}
 							if (response.status === 500) {
 								setAnimalList([]);
-								setServerError();
+								setServerErrorFunction();
 							}
 						},
 						(error) => {
@@ -45,11 +55,11 @@ function SelectAnimalComponent(props) {
 	};
 
 	useEffect(() => {
-		getAnimalListFromApi(props.OwnerId);
-	}, [props.OwnerId]);
+		getAnimalListFromApi(OwnerId);
+	}, [OwnerId]);
 
-	function onChange(e) {
-		props.onChange(e);
+	function onChangeFunction(e) {
+		onChange(e);
 	}
 
 	return (
@@ -71,13 +81,13 @@ function SelectAnimalComponent(props) {
 								name="AnimalId"
 								id={`${animal.AnimalId}`}
 								value={`${animal.AnimalId}`}
-								onChange={onChange}
+								onChange={onChangeFunction}
 							/>
 						</div>
 					);
 				})}
 			</div>
-			<label className="form-text text-danger ">{props.error}</label>
+			<label className="form-text text-danger ">{error}</label>
 		</div>
 	);
 }

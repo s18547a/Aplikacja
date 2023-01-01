@@ -1,6 +1,25 @@
-function FormAnimalTypeSelect(props) {
-	function onChange(e) {
-		props.onChange(e);
+import { ReactElement } from 'react';
+import AnimalType from '../../../classes/AnimalType';
+
+function FormAnimalTypeSelect({
+	onChange,
+	label,
+	error,
+	dataListOptions,
+	selectedValue,
+	disabled,
+	animalTypes,
+}: {
+	onChange: (any) => void;
+	label: string;
+	error: string;
+	dataListOptions: string;
+	selectedValue: string | undefined;
+	disabled: boolean;
+	animalTypes: AnimalType[];
+}): ReactElement {
+	function onChangeFunction(e) {
+		onChange(e);
 	}
 
 	return (
@@ -8,7 +27,7 @@ function FormAnimalTypeSelect(props) {
 			<div className="row">
 				<div className="col-12">
 					<label htmlFor="exampleDataList" className="form-label ">
-						{props.label}
+						{label}
 					</label>
 				</div>
 
@@ -17,20 +36,20 @@ function FormAnimalTypeSelect(props) {
 						<div className="col-12">
 							<input
 								className={
-									props.error == ''
+									error == ''
 										? 'form-control '
 										: 'form-control border border-danger'
 								}
-								list={props.dataListOptions}
+								list={dataListOptions}
 								id="exampleDataList"
 								placeholder=""
 								name="AnimalTypeId"
-								onChange={onChange}
-								defaultValue={props.selectedValue}
-								disabled={props.disabled}
+								onChange={onChangeFunction}
+								defaultValue={selectedValue}
+								disabled={disabled}
 							/>
-							<datalist id={props.dataListOptions}>
-								{props.animalTypes.map((element) => {
+							<datalist id={dataListOptions}>
+								{animalTypes.map((element) => {
 									return (
 										<option
 											key={element.AnimalTypeId}
@@ -42,7 +61,7 @@ function FormAnimalTypeSelect(props) {
 							</datalist>
 						</div>
 						<div className="col-12">
-							<label className="form-text text-danger ">{props.error}</label>
+							<label className="form-text text-danger ">{error}</label>
 						</div>
 					</div>
 				</div>

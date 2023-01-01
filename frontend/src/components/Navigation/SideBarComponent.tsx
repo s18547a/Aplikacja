@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import { useLocation } from 'react-router-dom';
 import { isAuthenticated } from '../other/authHelper';
 import { isOwner, isVet, isManager } from '../other/userType';
@@ -8,7 +9,7 @@ import UserProfileDropdown from './Dropdowns/UserProfileDropdown';
 import VetDropdown from './Dropdowns/VetDropdown';
 import VisitDropdown from './Dropdowns/VisitDropdown';
 
-function SideBar() {
+function SideBar(): ReactElement | null {
 	const location = useLocation();
 
 	const currentLocation = location.pathname;

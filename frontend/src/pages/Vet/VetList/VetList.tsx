@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getVets } from '../../../apiCalls/vetApiCalls';
 import Vet from '../../../classes/Vet';
@@ -6,7 +6,7 @@ import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
-function VetList() {
+function VetList(): ReactElement {
 	const [vetList, setVetList] = useState<Vet[]>([]);
 	const [empty, setEmpty] = useState<boolean>(false);
 	const [serverError, setServerError] = useState(false);
@@ -54,7 +54,7 @@ function VetList() {
 				<div className="card-title">
 					<h5>Lista weterynarzy</h5>
 				</div>
-				<TableOrEmpty>
+				<TableOrEmpty Empty={empty}>
 					<table className="table table-hover">
 						<thead>
 							<tr>

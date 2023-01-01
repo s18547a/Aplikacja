@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
 	getAnimalById,
@@ -24,17 +24,18 @@ import AnimalProfileNav from './AnimalProfileNav';
 import AnimalVaccines from './AnimalVaccines';
 import MedicalInfo from './MedicalInfo';
 
-function AnimalProfile() {
+function AnimalProfile(): ReactElement {
 	const [animal, setAnimal] = useState<Animal>();
 	const param = useParams();
 
-	const navigate = useNavigate();
-	const location = useLocation();
 	const [illnessList, setIllnessList] = useState<Illness[]>([]);
 	const [owner, setOwner] = useState<Owner>();
 	const [medicalInfo, setMedicalInfo] = useState<AnimalMedicalInfo>();
 	const [vaccineList, setVaccineList] = useState<Vaccination[]>([]);
 	const [serverError, setServerError] = useState(false);
+	const [coreVaccinesList, setCoreVaccinesList] = useState<VaccineType[]>([]);
+
+	const [selectedTab, setSelectedTab] = useState('');
 
 	useEffect(() => {
 		loadAnimal();
@@ -44,9 +45,9 @@ function AnimalProfile() {
 		loadAnimalCoreVaccines();
 	}, []);
 
-	const loadAnimal = async () => {
+	const loadAnimal = async (): Promise<void> => {
 		let response;
-		let promise;
+		let promise: Promise<any>;
 		let animalOwnerId;
 		if (param.AnimalId) {
 			promise = getAnimalById(param.AnimalId);
@@ -98,7 +99,7 @@ function AnimalProfile() {
 		}
 	};
 
-	const loadMedicalInfo = async () => {
+	const loadMedicalInfo = async (): Promise<void> => {
 		let promise;
 		let response;
 		if (param.AnimalId) {
@@ -126,7 +127,7 @@ function AnimalProfile() {
 		}
 	};
 
-	const loadIllnesses = async () => {
+	const loadIllnesses = async (): Promise<void> => {
 		let promise;
 		let response;
 		promise = getAnimalIllnesses(param.AnimalId);
@@ -155,7 +156,7 @@ function AnimalProfile() {
 		}
 	};
 
-	const loadAnimalVaccines = async () => {
+	const loadAnimalVaccines = async (): Promise<void> => {
 		let promise;
 		let response;
 		promise = getAnimalVaccines(param.AnimalId);
@@ -182,7 +183,7 @@ function AnimalProfile() {
 		}
 	};
 
-	const loadAnimalCoreVaccines = async () => {
+	const loadAnimalCoreVaccines = async (): Promise<void> => {
 		let promise;
 		let response;
 		promise = getAnimalCoreVaccines(param.AnimalId);
@@ -212,17 +213,13 @@ function AnimalProfile() {
 		}
 	};
 
-	const [coreVaccinesList, setCoreVaccinesList] = useState<VaccineType[]>([]);
-
-	const [selectedTab, setSelectedTab] = useState('');
-
 	function setSelectedTabFunction(e) {
 		const { name, value } = e.target;
 
 		setSelectedTab(value);
 	}
 
-	function updateIllness(illness) {
+	async function updateIllness(illness): Promise<void> {
 		illness = JSON.parse(illness);
 
 		const illnessToUpdate = {
@@ -253,7 +250,7 @@ function AnimalProfile() {
 		}
 	}
 
-	const setPage = () => {
+	const setPage = (): JSX.Element => {
 		if (selectedTab === '') {
 			return <AnimalMainInfo animal={animal} owner={owner} />;
 		} else if (selectedTab == 'ill') {
@@ -265,17 +262,13 @@ function AnimalProfile() {
 			);
 		} else if (selectedTab == 'add') {
 			return (
-				<MedicalInfo
-					animal={animal}
-					medicalInfo={medicalInfo}
-					animalId={animal?.AnimalId}
-				/>
+				<MedicalInfo medicalInfo={medicalInfo} animalId={animal?.AnimalId} />
 			);
 		} else if (selectedTab == 'vacc') {
 			return (
 				<AnimalVaccines vaccineList={vaccineList} coreList={coreVaccinesList} />
 			);
-		}
+		} else return <div></div>;
 	};
 
 	return (

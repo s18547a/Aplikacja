@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import {
 	getVetByVetId,
 	getVetTypes,
@@ -13,7 +13,7 @@ import VetSpecForm from './VetSpecForm';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
-interface VetI {
+export interface IVetForm {
 	Name: string;
 	LastName: string;
 	Contact: string;
@@ -23,16 +23,24 @@ interface VetI {
 	ProfileImage: string | null;
 	VetType: string[];
 }
-interface VetTypeI {
-	VetType: string;
-	Salary: number;
+
+export interface IVetError {
+	Name: string;
+	LastName: string;
+	Contact: string;
+	Email: string;
+	Password: string;
+	HireDate: string;
 }
-function VetForm() {
+export interface VetTypeI {
+	VetType: string;
+}
+function VetForm(): ReactElement {
 	const navigate = useNavigate();
 
 	const [vetTypeList, setVetTypeList] = useState<VetTypeI[]>([]);
 
-	const [vet, setVet] = useState<VetI>({
+	const [vet, setVet] = useState<IVetForm>({
 		Name: '',
 		LastName: '',
 		Contact: '',
@@ -128,14 +136,14 @@ function VetForm() {
 		}
 	}, []);
 
-	function handleChange(e) {
+	function handleChange(e): void {
 		const { name, value } = e.target;
 		setVet((prev) => ({
 			...prev,
 			[name]: value,
 		}));
 	}
-	function handleVetTypeChange(e) {
+	function handleVetTypeChange(e): void {
 		const { name, value } = e.target;
 		if (vet.VetType.includes(value)) {
 			const newVetTypes = vet.VetType.filter((type) => {
@@ -158,7 +166,7 @@ function VetForm() {
 		}
 	}
 
-	function handleSubmit(e) {
+	function handleSubmit(e): void {
 		e.preventDefault();
 		console.log(vet);
 

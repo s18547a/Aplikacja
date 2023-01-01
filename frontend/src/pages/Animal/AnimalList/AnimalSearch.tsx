@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import SearchButton from '../../../components/Buttons/SearchButton';
 import FormSearchDiv from '../../../components/Form/FormSearchDiv';
 
-function AnimalSearch(props) {
+function AnimalSearch(props): ReactElement {
 	const [searchParameters, setSearchParamteters] = useState({
 		Email: '',
 	});

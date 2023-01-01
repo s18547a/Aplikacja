@@ -1,28 +1,40 @@
+import { ReactElement } from 'react';
+import Vet from '../../classes/Vet';
 import { getDefalutProfileImage } from '../../components/other/imageHelper';
 
-function VetChoiceComponent(props) {
-	function handleVetChange(e) {
+function VetChoiceComponent({
+	label,
+	vets,
+	selected,
+	onChange,
+}: {
+	label: string;
+	vets: Vet[];
+	selected: string;
+	onChange: (any) => void;
+}): ReactElement {
+	function handleVetChangeFunction(e) {
 		e.preventDefault();
-		props.onChange(e);
+		onChange(e);
 	}
 
 	return (
 		<div className="form-group">
-			<div className="form-label fw-bold">{props.label}</div>
+			<div className="form-label fw-bold">{label}</div>
 			<div className="list-group">
 				<div className="row ">
-					{props.vets.map((vet) => {
+					{vets.map((vet) => {
 						return (
 							<div className="col-6">
 								<button
 									name={'VetId'}
 									value={vet.VetId}
 									className={
-										props.selected == vet.VetId
+										selected == vet.VetId
 											? '  list-group-item active stretched-link bg-primary  m-2 border-1'
 											: ' list-group-item stretched-link  m-2 border-1'
 									}
-									onClick={handleVetChange}
+									onClick={handleVetChangeFunction}
 								>
 									<div className="row p-3">
 										<div className="col-12">

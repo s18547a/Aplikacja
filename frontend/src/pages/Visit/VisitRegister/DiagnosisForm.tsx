@@ -5,14 +5,20 @@ interface DiagnosisI {
 	Description: String;
 }
 
-function DiagnosisForm(props) {
-	const [diagnosisList, setDiagnosisList] = useState<DiagnosisI[]>([]);
+function DiagnosisForm({
+	AnimalId,
+	setDiagnosisList,
+}: {
+	AnimalId: string;
+	setDiagnosisList: (any) => void;
+}) {
+	const [diagnosisList, setComponentDiagnosisList] = useState<DiagnosisI[]>([]);
 	const [numberOfDiagnosis, setNumberOfDiagnosis] = useState(0);
 
 	useEffect(() => {
-		setDiagnosisList([]);
+		setComponentDiagnosisList([]);
 		setNumberOfDiagnosis(0);
-	}, [props.AnimalId]);
+	}, [AnimalId]);
 	function addDiagnosis(e) {
 		const newDiagnosos = { Number: numberOfDiagnosis, Description: '' };
 
@@ -20,7 +26,7 @@ function DiagnosisForm(props) {
 		newDignosisArray.push(newDiagnosos);
 		const newDiagnosisNumber = numberOfDiagnosis + 1;
 		setNumberOfDiagnosis(newDiagnosisNumber);
-		setDiagnosisList(newDignosisArray);
+		setComponentDiagnosisList(newDignosisArray);
 	}
 
 	function handleDiagnosisChange(e) {
@@ -47,15 +53,15 @@ function DiagnosisForm(props) {
 				return value;
 			}
 		});
-		setDiagnosisList(newDiagnosisList);
+		setComponentDiagnosisList(newDiagnosisList);
 	}
 
 	function setDiagnosisListPrent() {
-		props.setDiagnosisList(diagnosisList);
+		setDiagnosisList(diagnosisList);
 	}
 
 	const diagnosisFromComponenet =
-		props.AnimalId != '' ? (
+		AnimalId != '' ? (
 			<div className="mt-3">
 				<div className="row">
 					<div className="col-12">

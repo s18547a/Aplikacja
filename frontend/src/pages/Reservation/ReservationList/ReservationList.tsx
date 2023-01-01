@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { X, XCircle } from 'react-bootstrap-icons';
+import { ReactElement, useEffect, useState } from 'react';
+
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import {
 	getReservationsByVetId,
@@ -21,7 +21,7 @@ import {
 import { isVet, isManager, isOwner } from '../../../components/other/userType';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
-function ReservationList() {
+function ReservationList(): ReactElement {
 	const navigate = useNavigate();
 
 	const [reservationList, setReservationList] = useState<Reservation[]>([]);
@@ -38,7 +38,7 @@ function ReservationList() {
 	});
 
 	const [serverError, setServerError] = useState(false);
-	async function loadReservationList() {
+	async function loadReservationList(): Promise<void> {
 		const currentUserId = getCurrentUser().userTypeId;
 
 		let response;
@@ -94,14 +94,14 @@ function ReservationList() {
 		}
 	}, []);
 
-	const handleRowCancel = (event) => {
+	const handleRowCancel = (event): void => {
 		console.log('Cliced');
 		const { name, value } = event.target;
 		console.log(value);
 		setReservationId(event.target.value);
 	};
 
-	const handleClick = (event) => {
+	const handleClick = (): void => {
 		console.log('Cancel' + reservationId);
 
 		let result;
@@ -122,7 +122,7 @@ function ReservationList() {
 	};
 
 	const location = useLocation();
-	const handleReliseReservation = (event) => {
+	const handleReliseReservation = (event): void => {
 		const { name, value } = event.target;
 		const realiseReservationParameters: string[] = value.split(',');
 

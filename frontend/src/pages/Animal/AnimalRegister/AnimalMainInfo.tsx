@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
+import Animal, { Sex } from '../../../classes/Animal';
+import AnimalType from '../../../classes/AnimalType';
 import Owner from '../../../classes/Owner';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormCheck from '../../../components/Form/FormCheck';
@@ -6,23 +8,38 @@ import FormDateReactDiv from '../../../components/Form/FormDateRectDiv';
 import FormDiv from '../../../components/Form/FormDiv';
 import FormSelect from '../../../components/Form/FormSelect';
 import { isOwner } from '../../../components/other/userType';
+import { IAnimalForm } from './AnimalForm';
 import FormAnimalTypeSelect from './FormAnimalTypeSelect';
 
-function AnimalMainInfo(props: {
+function AnimalMainInfo({
+	ownerList,
+	handleChange,
+	error,
+	animal,
+
+	animalTypes,
+	editForm,
+	handleDateChange,
+}: {
 	ownerList: Owner[];
-	handleChange;
-	error;
-	animal;
-	location;
-	animalTypes;
-	editForm;
-	handleDateChange;
-}) {
-	function handleChange(e) {
-		props.handleChange(e);
+	handleChange: (any) => void;
+	error: {
+		OwnerId: string;
+		Name: string;
+		BirthDate: string;
+		AnimalTypeId: string;
+		Sex: string;
+	};
+	animal: IAnimalForm;
+	animalTypes: AnimalType[];
+	editForm: boolean;
+	handleDateChange: (any) => void;
+}): ReactElement {
+	function handleChangeFuntion(e): void {
+		handleChange(e);
 	}
-	function handleDateChange(e) {
-		props.handleDateChange(e);
+	function handleDateChangeFunction(e): void {
+		handleDateChange(e);
 	}
 
 	useEffect(() => {}, []);
@@ -31,18 +48,14 @@ function AnimalMainInfo(props: {
 		<FormSelect
 			label="Właściciel"
 			name="OwnerId"
-			onChange={handleChange}
-			array={props.ownerList}
+			onChange={handleChangeFuntion}
+			array={ownerList}
 			id={'OwnerId'}
 			elementLabel={'Email'}
-			error={props.error.OwnerId}
+			error={error.OwnerId}
 			arrayIsObjectList={true}
 			selectedValue={
-				isOwner()
-					? props.animal.OwnerId
-					: props.editForm
-					? props.animal.OwnerId
-					: ''
+				isOwner() ? animal.OwnerId : editForm ? animal.OwnerId : ''
 			}
 			dataListOptions="Owners"
 		/>
@@ -58,32 +71,30 @@ function AnimalMainInfo(props: {
 					<FormDiv
 						label="Imie"
 						name="Name"
-						error={props.error.Name}
+						error={error.Name}
 						type="text"
 						onChange={handleChange}
-						value={props.animal.Name}
+						value={animal.Name}
 					/>
 				</div>
 				<div className="col-12">
 					<FormDateReactDiv
 						label={'Data urodzenia'}
-						value={props.animal.BirthDate}
-						onChange={handleDateChange}
-						error={props.error.BirthDate}
+						value={animal.BirthDate}
+						onChange={handleDateChangeFunction}
+						error={error.BirthDate}
 					/>
 				</div>
 
 				<div className="col-12">
 					<FormAnimalTypeSelect
 						label="Rodzaj"
-						name="AnimalTypeId"
-						onChange={handleChange}
-						animalTypes={props.animalTypes}
-						error={props.error.AnimalTypeId}
-						arrayIsObjectList={true}
+						onChange={handleChangeFuntion}
+						animalTypes={animalTypes}
+						error={error.AnimalTypeId}
 						dataListOptions="Animals"
-						selectedValue={props.animal.AnimalTypeId}
-						disabled={props.editForm}
+						selectedValue={animal.AnimalTypeId}
+						disabled={editForm}
 					/>
 				</div>
 				<div className="col-12">{isOwner() ? null : ownerField}</div>
@@ -91,9 +102,9 @@ function AnimalMainInfo(props: {
 					<FormCheck
 						label="Płeć"
 						name="Sex"
-						error={props.error.Sex}
-						onChange={handleChange}
-						selected={props.animal.Sex}
+						error={error.Sex}
+						onChange={handleChangeFuntion}
+						selected={animal.Sex}
 						elements={[
 							{
 								value: 1,
@@ -115,7 +126,7 @@ function AnimalMainInfo(props: {
 				</div>
 				<div className="col-12 mt-3">
 					<SubmitFormButton
-						label={props.editForm === true ? 'Zapisz zmiany' : 'Zarejestruj'}
+						label={editForm === true ? 'Zapisz zmiany' : 'Zarejestruj'}
 					/>
 				</div>
 			</div>

@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logIn } from '../../apiCalls/userApiCalls';
 import FormDiv from '../../components/Form/FormDiv';
 import ServerErrorInfoComponenet from '../Shared/ServerErrorInfoComponent';
 
-function LoginForm(props) {
+function LoginForm({
+	handleLogin,
+}: {
+	handleLogin: (any) => void;
+}): ReactElement {
 	const [loginForm, editLoginForm] = useState({ Email: '', Password: '' });
 	const [error, setError] = useState({ Email: '', Password: '' });
 
-	const [isLoading, setIsLoading] = useState(false);
-
 	const [serverError, setServerError] = useState(false);
 
-	function handleChange(e) {
+	function handleChange(e): any {
 		const { name, value } = e.target;
 		console.log(name);
 		editLoginForm((prev) => ({
@@ -26,8 +28,6 @@ function LoginForm(props) {
 
 		console.log(loginForm);
 		if (validateForm()) {
-			setIsLoading(true);
-
 			let response;
 			let promise;
 			promise = logIn(loginForm);
@@ -52,7 +52,7 @@ function LoginForm(props) {
 							if (response.status == 200) {
 								const user = JSON.stringify(data);
 
-								props.handleLogin(user);
+								handleLogin(user);
 							}
 							if (response.status == 500) {
 								setServerError(true);
@@ -66,7 +66,7 @@ function LoginForm(props) {
 			}
 		}
 	}
-	function validateForm() {
+	function validateForm(): boolean {
 		let isValid = true;
 		for (const [name, value] of Object.entries(loginForm)) {
 			error[name] = '';

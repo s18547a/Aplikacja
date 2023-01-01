@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { updateMedicalInfo } from '../../../apiCalls/animalApiCalls';
 import AnimalMedicalInfo from '../../../classes/AnimalMedicalInfo';
@@ -7,7 +7,7 @@ import FormCheck from '../../../components/Form/FormCheck';
 import FormDiv from '../../../components/Form/FormDiv';
 import FormTextField from '../../../components/Form/FormTextField';
 
-function MedicalInfoForm(props) {
+function MedicalInfoForm(): ReactElement {
 	const [medicalInfo, setMedicalInfo] = useState<AnimalMedicalInfo>({
 		AnimalId: '',
 		Chipped: null,
@@ -39,7 +39,7 @@ function MedicalInfoForm(props) {
 		}
 	}, []);
 
-	function hanldeSubmit(e) {
+	function hanldeSubmit(e): void {
 		e.preventDefault();
 		console.log(medicalInfo);
 
@@ -66,7 +66,7 @@ function MedicalInfoForm(props) {
 				);
 		}
 	}
-	function handleChange(e) {
+	function handleChange(e): void {
 		let { name, value } = e.target;
 
 		if (name == 'Sterilized' || name == 'Chipped') {

@@ -1,9 +1,6 @@
 import OwnerRegister from '../Owner/OwnerForm/OwnerRegister';
 
-function RegisterPage(props) {
-	function changeTab(e) {
-		props.changeTab(e);
-	}
+function RegisterPage({ changeTab }: { changeTab: (any) => void }) {
 	return <OwnerRegister changeTab={changeTab} />;
 }
 

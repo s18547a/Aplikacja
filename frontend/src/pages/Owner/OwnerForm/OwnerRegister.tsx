@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerOwnerApiCall } from '../../../apiCalls/ownerApiCalls';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormDiv from '../../../components/Form/FormDiv';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
-function OwnerForm(props) {
-	const [owner, setOwner] = useState({
+interface IOwnerForm {
+	Name: string;
+	LastName: string;
+	Contact: string;
+	Email: string;
+	Password: string;
+}
+function OwnerForm({ changeTab }: { changeTab: (any) => void }): ReactElement {
+	const [owner, setOwner] = useState<IOwnerForm>({
 		Name: '',
 		LastName: '',
 		Contact: '',
@@ -24,9 +31,8 @@ function OwnerForm(props) {
 	const [passwordError, setPasswordError] = useState('');
 	const [repeatPassword, setRepeatPassword] = useState('');
 	const [serverError, setServerError] = useState(false);
-	let naviage = useNavigate();
 
-	function handleChange(e) {
+	function handleChange(e): void {
 		const { name, value } = e.target;
 
 		setOwner((prev) => ({
@@ -35,7 +41,7 @@ function OwnerForm(props) {
 		}));
 	}
 
-	function validateForm() {
+	function validateForm(): boolean {
 		let isValid = true;
 
 		for (const [name, value] of Object.entries(owner)) {
@@ -86,10 +92,10 @@ function OwnerForm(props) {
 		return isValid;
 	}
 
-	function changeTab() {
-		props.changeTab('login');
+	function changeTabFunction(): void {
+		changeTab('login');
 	}
-	function handleSubmit(e) {
+	function handleSubmit(e): void {
 		e.preventDefault();
 
 		if (validateForm()) {
@@ -115,7 +121,7 @@ function OwnerForm(props) {
 								}));
 							}
 							if (response.status === 201) {
-								changeTab();
+								changeTabFunction();
 							}
 						},
 						(error) => {
@@ -127,7 +133,7 @@ function OwnerForm(props) {
 		}
 	}
 
-	function handleRepeatPassword(e) {
+	function handleRepeatPassword(e): void {
 		const { name, value } = e.target;
 		setRepeatPassword(value);
 	}

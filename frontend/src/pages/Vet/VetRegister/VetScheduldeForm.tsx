@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
 	getVetSchedulde,
@@ -7,7 +7,17 @@ import {
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import DayScheduldeComponenet from './DayScheduldeComponent';
 
-function VetScheduldeForm() {
+export interface IVetScheduldeForm {
+	Monday: string;
+	Tuesday: string;
+	Wednesday: string;
+	Thursday: string;
+	Friday: string;
+	Saturday: string;
+	Sunday: string;
+}
+
+function VetScheduldeForm(): ReactElement {
 	const params = useParams();
 
 	const navigate = useNavigate();
@@ -78,7 +88,7 @@ function VetScheduldeForm() {
 		}
 	}, []);
 
-	function handleChange(e) {
+	function handleChange(e): void {
 		console.log(schedulde);
 		console.log(e);
 		const { name, value } = e.target;

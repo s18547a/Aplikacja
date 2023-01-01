@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
 	getAnimalsbyOwner,
@@ -16,7 +16,7 @@ import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 import AnimalSearch from './AnimalSearch';
 
-function AnimalList() {
+function AnimalList(): ReactElement {
 	const [animals, setAnimalList] = useState<Animal[]>([]);
 
 	const navigate = useNavigate();

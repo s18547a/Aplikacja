@@ -1,20 +1,22 @@
-function ImageForm(props) {
-  function handleImageUpload(e) {
-    props.handleImageUpload(e);
-  }
+import { ReactElement } from 'react';
 
-  return (
-    <div>
-      <img width="250px" height="250px " src={props.preview} />
+function ImageForm(props): ReactElement {
+	function handleImageUpload(e) {
+		props.handleImageUpload(e);
+	}
 
-      <input
-        type={"file"}
-        accept={"image/*"}
-        onChange={handleImageUpload}
-        className={"form-control"}
-      />
-    </div>
-  );
+	return (
+		<div>
+			<img width="250px" height="250px " src={props.preview} />
+
+			<input
+				type={'file'}
+				accept={'image/*'}
+				onChange={handleImageUpload}
+				className={'form-control'}
+			/>
+		</div>
+	);
 }
 
 export default ImageForm;

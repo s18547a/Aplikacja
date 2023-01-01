@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
 	getAnimalTypes,
@@ -14,8 +14,9 @@ import { isOwner, isVet, isManager } from '../../../components/other/userType';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 import PhotoForm from '../../Shared/PhotoForm';
 import AnimalMainInfo from './AnimalMainInfo';
+import { Sex } from '../../../classes/Animal';
 
-interface AnimalI {
+export interface IAnimalForm {
 	Name: undefined;
 	BirthDate: undefined;
 
@@ -26,7 +27,7 @@ interface AnimalI {
 	ProfileImage: undefined | null | any;
 }
 
-function AnimalRegister() {
+function AnimalRegister(): ReactElement {
 	const [animalTypes, setAnimalTypes] = useState<AnimalType[]>([]);
 	const location = useLocation();
 
@@ -34,7 +35,7 @@ function AnimalRegister() {
 	const [ownerList, setOwnerList] = useState([]);
 	const [animalId, setAnimalId] = useState('');
 
-	const [animal, setAnimal] = useState<AnimalI>({
+	const [animal, setAnimal] = useState<IAnimalForm>({
 		Name: undefined,
 		BirthDate: undefined,
 
@@ -45,7 +46,14 @@ function AnimalRegister() {
 		ProfileImage: null,
 	});
 
-	const [error, setError] = useState({
+	const [error, setError] = useState<{
+		Name: string;
+		BirthDate: string;
+		Weight: string;
+		AnimalTypeId: string;
+		Sex: string;
+		OwnerId: string;
+	}>({
 		Name: '',
 		BirthDate: '',
 		Weight: '',
@@ -153,7 +161,7 @@ function AnimalRegister() {
 		}
 	}, []);
 
-	function handleChange(e) {
+	function handleChange(e): void {
 		const { name, value } = e.target;
 		let newValue = value;
 		if (newValue == 'false') {
@@ -170,7 +178,7 @@ function AnimalRegister() {
 		console.log(animal);
 	}
 
-	function handleDateChange(e) {
+	function handleDateChange(e): void {
 		console.log(e);
 		setAnimal((prev) => ({
 			...prev,
@@ -178,7 +186,7 @@ function AnimalRegister() {
 		}));
 	}
 
-	function validateForm() {
+	function validateForm(): boolean {
 		let isValid = true;
 
 		for (const [name, value] of Object.entries(animal)) {
@@ -213,7 +221,7 @@ function AnimalRegister() {
 		return isValid;
 	}
 
-	function handleSubmit(e) {
+	function handleSubmit(e): void {
 		e.preventDefault();
 		console.log('Submitted');
 		console.log(animal);
@@ -259,7 +267,7 @@ function AnimalRegister() {
 		}
 	}
 
-	function setPhoto(preview) {
+	function setPhoto(preview): void {
 		console.log(preview);
 		setAnimal((prev) => ({
 			...prev,
@@ -306,7 +314,6 @@ function AnimalRegister() {
 						handleChange={handleChange}
 						error={error}
 						animal={animal}
-						location={animal}
 						animalTypes={animalTypes}
 						editForm={editForm}
 						handleDateChange={handleDateChange}

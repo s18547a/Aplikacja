@@ -2,11 +2,17 @@ import { useEffect, useState } from 'react';
 import { getAnimalUnadminstratedVaccines } from '../../../apiCalls/animalApiCalls';
 import VaccineType from '../../../classes/VaccineType';
 
-function VisitVaccineForm(props) {
+function VisitVaccineForm({
+	AnimalId,
+	onChange,
+}: {
+	AnimalId: string;
+	onChange: (any) => void;
+}) {
 	const [vaccineList, setVaccineList] = useState<VaccineType[]>([]);
 
 	async function getAnimalUnadminstratedVaccinesApiCall(AnimalId) {
-		if (props.AnimalId) {
+		if (AnimalId) {
 			let results;
 			getAnimalUnadminstratedVaccines(AnimalId)
 				.then((data) => {
@@ -32,12 +38,8 @@ function VisitVaccineForm(props) {
 	useEffect(() => {
 		console.log('JEes');
 
-		getAnimalUnadminstratedVaccinesApiCall(props.AnimalId);
-	}, [props.AnimalId]);
-
-	function onChange(e) {
-		props.onChange(e);
-	}
+		getAnimalUnadminstratedVaccinesApiCall(AnimalId);
+	}, [AnimalId]);
 
 	return (
 		<div className="card card-body shadow">

@@ -1,12 +1,20 @@
+import { ReactElement } from 'react';
 import { CheckLg } from 'react-bootstrap-icons';
+import Illness from '../../../classes/Illness';
 import { isOwner } from '../../../components/other/userType';
 
-function AnimalIllnesses(props) {
-	function updateIllness(e) {
+function AnimalIllnesses({
+	updateIllness,
+	illnessList,
+}: {
+	updateIllness: (any) => void;
+	illnessList: Illness[];
+}): ReactElement {
+	function lupdateIllness(e) {
 		e.preventDefault();
 		const { name, value } = e.target;
 
-		props.updateIllness(value);
+		updateIllness(value);
 	}
 
 	return (
@@ -22,7 +30,7 @@ function AnimalIllnesses(props) {
 							</tr>
 						</thead>
 						<tbody>
-							{props.illnessList.map((illness) => {
+							{illnessList.map((illness) => {
 								return (
 									<tr>
 										<td>{illness?.Description}</td>
@@ -31,12 +39,12 @@ function AnimalIllnesses(props) {
 										<td>
 											{illness?.RecoveryDate == null ? (
 												isOwner() ? (
-													<a className="btn btn-danger">Niewyleczone</a>
+													<a className="btn btn-sm btn-danger">Niewyleczone</a>
 												) : (
 													<button
 														value={JSON.stringify(illness)}
-														onClick={updateIllness}
-														className="btn btn-danger"
+														onClick={lupdateIllness}
+														className="btn btn-sm btn-danger"
 													>
 														Niewyleczone
 													</button>
