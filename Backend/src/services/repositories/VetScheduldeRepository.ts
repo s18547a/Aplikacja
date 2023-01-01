@@ -1,6 +1,7 @@
 
 
-import { GetScheduldeParamters } from '../../dtos/dto';
+
+import { GetScheduldeParamters } from '../../common/Types';
 import { getDayOfAWeekName } from '../../utils/dateHelper';
 import Repository from './Repository';
 

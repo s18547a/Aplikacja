@@ -1,20 +1,25 @@
+import { ReactElement } from 'react';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormDiv from '../../../components/Form/FormDiv';
 import SelectAnimalComponent from '../../Shared/SelectAnimalComponent';
 import SelectOwnerComponent from '../../Shared/SelectOwnerComponent';
+import { IVisitError, IVisitForm } from './VisitForm';
 
-function VisitMainInfoForm(props) {
-	function onChange(e) {
-		props.onChange(e);
-	}
-	function onChangeOwner(e) {
-		props.onChangeOwner(e);
-	}
-
-	function setServerError() {
-		props.setServerError();
-	}
-
+function VisitMainInfoForm({
+	onChange,
+	onChangeOwner,
+	setServerError,
+	error,
+	visit,
+	editForm,
+}: {
+	onChange: (any) => void;
+	onChangeOwner: (any) => void;
+	setServerError: () => void;
+	error: IVisitError;
+	visit: IVisitForm;
+	editForm: boolean;
+}): ReactElement {
 	return (
 		<div className="card card-body shadow">
 			<div className="card-title">
@@ -24,17 +29,17 @@ function VisitMainInfoForm(props) {
 			<div className="row">
 				<SelectOwnerComponent
 					onChange={onChangeOwner}
-					error={props.error.OwnerId}
-					selectedValue={props.visit.OwnerId}
-					editForm={props.editForm}
+					error={error.OwnerId}
+					selectedValue={visit.OwnerId}
+					editForm={editForm}
 					setServerError={setServerError}
 				/>
 			</div>
 			<div className="row">
 				<SelectAnimalComponent
-					error={props.error.AnimalId}
+					error={error.AnimalId}
 					onChange={onChange}
-					OwnerId={props.visit.OwnerId}
+					OwnerId={visit.OwnerId}
 					setServerError={setServerError}
 				/>
 			</div>
@@ -43,11 +48,11 @@ function VisitMainInfoForm(props) {
 				<FormDiv
 					label="Data "
 					name="Date"
-					error={props.error.Date}
+					error={error.Date}
 					type="date"
 					onChange={onChange}
-					value={props.visit.Date}
-					disabled={props.editForm}
+					value={visit.Date}
+					disabled={editForm}
 				/>
 			</div>
 
@@ -60,21 +65,19 @@ function VisitMainInfoForm(props) {
 						<div className="col-12">
 							<input
 								className={
-									props.error.Hour != ''
+									error.Hour != ''
 										? 'form-control border-danger'
 										: 'form-control '
 								}
-								disabled={props.editForm}
+								disabled={editForm}
 								name="Hour"
 								type="time"
 								onChange={onChange}
-								value={props.visit.Hour}
+								value={visit.Hour}
 							></input>
 						</div>
 						<div className="col-12">
-							<label className="form-text text-danger ">
-								{props.error.Hour}
-							</label>
+							<label className="form-text text-danger ">{error.Hour}</label>
 						</div>
 					</div>
 				</div>
@@ -91,7 +94,7 @@ function VisitMainInfoForm(props) {
 							<div className="row">
 								<div className="col-12">
 									<div>
-										<p>{`${props.visit.Bill}.00 zł`}</p>
+										<p>{`${visit.Bill}.00 zł`}</p>
 									</div>
 								</div>
 							</div>

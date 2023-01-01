@@ -22,9 +22,9 @@ import VisitActivitiesForm from './VisitActivitesForm';
 import VisitMainInfoForm from './VisitMainInfoForm';
 import VisitVaccineForm from './VisitVaccineForm';
 
-interface VisitI {
+export interface IVisitForm {
 	Date: string;
-	VetId: number;
+	VetId: string;
 	OwnerId: string;
 	AnimalId: string;
 	Hour: string;
@@ -35,12 +35,19 @@ interface VisitI {
 	VaccineList: string[];
 	ReservationId: string;
 }
-
+export interface IVisitError {
+	Date: string;
+	VetId: string;
+	OwnerId: string;
+	AnimalId: string;
+	Hour: string;
+	Note: string | null;
+}
 function VisitForm(): ReactElement {
 	const [serverError, setServerError] = useState(false);
 	const location = useLocation();
 	const navigate = useNavigate();
-	const [visit, setVisit] = useState<VisitI>({
+	const [visit, setVisit] = useState<IVisitForm>({
 		Date: '',
 		VetId: getCurrentUser().userId,
 		OwnerId: '',
@@ -60,14 +67,7 @@ function VisitForm(): ReactElement {
 
 	const [animalList, setAnimalList] = useState<Animal[]>([]);
 
-	const [error, setError] = useState<{
-		Date: string;
-		VetId: string;
-		AnimalId: string;
-		Hour: string;
-		Note: string;
-		OwnerId: string;
-	}>({
+	const [error, setError] = useState<IVisitError>({
 		Date: '',
 		VetId: '',
 		AnimalId: '',
@@ -118,7 +118,7 @@ function VisitForm(): ReactElement {
 			}));
 		}
 	}, []);
-	const [realised, setRealised] = useState(false);
+	const [realised, setRealised] = useState<boolean>(false);
 	const [reservedId, setReservedId] = useState('');
 
 	function onChange(e) {

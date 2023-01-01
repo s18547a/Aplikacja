@@ -12,7 +12,8 @@ import VetRepository from './VetRepository';
 import MedicalActivityRepository from './MedicalActivityRepository';
 import ReservationRepository from './ReservationRepository';
 import Repository from './Repository';
-import { GetVisitPrarameters } from '../../dtos/dto';
+import { GetVisitPrarameters } from '../../common/Types';
+
 
 
 class VisitRepository extends Repository{
@@ -218,6 +219,7 @@ class VisitRepository extends Repository{
                 const VisitId = createIDwithUUIDV4();
                 const newVetId = Visit.VetId;
                 const newAnimalId = Visit.AnimalId;
+                
                 const newDate = Visit.Date;
                 const newHour = Visit.Hour;
                 const newNote = Visit.Note;

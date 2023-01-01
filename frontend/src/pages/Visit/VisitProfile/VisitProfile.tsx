@@ -101,6 +101,14 @@ function VisitProfile(): ReactElement {
 						</ul>
 					</div>
 				</div>
+				<div className="col-4">
+					<div className="card card-body">
+						<div className="card-title">
+							<h5>Opis</h5>
+							<div>{visit?.Note}</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

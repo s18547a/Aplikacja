@@ -12,7 +12,8 @@ import VetTypeRepository from './VetTypeRepository';
 
 import Repository from './Repository';
 import SharedRepository from './SharedRepository';
-import { GetVetParameters } from '../../dtos/dto';
+import { GetVetParameters } from '../../common/Types';
+
 
 
 //const VetTypeRepository=require('./VetTypeRepository');
