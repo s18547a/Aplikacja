@@ -18,6 +18,7 @@ class Animal {
 
     AnimalTypeId: string;
     AnimalType: AnimalType;
+    Owner:{Email:string}
 
     constructor(
         AnimalId: string ,
@@ -30,7 +31,8 @@ class Animal {
         Sex: number,
 
         AnimalTypeId: string,
-        AnimalType: AnimalType
+        AnimalType: AnimalType,
+        Owner:{Email:string}
     ) {
         this.AnimalId = AnimalId;
         this.Name = Name;
@@ -43,6 +45,7 @@ class Animal {
 
         this.AnimalTypeId = AnimalTypeId;
         this.AnimalType = AnimalType;
+        this.Owner=Owner
     }
 
     /**

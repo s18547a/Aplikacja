@@ -1,5 +1,9 @@
 import { ReactElement } from 'react';
-import { XCircle } from 'react-bootstrap-icons';
+import {
+	ExclamationCircle,
+	ExclamationCircleFill,
+	XCircle,
+} from 'react-bootstrap-icons';
 
 function ServerErrorInfoComponenet({
 	serverError,
@@ -14,9 +18,9 @@ function ServerErrorInfoComponenet({
 						<div className="alert alert-danger ">
 							<div className=" d-flex ">
 								<div className="me-2">
-									<XCircle />
+									<ExclamationCircle />
 								</div>
-								<div className="">Błąd serwera</div>
+								<div className="">| Błąd serwera</div>
 							</div>
 						</div>
 					) : null}

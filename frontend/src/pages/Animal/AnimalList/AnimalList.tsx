@@ -150,6 +150,7 @@ function AnimalList(): ReactElement {
 										<th>Imie</th>
 										<th>Rasa</th>
 										<th>Data urodzenia</th>
+										<th>Właściciel</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -168,6 +169,7 @@ function AnimalList(): ReactElement {
 														animal.AnimalType?.Race}
 												</td>
 												<td>{animal.BirthDate}</td>
+												<td>{animal?.Owner.Email}</td>
 											</tr>
 										);
 									})}

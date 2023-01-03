@@ -14,6 +14,7 @@ import Modal from '../../../components/Modal/Modal';
 import ModalEnableBtn from '../../../components/Modal/ModalEnableBtn';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../components/other/authHelper';
+import { spaceContact } from '../../../components/other/contactHelper';
 import {
 	getCurrentDate,
 	getCurrentHour,
@@ -159,7 +160,7 @@ function ReservationList(): ReactElement {
 					<table className="table table-hover">
 						<thead>
 							<tr>
-								<th>Weterynarz</th>
+								<th>{isOwner() ? 'Weterynarz' : 'Właściciel'}</th>
 								<th>Data</th>
 								<th>Godzina</th>
 								<th>Kontakt</th>
@@ -187,14 +188,24 @@ function ReservationList(): ReactElement {
 										}
 									>
 										<td>
-											{reservation.Vet?.Name + ' ' + reservation.Vet?.LastName}
+											{isOwner()
+												? `${
+														reservation.Vet?.Name +
+														' ' +
+														reservation.Vet?.LastName
+												  }`
+												: `${
+														reservation.Owner?.Name +
+														' ' +
+														reservation.Owner?.LastName
+												  }`}
 										</td>
 										<td>{reservation.Date}</td>
 										<td>{reservation.Hour}</td>
 										<td>
 											{isOwner()
-												? reservation.Vet?.Contact
-												: reservation.Owner?.Contact}
+												? spaceContact(reservation.Vet?.Contact)
+												: spaceContact(reservation.Owner?.Contact)}
 										</td>
 
 										<td>

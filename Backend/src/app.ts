@@ -62,12 +62,13 @@ export default function(db) {
 
     //repositories   
     const animalTypeRepository=new AnimalTypeRepository(db);
-    const animalRepository=new AnimalRepostiory(db,animalTypeRepository);
+    const ownerRepository=new OwnerRepository(db);
+    const animalRepository=new AnimalRepostiory(db,animalTypeRepository,ownerRepository);
     const animalMedicalInfoRepository=new AnimalMedicalInfoRepository(db);
     const animalIllnessRepository=new AnimalIllnessRepository(db);
  
     const clinicInfoRepository=new ClinicInfoRepository(db);
-    const ownerRepository=new OwnerRepository(db);
+   
     const vetTypeRepository=new VetTypeRepository(db);
     const vetRepository=new VetRepository(db,vetTypeRepository);    
     const surgeryRepository=new SurgeryRepository(db,animalRepository,vetRepository);

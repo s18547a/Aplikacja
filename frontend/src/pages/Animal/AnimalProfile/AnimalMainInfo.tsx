@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Animal from '../../../classes/Animal';
 import Owner from '../../../classes/Owner';
 import EditButton from '../../../components/Buttons/EditButton';
+import { spaceContact } from '../../../components/other/contactHelper';
 import { getDefalutProfileImage } from '../../../components/other/imageHelper';
 import ProfileDiv from '../../../components/other/ProfileDiv';
 
@@ -109,7 +110,10 @@ function AnimalProfile({
 											<ProfileDiv label={'Email'} value={owner?.Email} />
 										</div>
 										<div className="col-12">
-											<ProfileDiv label={'Telefon'} value={owner?.Contact} />
+											<ProfileDiv
+												label={'Telefon'}
+												value={spaceContact(owner?.Contact)}
+											/>
 										</div>
 									</div>
 								</div>

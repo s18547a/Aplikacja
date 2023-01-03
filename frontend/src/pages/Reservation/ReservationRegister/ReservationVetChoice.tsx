@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 
 import Vet from '../../../classes/Vet';
+import { spaceContact } from '../../../components/other/contactHelper';
 import { getDefalutProfileImage } from '../../../components/other/imageHelper';
 import { IReservationForm } from './ReservationForm';
 
@@ -22,7 +23,7 @@ function ReservationVetChoice({
 	return (
 		<div className="">
 			<div className="form-group">
-				<div className="form-label fw-bold">Weterynarz</div>
+				<div className="form-label ">Weterynarz</div>
 
 				<div className="list-group">
 					{vets.map((vet) => {
@@ -58,7 +59,9 @@ function ReservationVetChoice({
 													{vet.Name + ' ' + vet.LastName}
 												</div>
 
-												<div className="">{`tel. ${vet.Contact}`}</div>
+												<div className="">{`tel. ${spaceContact(
+													vet.Contact
+												)}`}</div>
 											</div>
 										</div>
 									</div>

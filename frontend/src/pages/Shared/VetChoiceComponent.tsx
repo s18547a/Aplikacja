@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import Vet from '../../classes/Vet';
+import { spaceContact } from '../../components/other/contactHelper';
 import { getDefalutProfileImage } from '../../components/other/imageHelper';
 
 function VetChoiceComponent({
@@ -56,7 +57,9 @@ function VetChoiceComponent({
 													{vet.Name + ' ' + vet.LastName}
 												</div>
 
-												<div className="">{`tel. ${vet.Contact}`}</div>
+												<div className="">{`tel. ${spaceContact(
+													vet.Contact
+												)}`}</div>
 											</div>
 										</div>
 									</div>

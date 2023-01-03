@@ -47,26 +47,31 @@ function PhotoForm({
 	}, [image]);
 
 	return (
-		<div className="card card-body shadow">
-			<div className="card-title">
-				<h5>Zdjęcie profilowe</h5>
-			</div>
-			<div className="row">
-				<div className="col-12">
-					<div className="row justify-content-center">
-						<div className="col-10">
-							<input
-								style={{ width: '300px' }}
-								type={'file'}
-								accept={'image/*'}
-								onChange={handleImage}
-								className="form-control "
-							/>
+		<div className="shadow">
+			<input
+				style={{ borderRadius: 0 }}
+				type={'file'}
+				accept={'image/*'}
+				onChange={handleImage}
+				className="form-control border-0"
+			/>
+
+			<div
+				className="card card-body"
+				style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+			>
+				<div className="card-title">
+					<h5>Zdjęcie profilowe</h5>
+				</div>
+				<div className="row">
+					<div className="col-12">
+						<div className="row justify-content-center">
+							<div className="col-10"></div>
 						</div>
-					</div>
-					<div className="row justify-content-center">
-						<div className="col-10">
-							<img width="300px" height="300px " src={preview} className="" />
+						<div className="row justify-content-center">
+							<div className="col-10">
+								<img width="300px" height="300px " src={preview} className="" />
+							</div>
 						</div>
 					</div>
 				</div>

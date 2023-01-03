@@ -42,7 +42,7 @@ function AnimalProfileNav({
 						value={'add'}
 						onClick={setSelectedTabFunction}
 					>
-						Informacje medyczne
+						Zdrowie
 					</button>
 				</li>
 			</div>

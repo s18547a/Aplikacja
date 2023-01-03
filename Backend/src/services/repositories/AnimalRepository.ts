@@ -1,7 +1,10 @@
 
 import { AnimalParametersType } from '../../common/Types';
 import Animal,{Sex} from '../../models/classes/Animal';
+import Owner from '../../models/classes/Owner';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
+import AnimalTypeRepository from './AnimalTypeRepository';
+import OwnerRepository from './OwnerRepository';
 import Repository from './Repository';
 
 const sql = require('mssql');
@@ -11,10 +14,12 @@ class AnimalRepostiory extends Repository{
 
     
     animalTypeRepository;
+    ownerRepository;
 
-    constructor(databse,animalTypeRepository){
+    constructor(databse,animalTypeRepository:AnimalTypeRepository,ownerRepository:OwnerRepository){
         super(databse);
         this.animalTypeRepository=animalTypeRepository;
+        this.ownerRepository=ownerRepository;
         //
     }
     getAnimal=async(AnimalId:string)=>{
@@ -36,8 +41,9 @@ class AnimalRepostiory extends Repository{
             const AnimalType = await  this.animalTypeRepository.getAnimalTypes({
                 AnimalTypeId: animalRecord.AnimalTypeId,
             });
-           
-        
+           const ownerResult = await this.ownerRepository.getOwner(animalRecord.OwnerId);
+            
+            
         
             const newAnimal = new Animal(
                 AnimalId,
@@ -47,7 +53,8 @@ class AnimalRepostiory extends Repository{
                 animalRecord.ProfileImage,
                 animalRecord.Sex,
                 animalRecord.AnimalTypeId,
-                AnimalType
+                AnimalType,
+                {Email:ownerResult.Email}
             );
     
             return newAnimal;
@@ -100,6 +107,8 @@ class AnimalRepostiory extends Repository{
                         const AnimalType = await  animalTypeRepository.getAnimalTypes({
                             AnimalTypeId: animal.AnimalTypeId,
                         });
+
+                        const ownerResult = await this.ownerRepository.getOwner(animal.OwnerId);
                 
                         const newAnimal = new Animal(
                             animal.AnimalId,
@@ -112,7 +121,8 @@ class AnimalRepostiory extends Repository{
                             animal.Sex,
                             animal.AnimalTypeId,
     
-                            AnimalType
+                            AnimalType,
+                            {Email:ownerResult.Email}
                         );
     
                         return newAnimal;

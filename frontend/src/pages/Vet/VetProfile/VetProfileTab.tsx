@@ -20,10 +20,10 @@ function VetProfileTab({
 				<div className="col-lg-9">
 					<div className="row">
 						<div className="col-12">
-							<VetSpec types={types} />
+							<VetInfo vet={vet} />
 						</div>
 						<div className="col-12">
-							<VetInfo vet={vet} />
+							<VetSpec types={types} />
 						</div>
 					</div>
 				</div>

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Vet from '../../../classes/Vet';
 import EditButton from '../../../components/Buttons/EditButton';
+import { spaceContact } from '../../../components/other/contactHelper';
 import { getDefalutProfileImage } from '../../../components/other/imageHelper';
 import ProfileDiv from '../../../components/other/ProfileDiv';
 
@@ -49,7 +50,10 @@ function VetInfo({ vet }: { vet: Vet }) {
 								<div className="col-12">
 									<ProfileDiv label={'Imie'} value={vet.Name} />
 									<ProfileDiv label={'Nazwisko'} value={vet.LastName} />
-									<ProfileDiv label={'Kontakt'} value={vet.Contact} />
+									<ProfileDiv
+										label={'Kontakt'}
+										value={spaceContact(vet.Contact)}
+									/>
 									<ProfileDiv label={'Email'} value={vet.Email} />
 									<ProfileDiv label={'Zatrudniono'} value={vet.HireDate} />
 								</div>
