@@ -59,10 +59,12 @@ function ReservationForm(): ReactElement {
 		setReservation((prev) => ({
 			...prev,
 			Date: e,
+			VetId: '',
 		}));
 
 		setDate(e);
 		setHours([]);
+		setVets([]);
 		let promise;
 		let response;
 		promise = getVetsOnDay(e);
@@ -232,6 +234,9 @@ function ReservationForm(): ReactElement {
 			<div className="row justify-content-center">
 				<div className="col-lg-4 ">
 					<div className="card card-body shadow">
+						<div className=" card-title">
+							<h5>Rezerwacja</h5>
+						</div>
 						<div className="col-12">
 							{isVet() || isManager() ? (
 								<SelectOwnerComponent

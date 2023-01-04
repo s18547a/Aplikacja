@@ -90,19 +90,32 @@ function App() {
 
 	return (
 		<div style={style}>
-			<header style={{ width: '100%', height: '8%' }}>
+			<header
+				style={{
+					width: '100%',
+					height: '8%',
+					position: 'sticky',
+					top: 0,
+					zIndex: 2,
+				}}
+			>
 				<BannerComponent handleLogout={handleLogout} />
 			</header>
 
 			<div className="row" style={{ height: '92%', width: '100%' }}>
 				{isAuthenticated() && (
-					<div className="col-lg-1 col-12">
+					<div
+						className="col-lg-1 col-12"
+						style={{
+							position: 'fixed',
+						}}
+					>
 						<SideBar />
 					</div>
 				)}
 				<div className={isAuthenticated() ? 'col-lg-11 col-10' : 'col-12'}>
 					<main
-						className={currentLocation.includes('/home') ? '' : 'pt-3'}
+						className={currentLocation.includes('/home') ? '' : 'pt-2 offset-1'}
 						/*</div>style={{margin:"100px"}}*/ style={{
 							height: '100%',
 							width: '100%',

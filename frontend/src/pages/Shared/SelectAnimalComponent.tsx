@@ -68,7 +68,13 @@ function SelectAnimalComponent({
 				<div className="form-label ">Zwierzę</div>
 				{animalList.map((animal) => {
 					return (
-						<div className="form-check mt-3 form-control d-flex justify-content-between">
+						<div
+							className={
+								error == ''
+									? 'form-check mt-3 form-control d-flex justify-content-between'
+									: 'form-check mt-3 form-control d-flex justify-content-between border border-danger'
+							}
+						>
 							<label
 								className="form-check-label"
 								htmlFor={`${animal.AnimalId}`}

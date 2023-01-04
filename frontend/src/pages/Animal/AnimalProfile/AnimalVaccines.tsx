@@ -20,7 +20,7 @@ function AnimalVaccines({
 								<h5>Historia szczepień</h5>
 							</div>
 							<TableOrEmpty Empty={vaccineList.length == 0}>
-								<table className="table">
+								<table className="table table-bordered">
 									<thead>
 										<tr>
 											<th>Szczepionka</th>

@@ -107,7 +107,7 @@ function VisitMainInfoForm({
 				<div className="form-group">
 					<div className="row">
 						<div className="col-12">
-							<div className="form-label">Spostrzeżenia</div>
+							<div className="form-label">Notatka</div>
 						</div>
 						<div className="col-12">
 							<textarea

@@ -16,7 +16,7 @@ function MedicalInfo({
 
 	const showBtn =
 		isManager() || isVet() ? (
-			<div className="row m-1">
+			<div className="row mb-1">
 				<div className="col-1">
 					<EditButton
 						onClick={() => {
@@ -30,7 +30,7 @@ function MedicalInfo({
 		) : null;
 
 	return (
-		<div className="row justify-content-center">
+		<div className="container row justify-content-center">
 			<div className="col-8">
 				<div className="container  border-0 ">
 					<div className="row ">
@@ -188,28 +188,30 @@ function MedicalInfo({
 									role="tabpanel"
 									aria-labelledby="list-home-list"
 								>
-									<div className="row justify-content-center">
-										<div className="col-6">
-											<ProfileDiv label={'Waga'} value={medicalInfo?.Weight} />
-										</div>
-									</div>
-
-									<div className="row justify-content-center">
-										<div className="col-6">
-											<ProfileDiv
-												label={'Chip'}
-												value={medicalInfo?.Chipped == true ? 'Tak' : 'Nie'}
-											/>
-										</div>
-									</div>
-									<div className="row justify-content-center">
-										<div className="col-6">
-											<ProfileDiv
-												label={'Steryzlizacja'}
-												value={medicalInfo?.Sterilized == true ? 'Tak' : 'Nie'}
-											/>
-										</div>
-									</div>
+									<table className="table table-bordered">
+										<thead>
+											<tr>
+												<th>Informacja</th>
+												<th>Stan</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Waga</td>
+												<td>{medicalInfo?.Weight}</td>
+											</tr>
+											<tr>
+												<td>Chip</td>
+												<td>{medicalInfo?.Chipped == true ? 'Tak' : 'Nie'}</td>
+											</tr>
+											<tr>
+												<td>Steryzlizacja</td>
+												<td>
+													{medicalInfo?.Sterilized == true ? 'Tak' : 'Nie'}
+												</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 
 								<div

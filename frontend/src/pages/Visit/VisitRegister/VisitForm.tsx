@@ -244,7 +244,7 @@ function VisitForm(): ReactElement {
 					const newBill = visit.Bill + medAct.Price;
 
 					visit['Bill'] = newBill;
-					const newMedicalActivites = visit.MedicalActivities;
+					const newMedicalActivites = visit.MedicalActivities.map((x) => x);
 					newMedicalActivites.push(value);
 					setVisit((prev) => ({
 						...prev,
@@ -258,7 +258,7 @@ function VisitForm(): ReactElement {
 					const newBill = visit.Bill - medAct.Price;
 
 					visit['Bill'] = newBill;
-					let newMedicalActivites = visit.MedicalActivities;
+					let newMedicalActivites = visit.MedicalActivities.map((x) => x);
 					newMedicalActivites = newMedicalActivites.filter((arrval) => {
 						if (arrval != value) {
 							return true;
