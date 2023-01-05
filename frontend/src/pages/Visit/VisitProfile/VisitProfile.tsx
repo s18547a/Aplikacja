@@ -4,7 +4,7 @@ import { getVisitById } from '../../../apiCalls/visitApiCalls';
 import Visit from '../../../classes/Visit';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ProfileDiv from '../../../components/Profile/ProfileDiv';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 function VisitProfile(): ReactElement {
 	const [visit, setVist] = useState<Visit>();

@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-function RegiserSuccessInfo(props): ReactElement {
+function RegisterSuccessBannerComponent(props): ReactElement {
 	return (
 		<div>
 			{props.newId != '' ? (
@@ -13,4 +13,4 @@ function RegiserSuccessInfo(props): ReactElement {
 	);
 }
 
-export default RegiserSuccessInfo;
+export default RegisterSuccessBannerComponent;

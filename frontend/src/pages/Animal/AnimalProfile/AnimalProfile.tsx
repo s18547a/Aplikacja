@@ -17,7 +17,7 @@ import Vaccination from '../../../classes/Vaccination';
 import VaccineType from '../../../classes/VaccineType';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentDate } from '../../../utils/getCurrentDate';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 import AnimalIllnesses from './AnimalIllnesses';
 import AnimalMainInfo from './AnimalMainInfo';
 import AnimalProfileNav from './AnimalProfileNav';

@@ -4,7 +4,7 @@ import { getVets } from '../../../apiCalls/vetApiCalls';
 import Vet from '../../../classes/Vet';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 function VetList(): ReactElement {
 	const [vetList, setVetList] = useState<Vet[]>([]);

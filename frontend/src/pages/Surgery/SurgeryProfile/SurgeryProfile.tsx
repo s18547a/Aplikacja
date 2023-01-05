@@ -12,7 +12,7 @@ import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbCompon
 import { getCurrentUser } from '../../../utils/authHelper';
 import ProfileDiv from '../../../components/Profile/ProfileDiv';
 import { isManager } from '../../../utils/userType';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 import SurgeryReportForm from '../SurgeryRegister/SurgeryReportForm';
 

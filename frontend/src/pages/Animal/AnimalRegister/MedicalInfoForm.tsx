@@ -7,7 +7,7 @@ import FormCheck from '../../../components/Form/FormCheck';
 import FormDiv from '../../../components/Form/FormDiv';
 import FormTextField from '../../../components/Form/FormTextField';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 function MedicalInfoForm(): ReactElement {
 	const [medicalInfo, setMedicalInfo] = useState<AnimalMedicalInfo>({

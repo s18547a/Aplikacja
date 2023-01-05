@@ -8,7 +8,7 @@ import {
 	cancelReservation,
 } from '../../../apiCalls/reservationApiCalls';
 import Reservation from '../../../classes/Reservation';
-import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
+import RegiserSuccessInfo from '../../../components/InfoBanners/RegisterSuccessBannerComponent';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import Modal from '../../../components/Modal/Modal';
 import ModalEnableBtn from '../../../components/Modal/ModalEnableBtn';
@@ -17,7 +17,7 @@ import { getCurrentUser } from '../../../utils/authHelper';
 import { spaceContact } from '../../../utils/contactHelper';
 import { getCurrentDate, getCurrentHour } from '../../../utils/getCurrentDate';
 import { isVet, isManager, isOwner } from '../../../utils/userType';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 function ReservationList(): ReactElement {
 	const navigate = useNavigate();

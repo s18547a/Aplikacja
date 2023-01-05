@@ -9,7 +9,7 @@ import Vet from '../../../classes/Vet';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../utils/authHelper';
 import { isManager } from '../../../utils/userType';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 import TodayReservationList from './TodayReservationList';
 import VetProfileNav from './VetProfileNav';

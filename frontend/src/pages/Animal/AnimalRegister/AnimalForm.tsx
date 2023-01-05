@@ -11,8 +11,8 @@ import AnimalType from '../../../classes/AnimalType';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../utils/authHelper';
 import { isOwner, isVet, isManager } from '../../../utils/userType';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
-import PhotoForm from '../../Shared/PhotoForm';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
+import PhotoForm from '../../../components/Form/PhotoForm';
 import AnimalMainInfo from './AnimalMainInfo';
 import { Sex } from '../../../classes/Animal';
 

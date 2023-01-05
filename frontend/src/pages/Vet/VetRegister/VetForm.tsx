@@ -6,12 +6,12 @@ import {
 	updateVet,
 } from '../../../apiCalls/vetApiCalls';
 import { useLocation, useNavigate } from 'react-router-dom';
-import PhotoForm from '../../Shared/PhotoForm';
+import PhotoForm from '../../../components/Form/PhotoForm';
 import VetMainInfo from './VetMainInfo';
 
 import VetSpecForm from './VetSpecForm';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 export interface IVetForm {
 	Name: string;

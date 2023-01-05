@@ -9,15 +9,15 @@ import {
 } from '../../../apiCalls/surgeryApiCalls';
 import Surgery from '../../../classes/Surgery';
 import Pagination from '../../../components/List/Pagination';
-import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
+import RegiserSuccessInfo from '../../../components/InfoBanners/RegisterSuccessBannerComponent';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../utils/authHelper';
 
 import { isVet, isManager, isOwner } from '../../../utils/userType';
 import { SearchListParamter } from '../../../utils/VisitListParameters';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
-import VisitSearch from '../../Shared/VisitSearch';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
+import VisitSearch from '../../../components/List/VisitSearch';
 
 function SurgeryList(): ReactElement {
 	const navigate = useNavigate();

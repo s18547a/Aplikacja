@@ -1,7 +1,7 @@
 import { ReactElement, useState } from 'react';
-import SearchButton from '../../components/Buttons/SearchButton';
-import FormSearchDateDiv from '../../components/Form/FormSearchDateDiv';
-import FormSearchDiv from '../../components/Form/FormSearchDiv';
+import SearchButton from '../Buttons/SearchButton';
+import FormSearchDateDiv from '../Form/FormSearchDateDiv';
+import FormSearchDiv from '../Form/FormSearchDiv';
 import { SearchListParamter } from '../../utils/VisitListParameters';
 
 function VisitSearch({ onSearch }: { onSearch: (any) => void }): ReactElement {

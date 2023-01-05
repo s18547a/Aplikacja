@@ -1,4 +1,4 @@
-import { createHTTDeleteOptions, createHttpGetOptions } from "../utils/apiCallsHelper";
+import { createHTTDeleteOptions, createHttpGetOptions, createHTTPPostOptions } from "../utils/apiCallsHelper";
 import { isAuthenticated } from "../utils/authHelper";
 import { getCurrentDate } from "../utils/getCurrentDate";
 import { isVet } from "../utils/userType";
@@ -8,13 +8,9 @@ const baseUrl = "http://localhost:8000/reservations";
 export function registerReservation(reservation) {
   const reservationString = JSON.stringify(reservation);
 
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: reservationString,
-  };
+
+
+  const options=createHTTPPostOptions(isAuthenticated(),reservationString)
   const promise = fetch(baseUrl, options);
 
   return promise;

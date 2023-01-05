@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormDiv from '../../../components/Form/FormDiv';
-import SelectAnimalComponent from '../../Shared/SelectAnimalComponent';
-import SelectOwnerComponent from '../../Shared/SelectOwnerComponent';
+import SelectAnimalComponent from '../../../components/Form/SelectAnimalComponent';
+import SelectOwnerComponent from '../../../components/Form/SelectOwnerComponent';
 import { IVisitError, IVisitForm } from './VisitForm';
 
 function VisitMainInfoForm({

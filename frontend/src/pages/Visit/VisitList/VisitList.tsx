@@ -7,16 +7,16 @@ import {
 } from '../../../apiCalls/visitApiCalls';
 import Visit from '../../../classes/Visit';
 import Pagination from '../../../components/List/Pagination';
-import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
+import RegiserSuccessInfo from '../../../components/InfoBanners/RegisterSuccessBannerComponent';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../utils/authHelper';
 import { SearchListParamter } from '../../../utils/VisitListParameters';
 import { isVet, isManager, isOwner } from '../../../utils/userType';
 
-import SearchInput from '../../Shared/SearchImput';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
-import VisitSearch from '../../Shared/VisitSearch';
+import SearchInput from '../../../components/List/SearchImput';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
+import VisitSearch from '../../../components/List/VisitSearch';
 
 function VisitList(): ReactElement {
 	const [visitList, setVisitList] = useState<Visit[]>([]);

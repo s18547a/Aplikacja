@@ -1,11 +1,7 @@
 import { ReactElement } from 'react';
-import {
-	ExclamationCircle,
-	ExclamationCircleFill,
-	XCircle,
-} from 'react-bootstrap-icons';
+import { ExclamationCircle } from 'react-bootstrap-icons';
 
-function ServerErrorInfoComponenet({
+function ServerErrorInfoBannerComponenet({
 	serverError,
 }: {
 	serverError: boolean;
@@ -30,4 +26,4 @@ function ServerErrorInfoComponenet({
 	);
 }
 
-export default ServerErrorInfoComponenet;
+export default ServerErrorInfoBannerComponenet;

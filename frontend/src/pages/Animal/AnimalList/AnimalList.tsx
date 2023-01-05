@@ -7,12 +7,12 @@ import {
 } from '../../../apiCalls/animalApiCalls';
 import Animal from '../../../classes/Animal';
 import Pagination from '../../../components/List/Pagination';
-import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
+import RegiserSuccessInfo from '../../../components/InfoBanners/RegisterSuccessBannerComponent';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../utils/authHelper';
 import { isOwner, isVet, isManager } from '../../../utils/userType';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 import AnimalSearch from './AnimalSearch';
 

@@ -2,7 +2,7 @@ import { ReactElement, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logIn } from '../../apiCalls/userApiCalls';
 import FormDiv from '../../components/Form/FormDiv';
-import ServerErrorInfoComponenet from '../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 function LoginForm({
 	handleLogin,

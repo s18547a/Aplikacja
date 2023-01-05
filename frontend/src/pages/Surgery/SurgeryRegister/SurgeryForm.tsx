@@ -1,8 +1,8 @@
 import { ReactElement, useEffect, useState } from 'react';
 
-import SelectOwnerComponent from '../../Shared/SelectOwnerComponent';
-import SelectAnimalComponent from '../../Shared/SelectAnimalComponent';
-import VetChoiceComponent from '../../Shared/VetChoiceComponent';
+import SelectOwnerComponent from '../../../components/Form/SelectOwnerComponent';
+import SelectAnimalComponent from '../../../components/Form/SelectAnimalComponent';
+import VetChoiceComponent from '../../../components/Form/VetChoiceComponent';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import pl from 'date-fns/locale/pl';
@@ -27,7 +27,7 @@ import ProfileDiv from '../../../components/Profile/ProfileDiv';
 
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentDate } from '../../../utils/getCurrentDate';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 import { checkIfAllFieldAsFilled } from '../../../utils/validatiorHelper';
 
 interface ISurgeryForm {

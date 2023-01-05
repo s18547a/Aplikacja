@@ -13,8 +13,8 @@ import { getCurrentUser } from '../../../utils/authHelper';
 import { errorAPIHandler } from '../../../utils/errorAPIHelper';
 import { getCurrentDate } from '../../../utils/getCurrentDate';
 import { isManager, isOwner, isVet } from '../../../utils/userType';
-import SelectOwnerComponent from '../../Shared/SelectOwnerComponent';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import SelectOwnerComponent from '../../../components/Form/SelectOwnerComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 import ReservationVetChoice from './ReservationVetChoice';
 

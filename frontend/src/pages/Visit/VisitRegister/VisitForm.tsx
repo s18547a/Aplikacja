@@ -16,7 +16,7 @@ import VaccineType from '../../../classes/VaccineType';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentUser } from '../../../utils/authHelper';
 import { errorAPIHandler } from '../../../utils/errorAPIHelper';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 import DiagnosisForm from './DiagnosisForm';
 import VisitActivitiesForm from './VisitActivitesForm';
 import VisitMainInfoForm from './VisitMainInfoForm';

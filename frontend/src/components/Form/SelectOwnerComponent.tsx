@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { getOwners } from '../../apiCalls/ownerApiCalls';
 import Owner from '../../classes/Owner';
-import FormSelect from '../../components/Form/FormSelect';
+import FormSelect from './FormSelect';
 
 function SelectOwnerComponent({
 	setServerError,

@@ -1,18 +1,16 @@
-import express from 'express';
+import express, { Router } from 'express';
 import AnimalController from '../controllers/AnimalController';
-
+const {isAuthorizated} = require('../middlewares/isAuthorizatied');
 
 class AnimalRouter{
 
-    router;
+    router:Router;
     constructor(animalController:AnimalController){
-        
-        const {isAuthorizated} = require('../middlewares/isAuthorizatied');
 
         const router = express.Router();
  
         router.get('/types',isAuthorizated, animalController.getAnimalTypes);
-    
+        
         router.get('/:AnimalId',isAuthorizated, animalController.getAnimal);
         
         router.get('/', isAuthorizated,animalController.getAnimals);

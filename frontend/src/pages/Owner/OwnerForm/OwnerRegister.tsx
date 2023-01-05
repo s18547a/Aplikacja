@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { registerOwnerApiCall } from '../../../apiCalls/ownerApiCalls';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormDiv from '../../../components/Form/FormDiv';
-import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 interface IOwnerForm {
 	Name: string;
