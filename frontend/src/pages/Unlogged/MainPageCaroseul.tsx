@@ -18,7 +18,7 @@ function MainPageCaroseul(): ReactElement {
 						style={{ height: '100%', width: '100%' }}
 					>
 						<img
-							src={require('./../../images/carouselImages/image1.jpg')}
+							src={require('../../assets/imgs/carousel/image1.jpg')}
 							className="d-block w-100"
 							alt="..."
 							style={{ height: '100%', width: '100%' }}
@@ -27,7 +27,7 @@ function MainPageCaroseul(): ReactElement {
 
 					<div className="carousel-item " style={{ height: '100%' }}>
 						<img
-							src={require('../../images/carouselImages/image2.jpg')}
+							src={require('../../assets/imgs/carousel/image2.jpg')}
 							className="d-block w-100"
 							alt="..."
 							style={{ height: '100%', width: '100%' }}

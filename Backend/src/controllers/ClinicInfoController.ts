@@ -19,9 +19,5 @@ class ClinicInfoController{
     };
 }
 export default  ClinicInfoController;
-/*
-export const getClinicSchedulde =async (req, res) => {
-  
-};
-*/
+
 

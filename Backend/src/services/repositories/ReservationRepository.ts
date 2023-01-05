@@ -35,7 +35,7 @@ class ReservationRepository extends Repository{
             if (!parameters.VetId && !parameters.Date && !parameters.OwnerId) {
                 const reservationPool = await pool
                     .request()
-                    .query('Select * From Reservation Order by Date,Hour');
+                    .query('Select ReservationId, Date, VetId, OwnerId, Hour From Reservation Order by Date,Hour');
                 reservationRecordset = reservationPool.recordset;
                 console.log(reservationRecordset);
             } else if (parameters.VetId && parameters.Date) {
@@ -44,7 +44,7 @@ class ReservationRepository extends Repository{
                     .input('VetId', sql.VarChar, parameters.VetId)
                     .input('Date', sql.Date, parameters.Date)
                     .query(
-                        'Select * From Reservation Where VetId=@VetId and Date=@Date Order by Date,Hour'
+                        'Select ReservationId, Date, VetId, OwnerId, Hour From Reservation Where VetId=@VetId and Date=@Date Order by Date,Hour'
                     );
                 reservationRecordset = reservationPool.recordset;
             } else if (parameters.VetId && !parameters.Date && !parameters.OwnerId) {
@@ -52,7 +52,7 @@ class ReservationRepository extends Repository{
                     .request()
                     .input('VetId', sql.VarChar, parameters.VetId)
                     .query(
-                        'Select * From Reservation  Where VetId=@VetId Order by Date,Hour'
+                        'Select ReservationId, Date, VetId, OwnerId, Hour From Reservation  Where VetId=@VetId Order by Date,Hour'
                     );
                 reservationRecordset = reservationPool.recordset;
             } else if (parameters.Date && !parameters.VetId && !parameters.OwnerId) {
@@ -60,7 +60,7 @@ class ReservationRepository extends Repository{
                     .request()
                     .input('Date', sql.Int, parameters.Date)
                     .query(
-                        'Select * From Reservation  Where Date=@Date Order by Date,Hour'
+                        'Select ReservationId, Date, VetId, OwnerId, Hour From Reservation  Where Date=@Date Order by Date,Hour'
                     );
                 reservationRecordset = reservationPool.recordset;
             } else if (parameters.OwnerId && !parameters.VetId && !parameters.Date) {
@@ -68,7 +68,7 @@ class ReservationRepository extends Repository{
                     .request()
                     .input('OwnerId', sql.VarChar, parameters.OwnerId)
                     .query(
-                        'Select * From Reservation Where OwnerId=@OwnerId Order by Date,Hour'
+                        'Select ReservationId, Date, VetId, OwnerId, Hour From Reservation Where OwnerId=@OwnerId Order by Date,Hour'
                     );
                 reservationRecordset = reservationPool.recordset;
             }

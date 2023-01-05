@@ -23,10 +23,11 @@ class VetRepository extends Repository{
 
    
     vetTypeRepository;
-   
-    constructor(db,vetTypeRepository:VetTypeRepository){
+   sharedRepository
+    constructor(db,vetTypeRepository:VetTypeRepository,sharedRepository:SharedRepository){
         super(db);
         this.vetTypeRepository=vetTypeRepository;
+        this.sharedRepository=sharedRepository;
       
 
     }
@@ -160,8 +161,8 @@ class VetRepository extends Repository{
 
             const hashedPassword = hashPassword(Password);
         
-            const sharedRepository=new SharedRepository(this.databaseConfiguration);
-            const emailExists = await sharedRepository.emailExists(Email);
+            
+            const emailExists = await this.sharedRepository.emailExists(Email);
             console.log(emailExists);
             if (emailExists) {
                 return null;
@@ -172,23 +173,18 @@ class VetRepository extends Repository{
 
             try {
          
-
-                //    let registerOwnerPool=await pool.request()
-          
-
                 await transaction.begin();
-                const results = await new sql.Request(transaction)
+                let results = await new sql.Request(transaction)
                     .input('VetId', sql.VarChar, VetId)
-                    .input('Email', sql.VarChar, Email)
-                    .input('Password', sql.VarChar, hashedPassword)
+                 
+                   
                     .input('Name', sql.VarChar, Name)
                     .input('LastName', sql.VarChar, LastName)
                     .input('Contact', sql.VarChar, Contact)
                     .input('HireDate', sql.VarChar, HireDate)
                     .input('ProfileImage', sql.VarChar, ProfileImage)
                     .query(
-                        'EXEC CreateVet @VetId=@VetId ,@Email=@Email,@Password=@Password,@Name=@Name,@LastName=@LastName,@Contact=@Contact,@HireDate=@HireDate ,@ProfileImage=@ProfileImage'
-                    );
+                        'INSERT into VET values(@VetId,@Name,@LastName,@Contact,@HireDate,@ProfileImage)');
 
                 const  rowsAffected = results.rowsAffected[0];
 
@@ -197,6 +193,16 @@ class VetRepository extends Repository{
                 if (rowsAffected != 1) {
                     throw Error('');
                 }
+                 results = await new sql.Request(transaction)
+                        .input('VetId', sql.VarChar, VetId)
+                        .input('Email', sql.VarChar, Email)
+                        .input('Password', sql.VarChar, hashedPassword)
+         
+                        .query('INSERT INTO [USER](UserId,Email,Password,OwnerId,VetId,Manager)values(@VetId,@Email,@Password,null,@VetId,null);');
+
+                    if(results.rowsAffected[0]!=1){
+                        throw Error('');
+                    }
 
                 if (VetType.length > 0) {
                     for await (const value of VetType) {
@@ -217,11 +223,7 @@ class VetRepository extends Repository{
                     VetId,
                     transaction
                 );
-                if (createScheduldeResults != VetId) {
-                    throw Error('');
-                }
-
-                console.log('CREATED');
+            if (createScheduldeResults != VetId) {throw Error('');}
                 await transaction.commit();
                 pool.close();
                 return VetId;

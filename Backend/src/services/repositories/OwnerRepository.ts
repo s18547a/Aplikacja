@@ -10,36 +10,37 @@ import Repository from './Repository';
 import SharedRepository from './SharedRepository';
 import { GetOwnerParamters } from '../../common/Types';
 
-
-
-
 class OwnerRepository extends Repository{
-    constructor(db){
+    sharedRepository
+    constructor(db,sharedRepository:SharedRepository){
         super(db);
+        this.sharedRepository=sharedRepository;
+        
     }
     
-    getOwner=async(OwnerId)=>{
+    getOwner=async(OwnerId:string):Promise<Owner|null|unknown>=>{
         try {
             const pool = await sql.connect(this.databaseConfiguration);
             const result = await pool
                 .request().input('OwnerId',sql.VarChar,OwnerId)
                 .query(
-                    'Select o.OwnerId,Name,LastName,Contact,Email From Owner o inner join [User] u on o.OwnerId=u.OwnerId where o.OwnerId=@OwnerId'
+                    'Select o.OwnerId,Name,LastName,Contact,Email '+ 
+                    'From Owner o inner join [User] u on o.OwnerId=u.OwnerId where o.OwnerId=@OwnerId'
                 );
 
             const ownerRecord=result.recordset[0];
-            if(ownerRecord==undefined){
+            let isEmpty: boolean;
+
+            ownerRecord[0] == undefined ? (isEmpty = true) : (isEmpty = false);
+            if (isEmpty) {
+               
                 return null;
             }
  
-            const owner= new Owner(
-                ownerRecord.OwnerId,
-                ownerRecord.Name,
-                ownerRecord.LastName,
-                ownerRecord.Contact,
-                ownerRecord.Email,
-                ownerRecord.Password
-            );
+            const owner= new Owner(ownerRecord.OwnerId,
+                ownerRecord.Name,ownerRecord.LastName, 
+                ownerRecord.Contact,ownerRecord.Email,
+                ownerRecord.Password);
 
             return owner;
     
@@ -48,10 +49,6 @@ class OwnerRepository extends Repository{
             return error;
     
         }
-
-  
-
-
     };
 
     getOwners = async (parameters: GetOwnerParamters) => {
@@ -99,32 +96,24 @@ class OwnerRepository extends Repository{
 
     registerOwner = async (owner) => {
         try {
-            const pool = await sql.connect(this.databaseConfiguration);
-            const transaction = new sql.Transaction(pool);
+            
             const UserId: string = createIDwithUUIDV4();
             const Email: string = owner.Email;
             const Password: string | null = owner.Password;
             const Name: string = owner.Name;
             const LastName: string = owner.LastName;
             const Contact: string = validateContact(owner.Contact);
-
-
-
             const hashedPassword = hashPassword(Password);
-            // let hashedPassword = Password;
-
-            const sharedRepository=new SharedRepository(this.databaseConfiguration);
-            const emailExists = await sharedRepository.emailExists(Email);
+            const emailExists:boolean = await this.sharedRepository.emailExists(Email);
       
-            if (emailExists) {
-                return null;
-            }
-   
+            if (emailExists) { return null;}
+            const pool = await sql.connect(this.databaseConfiguration);
+            const transaction = new sql.Transaction(pool);
             try{
         
     
                 await transaction.begin();
-                const results = await new sql.Request(transaction)
+                let results = await new sql.Request(transaction)
                     .input('UserId', sql.VarChar, UserId)
                     .input('Email', sql.VarChar, Email)
                     .input('Password', sql.VarChar, hashedPassword)
@@ -133,12 +122,9 @@ class OwnerRepository extends Repository{
                     .input('Contact', sql.VarChar, Contact)
                     .query('INSERT INTO Owner(OwnerId,Name,LastName,Contact) Values(@UserId,@Name,@LastName,@Contact)');
   
-                if(results.rowsAffected[0]!=1){
-                    throw Error('');
-                }
-                else
-                {
-                    const results = await new sql.Request(transaction)
+                if(results.rowsAffected[0]!=1){throw Error('');}
+                
+                     results = await new sql.Request(transaction)
                         .input('UserId', sql.VarChar, UserId)
                         .input('Email', sql.VarChar, Email)
                         .input('Password', sql.VarChar, hashedPassword)
@@ -150,7 +136,7 @@ class OwnerRepository extends Repository{
                     }
                     await transaction.commit();
                     return UserId;
-                }
+                
 
             } catch(error){
                 transaction.rollback();

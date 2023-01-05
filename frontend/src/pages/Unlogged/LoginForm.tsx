@@ -1,6 +1,6 @@
 import { ReactElement, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { logIn } from '../../apiCalls/userApiCalls';
+import { logInApiCall } from '../../apiCalls/userApiCalls';
 import FormDiv from '../../components/Form/FormDiv';
 import ServerErrorInfoComponenet from '../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
@@ -30,7 +30,7 @@ function LoginForm({
 		if (validateForm()) {
 			let response;
 			let promise;
-			promise = logIn(loginForm);
+			promise = logInApiCall(loginForm);
 			if (promise) {
 				promise
 					.then((data) => {
@@ -39,11 +39,7 @@ function LoginForm({
 					})
 					.then(
 						(data) => {
-							if (
-								response.status == 404 ||
-								response.status == 403 ||
-								response.status == 401
-							) {
+							if (response.status == 404 || response.status == 401) {
 								setError((prev) => ({
 									...prev,
 									Email: 'Niepoprawny email lub hasło',

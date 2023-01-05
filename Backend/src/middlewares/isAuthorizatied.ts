@@ -23,7 +23,6 @@ export const isAuthorizated=async(req,res,next)=>{
             }
             else 
             {
-                req.user=user;
                 return next();
             }
         });

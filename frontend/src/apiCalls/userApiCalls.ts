@@ -1,6 +1,6 @@
 const baseUrl = "http://localhost:8000/users";
 
-export function logIn(user) {
+export function logInApiCall(user) {
   const url = `${baseUrl}`;
   const userJSON = JSON.stringify(user); //convert javascript to JSON
   const options = {

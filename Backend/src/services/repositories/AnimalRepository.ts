@@ -1,6 +1,7 @@
 
 import { AnimalParametersType } from '../../common/Types';
 import Animal,{Sex} from '../../models/classes/Animal';
+import AnimalType from '../../models/classes/AnimalType';
 import Owner from '../../models/classes/Owner';
 import { createIDwithUUIDV4 } from '../../utils/idHelpers';
 import AnimalTypeRepository from './AnimalTypeRepository';
@@ -12,8 +13,7 @@ const sql = require('mssql');
 class AnimalRepostiory extends Repository{
     
 
-    
-    animalTypeRepository;
+    animalTypeRepository
     ownerRepository;
 
     constructor(databse,animalTypeRepository:AnimalTypeRepository,ownerRepository:OwnerRepository){
@@ -27,7 +27,7 @@ class AnimalRepostiory extends Repository{
         try {
     
             const pool =await sql.connect(this.databaseConfiguration);
-            const result = await pool.request().input('AnimalId',sql.VarChar,AnimalId).query('Select * From Animal where AnimalId=@AnimalId');
+            const result = await pool.request().input('AnimalId',sql.VarChar,AnimalId).query('Select AnimalId,Name,BirthDate,AnimalTypeId,OwnerId,ProfileImage,Sex From Animal where AnimalId=@AnimalId');
     
     
             const animalRecord=result.recordset[0];
@@ -41,6 +41,7 @@ class AnimalRepostiory extends Repository{
             const AnimalType = await  this.animalTypeRepository.getAnimalTypes({
                 AnimalTypeId: animalRecord.AnimalTypeId,
             });
+            
            const ownerResult = await this.ownerRepository.getOwner(animalRecord.OwnerId);
             
             
@@ -175,11 +176,9 @@ class AnimalRepostiory extends Repository{
               
     
                 if (rowsAffected != 1) {
-                    console.log('falied to insert');
+                  
                     throw Error('');
                 } else {
-                    //   const createAnimalMedicalInformationResult = await AnimalMedicalInfoRepository.createAnimalMedicalInformation(AnimalId,transaction);
-                    
                     const createAnimalMedicalInformationResult = await new sql.Request(transaction)
                         .input('AnimalId', sql.VarChar, AnimalId)
                         .query(

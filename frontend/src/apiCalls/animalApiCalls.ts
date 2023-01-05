@@ -15,7 +15,6 @@ export function getAnimalTypes() {
 export function getAnimals() {
   const url = baseUrl;
  
-
   const options=createHttpGetOptions(isVet());
 
   const promise =  fetch(url,options);

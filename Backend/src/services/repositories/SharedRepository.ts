@@ -10,7 +10,7 @@ class SharedRepository extends Repository{
         super(db);
     }
     
-    emailExists = async (Email: string) => {
+    emailExists = async (Email: string)=> {
         try {
             const pool = await sql.connect(this.databaseConfiguration);
             const results = await pool

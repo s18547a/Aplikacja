@@ -3,13 +3,9 @@ import { getCurrentUser } from "./authHelper";
 export function createHttpGetOptions(haveAuth:boolean){
 
     let token:string|null=null;
-    if(haveAuth){
-        token=getCurrentUser().token;
+    if(haveAuth){token=getCurrentUser().token; }
 
-
-    }
-
-const options = {
+  const options = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

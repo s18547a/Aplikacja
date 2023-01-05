@@ -32,6 +32,7 @@ import UserRouter from './routers/UserRouter';
 import VaccineRouter from './routers/VaccineRouter';
 import VetRouter from './routers/VetRouter';
 import VisitRouter from './routers/VisitRouter';
+import SharedRepository from './services/repositories/SharedRepository';
 
 //const {createError} =require('http-errors');
 const express = require('express');
@@ -61,8 +62,9 @@ export default function(db) {
     });
 
     //repositories   
+    const sharedRepository=new SharedRepository(db);
     const animalTypeRepository=new AnimalTypeRepository(db);
-    const ownerRepository=new OwnerRepository(db);
+    const ownerRepository=new OwnerRepository(db,sharedRepository);
     const animalRepository=new AnimalRepostiory(db,animalTypeRepository,ownerRepository);
     const animalMedicalInfoRepository=new AnimalMedicalInfoRepository(db);
     const animalIllnessRepository=new AnimalIllnessRepository(db);
@@ -70,7 +72,7 @@ export default function(db) {
     const clinicInfoRepository=new ClinicInfoRepository(db);
    
     const vetTypeRepository=new VetTypeRepository(db);
-    const vetRepository=new VetRepository(db,vetTypeRepository);    
+    const vetRepository=new VetRepository(db,vetTypeRepository,sharedRepository);    
     const surgeryRepository=new SurgeryRepository(db,animalRepository,vetRepository);
     const reservationRepository=new ReservationRepository(db,ownerRepository,vetRepository);
     const scheduldeHelperRepository=new ScheduldeHelperRepository(db,reservationRepository,surgeryRepository);

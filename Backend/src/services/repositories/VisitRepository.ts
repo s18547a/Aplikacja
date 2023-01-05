@@ -252,16 +252,14 @@ class VisitRepository extends Repository{
 
                 if (selectedActivites.length > 0) {
                     for await (const activity of selectedActivites) {
-                    // const activityPool =
-                    //  await pool.request()
-
+                   
                         const resultsS = await new sql.Request(transaction)
                             .input('MedicalActivityId', sql.VarChar, activity)
                             .input('VisitId', sql.VarChar, VisitId)
                             .query(
                                 'Insert into VisitMedicalActivities(MedicalActivityId,VisitId) values (@MedicalActivityId,@VisitId)'
                             );
-                        console.log('RESULTS');
+                      
                         if (resultsS.rowsAffected[0] != 1) {
                             
                             throw Error('');
@@ -285,7 +283,7 @@ class VisitRepository extends Repository{
                     }
                 }
                 if(vaccineList.length>0 ){
-                //  const date = getCurrentDate();
+                
 
                     for await(const VaccineType of vaccineList){
                         const result = await new sql.Request(transaction)
@@ -300,9 +298,6 @@ class VisitRepository extends Repository{
                         }
 
                     }
-       
-       
-        
                 }
                 if(cannceledReservation!=''){
 
