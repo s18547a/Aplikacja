@@ -1,19 +1,24 @@
 import AnimalMedicalInfo from "../classes/AnimalMedicalInfo";
-import { getCurrentUser, isAuthenticated } from "../components/other/authHelper";
+import { createHttpGetOptions, createHTTPutOptions } from "../utils/apiCallsHelper";
+import { getCurrentUser, isAuthenticated } from "../utils/authHelper";
+import { isVet } from "../utils/userType";
 
 const baseUrl = "http://localhost:8000/animals";
 
 export function getAnimalTypes() {
   const url = `${baseUrl}/types`;
-
-  const promise = fetch(url);
+  const options=createHttpGetOptions(isAuthenticated());
+  const promise = fetch(url,options);
   return promise;
 }
 
 export function getAnimals() {
   const url = baseUrl;
+ 
 
-  const promise = fetch(url);
+  const options=createHttpGetOptions(isVet());
+
+  const promise =  fetch(url,options);
   return promise;
 }
 
@@ -39,20 +44,27 @@ export function registerAnimal(Animal) {
 
 export async function getAnimalsbyOwner(OwnerId) {
   const url = `${baseUrl}?OwnerId=${OwnerId}`;
-  const promise = await fetch(url);
+
+
+  const options=createHttpGetOptions(isAuthenticated())
+
+
+  const promise = await fetch(url,options);
   return promise;
 }
 
 export async function getAnimalById(AnimalId: String) {
   const url = `${baseUrl}/${AnimalId}`;
-  const promise = await fetch(url);
+  const options=createHttpGetOptions(isAuthenticated())
+  const promise = await fetch(url,options);
 
   return promise;
 }
 export async function getAnimalsByOwnerEmail(Email) {
   const url = `${baseUrl}?Email=${Email}`;
 
-  const promise = await fetch(url);
+  const options=createHttpGetOptions(isAuthenticated());
+  const promise = await fetch(url,options);
 
   return promise;
 }
@@ -81,21 +93,15 @@ const illnessesUrl = `${baseUrl}/illnesses`;
 
 export async function getAnimalIllnesses(AnimalId) {
   const url = `${baseUrl}/${AnimalId}/illnesses`;
-
-  const promise = await fetch(url);
+  const options=createHttpGetOptions(isAuthenticated())
+  const promise = await fetch(url,options);
 
   return promise;
 }
 
 export async function setRecoveryIllness(Illness) {
   const stringIllness = JSON.stringify(Illness);
-  const options = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: stringIllness,
-  };
+  const options = createHTTPutOptions(isVet(),stringIllness);
 
   const promise = await fetch(illnessesUrl, options);
 
@@ -105,20 +111,17 @@ const animalMedInfoURL = `${baseUrl}/medicalInfo`;
 
 export async function getAnimalMedicalInfo(AnimalId: String) {
   const url = `${baseUrl}/${AnimalId}/medicalInfo`;
-  const promise = await fetch(url);
+
+  const options=createHttpGetOptions(isAuthenticated())
+  const promise = await fetch(url,options);
 
   return promise;
 }
 
 export async function updateMedicalInfo(AnimalMedicalInfo: AnimalMedicalInfo) {
   const stringifyAMI = JSON.stringify(AnimalMedicalInfo);
-  const options = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: stringifyAMI,
-  };
+  
+  const options=createHTTPutOptions(isVet(),stringifyAMI)
   const promise = await fetch(animalMedInfoURL, options);
 
   return promise;
@@ -127,17 +130,18 @@ export async function updateMedicalInfo(AnimalMedicalInfo: AnimalMedicalInfo) {
 const vaccineUrl = "http://localhost:8000/vaccines";
 
 export async function getAnimalVaccines(AnimalId) {
-  const url = `${vaccineUrl}/${AnimalId}`;
 
-  const promise = await fetch(url);
+  const url = `${vaccineUrl}/${AnimalId}`;
+  const options=createHttpGetOptions(isAuthenticated());
+  const promise = await fetch(url,options);
 
   return promise;
 }
 
 export async function getAnimalCoreVaccines(AnimalId) {
   const url = `${vaccineUrl}/core/${AnimalId}`;
-
-  const promise = await fetch(url);
+  const options=createHttpGetOptions(isAuthenticated());
+  const promise = await fetch(url,options);
 
   return promise;
 }
@@ -145,8 +149,8 @@ export async function getAnimalCoreVaccines(AnimalId) {
 export async function getAnimalUnadminstratedVaccines(AnimalId) {
   console.log(AnimalId);
   const url = `${vaccineUrl}/types?unAdministratedAnimalId=${AnimalId}`;
-
-  const promise = await fetch(url);
+  const options=createHttpGetOptions(isAuthenticated());
+  const promise = await fetch(url,options);
 
   return promise;
 }

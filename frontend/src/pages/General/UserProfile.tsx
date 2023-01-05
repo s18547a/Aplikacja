@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
-import { getCurrentUser } from '../../components/other/authHelper';
-import { isOwner, isVet } from '../../components/other/userType';
+import { getCurrentUser } from '../../utils/authHelper';
+import { isOwner, isVet } from '../../utils/userType';
 import OwnerProfile from '../Owner/OwnerProfile/OwnerProfile';
 import VetProfile from '../Vet/VetProfile/VetProfile';
 

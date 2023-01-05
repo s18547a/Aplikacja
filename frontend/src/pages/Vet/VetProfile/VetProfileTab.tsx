@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import Vet from '../../../classes/Vet';
-import { getCurrentUser } from '../../../components/other/authHelper';
+import { getCurrentUser } from '../../../utils/authHelper';
 import VetInfo from './VetInfo';
 import VetSchedulde from './VetSchedulde';
 import VetSpec from './VetSpec';

@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { useLocation } from 'react-router-dom';
-import { isAuthenticated } from '../other/authHelper';
-import { isOwner, isVet, isManager } from '../other/userType';
+import { isAuthenticated } from '../../utils/authHelper';
+import { isOwner, isVet, isManager } from '../../utils/userType';
 import AnimalDropdown from './Dropdowns/AnimalDropdown';
 import ReservationDropdown from './Dropdowns/ReservationDropdown';
 import SurgeryDropdown from './Dropdowns/SurgeryDropdown';

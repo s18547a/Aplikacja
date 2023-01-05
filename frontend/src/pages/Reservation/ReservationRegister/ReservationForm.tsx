@@ -9,10 +9,10 @@ import FormDateReactDiv from '../../../components/Form/FormDateRectDiv';
 import FormDiv from '../../../components/Form/FormDiv';
 import FormSelectLimit from '../../../components/Form/FormSelectLimit';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import { getCurrentUser } from '../../../components/other/authHelper';
-import { errorAPIHandler } from '../../../components/other/errorAPIHelper';
-import { getCurrentDate } from '../../../components/other/getCurrentDate';
-import { isManager, isOwner, isVet } from '../../../components/other/userType';
+import { getCurrentUser } from '../../../utils/authHelper';
+import { errorAPIHandler } from '../../../utils/errorAPIHelper';
+import { getCurrentDate } from '../../../utils/getCurrentDate';
+import { isManager, isOwner, isVet } from '../../../utils/userType';
 import SelectOwnerComponent from '../../Shared/SelectOwnerComponent';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 

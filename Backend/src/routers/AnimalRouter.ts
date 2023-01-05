@@ -11,23 +11,23 @@ class AnimalRouter{
 
         const router = express.Router();
  
-        router.get('/types', animalController.getAnimalTypes);
+        router.get('/types',isAuthorizated, animalController.getAnimalTypes);
     
-        router.get('/:AnimalId', animalController.getAnimal);
+        router.get('/:AnimalId',isAuthorizated, animalController.getAnimal);
         
-        router.get('/', animalController.getAnimals);
+        router.get('/', isAuthorizated,animalController.getAnimals);
         
         router.post('/', isAuthorizated, animalController.registerAnimal);
         
         router.put('/', isAuthorizated,  animalController.updateAnimal);
         
-        router.get('/:AnimalId/illnesses',  animalController.getIllnesses);
+        router.get('/:AnimalId/illnesses', isAuthorizated,  animalController.getIllnesses);
         
-        router.put('/illnesses',  animalController.updateIllness);
+        router.put('/illnesses', isAuthorizated,  animalController.updateIllness);
         
-        router.get('/:AnimalId/medicalInfo',  animalController.getMedicalInfo);
+        router.get('/:AnimalId/medicalInfo', isAuthorizated,  animalController.getMedicalInfo);
         
-        router.put('/medicalInfo',  animalController.updateMedicalInfo);
+        router.put('/medicalInfo', isAuthorizated,  animalController.updateMedicalInfo);
 
         this.router=router;
 

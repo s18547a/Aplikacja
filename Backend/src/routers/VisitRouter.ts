@@ -1,17 +1,18 @@
 import express from 'express';
 import VisitController from '../controllers/VisitController';
+import { isAuthorizated } from '../middlewares/isAuthorizatied';
 
 class VisitRouter{
 
     router;
     constructor(visitController:VisitController){
         const router = express.Router();
-        router.get('/activities',visitController.getVisitActivities);
-        router.get('/search',visitController.searchVisits);
-        router.get('/:VisitId',visitController.getVisit);
+        router.get('/activities', isAuthorizated,visitController.getVisitActivities);
+        router.get('/search', isAuthorizated,visitController.searchVisits);
+        router.get('/:VisitId', isAuthorizated,visitController.getVisit);
 
-        router.get('/', visitController.getVisits);
-        router.post('/',visitController.registerVisit);
+        router.get('/',  isAuthorizated,visitController.getVisits);
+        router.post('/', isAuthorizated,visitController.registerVisit);
         this.router=router;
     }
 }

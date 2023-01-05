@@ -10,9 +10,9 @@ import Pagination from '../../../components/List/Pagination';
 import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import { getCurrentUser } from '../../../components/other/authHelper';
-import { SearchListParamter } from '../../../components/other/helperClass/VisitListParameters';
-import { isVet, isManager, isOwner } from '../../../components/other/userType';
+import { getCurrentUser } from '../../../utils/authHelper';
+import { SearchListParamter } from '../../../utils/VisitListParameters';
+import { isVet, isManager, isOwner } from '../../../utils/userType';
 
 import SearchInput from '../../Shared/SearchImput';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';

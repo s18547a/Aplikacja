@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import Vet from '../../classes/Vet';
-import { spaceContact } from '../../components/other/contactHelper';
-import { getDefalutProfileImage } from '../../components/other/imageHelper';
+import { spaceContact } from '../../utils/contactHelper';
+import { getDefalutProfileImage } from '../../utils/imageHelper';
 
 function VetChoiceComponent({
 	label,

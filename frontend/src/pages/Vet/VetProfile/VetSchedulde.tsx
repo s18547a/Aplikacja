@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getVetSchedulde } from '../../../apiCalls/vetApiCalls';
 import EditButton from '../../../components/Buttons/EditButton';
-import { isManager } from '../../../components/other/userType';
+import { isManager } from '../../../utils/userType';
 
 interface ScheduldeI {
 	Monday: string | null | undefined;

@@ -3,7 +3,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import SelectOwnerComponent from '../../Shared/SelectOwnerComponent';
 import SelectAnimalComponent from '../../Shared/SelectAnimalComponent';
 import VetChoiceComponent from '../../Shared/VetChoiceComponent';
-import DatePicker from 'react-datepicker';
+
 import 'react-datepicker/dist/react-datepicker.css';
 import pl from 'date-fns/locale/pl';
 import { useNavigate } from 'react-router-dom';
@@ -23,11 +23,12 @@ import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormDateReactDiv from '../../../components/Form/FormDateRectDiv';
 import FormSelectLimit from '../../../components/Form/FormSelectLimit';
 import FormTextField from '../../../components/Form/FormTextField';
-import ProfileDiv from '../../../components/other/ProfileDiv';
-import { checkIfAllFieldAsFilled } from '../../../components/other/validatiorHelper';
+import ProfileDiv from '../../../components/Profile/ProfileDiv';
+
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import { getCurrentDate } from '../../../components/other/getCurrentDate';
+import { getCurrentDate } from '../../../utils/getCurrentDate';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
+import { checkIfAllFieldAsFilled } from '../../../utils/validatiorHelper';
 
 interface ISurgeryForm {
 	OwnerId: string;

@@ -1,5 +1,6 @@
 import express from 'express';
 import VetController from '../controllers/VetController';
+import { isAuthorizated } from '../middlewares/isAuthorizatied';
 
 class VetRouter{
 
@@ -7,15 +8,15 @@ class VetRouter{
 
     constructor(vetController:VetController){
         const router = express.Router();
-        router.get('/types',vetController.getVetTypes);
-        router.get('/:VetId',vetController.getVet);
-        router.get('/',vetController.getVets);
-        router.post('/',vetController.registerVet);
-        router.get('/schedulde/availableHours',vetController.getAvailableHours);
-        router.get('/:VetId/schedulde',vetController.getVetSchedulde);
-        router.get('/:VetId/daysOfWeek',vetController.getVetDaysOfWeek);
-        router.put('/schedulde', vetController.updateSchedulde);
-        router.put('/',vetController.updateVet);
+        router.get('/types', isAuthorizated,vetController.getVetTypes);
+        router.get('/:VetId', isAuthorizated,vetController.getVet);
+        router.get('/', isAuthorizated,vetController.getVets);
+        router.post('/', isAuthorizated,vetController.registerVet);
+        router.get('/schedulde/availableHours', isAuthorizated,vetController.getAvailableHours);
+        router.get('/:VetId/schedulde', isAuthorizated,vetController.getVetSchedulde);
+        router.get('/:VetId/daysOfWeek', isAuthorizated,vetController.getVetDaysOfWeek);
+        router.put('/schedulde',  isAuthorizated,vetController.updateSchedulde);
+        router.put('/', isAuthorizated,vetController.updateVet);
         this.router=router;
     }
 }

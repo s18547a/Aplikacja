@@ -7,8 +7,8 @@ import Reservation from '../../../classes/Reservation';
 import Surgery from '../../../classes/Surgery';
 import Vet from '../../../classes/Vet';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import { getCurrentUser } from '../../../components/other/authHelper';
-import { isManager } from '../../../components/other/userType';
+import { getCurrentUser } from '../../../utils/authHelper';
+import { isManager } from '../../../utils/userType';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 import TodayReservationList from './TodayReservationList';

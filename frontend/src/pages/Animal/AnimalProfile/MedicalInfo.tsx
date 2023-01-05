@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AnimalMedicalInfo from '../../../classes/AnimalMedicalInfo';
 import EditButton from '../../../components/Buttons/EditButton';
-import ProfileDiv from '../../../components/other/ProfileDiv';
-import { isManager, isVet } from '../../../components/other/userType';
+import ProfileDiv from '../../../components/Profile/ProfileDiv';
+import { isManager, isVet } from '../../../utils/userType';
 
 function MedicalInfo({
 	animalId,

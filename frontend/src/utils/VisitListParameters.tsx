@@ -1,5 +1,5 @@
-import { getCurrentUser } from '../authHelper';
-import { isOwner } from '../userType';
+import { getCurrentUser } from './authHelper';
+import { isOwner } from './userType';
 
 export class SearchListParamter {
 	Email: string = '';

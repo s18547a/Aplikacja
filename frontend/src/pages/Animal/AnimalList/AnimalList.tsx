@@ -10,8 +10,8 @@ import Pagination from '../../../components/List/Pagination';
 import RegiserSuccessInfo from '../../../components/List/RegisterSuccessInfo';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import { getCurrentUser } from '../../../components/other/authHelper';
-import { isOwner, isVet, isManager } from '../../../components/other/userType';
+import { getCurrentUser } from '../../../utils/authHelper';
+import { isOwner, isVet, isManager } from '../../../utils/userType';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 import AnimalSearch from './AnimalSearch';

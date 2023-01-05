@@ -9,9 +9,9 @@ import Surgery from '../../../classes/Surgery';
 import Modal from '../../../components/Modal/Modal';
 import ModalEnableBtn from '../../../components/Modal/ModalEnableBtn';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import { getCurrentUser } from '../../../components/other/authHelper';
-import ProfileDiv from '../../../components/other/ProfileDiv';
-import { isManager } from '../../../components/other/userType';
+import { getCurrentUser } from '../../../utils/authHelper';
+import ProfileDiv from '../../../components/Profile/ProfileDiv';
+import { isManager } from '../../../utils/userType';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 import SurgeryReportForm from '../SurgeryRegister/SurgeryReportForm';

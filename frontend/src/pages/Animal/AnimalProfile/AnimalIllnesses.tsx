@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { CheckLg } from 'react-bootstrap-icons';
 import Illness from '../../../classes/Illness';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
-import { isOwner } from '../../../components/other/userType';
+import { isOwner } from '../../../utils/userType';
 
 function AnimalIllnesses({
 	updateIllness,

@@ -1,17 +1,18 @@
-import express from 'express';
+import express, { Router } from 'express';
 import ReservationController from '../controllers/ReservationContoller';
+import { isAuthorizated } from '../middlewares/isAuthorizatied';
 
 class ReservationRouter{
 
-    router;
+    router:Router;
 
     constructor(reservationController:ReservationController){
         const router=express.Router();
         
-        router.get('/',reservationController.getReservations);
-        router.post('/',reservationController.registerReservation);
+        router.get('/', isAuthorizated, reservationController.getReservations);
+        router.post('/', isAuthorizated,reservationController.registerReservation);
 
-        router.delete('/:ReservationId',reservationController.deleteReservation);
+        router.delete('/:ReservationId', isAuthorizated,reservationController.deleteReservation);
 
         this.router=router;
     }

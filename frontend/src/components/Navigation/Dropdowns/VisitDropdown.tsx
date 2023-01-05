@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import { ListUl, PersonPlus, PlusSquare } from 'react-bootstrap-icons';
 import { useLocation } from 'react-router-dom';
-import { isAuthenticated } from '../../other/authHelper';
-import { isOwner } from '../../other/userType';
+import { isAuthenticated } from '../../../utils/authHelper';
+import { isOwner } from '../../../utils/userType';
 import NavBtn from '../NavBtn';
 import NavElement from '../NavElement';
 

@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import Vet from '../../../classes/Vet';
 import EditButton from '../../../components/Buttons/EditButton';
-import { spaceContact } from '../../../components/other/contactHelper';
-import { getDefalutProfileImage } from '../../../components/other/imageHelper';
-import ProfileDiv from '../../../components/other/ProfileDiv';
+import { spaceContact } from '../../../utils/contactHelper';
+import { getDefalutProfileImage } from '../../../utils/imageHelper';
+import ProfileDiv from '../../../components/Profile/ProfileDiv';
 
 function VetInfo({ vet }: { vet: Vet }) {
 	const navigate = useNavigate();

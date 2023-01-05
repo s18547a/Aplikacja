@@ -1,5 +1,6 @@
 import express from 'express';
 import VaccineController from '../controllers/VaccineController';
+import { isAuthorizated } from '../middlewares/isAuthorizatied';
 
 
 class VaccineRouter{
@@ -9,9 +10,9 @@ class VaccineRouter{
         const router = express.Router();
 
 
-        router.get('/types',vaccineController.getVaccineTypes);
-        router.get('/:AnimalId',vaccineController.getAnimalVaccines);
-        router.get('/core/:AnimalId',vaccineController.getAnimalCoreVaccineTypes);
+        router.get('/types', isAuthorizated,vaccineController.getVaccineTypes);
+        router.get('/:AnimalId', isAuthorizated,vaccineController.getAnimalVaccines);
+        router.get('/core/:AnimalId', isAuthorizated,vaccineController.getAnimalCoreVaccineTypes);
         this.router=router;
     }
 }

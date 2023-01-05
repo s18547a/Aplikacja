@@ -6,7 +6,7 @@ import {
 	useNavigate,
 	useLocation,
 } from 'react-router-dom';
-import { isAuthenticated } from './components/other/authHelper';
+import { isAuthenticated } from './utils/authHelper';
 
 import Navigation from './components/Banner/BannerComponent';
 
@@ -23,7 +23,7 @@ import UserProfile from './pages/General/UserProfile';
 import SurgeryForm from './pages/Surgery/SurgeryRegister/SurgeryForm';
 import VisitProfile from './pages/Visit/VisitProfile/VisitProfile';
 import VetList from './pages/Vet/VetList/VetList';
-import { isManager, isVet } from './components/other/userType';
+import { isManager, isVet } from './utils/userType';
 import VetForm from './pages/Vet/VetRegister/VetForm';
 import VetProfile from './pages/Vet/VetProfile/VetProfile';
 import VetScheduldeForm from './pages/Vet/VetRegister/VetScheduldeForm';

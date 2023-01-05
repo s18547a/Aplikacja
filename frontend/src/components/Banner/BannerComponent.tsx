@@ -4,9 +4,9 @@ import { Navigate, Link, useNavigate, useLocation } from 'react-router-dom';
 import Modal from '../Modal/Modal';
 
 import ModalEnableBtn from '../Modal/ModalEnableBtn';
-import { getCurrentUser, isAuthenticated } from '../other/authHelper';
-import { getDefalutProfileImage, getLogo } from '../other/imageHelper';
-import { getUserName, isManager, isOwner, isVet } from '../other/userType';
+import { getCurrentUser, isAuthenticated } from '../../utils/authHelper';
+import { getDefalutProfileImage, getLogo } from '../../utils/imageHelper';
+import { getUserName, isManager, isOwner, isVet } from '../../utils/userType';
 
 function BannerComponent(props) {
 	function handleLogout() {

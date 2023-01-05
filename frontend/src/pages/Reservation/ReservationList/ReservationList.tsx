@@ -13,13 +13,10 @@ import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import Modal from '../../../components/Modal/Modal';
 import ModalEnableBtn from '../../../components/Modal/ModalEnableBtn';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import { getCurrentUser } from '../../../components/other/authHelper';
-import { spaceContact } from '../../../components/other/contactHelper';
-import {
-	getCurrentDate,
-	getCurrentHour,
-} from '../../../components/other/getCurrentDate';
-import { isVet, isManager, isOwner } from '../../../components/other/userType';
+import { getCurrentUser } from '../../../utils/authHelper';
+import { spaceContact } from '../../../utils/contactHelper';
+import { getCurrentDate, getCurrentHour } from '../../../utils/getCurrentDate';
+import { isVet, isManager, isOwner } from '../../../utils/userType';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 function ReservationList(): ReactElement {

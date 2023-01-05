@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getVisitById } from '../../../apiCalls/visitApiCalls';
 import Visit from '../../../classes/Visit';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
-import ProfileDiv from '../../../components/other/ProfileDiv';
+import ProfileDiv from '../../../components/Profile/ProfileDiv';
 import ServerErrorInfoComponenet from '../../Shared/ServerErrorInfoComponent';
 
 function VisitProfile(): ReactElement {

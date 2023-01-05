@@ -1,16 +1,21 @@
+import { createHttpGetOptions } from "../utils/apiCallsHelper";
+import { isAuthenticated } from "../utils/authHelper";
+import { isVet } from "../utils/userType";
+
 const baseUrl = "http://localhost:8000/owners";
 
 export async function getOwnerById(OwnerId) {
   const ownerUrl = `${baseUrl}/${OwnerId}`;
-
-  const promise = await fetch(ownerUrl);
+  const options=createHttpGetOptions(isAuthenticated())
+  const promise = await fetch(ownerUrl,options);
 
   return promise;
 }
 
 export function getOwners() {
-  const promise = fetch(baseUrl);
-
+  const options=createHttpGetOptions(isVet())
+  const promise = fetch(baseUrl,options);
+  
   return promise;
 }
 
