@@ -13,7 +13,7 @@ function Modal(props): ReactElement {
 			aria-labelledby="exampleModalLabel"
 			aria-hidden="true"
 		>
-			<div className="modal-dialog modal-sm">
+			<div className="modal-dialog modal-sm" style={{ zIndex: 102 }}>
 				<div className="modal-content">
 					<div className="modal-header d-flex justify-content-center">
 						<div className="">

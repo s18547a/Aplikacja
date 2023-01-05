@@ -21,11 +21,11 @@ function ReservationVetChoice({
 	}
 
 	return (
-		<div className="">
-			<div className="form-group">
-				<div className="form-label ">Weterynarz</div>
+		<div className="form-group">
+			<div className="form-label ">Weterynarz</div>
 
-				<div className="list-group">
+			<div className="list-group">
+				<div className="row">
 					{vets.map((vet) => {
 						return (
 							<div className="col-6">

@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { List, ListUl } from 'react-bootstrap-icons';
 import { useLocation } from 'react-router-dom';
-import { hoverElement } from '../AdditionalStyles/NavigationAdditionalStyles';
+import { hoverElementON } from '../AdditionalStyles/NavigationAdditionalStyles';
 interface elementType {
 	label: string;
 	link: string;
@@ -33,11 +33,14 @@ function NavElement(props: {
 	const [style, setStyle] = useState({});
 
 	return (
-		<div className="border">
+		<div
+			className="border"
+			style={{ borderRadius: 10, backgroundColor: 'white' }}
+		>
 			<li
 				className=" "
 				style={style}
-				onMouseEnter={() => setStyle(hoverElement)}
+				onMouseEnter={() => setStyle(hoverElementON)}
 				onMouseLeave={() => setStyle({})}
 			>
 				<a

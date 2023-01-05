@@ -96,7 +96,7 @@ function SideBar(): ReactElement | null {
 			return (
 				<div style={{ width: '170px', height: '100%' }}>
 					<ul
-						className="list-unstyled bg-white shadow width"
+						className="list-unstyled   width"
 						style={{ width: '170px', height: '100%' }}
 					>
 						{userNaviagion()}

@@ -9,10 +9,12 @@ function VetProfileTab({
 	types,
 	vet,
 	vetId,
+	setServerError,
 }: {
 	types: any[];
 	vet: Vet;
 	vetId: string | undefined;
+	setServerError: (any) => void;
 }): ReactElement {
 	return (
 		<div className="">
@@ -31,6 +33,7 @@ function VetProfileTab({
 				<div className="col-lg-3">
 					<VetSchedulde
 						VetId={vetId == undefined ? getCurrentUser().userTypeId : vetId}
+						setServerError={setServerError}
 					/>
 				</div>
 			</div>

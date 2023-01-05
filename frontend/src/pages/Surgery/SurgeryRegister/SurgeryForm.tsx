@@ -200,11 +200,11 @@ function SurgeryForm(): ReactElement {
 						if (response.status == 200) {
 							setavailableDaysList(data);
 							console.log(data);
-						}
-						if (response.status == 404) {
+						} else if (response.status == 404) {
 							setavailableDaysListError('Weterynarz nie przyjmuje');
 							console.log(404);
 						} else {
+							console.log('CO JEST');
 							setServerError(true);
 						}
 					},
@@ -273,12 +273,6 @@ function SurgeryForm(): ReactElement {
 			}
 		}
 		return isValid;
-	}
-	function setAPIError(value: any, errorField: any) {
-		setError((prev) => ({
-			...prev,
-			[errorField]: value,
-		}));
 	}
 
 	function handleReactDatePicker(e) {

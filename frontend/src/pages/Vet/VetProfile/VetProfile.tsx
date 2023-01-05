@@ -144,7 +144,14 @@ function VetProfile(): ReactElement {
 	}
 
 	const profileTab = (
-		<VetProfileTab vet={vet} types={vet.Types} vetId={params.VetId} />
+		<VetProfileTab
+			vet={vet}
+			types={vet.Types}
+			vetId={params.VetId}
+			setServerError={() => {
+				setServerError(true);
+			}}
+		/>
 	);
 	const reservationTab = (
 		<TodayReservationList

@@ -82,16 +82,16 @@ export async function getValiableHourForSurgery(Day, VetId) {
 
 export async function getVetSchedulde(VetId) {
   const url = `${baseUrl}/${VetId}/schedulde`;
-
-  const promise = await fetch(url);
+  const options = createHttpGetOptions(isVet());
+  const promise = await fetch(url,options);
 
   return promise;
 }
 
 export async function getVetDaysOfWeek(VetId) {
   const url = `${baseUrl}/${VetId}/daysOfWeek`;
-
-  const promise = await fetch(url);
+  const options = createHttpGetOptions(isAuthenticated());
+  const promise = await fetch(url,options);
   return promise;
 }
 

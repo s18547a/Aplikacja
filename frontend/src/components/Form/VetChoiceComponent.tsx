@@ -21,7 +21,7 @@ function VetChoiceComponent({
 
 	return (
 		<div className="form-group">
-			<div className="form-label fw-bold">{label}</div>
+			<div className="form-label">{label}</div>
 			<div className="list-group">
 				<div className="row ">
 					{vets.map((vet) => {

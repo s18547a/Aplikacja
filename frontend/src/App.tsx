@@ -83,8 +83,6 @@ function App() {
 		? {
 				height: '100%',
 				width: '100%',
-
-				//   backgroundImage: `url(${require("../src/images/homePage.webp")})`,
 		  }
 		: { height: '100%', width: '100%' };
 
@@ -94,9 +92,8 @@ function App() {
 				style={{
 					width: '100%',
 					height: '8%',
-					position: 'sticky',
-					top: 0,
-					zIndex: 2,
+
+					zIndex: 100,
 				}}
 			>
 				<BannerComponent handleLogout={handleLogout} />

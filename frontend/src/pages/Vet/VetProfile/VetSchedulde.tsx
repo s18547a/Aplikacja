@@ -14,7 +14,13 @@ interface ScheduldeI {
 	Sunday: string | null | undefined;
 }
 
-function VetSchedulde({ VetId }: { VetId: string }) {
+function VetSchedulde({
+	VetId,
+	setServerError,
+}: {
+	VetId: string;
+	setServerError: (any) => void;
+}) {
 	const [schedulde, setSchedulde] = useState<ScheduldeI>({
 		Monday: undefined,
 		Tuesday: undefined,
@@ -45,9 +51,11 @@ function VetSchedulde({ VetId }: { VetId: string }) {
 						if (response.status == 404) {
 						}
 						if (response.status == 500) {
+							setServerError(true);
 						}
 					},
 					(error) => {
+						setServerError(true);
 						console.log(error);
 					}
 				);
