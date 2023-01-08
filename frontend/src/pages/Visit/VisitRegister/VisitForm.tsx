@@ -140,14 +140,13 @@ function VisitForm(): ReactElement {
 	}
 
 	function onChangeOwner(e) {
-		e.preventDefault();
 		setAnimalList([]);
 		setError((prev) => ({
 			...prev,
 			AnimalId: '',
 		}));
 
-		const { name, value } = e.target;
+		const value = e.value;
 		setVisit((prev) => ({
 			...prev,
 			OwnerId: value,
@@ -357,6 +356,7 @@ function VisitForm(): ReactElement {
 								visit={visit}
 								editForm={realised}
 								setServerError={setServerErrorChild}
+								realised={realised}
 							/>
 						</div>
 					</div>

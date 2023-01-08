@@ -94,10 +94,10 @@ function SideBar(): ReactElement | null {
 	const authorizatedSideBar = () => {
 		if (isAuthenticated()) {
 			return (
-				<div style={{ width: '170px', height: '100%' }}>
+				<div style={{ width: '150px', height: '100%' }} className="">
 					<ul
-						className="list-unstyled   width"
-						style={{ width: '170px', height: '100%' }}
+						className="list-unstyled  "
+						style={{ width: '150px', height: '100%' }}
 					>
 						{userNaviagion()}
 					</ul>

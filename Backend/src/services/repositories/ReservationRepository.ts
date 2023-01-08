@@ -110,6 +110,7 @@ class ReservationRepository extends Repository{
                 }
             }
         } catch (error) {
+            console.log(error)
             return error;
         }
     };

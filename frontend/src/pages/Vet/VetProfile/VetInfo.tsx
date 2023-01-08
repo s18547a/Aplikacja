@@ -9,14 +9,14 @@ function VetInfo({ vet }: { vet: Vet }) {
 	const navigate = useNavigate();
 	return (
 		<div className="">
-			<div className="row align-items-center">
+			<div className="row justify-content-center">
 				<div className="col-lg-4 ">
-					<div className="row ">
-						<div className="col-12 card card-body border-0 shadow p-4 ">
+					<div className="row  card card-body border-0 shadow">
+						<div className="col-12  ">
 							<img
 								height="250px"
 								width="250px"
-								className=""
+								className=" card-img-top"
 								src={
 									vet.ProfileImage == null
 										? getDefalutProfileImage()

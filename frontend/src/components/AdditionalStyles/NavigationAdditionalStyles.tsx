@@ -1,9 +1,11 @@
 export const hoverElementON = {
-	'background-color': '#e3f2fd',
-	'border-radius': 10,
+	backgroundColor: '#e3f2fd',
+	borderTopRightRadius: 10,
+	borderBottomRightRadius: 10,
 };
 
 export const hoverElementOFF = {
-	'background-color': 'white',
-	'border-radius': 10,
+	backgroundColor: 'white',
+	borderTopRightRadius: 10,
+	borderBottomRightRadius: 10,
 };

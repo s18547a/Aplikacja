@@ -87,7 +87,7 @@ class VetRepository extends Repository{
                 const vetPool = await pool
                     .request()
                     .query(
-                        `Select v.VetId, Name,LastName, Contact,HireDate, ProfileImage From Vet v join Schedulde s on v.VetId=s.VetId where ${newDate} is not null`
+                        `Select v.VetId, Name,LastName, Contact,HireDate, ProfileImage From Vet v join Schedulde s on v.VetId=s.VetId where ${newDate} is not null Order by HireDate desc`
                     );
                 vetsRecordset = vetPool.recordset;
             }  else if (parameters.VetType) {
@@ -95,14 +95,14 @@ class VetRepository extends Repository{
                     .request()
                     .input('VetType', sql.VarChar, parameters.VetType)
                     .query(
-                        'Select v.VetId,v.Name,v.LastName, v.Contact,v.HireDate, v.ProfileImage From Vet v join VetTypeVet vtv on v.VetId=vtv.VetId join SurgeryType st on vtv.VetType=st.VetType where st.SurgeryType=@VetType'
+                        'Select v.VetId,v.Name,v.LastName, v.Contact,v.HireDate, v.ProfileImage From Vet v join VetTypeVet vtv on v.VetId=vtv.VetId join SurgeryType st on vtv.VetType=st.VetType where st.SurgeryType=@VetType Order by v.HireDate desc'
                     );
                 vetsRecordset = vetPool.recordset;
             } else if (!parameters.VetType &&  !parameters.Date) {
                 const vetPool = await pool
                     .request()
 
-                    .query('Select * From Vet ');
+                    .query('Select v.VetId,v.Name,v.LastName, v.Contact,v.HireDate, u.Email, v.ProfileImage From Vet v join [User] u on v.VetId=u.VetId Order by v.HireDate desc');
                 vetsRecordset = vetPool.recordset;
             }
 

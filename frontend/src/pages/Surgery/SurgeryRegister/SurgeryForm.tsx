@@ -108,13 +108,14 @@ function SurgeryForm(): ReactElement {
 		}
 	};
 	function onChangeOwner(e) {
-		e.preventDefault();
+		//e.preventDefault();
+		const value = e.value;
 		setAnimalList([]);
 		setError((prev) => ({
 			...prev,
 			AnimalId: '',
 		}));
-		const { name, value } = e.target;
+
 		setSurgery((prev) => ({
 			...prev,
 			OwnerId: value,
@@ -350,12 +351,16 @@ function SurgeryForm(): ReactElement {
 			<div className="row justify-content-center">
 				<div className=" col-4 ">
 					<div className="card card-body shadow">
+						<div className=" card-title">
+							<h5>Informacje</h5>
+						</div>
 						<SelectOwnerComponent
 							onChange={onChangeOwner}
 							error={error.OwnerId}
 							setServerError={setServerErrorChild}
 							selectedValue={surgery.OwnerId}
 							editForm={false}
+							realised={false}
 						/>
 
 						<SelectAnimalComponent

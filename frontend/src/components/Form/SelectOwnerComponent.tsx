@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { getOwners } from '../../apiCalls/ownerApiCalls';
 import Owner from '../../classes/Owner';
 import FormSelect from './FormSelect';
+import FormSelectReact from './FromSelectReact';
 
 function SelectOwnerComponent({
 	setServerError,
@@ -9,15 +10,34 @@ function SelectOwnerComponent({
 	error,
 	selectedValue,
 	editForm,
+	realised,
 }: {
 	setServerError: () => void;
 	onChange: (any) => void;
 	error: string;
-	selectedValue: string;
+	selectedValue: any;
 	editForm: boolean;
+	realised: boolean;
 }): ReactElement {
-	const [ownerList, setOwnerList] = useState<Owner[]>([]);
+	const [ownerList, setOwnerList] = useState<
+		{ value: string; label: string }[]
+	>([]);
 
+	const createOptionsForReactSelect = (ownerList: Owner[]) => {
+		let optionList: { value: string; label: string }[] = [];
+		if (ownerList) {
+			ownerList.forEach((element) => {
+				const option: { value: string; label: string } = {
+					value: element.OwnerId as string,
+					label: `${element.Email}`,
+				};
+
+				optionList.push(option);
+			});
+
+			setOwnerList(optionList);
+		}
+	};
 	const getOwnerListFromApi = () => {
 		let promise;
 		let response;
@@ -31,8 +51,7 @@ function SelectOwnerComponent({
 				.then(
 					(data) => {
 						if (response.status === 200) {
-							console.log(data);
-							setOwnerList(data);
+							createOptionsForReactSelect(data);
 						}
 						if (response.status == 500) {
 							setServerError();
@@ -54,18 +73,15 @@ function SelectOwnerComponent({
 	}
 
 	return (
-		<FormSelect
-			label="Właściciel"
-			name="OwnerId"
+		<FormSelectReact
+			name={'OwnerId'}
 			onChange={onChangeFunction}
-			array={ownerList}
-			id={'OwnerId'}
-			elementLabel={'Email'}
+			disabled={realised}
+			options={ownerList}
+			label={'Właściciel'}
 			error={error}
-			arrayIsObjectList={true}
 			selectedValue={selectedValue}
-			dataListOptions="Owners"
-			disabled={editForm}
+			editForm={editForm}
 		/>
 	);
 }

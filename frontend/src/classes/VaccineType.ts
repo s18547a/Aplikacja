@@ -1,8 +1,8 @@
 class VaccineType {
-  VaccineType: String;
-  Species: String | null;
+  VaccineType: string;
+  Species: string | null;
   Core: boolean;
-  constructor(VaccineType: String, Species: String | null, Core: boolean) {
+  constructor(VaccineType: string, Species: string | null, Core: boolean) {
     this.VaccineType = VaccineType;
     this.Species = Species;
     this.Core = Core;

@@ -1,11 +1,14 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
+	getFullSchedulde,
 	getVetSchedulde,
 	updateSchedulde,
 } from '../../../apiCalls/vetApiCalls';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
-import DayScheduldeComponenet from './DayScheduldeComponent';
+import ServerErrorInfoBannerComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
+
+import NewScheduldeDayEditComponent from './NewScheduldeDayEditComponent';
 
 export interface IVetScheduldeForm {
 	Monday: string;
@@ -19,26 +22,17 @@ export interface IVetScheduldeForm {
 
 function VetScheduldeForm(): ReactElement {
 	const params = useParams();
+	const [serverError, setServerError] = useState(false);
 
 	const navigate = useNavigate();
 	const [schedulde, setSchedulde] = useState({
-		Monday: '-',
-		Tuesday: '-',
-		Wednesday: '-',
-		Thursday: '-',
-		Friday: '-',
-		Saturday: '-',
-		Sunday: '-',
-	});
-
-	const [freeSchedulde, setFreeSchedulde] = useState({
-		Monday: false,
-		Tuesday: false,
-		Wednesday: false,
-		Thursday: false,
-		Friday: false,
-		Saturday: false,
-		Sunday: false,
+		Monday: '',
+		Tuesday: '',
+		Wednesday: '',
+		Thursday: '',
+		Friday: '',
+		Saturday: '',
+		Sunday: '',
 	});
 
 	const [error, setError] = useState({
@@ -50,12 +44,28 @@ function VetScheduldeForm(): ReactElement {
 		Saturday: '',
 		Sunday: '',
 	});
-
+	const [vetId, setVetId] = useState<string>();
+	const [fullSchedulde, setFullSchedulde] = useState<
+		{
+			VetId: string;
+			Name: string;
+			LastName: string;
+			Monday: string;
+			Tuesday: string;
+			Wednesday: string;
+			Thursday: string;
+			Friday: string;
+			Saturday: string;
+			Sunday: string;
+		}[]
+	>([]);
+	const naviagate = useNavigate();
 	useEffect(() => {
-		const VetId = params.VetId;
+		const paramVetId = params.VetId;
+		setVetId(paramVetId);
 		let response;
 		let promise;
-		promise = getVetSchedulde(VetId);
+		promise = getVetSchedulde(paramVetId);
 
 		if (promise) {
 			promise
@@ -67,74 +77,58 @@ function VetScheduldeForm(): ReactElement {
 					(data) => {
 						if (response.status == 200) {
 							for (const [name, value] of Object.entries(data)) {
+								setSchedulde((prev) => ({
+									...prev,
+									[name]: value,
+								}));
 								if (value == null) {
-									setFreeSchedulde((prev) => ({
-										...prev,
-										[name]: true,
-									}));
-								} else {
 									setSchedulde((prev) => ({
 										...prev,
-										[name]: value,
+										[name]: '',
 									}));
 								}
+								//}
 							}
 						}
 					},
 					(error) => {
+						console.log(error);
+						setServerError(true);
+					}
+				);
+		}
+		promise = getFullSchedulde();
+		if (promise) {
+			promise
+				.then((data) => {
+					response = data;
+					return data.json();
+				})
+				.then(
+					(data) => {
+						setFullSchedulde(data);
+					},
+					(error) => {
+						setServerError(true);
 						console.log(error);
 					}
 				);
 		}
 	}, []);
 
-	function handleChange(e): void {
-		console.log(schedulde);
-		console.log(e);
+	function handleChange(e) {
 		const { name, value } = e.target;
 		console.log(value);
-
-		if (name.includes('start')) {
-			const day = name.split('start')[1];
-			console.log(day);
-			const oldTime = schedulde[day];
-			const oldEndTime = oldTime.split('-')[1];
-			const newTime = `${value}-${oldEndTime}`;
-			setSchedulde((prev) => ({
-				...prev,
-				[day]: newTime,
-			}));
-		}
-		if (name.includes('end')) {
-			const day = name.split('end')[1];
-			const oldTime = schedulde[day];
-			const oldStartTime = oldTime.split('-')[0];
-			const newTime = `${oldStartTime}-${value}`;
-
-			setSchedulde((prev) => ({
-				...prev,
-				[day]: newTime,
-			}));
-		}
-		console.log(schedulde);
-	}
-
-	function handleCheckBoxChange(e) {
-		const { name, value } = e.target;
-		const newValue = !freeSchedulde[name];
-		if (newValue == true) {
-			setSchedulde((prev) => ({
-				...prev,
-				[name]: '-',
-			}));
-		}
-		setFreeSchedulde((prev) => ({
+		setError((prev) => ({
 			...prev,
-			[name]: newValue,
+			[name]: '',
 		}));
-		console.log(freeSchedulde);
-	}
 
+		setSchedulde((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	}
 	function isValid() {
 		let isValid = true;
 		for (const [name, value] of Object.entries(schedulde)) {
@@ -143,41 +137,68 @@ function VetScheduldeForm(): ReactElement {
 				[name]: '',
 			}));
 
-			const time = value.split('-');
-			if (freeSchedulde[name] == false) {
-				if (time[0] == '' || time[1] == '') {
+			if (value != '') {
+				const splitedHours = value.split('-');
+				if (splitedHours.length != 2) {
 					setError((prev) => ({
 						...prev,
-						[name]: 'Niedokończone wpisywanie',
+						[name]: 'error',
 					}));
 					isValid = false;
-				}
-				if (time[0] > time[1]) {
-					setError((prev) => ({
-						...prev,
-						[name]: 'Godzina rozpoczęcia musi być wcześniej',
-					}));
-					isValid = false;
+				} else {
+					splitedHours.forEach((hours) => {
+						const regex = '[0-2][0-9]:[0][0]';
+						const match = hours.match(regex);
+						if (match == null) {
+							setError((prev) => ({
+								...prev,
+								[name]: 'error',
+							}));
+							isValid = false;
+						}
+						if (Number(hours.split(':')[0]) > 24) {
+							if (match == null) {
+								setError((prev) => ({
+									...prev,
+									[name]: 'error',
+								}));
+								isValid = false;
+							}
+						}
+					});
+
+					if (splitedHours[0] >= splitedHours[1]) {
+						setError((prev) => ({
+							...prev,
+							[name]: 'error',
+						}));
+						isValid = false;
+					}
 				}
 			}
 		}
+		console.log(error);
 
 		return isValid;
 	}
 
 	function handleSubmit(e) {
 		e.preventDefault();
+
+		isValid();
 		if (isValid()) {
 			const newSchedulde = {
 				VetId: params.VetId,
+				...schedulde,
 			};
-
-			for (const [name, value] of Object.entries(schedulde)) {
-				if (freeSchedulde[name] == true) {
+			for (const [name, value] of Object.entries(newSchedulde)) {
+				if (value == '') {
 					newSchedulde[name] = null;
-				} else newSchedulde[name] = value;
+				}
 			}
 			console.log(newSchedulde);
+
+			console.log(vetId);
 
 			let results;
 			updateSchedulde(newSchedulde)
@@ -202,95 +223,121 @@ function VetScheduldeForm(): ReactElement {
 	}
 	return (
 		<form className="container" onSubmit={handleSubmit}>
+			<ServerErrorInfoBannerComponenet serverError={serverError} />
 			<div className="row">
-				<div className="col-lg-5 offset-lg-4 col-8">
-					<div className="card card-body shadow">
-						<div className="card-title">
-							<h5>Harmonogram</h5>
+				<div className=" card card-body">
+					<div className=" card-title">
+						<h5>{`Edycja harmonogramu: ${
+							fullSchedulde.filter((schedulde) => {
+								if (schedulde.VetId == vetId) {
+									return true;
+								}
+							})[0]?.Name
+						} ${
+							fullSchedulde.filter((schedulde) => {
+								if (schedulde.VetId == vetId) {
+									return true;
+								}
+							})[0]?.LastName
+						}`}</h5>
+					</div>
+					<div className="row mb-1">
+						<div className="col-2">
+							<SubmitFormButton label={'Zapisz'} />
 						</div>
-						<div className="row">
-							<div className="col-12">
-								<DayScheduldeComponenet
-									day="Poniedziałek"
-									value={schedulde.Monday}
-									name="Monday"
-									onChange={handleChange}
-									onCheckBoxChange={handleCheckBoxChange}
-									isFree={freeSchedulde.Monday}
-									error={error.Monday}
-								/>
-							</div>
-
-							<div className="col-12">
-								<DayScheduldeComponenet
-									day="Wtorek"
-									value={schedulde.Tuesday}
-									name="Tuesday"
-									onChange={handleChange}
-									onCheckBoxChange={handleCheckBoxChange}
-									isFree={freeSchedulde.Tuesday}
-									error={error.Tuesday}
-								/>
-							</div>
-							<div className="col-12">
-								<DayScheduldeComponenet
-									day="Środa"
-									value={schedulde.Wednesday}
-									name="Wednesday"
-									onChange={handleChange}
-									onCheckBoxChange={handleCheckBoxChange}
-									isFree={freeSchedulde.Wednesday}
-									error={error.Wednesday}
-								/>
-							</div>
-							<div className="col-12">
-								<DayScheduldeComponenet
-									day="Czwartek"
-									value={schedulde.Thursday}
-									name="Thursday"
-									onChange={handleChange}
-									onCheckBoxChange={handleCheckBoxChange}
-									isFree={freeSchedulde.Thursday}
-									error={error.Thursday}
-								/>
-							</div>
-							<div className="col-12">
-								<DayScheduldeComponenet
-									day="Piątek"
-									value={schedulde.Friday}
-									name="Friday"
-									onChange={handleChange}
-									onCheckBoxChange={handleCheckBoxChange}
-									isFree={freeSchedulde.Friday}
-									error={error.Friday}
-								/>
-							</div>
-							<div className="col-12">
-								<DayScheduldeComponenet
-									day="Sobota"
-									value={schedulde.Saturday}
-									name="Saturday"
-									onChange={handleChange}
-									onCheckBoxChange={handleCheckBoxChange}
-									isFree={freeSchedulde.Saturday}
-									error={error.Saturday}
-								/>
-							</div>
-							<div className="col-12">
-								<DayScheduldeComponenet
-									day="Niedziela"
-									value={schedulde.Sunday}
-									name="Sunday"
-									onChange={handleChange}
-									onCheckBoxChange={handleCheckBoxChange}
-									isFree={freeSchedulde.Sunday}
-									error={error.Sunday}
-								/>
-							</div>
-							<div className="col-12">
-								<SubmitFormButton label="Zapisz" />
-							</div>
-						</div>
+					</div>
+					<div className="row col-12">
+						<table className="table table-bordered">
+							<thead>
+								<tr>
+									<th>Weterynarz</th>
+									<th>Poniedziałek</th>
+									<th>Wtorek</th>
+									<th>Środa</th>
+									<th>Czwartek</th>
+									<th>Piątek</th>
+									<th>Sobota</th>
+									<th>Niedziela</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr key={vetId} className="">
+									<td>{`Edytowany`}</td>
+									<td>
+										<NewScheduldeDayEditComponent
+											value={schedulde.Monday}
+											onChange={handleChange}
+											name={'Monday'}
+											error={error.Monday}
+										/>
+									</td>
+									<td>
+										<NewScheduldeDayEditComponent
+											value={schedulde.Tuesday}
+											onChange={handleChange}
+											name={'Tuesday'}
+											error={error.Tuesday}
+										/>
+									</td>
+									<td>
+										<NewScheduldeDayEditComponent
+											value={schedulde.Wednesday}
+											onChange={handleChange}
+											name={'Wednesday'}
+											error={error.Wednesday}
+										/>
+									</td>
+									<td>
+										<NewScheduldeDayEditComponent
+											value={schedulde.Thursday}
+											onChange={handleChange}
+											name={'Thursday'}
+											error={error.Thursday}
+										/>
+									</td>
+									<td>
+										<NewScheduldeDayEditComponent
+											value={schedulde.Friday}
+											onChange={handleChange}
+											name={'Friday'}
+											error={error.Friday}
+										/>
+									</td>
+									<td>
+										<NewScheduldeDayEditComponent
+											value={schedulde.Saturday}
+											onChange={handleChange}
+											name={'Saturday'}
+											error={error.Saturday}
+										/>
+									</td>
+									<td>
+										<NewScheduldeDayEditComponent
+											value={schedulde.Sunday}
+											onChange={handleChange}
+											name={'Sunday'}
+											error={error.Sunday}
+										/>
+									</td>
+								</tr>
+								{fullSchedulde.map((vetSchdulde) => {
+									if (vetId != vetSchdulde.VetId) {
+										return (
+											<tr key={vetSchdulde.VetId} className="">
+												<td>{`${vetSchdulde.Name} ${vetSchdulde.LastName}`}</td>
+												<td>{vetSchdulde.Monday}</td>
+												<td>{vetSchdulde.Tuesday}</td>
+												<td>{vetSchdulde.Wednesday}</td>
+												<td>{vetSchdulde.Thursday}</td>
+												<td>{vetSchdulde.Friday}</td>
+												<td>{vetSchdulde.Saturday}</td>
+												<td>{vetSchdulde.Sunday}</td>
+											</tr>
+										);
+									}
+								})}
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

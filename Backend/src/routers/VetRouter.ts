@@ -15,7 +15,9 @@ class VetRouter{
         router.get('/schedulde/availableHours', isAuthorizated,vetController.getAvailableHours);
         router.get('/:VetId/schedulde', isAuthorizated,vetController.getVetSchedulde);
         router.get('/:VetId/daysOfWeek', isAuthorizated,vetController.getVetDaysOfWeek);
+        router.get('/schedulde/full',isAuthorizated, vetController.getFullSchedulde)
         router.put('/schedulde',  isAuthorizated,vetController.updateSchedulde);
+        
         router.put('/', isAuthorizated,vetController.updateVet);
         this.router=router;
     }

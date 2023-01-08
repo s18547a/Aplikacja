@@ -28,11 +28,10 @@ export interface IAnimalForm {
 }
 
 function AnimalRegister(): ReactElement {
-	const [animalTypes, setAnimalTypes] = useState<AnimalType[]>([]);
 	const location = useLocation();
 
 	const [editForm, setEditForm] = useState(false);
-	const [ownerList, setOwnerList] = useState([]);
+
 	const [animalId, setAnimalId] = useState('');
 
 	const [animal, setAnimal] = useState<IAnimalForm>({
@@ -75,53 +74,6 @@ function AnimalRegister(): ReactElement {
 		}
 		let response;
 		let promise;
-
-		promise = getAnimalTypes();
-		if (promise) {
-			promise
-				.then((data) => {
-					response = data;
-
-					return response.json();
-				})
-				.then(
-					(data) => {
-						if (response.status == 500) {
-							setServerError(true);
-						}
-						if (response.status == 200) {
-							setAnimalTypes(data);
-						}
-					},
-					(error) => {
-						console.log(error);
-					}
-				);
-		}
-
-		if (isVet() || isManager()) {
-			promise = getOwners();
-			if (promise) {
-				promise
-					.then((data) => {
-						response = data;
-						return response.json();
-					})
-					.then(
-						(data) => {
-							if (response.status == 200) {
-								setOwnerList(data);
-							}
-							if (response.status == 500) {
-								setServerError(true);
-							}
-						},
-						(error) => {
-							setServerError(true);
-						}
-					);
-			}
-		}
 
 		const state = location.state as { AnimalId: string };
 		if (state != null) {
@@ -202,21 +154,6 @@ function AnimalRegister(): ReactElement {
 					isValid = false;
 				}
 			}
-			if (name == 'AnimalTypeId') {
-				const ft = animalTypes.filter((type) => {
-					if (type.AnimalTypeId == value) {
-						return true;
-					}
-				});
-				console.log(ft);
-				if (ft.length != 1) {
-					setError((prevErrors) => ({
-						...prevErrors,
-						[name]: 'Niepoprawnie wypełnione pole',
-					}));
-					isValid = false;
-				}
-			}
 		}
 		return isValid;
 	}
@@ -275,6 +212,25 @@ function AnimalRegister(): ReactElement {
 		}));
 	}
 
+	function handleOwnerChange(e): void {
+		const value = e.value;
+		setAnimal((prev) => ({
+			...prev,
+			OwnerId: value,
+		}));
+	}
+
+	function handleAnimalTypeChange(e): void {
+		console.log(e);
+		const value = e.value;
+		setAnimal((prev) => ({
+			...prev,
+			AnimalTypeId: value,
+		}));
+	}
+	function setServerErrorFuntion() {
+		setServerError(true);
+	}
 	return (
 		<form className="container " onSubmit={handleSubmit} noValidate style={{}}>
 			<ServerErrorInfoComponenet serverError={serverError} />
@@ -310,13 +266,14 @@ function AnimalRegister(): ReactElement {
 
 				<div className="col-lg-4">
 					<AnimalMainInfo
-						ownerList={ownerList}
 						handleChange={handleChange}
 						error={error}
 						animal={animal}
-						animalTypes={animalTypes}
 						editForm={editForm}
 						handleDateChange={handleDateChange}
+						handleOwnerChange={handleOwnerChange}
+						setServerError={setServerErrorFuntion}
+						handleAnimalTypeChange={handleAnimalTypeChange}
 					/>
 				</div>
 			</div>

@@ -22,8 +22,9 @@ function AnimalProfile({
 				<div className="col-lg-4 col-12">
 					<div className=" card card-body border-0 shadow">
 						<div className="row justify-content-center">
-							<div className="col-12 ms-4">
+							<div className="col-12 ">
 								<img
+									className=" card-img-top"
 									height="400px"
 									width="350px"
 									src={

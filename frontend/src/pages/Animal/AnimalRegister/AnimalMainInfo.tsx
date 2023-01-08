@@ -1,27 +1,28 @@
-import { ReactElement, useEffect } from 'react';
-import Animal, { Sex } from '../../../classes/Animal';
+import { ReactElement, useEffect, useState } from 'react';
 import AnimalType from '../../../classes/AnimalType';
-import Owner from '../../../classes/Owner';
+
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormCheck from '../../../components/Form/FormCheck';
 import FormDateReactDiv from '../../../components/Form/FormDateRectDiv';
 import FormDiv from '../../../components/Form/FormDiv';
-import FormSelect from '../../../components/Form/FormSelect';
+
+import FormSelectReact from '../../../components/Form/FromSelectReact';
+import SelectOwnerComponent from '../../../components/Form/SelectOwnerComponent';
 import { isOwner } from '../../../utils/userType';
 import { IAnimalForm } from './AnimalForm';
-import FormAnimalTypeSelect from './FormAnimalTypeSelect';
+import AnimalTypeSelect from './AnimalTypeSelect';
 
 function AnimalMainInfo({
-	ownerList,
 	handleChange,
 	error,
 	animal,
 
-	animalTypes,
 	editForm,
 	handleDateChange,
+	handleOwnerChange,
+	setServerError,
+	handleAnimalTypeChange,
 }: {
-	ownerList: Owner[];
 	handleChange: (any) => void;
 	error: {
 		OwnerId: string;
@@ -31,9 +32,12 @@ function AnimalMainInfo({
 		Sex: string;
 	};
 	animal: IAnimalForm;
-	animalTypes: AnimalType[];
+
 	editForm: boolean;
 	handleDateChange: (any) => void;
+	handleOwnerChange: (any) => void;
+	setServerError: () => void;
+	handleAnimalTypeChange: (any) => void;
 }): ReactElement {
 	function handleChangeFuntion(e): void {
 		handleChange(e);
@@ -41,23 +45,17 @@ function AnimalMainInfo({
 	function handleDateChangeFunction(e): void {
 		handleDateChange(e);
 	}
-
-	useEffect(() => {}, []);
+	const [animalTypeList, setAnimalTypeList] =
+		useState<{ value: string; label: string }[]>();
 
 	const ownerField = (
-		<FormSelect
-			label="Właściciel"
-			name="OwnerId"
-			onChange={handleChangeFuntion}
-			array={ownerList}
-			id={'OwnerId'}
-			elementLabel={'Email'}
+		<SelectOwnerComponent
+			setServerError={setServerError}
+			onChange={handleOwnerChange}
 			error={error.OwnerId}
-			arrayIsObjectList={true}
-			selectedValue={
-				isOwner() ? animal.OwnerId : editForm ? animal.OwnerId : ''
-			}
-			dataListOptions="Owners"
+			selectedValue={animal.OwnerId}
+			editForm={editForm}
+			realised={false}
 		/>
 	);
 
@@ -87,14 +85,12 @@ function AnimalMainInfo({
 				</div>
 
 				<div className="col-12">
-					<FormAnimalTypeSelect
-						label="Rodzaj"
-						onChange={handleChangeFuntion}
-						animalTypes={animalTypes}
+					<AnimalTypeSelect
+						setServerError={setServerError}
 						error={error.AnimalTypeId}
-						dataListOptions="Animals"
+						editForm={editForm}
+						handleAnimalTypeChange={handleAnimalTypeChange}
 						selectedValue={animal.AnimalTypeId}
-						disabled={editForm}
 					/>
 				</div>
 				<div className="col-12">{isOwner() ? null : ownerField}</div>

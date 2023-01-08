@@ -49,7 +49,7 @@ function VisitVaccineForm({
 			<div className="form-group">
 				{vaccineList.map((vaccineType) => {
 					return (
-						<div className="form-check">
+						<div className="form-check" id={vaccineType.VaccineType}>
 							<input
 								className="form-check-input"
 								onChange={onChange}

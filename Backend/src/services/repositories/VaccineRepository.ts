@@ -61,7 +61,7 @@ class VaccineRepository extends Repository{
     
             const pool =await sql.connect(this.databaseConfiguration);
     
-            const results =await pool.request().input('AnimalId',sql.VarChar,AnimalId).query('Select * From AnimalVaccine Where AnimalId=@AnimalId');
+            const results =await pool.request().input('AnimalId',sql.VarChar,AnimalId).query('Select * From AnimalVaccine Where AnimalId=@AnimalId Order By Date Desc');
     
             const vaccineRecordset=results.recordset;
             if(vaccineRecordset.length==0){

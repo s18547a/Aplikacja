@@ -1,4 +1,5 @@
 
+import e from 'express';
 import { GetScheduldeParamters, GetVetParameters } from '../common/Types';
 import Schedulde from '../models/classes/Schedulde';
 import VetRepository from '../services/repositories/VetRepository';
@@ -140,6 +141,15 @@ class VetController{
             return res.status(500).json({});
         } else return res.status(201).json({});
     };
+
+    getFullSchedulde=async(req,res)=>{
+        const results =await this.vetScheduldeRepository.getFullSchedulde();
+        if (results instanceof Error){
+            return res.status(500).json({})
+        }
+        else return res.status(200).json(results);
+    }
+   
 
 }
 

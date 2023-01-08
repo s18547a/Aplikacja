@@ -215,7 +215,7 @@ class AnimalRepostiory extends Repository{
         const Sex: number = Animal.Sex;
     
         const ProfileImage: string | null = Animal.ProfileImage;
-    
+        console.log(Animal);
         try {
            
             const pool = await sql.connect(this.databaseConfiguration);
@@ -232,7 +232,7 @@ class AnimalRepostiory extends Repository{
                 .input('ProfileImage', sql.VarChar, ProfileImage)
     
                 .query(
-                    'Update Animal set Name=@Name, BirthDate = @BirthDate,Sex=@Sex, ProfileImage=@ProfileImage where AnimalId=@AnimalId'
+                    'Update Animal set Name=@Name, BirthDate = @BirthDate,Sex=@Sex,AnimalTypeId=@AnimalTypeId,OwnerId=@OwnerId, ProfileImage=@ProfileImage where AnimalId=@AnimalId'
                 );
             console.log(animalRegisterPool);
        

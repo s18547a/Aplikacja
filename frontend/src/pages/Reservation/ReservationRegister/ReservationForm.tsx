@@ -154,11 +154,11 @@ function ReservationForm(): ReactElement {
 	}
 
 	async function handleOwnerChange(e): Promise<void> {
-		const { name, value } = e.target;
-
+		//const { name, value } = e.target;
+		const value = e.value;
 		setReservation((prev) => ({
 			...prev,
-			[name]: value,
+			OwnerId: value,
 		}));
 	}
 
@@ -245,6 +245,7 @@ function ReservationForm(): ReactElement {
 									setServerError={setServerErrorChild}
 									selectedValue={reservation.OwnerId}
 									editForm={false}
+									realised={false}
 								/>
 							) : null}
 						</div>

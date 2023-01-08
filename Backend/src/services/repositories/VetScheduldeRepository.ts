@@ -1,6 +1,7 @@
 
 
 
+import { config } from 'process';
 import { GetScheduldeParamters } from '../../common/Types';
 import { getDayOfAWeekName } from '../../utils/dateHelper';
 import Repository from './Repository';
@@ -22,7 +23,7 @@ class VetScheduldeRepository extends Repository{
     getSchedulde = async (VetId: string) => {
         try {
             const pool = await sql.connect(this.databaseConfiguration);
-  
+            
             const scheduldePool = await pool
                 .request()
                 .input('VetId', sql.VarChar, VetId)
@@ -178,6 +179,35 @@ class VetScheduldeRepository extends Repository{
             return error;
         }
     };
+
+     
+    getFullSchedulde = async () => {
+        try {
+            const pool = await sql.connect(this.databaseConfiguration);
+            
+            const scheduldePool = await pool
+                .request()
+               
+                .query(
+                    'Select v.VetId, v.Name, v.LastName, Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday From Schedulde s join Vet v on s.VetId=v.VetId'
+                );
+  
+            const scheduldeRecordset = scheduldePool.recordset;
+  
+            let isEmpty: boolean;
+  
+            scheduldeRecordset[0] == undefined ? (isEmpty = true) : (isEmpty = false);
+            if (isEmpty) {
+                return null;
+            } else return scheduldeRecordset;
+        } catch (error) {
+            console.log(error);
+  
+            return error;
+        }
+    };
+
+   
 
 }
 export default VetScheduldeRepository;

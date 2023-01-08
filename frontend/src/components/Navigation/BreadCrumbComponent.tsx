@@ -13,11 +13,15 @@ function BreadCrumbComponent(props: {
 			<ol className="breadcrumb">
 				{props.elements.map((element) => {
 					return element.active ? (
-						<li className={' breadcrumb-item active'} aria-current="page">
+						<li
+							key={element.label}
+							className={' breadcrumb-item active'}
+							aria-current="page"
+						>
 							<a>{element.label}</a>
 						</li>
 					) : (
-						<li className={' breadcrumb-item'}>
+						<li key={element.label} className={' breadcrumb-item'}>
 							<a href={element.link}>{element.label}</a>
 						</li>
 					);

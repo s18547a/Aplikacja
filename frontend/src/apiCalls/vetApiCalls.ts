@@ -97,14 +97,18 @@ export async function getVetDaysOfWeek(VetId) {
 
 export async function updateSchedulde(updatedSchedulde) {
   const scheduldeStr = JSON.stringify(updatedSchedulde);
-  const optios = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: scheduldeStr,
-  };
+  const optios = createHTTPutOptions(isManager(),scheduldeStr);
+  
   const promise = await fetch(baseUrlSchedulde, optios);
 
   return promise;
+}
+
+export async function  getFullSchedulde() {
+  
+  const url=`${baseUrlSchedulde}/full`;
+  const options=createHttpGetOptions(isManager());
+  const promise = await fetch(url,options)
+  return promise;
+  
 }

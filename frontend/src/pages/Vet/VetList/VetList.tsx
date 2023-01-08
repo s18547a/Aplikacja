@@ -5,6 +5,7 @@ import Vet from '../../../classes/Vet';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
+import { spaceContact } from '../../../utils/contactHelper';
 
 function VetList(): ReactElement {
 	const [vetList, setVetList] = useState<Vet[]>([]);
@@ -60,6 +61,8 @@ function VetList(): ReactElement {
 							<tr>
 								<th>Weterynarz</th>
 								<th>Zatrudniony od</th>
+								<th>Telefon</th>
+								<th>Email</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -73,6 +76,8 @@ function VetList(): ReactElement {
 									>
 										<td>{vet.Name + ' ' + vet.LastName}</td>
 										<td>{vet.HireDate}</td>
+										<td>{spaceContact(vet.Contact)}</td>
+										<td>{vet.Email}</td>
 									</tr>
 								);
 							})}

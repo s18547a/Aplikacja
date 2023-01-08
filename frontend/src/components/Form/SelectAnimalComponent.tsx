@@ -69,6 +69,7 @@ function SelectAnimalComponent({
 				{animalList.map((animal) => {
 					return (
 						<div
+							key={animal.AnimalId}
 							className={
 								error == ''
 									? 'form-check mt-3 form-control d-flex justify-content-between'

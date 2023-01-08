@@ -178,6 +178,10 @@ function SurgeryList(): ReactElement {
 								return (
 									<tr
 										onClick={() => {
+											setMessage(() => ({
+												message: '',
+												id: '',
+											}));
 											navigate(`/surgeries/${surgery.SurgeryId}`);
 										}}
 										className={surgery.Report ? '' : ' table-danger'}

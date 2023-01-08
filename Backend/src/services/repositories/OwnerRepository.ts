@@ -24,14 +24,15 @@ class OwnerRepository extends Repository{
             const result = await pool
                 .request().input('OwnerId',sql.VarChar,OwnerId)
                 .query(
-                    'Select o.OwnerId,Name,LastName,Contact,Email '+ 
+                    'Select o.OwnerId,Name,LastName,Contact,u.Email '+ 
                     'From Owner o inner join [User] u on o.OwnerId=u.OwnerId where o.OwnerId=@OwnerId'
                 );
 
             const ownerRecord=result.recordset[0];
+           
             let isEmpty: boolean;
-
-            ownerRecord[0] == undefined ? (isEmpty = true) : (isEmpty = false);
+                
+            ownerRecord == undefined ? (isEmpty = true) : (isEmpty = false);
             if (isEmpty) {
                
                 return null;

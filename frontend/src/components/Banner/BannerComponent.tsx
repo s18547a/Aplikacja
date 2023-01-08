@@ -58,33 +58,27 @@ function BannerComponent(props) {
 					}}
 				>
 					<div
-						className="row justify-content-between"
+						className="row justify-content-between "
 						style={{ width: '100%' }}
 					>
-						<div className="col-lg-6 ">
+						<div className="col-6 ">
 							<div className="row">
 								<div className="col-2">
 									<img height="75px" width="100px" src={getLogo()} />
 								</div>
 							</div>
 						</div>
-						<div className="col-lg-6   row justify-content-end">
-							<div className="col-auto">
+						<div className="col-6   row justify-content-end">
+							<div className=" col-auto ">
 								<img
 									height="75px"
 									width="75px"
-									className="  collapsed"
 									src={
 										getCurrentUser().ProfileImage == null
 											? getDefalutProfileImage()
 											: getCurrentUser().ProfileImage
 									}
 									style={{ borderRadius: 90 }}
-									role="button"
-									id="bannerDropdown"
-									data-bs-toggle="collapse"
-									data-bs-target="#dropdownBanner"
-									aria-expanded="false"
 								/>
 							</div>
 

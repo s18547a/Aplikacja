@@ -22,7 +22,7 @@ function FormCheck(props): ReactElement {
 					<div className="row">
 						{props.elements.map((element) => {
 							return (
-								<div className="col-12">
+								<div className="col-12" key={element.id}>
 									<div className="form-check ">
 										<input
 											name={props.name}

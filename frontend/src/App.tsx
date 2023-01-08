@@ -35,6 +35,7 @@ import SurgeryProfile from './pages/Surgery/SurgeryProfile/SurgeryProfile';
 import NotFoundPage from './pages/General/NotFoundPage';
 
 import BannerComponent from './components/Banner/BannerComponent';
+import FooterComponenet from './components/Footers/FooterComponent';
 const bootstrap = require('bootstrap');
 
 function App() {
@@ -89,6 +90,7 @@ function App() {
 	return (
 		<div style={style}>
 			<header
+				className=" "
 				style={{
 					width: '100%',
 					height: '8%',
@@ -99,10 +101,10 @@ function App() {
 				<BannerComponent handleLogout={handleLogout} />
 			</header>
 
-			<div className="row" style={{ height: '92%', width: '100%' }}>
+			<div className="row" style={{ height: '90%', width: '100%' }}>
 				{isAuthenticated() && (
 					<div
-						className="col-lg-1 col-12"
+						className="col-lg-1 col-12 "
 						style={{
 							position: 'fixed',
 						}}
@@ -113,7 +115,7 @@ function App() {
 				<div className={isAuthenticated() ? 'col-lg-11 col-10' : 'col-12'}>
 					<main
 						className={currentLocation.includes('/home') ? '' : 'pt-2 offset-1'}
-						/*</div>style={{margin:"100px"}}*/ style={{
+						style={{
 							height: '100%',
 							width: '100%',
 						}}
@@ -203,6 +205,8 @@ function App() {
 					</main>
 				</div>
 			</div>
+
+			<FooterComponenet />
 		</div>
 	);
 }

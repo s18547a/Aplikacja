@@ -18,7 +18,11 @@ function VisitActivitiesForm({
 			<div className="" key={AnimalId}>
 				{medicalActivities.map((mA) => {
 					return (
-						<div className="form-check">
+						<div
+							className="form-check"
+							id={mA.MedicalActivityId}
+							key={mA.MedicalActivityId}
+						>
 							<input
 								className="form-check-input"
 								onChange={changeActivity}

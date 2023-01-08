@@ -63,7 +63,7 @@ function VetSchedulde({
 	}, []);
 
 	return (
-		<div className="card card-body shadow ">
+		<div className="contianer card card-body shadow ">
 			<div className="card-title">
 				<div className="row">
 					<div className="col-12">

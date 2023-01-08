@@ -35,7 +35,11 @@ function NavElement(props: {
 	return (
 		<div
 			className="border"
-			style={{ borderRadius: 10, backgroundColor: 'white' }}
+			style={{
+				borderTopRightRadius: 10,
+				borderBottomRightRadius: 10,
+				backgroundColor: 'white',
+			}}
 		>
 			<li
 				className=" "
@@ -57,7 +61,7 @@ function NavElement(props: {
 			<ul id={props.id} className={'collapse'} data-parent="#accordion">
 				{props.elements.map((element) => {
 					return (
-						<li className="d-flex justify-content-start  ">
+						<li className="d-flex justify-content-start  " key={element.label}>
 							<div className="d-flex align-items-center">{element.icon}</div>
 							<div className="">
 								<a

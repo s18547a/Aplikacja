@@ -32,7 +32,7 @@ function FormDateReactDiv(props): ReactElement {
 
 				<div className="col-12">
 					<div className="row">
-						<div className="col-12">
+						<div className="col-12" style={{ zIndex: 3 }}>
 							<DatePicker
 								className={
 									props.error == ''

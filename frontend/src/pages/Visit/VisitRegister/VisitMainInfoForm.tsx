@@ -12,6 +12,7 @@ function VisitMainInfoForm({
 	error,
 	visit,
 	editForm,
+	realised,
 }: {
 	onChange: (any) => void;
 	onChangeOwner: (any) => void;
@@ -19,6 +20,7 @@ function VisitMainInfoForm({
 	error: IVisitError;
 	visit: IVisitForm;
 	editForm: boolean;
+	realised: boolean;
 }): ReactElement {
 	return (
 		<div className="card card-body shadow">
@@ -33,6 +35,7 @@ function VisitMainInfoForm({
 					selectedValue={visit.OwnerId}
 					editForm={editForm}
 					setServerError={setServerError}
+					realised={realised}
 				/>
 			</div>
 			<div className="row">

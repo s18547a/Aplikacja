@@ -8,13 +8,17 @@ import {
 
 function NavBtn(props: { link: string; label: string }): ReactElement {
 	const location = useLocation().pathname;
-	console.log(location);
+
 	const [style, setStyle] = useState({});
 
 	return (
 		<div
 			className="border"
-			style={{ backgroundColor: 'white', borderRadius: 10 }}
+			style={{
+				backgroundColor: 'white',
+				borderTopRightRadius: 10,
+				borderBottomRightRadius: 10,
+			}}
 		>
 			<div
 				style={style}
