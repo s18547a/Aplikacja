@@ -12,7 +12,11 @@ interface IOwnerForm {
 	Email: string;
 	Password: string;
 }
-function OwnerForm({ changeTab }: { changeTab: (any) => void }): ReactElement {
+function OwnerForm({
+	changeTab,
+}: {
+	changeTab: (any) => void | null;
+}): ReactElement {
 	const [owner, setOwner] = useState<IOwnerForm>({
 		Name: '',
 		LastName: '',

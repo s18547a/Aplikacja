@@ -1,9 +1,7 @@
 
-
-
-import { config } from 'process';
 import { GetScheduldeParamters } from '../../common/Types';
 import { getDayOfAWeekName } from '../../utils/dateHelper';
+import { createVetVisitHours } from '../../utils/hours';
 import Repository from './Repository';
 
 import ScheduldeHelperRepository from './ScheduldeHelperRepository';
@@ -206,6 +204,36 @@ class VetScheduldeRepository extends Repository{
             return error;
         }
     };
+
+    getTodaySchedulde=async(parameters:{date:string,vetId:string})=>{
+        try {
+           
+            const dayName:string=getDayOfAWeekName(parameters.date);
+
+            console.log(dayName)
+            const pool =await sql.connect(this.databaseConfiguration);
+
+            const results=await pool.request()
+            .input('VetId',sql.VarChar,parameters.vetId)
+            .query(
+                ` Select ${dayName} From Schedulde Where VetId=@VetId`
+            );
+            console.log(results)
+            if(results.recordset[0][dayName]==null){
+                return null;
+            }
+           
+            const receptionHours:string[]=createVetVisitHours(results.recordset[0][dayName]);
+
+            return receptionHours;
+
+            
+        } catch (error) {
+
+            console.log(error);
+            return error
+        }
+    }
 
    
 

@@ -76,6 +76,12 @@ class SurgeryRepository extends Repository{
     
                 surgeryRecordset=surgeryPool.recordset;
     
+            } else if(parameters.VetId&&!parameters.Date){
+                const surgeryPool= await pool.request().input('LeadVetId',sql.VarChar,parameters.VetId).input('Date',sql.Date,parameters.Date)
+                    .query('Select SurgeryId,Date,SurgeryType,LeadVetId,Description,s.AnimalId,a.OwnerId,StartTime From Surgery s join Animal a on s.AnimalId=a.AnimalId where  s.LeadVetId=@LeadVetId order by Date');
+    
+                surgeryRecordset=surgeryPool.recordset;
+
             }
         
             else {

@@ -30,6 +30,15 @@ export async function getSurgeriesByOwner(OwnerId: string) {
 	return promise;
 }
 
+export async function getSurgeriesByVet(VetId:string) {
+	const ulr = `${baseUrl}?VetId=${VetId}`;
+	const options=createHttpGetOptions(isAuthenticated())
+	const promise = await fetch(ulr,options);
+
+	return promise;
+
+}
+
 export async function searchSurgeryList(paramters: SearchListParamter) {
 	const queryURL = paramters.createURLString();
 	console.log(queryURL);

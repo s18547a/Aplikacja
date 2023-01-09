@@ -16,7 +16,8 @@ import { isManager, isOwner, isVet } from '../../../utils/userType';
 import SelectOwnerComponent from '../../../components/Form/SelectOwnerComponent';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
-import ReservationVetChoice from './ReservationVetChoice';
+import ReservationVetChoice from '../../../components/Form/VetChoiceComponent';
+import VetChoiceComponent from '../../../components/Form/VetChoiceComponent';
 
 export interface IReservationForm {
 	Date: string | undefined;
@@ -112,6 +113,11 @@ function ReservationForm(): ReactElement {
 			VetId: value,
 			Hour: '',
 		}));
+		setError((prev) => ({
+			...prev,
+
+			Hour: '',
+		}));
 		setHours([]);
 		let response;
 		let promise;
@@ -133,7 +139,7 @@ function ReservationForm(): ReactElement {
 						if (response.status == 404) {
 							setError((prev) => ({
 								...prev,
-								Hour: 'Błąd',
+								Hour: 'Brak wolnych terminów',
 							}));
 						}
 					},
@@ -263,39 +269,37 @@ function ReservationForm(): ReactElement {
 						</div>
 
 						<div className="col-12">
-							{reservation.Date ? (
-								<ReservationVetChoice
-									reservation={reservation}
-									vets={vets}
-									error={error.VetId}
-									handleVetChange={handleVetChange}
-								/>
-							) : null}
-						</div>
-						<div className="col-12">
-							{reservation.VetId ? (
-								<div className="">
-									<div className="col-12">
-										<FormSelectLimit
-											label="Godzina"
-											name="hour"
-											onChange={handleHourChange}
-											array={hours}
-											id={'element'}
-											elementLabel={'element'}
-											error={error.Hour}
-											arrayIsObjectList={false}
-											selectedValue={''}
-											selected={false}
-										/>
-									</div>
-								</div>
-							) : null}
+							<div className="col-12">
+								{reservation.Date ? (
+									<VetChoiceComponent
+										selected={reservation.VetId}
+										vets={vets}
+										error={error.VetId}
+										handleVetChange={handleVetChange}
+									/>
+								) : null}
+							</div>
 						</div>
 
+						{reservation.VetId ? (
+							<div className="col-12 mt-3">
+								<FormSelectLimit
+									label="Godzina"
+									name="hour"
+									onChange={handleHourChange}
+									array={hours}
+									id={'element'}
+									elementLabel={'element'}
+									error={error.Hour}
+									arrayIsObjectList={false}
+									selectedValue={''}
+									selected={false}
+								/>
+							</div>
+						) : null}
 						{reservation.Hour && (
 							<div className="">
-								<SubmitFormButton label={'Zarezerwuj'} />
+								<SubmitFormButton label={'Zapisz'} />
 							</div>
 						)}
 					</div>

@@ -46,7 +46,7 @@ function OwnerProfile(): ReactElement {
 	}, []);
 
 	return (
-		<div className="row justify-content-center">
+		<div className="row justify-content-center mt-5">
 			<div className="col-3">
 				<div className="container card card-body shadow">
 					<div className="row">

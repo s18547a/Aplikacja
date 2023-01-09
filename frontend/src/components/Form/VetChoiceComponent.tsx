@@ -1,69 +1,75 @@
 import { ReactElement } from 'react';
+
 import Vet from '../../classes/Vet';
 import { spaceContact } from '../../utils/contactHelper';
 import { getDefalutProfileImage } from '../../utils/imageHelper';
 
 function VetChoiceComponent({
-	label,
+	handleVetChange,
 	vets,
 	selected,
-	onChange,
+	error,
 }: {
-	label: string;
+	handleVetChange: (any) => void;
 	vets: Vet[];
-	selected: string;
-	onChange: (any) => void;
+	selected: string | undefined;
+	error: string;
 }): ReactElement {
 	function handleVetChangeFunction(e) {
-		e.preventDefault();
-		onChange(e);
+		handleVetChange(e);
 	}
 
 	return (
-		<div className="form-group">
-			<div className="form-label">{label}</div>
-			<div className="list-group">
-				<div className="row ">
+		<div className="row">
+			<div className=" form-group">
+				<div className=" form-label">Weterynarz</div>
+
+				<div className=" row">
 					{vets.map((vet) => {
 						return (
 							<div className="col-6">
-								<button
-									name={'VetId'}
-									value={vet.VetId}
-									className={
-										selected == vet.VetId
-											? '  list-group-item active stretched-link bg-primary  m-2 border-1'
-											: ' list-group-item stretched-link  m-2 border-1'
-									}
+								<div
+									className={selected == vet.VetId ? ' card ' : ' card '}
 									onClick={handleVetChangeFunction}
 								>
-									<div className="row p-3">
-										<div className="col-12">
-											<img
-												width={'100px'}
-												height={'100px'}
-												src={
-													vet.ProfileImage == null
-														? getDefalutProfileImage()
-														: vet.ProfileImage
-												}
-											/>
-										</div>
-									</div>
-									<div className="row">
-										<div className="col-12 ">
-											<div className="d-flex flex-column">
-												<div className=" p-3">
-													{vet.Name + ' ' + vet.LastName}
-												</div>
+									<img
+										height={'150px'}
+										src={
+											vet.ProfileImage == null
+												? getDefalutProfileImage()
+												: vet.ProfileImage
+										}
+										className=" card-img-top"
+									/>
 
-												<div className="">{`tel. ${spaceContact(
-													vet.Contact
-												)}`}</div>
-											</div>
+									<div className=" card-body">
+										<div className=" card-title d-flex">
+											<h6 className="">{vet.Name + ' ' + vet.LastName}</h6>
 										</div>
 									</div>
-								</button>
+									<ul className=" list-group list-group-flush">
+										<li className="list-group-item">{`tel. ${spaceContact(
+											vet.Contact
+										)}`}</li>
+										<li className="list-group-item ">
+											<div className="row">
+												{vet.VetId !== selected && (
+													<button
+														name={'VetId'}
+														value={vet.VetId}
+														onClick={handleVetChangeFunction}
+														className=" btn btn-primary"
+													>
+														Wybierz
+													</button>
+												)}
+												{vet.VetId === selected && (
+													<button className=" btn btn-success">Wybrano</button>
+												)}
+											</div>
+										</li>
+									</ul>
+								</div>
 							</div>
 						);
 					})}
@@ -72,4 +78,5 @@ function VetChoiceComponent({
 		</div>
 	);
 }
+
 export default VetChoiceComponent;

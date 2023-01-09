@@ -60,9 +60,6 @@ function SideBar(): ReactElement | null {
 	const ownerNav = (
 		<div className="row">
 			<div className="col-12">
-				<UserProfileDropdown />
-			</div>
-			<div className="col-12">
 				<AnimalDropdown />
 			</div>
 			<div className="col-12">

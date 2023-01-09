@@ -17,6 +17,7 @@ import { isVet, isManager, isOwner } from '../../../utils/userType';
 import SearchInput from '../../../components/List/SearchImput';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 import VisitSearch from '../../../components/List/VisitSearch';
+import { changePageTitle } from '../../../utils/otherHelper';
 
 function VisitList(): ReactElement {
 	const [visitList, setVisitList] = useState<Visit[]>([]);
@@ -46,6 +47,7 @@ function VisitList(): ReactElement {
 	};
 
 	const loadVisits = async (): Promise<any> => {
+		changePageTitle('Wizyty');
 		let promise;
 		let response;
 		const curretUserId = getCurrentUser().userTypeId;

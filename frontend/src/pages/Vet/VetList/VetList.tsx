@@ -6,6 +6,7 @@ import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 import { spaceContact } from '../../../utils/contactHelper';
+import { changePageTitle } from '../../../utils/otherHelper';
 
 function VetList(): ReactElement {
 	const [vetList, setVetList] = useState<Vet[]>([]);
@@ -14,6 +15,7 @@ function VetList(): ReactElement {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		changePageTitle('Weterynarze');
 		let response;
 		let promise;
 

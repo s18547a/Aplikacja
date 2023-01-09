@@ -15,6 +15,8 @@ import { isOwner, isVet, isManager } from '../../../utils/userType';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 import AnimalSearch from './AnimalSearch';
+import OwnerProfile from '../../Owner/OwnerProfile/OwnerProfile';
+import { changePageTitle } from '../../../utils/otherHelper';
 
 function AnimalList(): ReactElement {
 	const [animals, setAnimalList] = useState<Animal[]>([]);
@@ -44,6 +46,7 @@ function AnimalList(): ReactElement {
 	};
 
 	useEffect(() => {
+		changePageTitle('Zwierzęta');
 		const loadAnimals = async () => {
 			let promise;
 			let response;
@@ -137,8 +140,10 @@ function AnimalList(): ReactElement {
 					/>
 				</div>
 			</div>
+
 			<RegiserSuccessInfo newId={newId} message={'Zarejestrowane zwierzę: '} />
 			{isVet() ? <AnimalSearch onSearch={handleSearch} /> : null}
+
 			<div className="card card-body mt-4 shadow">
 				<h5>Zwierzęta</h5>
 				<div>

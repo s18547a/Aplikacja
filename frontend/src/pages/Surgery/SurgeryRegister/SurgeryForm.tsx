@@ -174,7 +174,7 @@ function SurgeryForm(): ReactElement {
 	}
 	const [availableDayList, setavailableDaysList] = useState<String[]>([]);
 	const [availableDayListError, setavailableDaysListError] = useState('');
-	function onChangeVet(e) {
+	function onChangeVet(e): void {
 		const { name, value } = e.target;
 		setError((prev) => ({
 			...prev,
@@ -277,7 +277,7 @@ function SurgeryForm(): ReactElement {
 	}
 
 	function handleReactDatePicker(e) {
-		const date: String = e;
+		const date: String = e.toISOString().split('T')[0];
 		console.log(e);
 		setSurgery((prev) => ({
 			...prev,
@@ -384,10 +384,10 @@ function SurgeryForm(): ReactElement {
 						<ProfileDiv label="Cena:" value={`${surgeryPriece} zł`} />
 
 						<VetChoiceComponent
-							label={'Prowadzący'}
 							selected={surgery.LeadVetId}
-							onChange={onChangeVet}
+							handleVetChange={onChangeVet}
 							vets={vets}
+							error={error.LeadVetId}
 						/>
 
 						{surgery.LeadVetId && (

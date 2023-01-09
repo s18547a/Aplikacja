@@ -5,20 +5,66 @@ import Surgery from '../../../classes/Surgery';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 
 function TodayReservationList({
-	list,
-	surgeries,
+	visitList,
+	surgeryList,
+	schedulde,
 }: {
-	list: Reservation[];
-	surgeries: Surgery[];
+	visitList: Reservation[];
+	surgeryList: Surgery[];
+	schedulde: string[];
 }) {
-	const [reservationList, setReservationList] = useState<Reservation[]>([]);
+	//const [reservationList, setReservationList] = useState<Reservation[]>([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		const propsList = list;
-		setReservationList(propsList);
+		//	const propsList = list;
+		//setReservationList(propsList);
 	});
 
+	function checkIfVetHaveActivityAtThisTIme(hour: string): string {
+		const hourVisit = visitList.filter((visit) => {
+			return visit.Hour == hour;
+		})[0];
+		if (hourVisit) {
+			return 'Wizyta';
+		}
+		const surgeryVisit = surgeryList.filter((surgery) => {
+			return surgery.StartTime == hour;
+		})[0];
+		if (surgeryVisit) {
+			return 'Zabieg';
+		} else return '';
+	}
 	return (
+		<div className="container">
+			<div className="card">
+				<div className="card-body shadow">
+					<div className=" card-title">
+						<h5>Dzisiejszy harmonogram</h5>
+					</div>
+					<div className="row">
+						<div className="col-12">
+							<table className=" table table-bordered">
+								<tbody>
+									<tr>
+										{schedulde.map((hour) => {
+											return <th>{hour}</th>;
+										})}
+									</tr>
+									<tr>
+										{schedulde.map((hour) => {
+											return <td>{checkIfVetHaveActivityAtThisTIme(hour)}</td>;
+										})}
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+
+	/*return (
 		<div className="container">
 			<div className="row">
 				<div className="card card-body border-0 shadow">
@@ -89,7 +135,7 @@ function TodayReservationList({
 				</div>
 			</div>
 		</div>
-	);
+	);*/
 }
 
 export default TodayReservationList;

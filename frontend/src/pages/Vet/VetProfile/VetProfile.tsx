@@ -1,8 +1,11 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { getTodayReservationsByVetId } from '../../../apiCalls/reservationApiCalls';
 import { getTodaySurgeries } from '../../../apiCalls/surgeryApiCalls';
-import { getVetByVetId } from '../../../apiCalls/vetApiCalls';
+import {
+	getTodaySchedulde,
+	getVetByVetId,
+} from '../../../apiCalls/vetApiCalls';
 import Reservation from '../../../classes/Reservation';
 import Surgery from '../../../classes/Surgery';
 import Vet from '../../../classes/Vet';
@@ -12,8 +15,10 @@ import { isManager } from '../../../utils/userType';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 
 import TodayReservationList from './TodayReservationList';
-import VetProfileNav from './VetProfileNav';
+
 import VetProfileTab from './VetProfileTab';
+import { getCurrentDate } from '../../../utils/getCurrentDate';
+import { changePageTitle } from '../../../utils/otherHelper';
 function VetProfile(): ReactElement {
 	const params = useParams();
 	const location = useLocation();
@@ -36,7 +41,10 @@ function VetProfile(): ReactElement {
 
 	const [todaySurgeriesList, setTodaySurgeries] = useState<Surgery[]>([]);
 
+	const [todaySchedulde, setTodaySchedulde] = useState<string[]>([]);
+
 	useEffect(() => {
+		changePageTitle('Profil');
 		let VetId = getCurrentUser().userTypeId;
 		if (location.pathname == '/') {
 			VetId = getCurrentUser().userTypeId;
@@ -132,42 +140,40 @@ function VetProfile(): ReactElement {
 			}
 		};
 
+		const loadTodaySchedulde = async () => {
+			let response;
+			let promise;
+			promise = getTodaySchedulde(getCurrentDate(), VetId);
+			if (promise) {
+				promise
+					.then((data) => {
+						response = data;
+						return response.json();
+					})
+					.then(
+						(data) => {
+							if (response.status == 200) {
+								setTodaySchedulde(data);
+							}
+							if (response.status == 404) {
+							}
+							if (response.status == 500) {
+								setServerError(true);
+							}
+						},
+						(error) => {
+							setServerError(true);
+						}
+					);
+			}
+		};
+
 		loadVet();
 		loadVetReservations();
 		loadVetSurgeries();
+		loadTodaySchedulde();
 	}, []);
 
-	const [activeTab, setActiveTab] = useState('');
-	function onChangTab(e) {
-		const { name, value } = e.target;
-		setActiveTab(value);
-	}
-
-	const profileTab = (
-		<VetProfileTab
-			vet={vet}
-			types={vet.Types}
-			vetId={params.VetId}
-			setServerError={() => {
-				setServerError(true);
-			}}
-		/>
-	);
-	const reservationTab = (
-		<TodayReservationList
-			list={todayReservationList}
-			surgeries={todaySurgeriesList}
-		/>
-	);
-
-	function setContent() {
-		if (activeTab == '') {
-			return profileTab;
-		}
-		if (activeTab == 'res') {
-			return reservationTab;
-		}
-	}
 	return (
 		<div className="container">
 			<ServerErrorInfoComponenet serverError={serverError} />
@@ -188,9 +194,25 @@ function VetProfile(): ReactElement {
 				</div>
 			) : null}
 
-			<VetProfileNav activeTab={activeTab} onChange={onChangTab} />
-			<div className="row">
-				<div className="col-12">{setContent()}</div>
+			{/*<VetProfileNav activeTab={activeTab} onChange={onChangTab} />*/}
+			<div className="row  mt-5">
+				<div className="col-12">
+					<VetProfileTab
+						vet={vet}
+						types={vet.Types}
+						vetId={params.VetId}
+						setServerError={() => {
+							setServerError(true);
+						}}
+					/>
+				</div>
+				<div className="col-12 mt-5">
+					<TodayReservationList
+						visitList={todayReservationList}
+						surgeryList={todaySurgeriesList}
+						schedulde={todaySchedulde}
+					/>
+				</div>
 			</div>
 		</div>
 	);

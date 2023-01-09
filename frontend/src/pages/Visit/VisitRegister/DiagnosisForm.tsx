@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { PlusCircle } from 'react-bootstrap-icons';
 
 interface DiagnosisI {
 	Number: number;
@@ -63,44 +64,45 @@ function DiagnosisForm({
 	const diagnosisFromComponenet =
 		AnimalId != '' ? (
 			<div className="mt-3">
-				<div className="row">
-					<div className="col-12">
+				<div className="card card-body shadow">
+					<div className="card-title d-flex justify-content-between">
+						<h5>Diagnozy</h5>
 						<a
 							className="btn btn-primary"
 							role={'button'}
 							onClick={addDiagnosis}
 						>
-							Dodaj diagnozę
+							<PlusCircle />
 						</a>
 					</div>
-				</div>
 
-				<div className="row">
-					{diagnosisList.map((d) => {
-						return (
-							<div className="col-12 mt-1 mb-1" key={d.Number}>
-								<div className=" card card-body shadow">
-									<div>
-										<button
-											className="btn btn-close"
-											value={d.Number}
-											onClick={removeDiagnosis}
-										></button>
-									</div>
-									<div className="row">
-										<div className="col-12">
-											<textarea
-												name={String(d.Number)}
-												className="form-control"
-												onChange={handleDiagnosisChange}
-												rows={2}
-											/>
+					<div className="row">
+						{diagnosisList.map((d) => {
+							return (
+								<div className="col-12 mt-1 mb-1" key={d.Number}>
+									<div className="">
+										<div>
+											<button
+												className="btn btn-close"
+												value={d.Number}
+												onClick={removeDiagnosis}
+											></button>
+										</div>
+										<div className="row">
+											<div className="col-12">
+												<textarea
+													name={String(d.Number)}
+													className="form-control"
+													onChange={handleDiagnosisChange}
+													rows={2}
+												/>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						);
-					})}
+							);
+						})}
+					</div>
 				</div>
 			</div>
 		) : null;

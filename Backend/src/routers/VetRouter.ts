@@ -8,6 +8,7 @@ class VetRouter{
 
     constructor(vetController:VetController){
         const router = express.Router();
+        router.get('/todaySchedulde',isAuthorizated,vetController.getTodaySchedulde);    
         router.get('/types', isAuthorizated,vetController.getVetTypes);
         router.get('/:VetId', isAuthorizated,vetController.getVet);
         router.get('/', isAuthorizated,vetController.getVets);
@@ -15,7 +16,9 @@ class VetRouter{
         router.get('/schedulde/availableHours', isAuthorizated,vetController.getAvailableHours);
         router.get('/:VetId/schedulde', isAuthorizated,vetController.getVetSchedulde);
         router.get('/:VetId/daysOfWeek', isAuthorizated,vetController.getVetDaysOfWeek);
+      
         router.get('/schedulde/full',isAuthorizated, vetController.getFullSchedulde)
+       
         router.put('/schedulde',  isAuthorizated,vetController.updateSchedulde);
         
         router.put('/', isAuthorizated,vetController.updateVet);

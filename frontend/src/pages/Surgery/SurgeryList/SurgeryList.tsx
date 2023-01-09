@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {
 	getSurgeries,
 	getSurgeriesByOwner,
+	getSurgeriesByVet,
 	searchSurgeryList,
 } from '../../../apiCalls/surgeryApiCalls';
 import Surgery from '../../../classes/Surgery';
@@ -18,6 +19,7 @@ import { isVet, isManager, isOwner } from '../../../utils/userType';
 import { SearchListParamter } from '../../../utils/VisitListParameters';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 import VisitSearch from '../../../components/List/VisitSearch';
+import { changePageTitle } from '../../../utils/otherHelper';
 
 function SurgeryList(): ReactElement {
 	const navigate = useNavigate();
@@ -56,11 +58,14 @@ function SurgeryList(): ReactElement {
 		let response;
 		let promise;
 
-		if (isVet() || isManager()) {
+		if (isManager()) {
 			promise = getSurgeries();
-		}
-		if (isOwner()) {
+		} else if (isOwner()) {
 			promise = getSurgeriesByOwner(currentUserId);
+		} else {
+			if (isVet()) {
+				promise = getSurgeriesByVet(currentUserId);
+			}
 		}
 
 		if (promise) {
@@ -92,6 +97,7 @@ function SurgeryList(): ReactElement {
 	}
 
 	useEffect(() => {
+		changePageTitle('Zabiegi');
 		loadSurgeryList();
 
 		const state = location.state as { id: string };

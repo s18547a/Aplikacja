@@ -112,3 +112,11 @@ export async function  getFullSchedulde() {
   return promise;
   
 }
+
+export async function getTodaySchedulde(date:string,vetId:string){
+  const url=`http://localhost:8000/vets/todaySchedulde?Date=${date}&VetId=${vetId}`;
+  const options =createHttpGetOptions(isVet());
+  const promise =await fetch(url,options);
+
+  return promise;
+}

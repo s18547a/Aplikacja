@@ -145,9 +145,22 @@ class VetController{
     getFullSchedulde=async(req,res)=>{
         const results =await this.vetScheduldeRepository.getFullSchedulde();
         if (results instanceof Error){
-            return res.status(500).json({})
+            return res.status(500).json({});
         }
         else return res.status(200).json(results);
+    }
+
+    getTodaySchedulde=async(req,res)=>{
+        const parameters:{date:string,vetId:string}={date:req.query.Date,vetId:req.query.VetId}
+        const results = await this.vetScheduldeRepository.getTodaySchedulde(parameters);
+
+        if(results instanceof Error){
+            return res.status(500).json({});
+        }else if( results ==null){
+            return res.status(404).json({});
+        }
+        else return res.status(200).json(results);
+
     }
    
 

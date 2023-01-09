@@ -18,6 +18,7 @@ import { spaceContact } from '../../../utils/contactHelper';
 import { getCurrentDate, getCurrentHour } from '../../../utils/getCurrentDate';
 import { isVet, isManager, isOwner } from '../../../utils/userType';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
+import { changePageTitle } from '../../../utils/otherHelper';
 
 function ReservationList(): ReactElement {
 	const navigate = useNavigate();
@@ -37,6 +38,7 @@ function ReservationList(): ReactElement {
 
 	const [serverError, setServerError] = useState(false);
 	async function loadReservationList(): Promise<void> {
+		changePageTitle('Rezerwacje');
 		const currentUserId = getCurrentUser().userTypeId;
 
 		let response;

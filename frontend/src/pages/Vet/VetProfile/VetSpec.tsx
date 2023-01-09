@@ -1,17 +1,15 @@
 function VetSpec({ types }: { types: { VetType: string }[] }) {
+	function specHelper() {
+		let specString = '';
+	}
 	return (
-		<div className="mt-2 mb-2">
-			<div className="row">
-				<div className="col-lg-12">
-					<div className="row">
-						{types.map((type) => {
-							return (
-								<div className="col-lg-3 text-center">
-									<div className=" card card-body shadow">{type.VetType}</div>
-								</div>
-							);
-						})}
-					</div>
+		<div className="card">
+			<div className="card-body">
+				<div className="card-title">
+					<h5>Specjalizacje</h5>
+					{types.map((type) => {
+						return <div>{type.VetType}</div>;
+					})}
 				</div>
 			</div>
 		</div>
